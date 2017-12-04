@@ -135,3 +135,77 @@ These forms are clearly distinguished
     std::string stars(100, '*');     // constructor initialization
     std::string name;                // default type-dependent initialization
 
+### Exercises
+
+1-0 -- Done.
+1-1
+
+This should be valid.
+
+    const std::string hello = "Hello";
+
+I think that this is also valid, because the constness of the initializer 
+doesn't affect variable constness.  Actually the real point here is the 
+associativity of the + operator affecting the parse order, because you can't
+concatenate two char* literals.
+
+    const std::string message = hello + ", world" + "!";
+
+1-2
+
+This should be valid.
+
+    const std::string exclam = "!";
+
+This will fail though because it will parse as ("hello" + "world") which is
+an invalid expression.
+
+    const std::string message = "hello" + ", world" + exclam;
+
+But this would work
+
+    const std::string message = "hello" + (", world" + exclam);
+
+1-3
+
+Without running it I'd say that yes it's fine and it prints "a string\nanother
+string\n".   Because the two locals are local to their relative blocks so they
+don't shadow each other.  And that was correct.
+
+1-4
+
+I misread this, the first scope hasn't been closed.  Yeah, it's valid and fine.
+The ; doesn't affect it.
+
+1-5
+
+This won't work because x has been destroyed at the time we try to print it.
+`error: 'x' was not declared in this scope`
+
+Rewrite it to be valid?  Just move the second cout into the inner scope.
+
+1-6
+
+My prediction of running the program:  It will read samuel beckett into the string name.
+
+And so it will print
+
+    Hello, Samuel Beckett
+    And what is yours?
+
+Don't really get this question.  Something to do with buffers flushing?
+I can't see how it could have any other behaviour.
+
+It does actually read a single word Samuel into `name`.  How terrible
+How could this happen?
+
+"Executing `std::cin >> v` discards andy shitespace characters in the standard
+input stream, then reads from the standard input into variable v"
+
+???  That still doesn't explain this behaviour.
+
+`std::cin` causes the buffer to flush the word Samuel only to the variable!
+Everything's read into cin's internal buffer.
+
+Basically cin reads until whitespace separation which is nuts.
+

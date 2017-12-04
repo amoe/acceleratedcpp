@@ -5,3 +5,6 @@ Program(target='ex0_6', source=['ex0_6.cc'])
 
 Program(target='input', source=['input.cc'])
 Program(target='framed_greeting', source=['framed_greeting.cc'])
+Program(target='exercises_1', source=['exercises_1.cc'])
+Program(target='ex1_4', source=['ex1_4.cc'])
+Program(target='ex1_5', source=['ex1_5.cc'])
