@@ -209,3 +209,9 @@ Everything's read into cin's internal buffer.
 
 Basically cin reads until whitespace separation which is nuts.
 
+## CHAPTER 2: LOOPING & COUNTING
+
+We rewrite the program to try to generate the lines based on an algorithm of some
+kind.  It's not 100% clear what the spec is at the start.
+
+See source `loop_greeting.cc`
