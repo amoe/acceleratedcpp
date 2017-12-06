@@ -51,27 +51,22 @@ int main() {
 
         // invariant: we have written c characters so far in this row
         while (c != width) {
-            // There's no reason for us to only write 1 char on this iteration,
-            // provided that we update c appropriately (and provided that we
-            // make sure we don't go over `width`!
 
-            if (r == 0 || r == row_count - 1 || c == 0 || c == width - 1) {
-                // This is a border character.
-                cout << "*";
-                c++;
+            // Are we about to write the greeting?
+            if ((c == (border_width + padding_left) && r == (frame_height + padding_top)))  {
+                // we should write the greeting and update c accordingly
+
+                cout << greeting;
+                c += greeting.size();
             } else {
-                // do something else
-
-                // We now have to work out if we should be writing the first
-                // char of the greeting, if so write the entire greeting.
-                
-                if (c == (border_width + padding_left) && r == (frame_height + padding_top)) {
-                    cout << greeting;
-                    c += greeting.size();
+                if (r == 0 || r == row_count - 1 || c == 0 || c == width - 1) {
+                    // This is a border character.
+                    cout << "*";
                 } else {
                     cout << " ";
-                    c++;
                 }
+                
+                c++;
             }
         }
 
