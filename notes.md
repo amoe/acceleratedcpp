@@ -272,4 +272,12 @@ types get converted into bigger types.
 
 2-1: Done by setting all padding values to 0.
 
+2-2: Done by setting the values of `padding_left` and `padding_right`
+
+2-3: Done by introducing a cin which can read an int.  Then just assign all
+padding values from this int.
+
+2-4
+
+
 

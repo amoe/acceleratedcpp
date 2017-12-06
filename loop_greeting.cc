@@ -17,11 +17,21 @@ int main() {
     const int greeting_height = 1;
     const int frame_height = 1;    // The top and the bottom use up one row each
 
+    cout << "How much padding should I use? ";
+    int requested_padding;
+    cin >> requested_padding;
+
     // Padding applies to both the top and bottom of the greeting.
-    const int padding_top = 0;
-    const int padding_bottom = 0;
-    const int padding_left = 0;
-    const int padding_right = 0;
+    // const int padding_top = 1;
+    // const int padding_bottom = 1;
+    // const int padding_left = 4;
+    // const int padding_right = 4;
+
+    // Note that these can still be const.
+    const int padding_top = requested_padding;
+    const int padding_bottom = requested_padding;
+    const int padding_left = requested_padding;
+    const int padding_right = requested_padding;
     
     const int padding_total = padding_top + padding_bottom;
 
