@@ -215,3 +215,29 @@ We rewrite the program to try to generate the lines based on an algorithm of som
 kind.  It's not 100% clear what the spec is at the start.
 
 See source `loop_greeting.cc`
+
+To justify the existence of the `++` operator, they say
+
+"the idea of transforming a value into its immediate successor, in contrast with
+computing an arbitrary value, is so fundamental to abstract data structures that
+it deserves a special notation for that reason alone".
+
+They introduce the idea of a loop invariant.  Quoth:
+
+    "[A loop invariant is] a property that we assert will be true about a while 
+    each time it is about to test its condition.  We choose an invariant that
+    we can use to convince ourselves that the program behaves as we intend, and
+    we write the pgoram so as to make the invariant true at the proper times.
+    Although the invariant is not part of the program text, it is a valuable
+    intellectual tool for designing programs.  Every useful 'while' statement
+    that we can imagine has a loop invariant associated with it.  Stating the
+    invariant in a comment can make a 'while' much easier to understand.
+
+    ...
+    
+    The general idea is to find an invariant that states a relevant property of the
+    variables that the loop involves (we have written `r` rows), and to use the
+    condition to ensure that when the loop completes, those variables will have
+    useful values (r == rows).  The loop body's job is then to manipulate the 
+    relevant variables so as to arrange for the condition to be false eventually,
+    while maintaining the truth of the invariant.

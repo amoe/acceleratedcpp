@@ -19,5 +19,30 @@ int main() {
     
     const int padding_total = padding_top + padding_bottom;
 
-    
+    const int row_count = greeting_height + padding_total + frame_height;
+
+
+    //
+    std::cout << std::endl;
+    int r = 0;
+
+    // Invariant: We have written r rows of output so far.
+
+
+    // * <-- The invariant is true here: we have written 0 rows of output, and
+    // r is equal 0.
+    while (r != row_count) {
+        // We don't yet know how to write a real row.
+        std::cout << std::endl;
+
+        // * <-- The invariant is false here, now we have written one more row.
+        ++r;
+        
+        // * <--- Incrementing r makes the invariant true here.
+    }
+
+    // Now we also know that the invariant is true here..  Moreover we know that
+    // we have written `row_count` rows because the loop condition implies such.
+    // Therefore we've inductively demonstrated that we have fulfilled the
+    // program brief to write `row_count` rows.
 }
