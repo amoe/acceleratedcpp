@@ -305,3 +305,9 @@ padding as well.  But we skip the greeting row to avoid this decision.
 
 2-9
 Done, simple
+
+2-10
+
+The first example creates an alias cout in side the block beginning while(k!=n)
+But the alias only exists in the scope of that block.  So std::is still required
+here.  It's useful to see that `using` is a regular scoped statement.
