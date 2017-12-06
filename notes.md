@@ -277,7 +277,31 @@ types get converted into bigger types.
 2-3: Done by introducing a cin which can read an int.  Then just assign all
 padding values from this int.
 
-2-4
+2-4  This one's tricky because you can't just always print the greeting length.
+You need to exactly hit the loop condition, otherwise you're going to end up
+printing more spaces than you need which will lead to overflowing the box
+with spaces.  Note that there's probably a way to print the corect amount of
+padding as well.  But we skip the greeting row to avoid this decision.
 
+2-5  Nice exercise but I'm not going to do it.
 
+2-6  It should print the numbers 0 to 9.  Actually it prints 1 to 10, of course.
 
+2-7  
+    for (int i = 10; i >= -5; i--) {
+        std::cout << i << std::endl;
+    }
+
+2-8  A tiny bit tricky because you have to make sure you intialize product to 1.
+
+    int product = 1;
+
+    for (int i = 2; i < 10; i++) {
+        product *= i;
+
+    }
+
+    std::cout << product << std::endl;
+
+2-9
+Done, simple

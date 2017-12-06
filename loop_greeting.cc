@@ -61,9 +61,10 @@ int main() {
 
         // invariant: we have written c characters so far in this row
         while (c != width) {
+            bool is_on_greeting_row = (r == (frame_height + padding_top));
 
             // Are we about to write the greeting?
-            if ((c == (border_width + padding_left) && r == (frame_height + padding_top)))  {
+            if ((c == (border_width + padding_left) && is_on_greeting_row))  {
                 // we should write the greeting and update c accordingly
 
                 cout << greeting;
@@ -72,11 +73,22 @@ int main() {
                 if (r == 0 || r == row_count - 1 || c == 0 || c == width - 1) {
                     // This is a border character.
                     cout << "*";
+                    c++;
                 } else {
-                    cout << " ";
+                    // Figure out how many spaces to write.
+                    if (is_on_greeting_row) {
+                        cout << " ";
+                        c++;
+                    } else {
+                        // The problem is that if you don't write the exact
+                        // amount, you end up overwriting.
+                        int spaces_left = (width - padding_right) - c;
+                        std::string spaces(spaces_left, ' ');
+                        cout << spaces;
+                        c += spaces_left;
+                    }
                 }
                 
-                c++;
             }
         }
 
