@@ -241,3 +241,9 @@ They introduce the idea of a loop invariant.  Quoth:
     useful values (r == rows).  The loop body's job is then to manipulate the 
     relevant variables so as to arrange for the condition to be false eventually,
     while maintaining the truth of the invariant.
+
+They note that std::string::size_type is an unsigned integer type.
+
+The relational operators have lower precedence than the arithmetic operators.
+
+
