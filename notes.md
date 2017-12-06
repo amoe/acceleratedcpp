@@ -255,4 +255,21 @@ That is, `r` takes on the values in [0, rows)
 Note that in c++ you can inline functions.  People avoid Extract Method in C++
 sometimes because function calls are expensive but you may just inline them.
 
+A range of the form [m, n] has n - m elements by definition.
+Therefore [n, n) is an empty range.
+
+The reason that the authors prefer to use `!=` in while conditions is so that
+we have extra information about the loop variable at the end.  But if it only
+exists in the scope of a for loop, then that doesn't apply.  So there is perhaps
+a good reason to use != conditions in while loops, but perhaps not for loops.
+
+The usual arithmetic operations normally attempt to preserve precision.  Smaller
+types get converted into bigger types.
+
+## EXERCISES
+
+2-0: Done
+
+2-1: Done by setting all padding values to 0.
+
 

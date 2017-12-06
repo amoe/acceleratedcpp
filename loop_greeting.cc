@@ -18,10 +18,10 @@ int main() {
     const int frame_height = 1;    // The top and the bottom use up one row each
 
     // Padding applies to both the top and bottom of the greeting.
-    const int padding_top = 1;
-    const int padding_bottom = 1;
-    const int padding_left = 1;
-    const int padding_right = 1;
+    const int padding_top = 0;
+    const int padding_bottom = 0;
+    const int padding_left = 0;
+    const int padding_right = 0;
     
     const int padding_total = padding_top + padding_bottom;
 
