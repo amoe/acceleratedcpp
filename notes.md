@@ -251,3 +251,8 @@ a range, the final value being the _off-the-end value_ for the range.  A half-op
 range.  [begin, off-the-end)
 
 That is, `r` takes on the values in [0, rows)
+
+Note that in c++ you can inline functions.  People avoid Extract Method in C++
+sometimes because function calls are expensive but you may just inline them.
+
+
