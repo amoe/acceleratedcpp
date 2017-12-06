@@ -1,13 +1,18 @@
 #include <iostream>
 
+using std::cout;
+using std::cin;
+using std::endl;
+using std::string;
+
 int main() {
-    std::cout << "Please enter your first name: ";
-    std::string name;
-    std::cin >> name;   // read a single word name
+    cout << "Please enter your first name: ";
+    string name;
+    cin >> name;   // read a single word name
 
 
     // This is the message, we can know its length at this point.
-    const std::string greeting = "Hello, " + name + "!";
+    const string greeting = "Hello, " + name + "!";
 
     const int greeting_height = 1;
     const int frame_height = 1;    // The top and the bottom use up one row each
@@ -29,20 +34,18 @@ int main() {
     // Note that this must be derived from size_type because this comes from
     // user input, outside the program.  C++ only guarantees that ints can
     // take values up to 32767.  (!)
-    const std::string::size_type width
+    const string::size_type width
        = greeting.size() + (padding_left + padding_right) + (border_width * 2);
 
 
     //
-    std::cout << std::endl;
-    int r = 0;
+    cout << endl;
 
     // Invariant: We have written r rows of output so far.
 
-
     // * <-- The invariant is true here: we have written 0 rows of output, and
     // r is equal 0.
-    while (r != row_count) {
+    for (int r = 0; r != row_count; r++) {
         // We don't yet know how to write a real row.
         int c = 0;
 
@@ -54,7 +57,7 @@ int main() {
 
             if (r == 0 || r == row_count - 1 || c == 0 || c == width - 1) {
                 // This is a border character.
-                std::cout << "*";
+                cout << "*";
                 c++;
             } else {
                 // do something else
@@ -63,20 +66,18 @@ int main() {
                 // char of the greeting, if so write the entire greeting.
                 
                 if (c == (border_width + padding_left) && r == (frame_height + padding_top)) {
-                    std::cout << greeting;
+                    cout << greeting;
                     c += greeting.size();
                 } else {
-                    std::cout << " ";
+                    cout << " ";
                     c++;
                 }
             }
         }
 
-        std::cout << std::endl;
+        cout << endl;
 
         // * <-- The invariant is false here, now we have written one more row.
-        ++r;
-        
         // * <--- Incrementing r makes the invariant true here.
     }
 

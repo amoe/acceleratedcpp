@@ -246,4 +246,8 @@ They note that std::string::size_type is an unsigned integer type.
 
 The relational operators have lower precedence than the arithmetic operators.
 
+They teach `for` as a shortening of the `while` loop.  and say that it generates
+a range, the final value being the _off-the-end value_ for the range.  A half-open
+range.  [begin, off-the-end)
 
+That is, `r` takes on the values in [0, rows)
