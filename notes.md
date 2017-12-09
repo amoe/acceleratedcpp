@@ -216,7 +216,7 @@ kind.  It's not 100% clear what the spec is at the start.
 
 See source `loop_greeting.cc`
 
-To justify the existence of the `++` operator, they say
+To justify the existence of the `++` (autoincrement) operator, they say
 
 "the idea of transforming a value into its immediate successor, in contrast with
 computing an arbitrary value, is so fundamental to abstract data structures that
@@ -339,6 +339,20 @@ here.  It's useful to see that `using` is a regular scoped statement.
 ## CH3 - Working with batches of data
 
 SO I presume that this will be about vectors.
+
+New concepts:
+
+* cin can be chained to read multiple lines in a single statement.
+* cin does input formatting to allow reading doubles.
+* cin will yield a false status on EOF, allowing it to be used in loops
+* the iomanip header -- this gives several things.
+    * streamsize type
+    * the "precision()" function which I guess sets a precision like printf
+    * it's left-shifted onto the stream just like real output
+    * cout << setprecision(3)
+    * This modifies the stream property and then you have to reset it.
+    * You can save away the previous precision by calling cout.precision()
+
 
 
 

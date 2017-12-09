@@ -1,10 +1,15 @@
 #include <iostream>
+#include <iomanip>
 #include <string>
 
 using std::cout;
 using std::cin;
 using std::endl;
 using std::string;
+
+using std::streamsize;
+using std::setprecision;
+
 
 int main() {
 
@@ -30,9 +35,20 @@ int main() {
     double sum = 0;
     double thisGrade;
 
+    // Invariant: we have read `count` grades so far, and `sum` is the sum of
+    // the grades that we have read.
     // I suppose that cin returns 0 or NULL on EOF.
     while (cin >> thisGrade) {
         ++count;
         sum += thisGrade;
     }
+
+    // Now write the result.
+    streamsize previous_precision = cout.precision();
+    cout << "Your final grade is "
+         << setprecision(3)
+         << 0.2 * midterm_grade + 0.4 * final_grade + 0.4 * sum / count
+         << setprecision(previous_precision)
+         << endl;
+
 }
