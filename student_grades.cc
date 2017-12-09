@@ -42,6 +42,16 @@ int main() {
 
     // Now compute the median.
 
+    // Sort the homework grades
+    // Pick the middle value
+    // Determine if the size is odd or not
+    // If the size is odd, we take floor(size / 2) as our middle val
+    // If the size is even, we take (size/2) and ((size/2)+1) as our indices (which will
+    // always be integral because size is even)
+    // Pull them out, as value a and b, then result is (a+b)/2
+    
+    
+
     double median_grade;
 
     // Now write the result.
