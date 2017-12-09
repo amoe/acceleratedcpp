@@ -59,6 +59,10 @@ void ex3_3_count_distinct_words() {
 
         // Insanely dumb linear search to see if we already saw it.
         // But we don't have hash tables or `break` yet.
+        // We cheated a bit by knowing that we can compare strings.
+        // The smart solution sorts the vector and keeps two index counters.
+        // However that also depends on knowing that you can meaningfully
+        // sort string vectors (which is a larger assumption... maybe).
         bool is_already_seen = false;
         int j = 0;
         while (!is_already_seen && j < seen.size()) {
