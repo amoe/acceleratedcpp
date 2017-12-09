@@ -31,27 +31,24 @@ int main() {
     cout << "Enter all your homework grades, "
         "followed by end-of-file: ";
 
-    int count = 0;
-    double sum = 0;
-    double thisGrade;
+    double this_grade;
+    vector<double> homework_grades;
 
-    // Invariant:
-    // 2 clauses:
-    //   * we have read `count` grades so far, and
-    //   *  `sum` is the sum of the grades that we have read
-    //
+    // loop invariant: homework_grades contains all grades read so far
     // I suppose that cin returns 0 or NULL on EOF.
-    while (cin >> thisGrade) {
-        ++count;             // after this the second clause of the invariant is false
-        sum += thisGrade;    // after this they both become true
+    while (cin >> this_grade) {
+        homework_grades.push_back(this_grade);
     }
+
+    // Now compute the median.
+
+    double median_grade;
 
     // Now write the result.
     streamsize previous_precision = cout.precision();
     cout << "Your final grade is "
          << setprecision(3)
-         << 0.2 * midterm_grade + 0.4 * final_grade + 0.4 * sum / count
+         << median_grade
          << setprecision(previous_precision)
          << endl;
-
 }
