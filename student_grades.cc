@@ -35,12 +35,15 @@ int main() {
     double sum = 0;
     double thisGrade;
 
-    // Invariant: we have read `count` grades so far, and `sum` is the sum of
-    // the grades that we have read.
+    // Invariant:
+    // 2 clauses:
+    //   * we have read `count` grades so far, and
+    //   *  `sum` is the sum of the grades that we have read
+    //
     // I suppose that cin returns 0 or NULL on EOF.
     while (cin >> thisGrade) {
-        ++count;
-        sum += thisGrade;
+        ++count;             // after this the second clause of the invariant is false
+        sum += thisGrade;    // after this they both become true
     }
 
     // Now write the result.

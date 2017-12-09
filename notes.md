@@ -352,8 +352,19 @@ New concepts:
     * cout << setprecision(3)
     * This modifies the stream property and then you have to reset it.
     * You can save away the previous precision by calling cout.precision()
+* uninitialized variables contain rubbish!  they will crash the program if used
+* while (cin >> thisGrade) works because: 
 
+"the istream class provides a conversion that can be used to convert cin into a
+value that can be used in a condition".  Presumably it overloads a boolean-coercion
+operator and returns the eof value.
 
+Actually it returns a success value, there are several ways in which it can fail:
+* end of file
+* input incompatible with type
+* hardware failure (broken pipe, etc)
+
+The loop invariant contains two clauses which indirectly affect each other.
 
 
 
