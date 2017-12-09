@@ -421,4 +421,18 @@ The max() function is defined in <algorithm>.
 
 3-0 -- Done.
 
+3-1 -- No idea how to do this.  
+
+Well yeah, imagine that we have read the values
+
+1, 2, 4, 8
+
+Now imagine that we discard the value 4
+
+If we then read another value 16, the median should be 4.
+
+But we discarded it, therefore it will incorrectly be seen as (2+8)/2 = 5.
+
+3-2
+
 
