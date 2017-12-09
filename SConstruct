@@ -12,3 +12,7 @@ Program(target='ex1_5', source=['ex1_5.cc'])
 
 Program(target='loop_greeting', source=['loop_greeting.cc'])
 Program(target='exercises_2', source=['exercises_2.cc'])
+
+Program(target='student_grades', source=['student_grades.cc'])
+Program(target='exercises_3', source=['exercises_3.cc'])
+
