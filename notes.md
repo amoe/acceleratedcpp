@@ -311,3 +311,45 @@ Done, simple
 The first example creates an alias cout in side the block beginning while(k!=n)
 But the alias only exists in the scope of that block.  So std::is still required
 here.  It's useful to see that `using` is a regular scoped statement.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+## CH3 - Working with batches of data
+
+SO I presume that this will be about vectors.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
