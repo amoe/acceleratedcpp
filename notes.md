@@ -391,15 +391,34 @@ Typedef names are *scoped* so don't worry about them.
 
 They introduce sort, and also the mysterious .begin() and .end().
 
+.begin() describes the first element, .end() denotes *one past* the last element,
+see ch8
 
+sort works in place, it mutates the array.
 
+Integer division -- The result is truncated towards zero.
 
+size_type is unsigned therefore it's reasonable to check size == 0.  I guess
+we kind of ignore this as programmers.
 
+When signed integers and unsigned integers combine in an expression, ordinary 
+integers are converted to unsigned.  That is
 
+The result of 
+    homework.size() - 100
 
+is unsigned, therefore it's 0 at the minimum.  This is actually somewhat cool.
 
+The high level performance goals of are specified:
 
+* Appending to std::vector is O(n) although surely it can be O(1)?
+* Sort is O(log(n))
 
+The max() function is defined in <algorithm>.
+<ios> defines the `streamsize` type which is an opaque type used by precision().
 
+### Exercises
+
+3-0 -- Done.
 
 

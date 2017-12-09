@@ -81,6 +81,10 @@ int main() {
             (homework_grades.at(lower_mid) + homework_grades.at(upper_mid))
             / 2;
     } else {
+        // The truth is that in this case you don't actually need to worry
+        // about floor vs ceiling, because both are correct for this case.
+        // But anyway, 
+        // when doing integer division, the result is *truncated towards zero*.
         const vec_sz mid = floor(size / 2.0);
         median = homework_grades.at(mid);
     }
