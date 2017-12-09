@@ -366,7 +366,30 @@ Actually it returns a success value, there are several ways in which it can fail
 
 The loop invariant contains two clauses which indirectly affect each other.
 
+Now we modify it to use the median.
 
+What does it mean to be a template class?  We don't know but we know that we can
+separate what it means to be a vector from the particular type of the object
+that the vector holds.  We specify the type of the contents inside angle
+brackets.
+
+They explain std::vector, which .. works as we expect.
+
+Apparently we also have to check that the size is zero.
+
+They introduce this gnarly statement:
+
+    typedef vector<double>::size_type vec_sz;
+
+This defines a type abbreviation.  In general you should use size_type for all
+container sizes.
+
+But surely `vec_sz` is a dubious name for this because it is contingent on the
+vector being of type double?
+
+Typedef names are *scoped* so don't worry about them.
+
+They introduce sort, and also the mysterious .begin() and .end().
 
 
 
