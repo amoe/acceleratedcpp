@@ -80,7 +80,42 @@ void ex3_3_count_distinct_words() {
     cout << "Total words was " << seen.size() << endl;
 }
 
+void ex3_4_longest_and_shortest() {
+    vector<string> input;
+    input.push_back("the");
+    input.push_back("quick");
+    input.push_back("brown");
+    input.push_back("fox");
+    input.push_back("jumped");
+    input.push_back("over");
+    input.push_back("the");
+    input.push_back("lazy");
+    input.push_back("dog");
+
+
+    // We start off by taking the first element specially.  Because the max
+    // or min of a 1 element set is always that item.
+    // Zero items should be an error case.
+    int max_length = input.at(0).size();
+    int min_length = input.at(0).size();
+    
+    for (int i = 1; i < input.size(); i++) {
+        int this_len = input.at(i).size();
+
+        if (this_len > max_length)
+            max_length = this_len;
+
+        if (this_len < min_length)
+            min_length = this_len;
+    }
+
+    std::cout << "Maximum length was " << max_length << endl;
+    std::cout << "Minimum length was " << min_length << endl;
+}
+
 int main() {
     ex3_2_quartiles();
     ex3_3_count_distinct_words();
+    ex3_4_longest_and_shortest();
+
 }
