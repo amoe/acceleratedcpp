@@ -58,7 +58,9 @@ int main() {
     vec_sz size = homework_grades.size();
 
     if (size == 0) {
-        cout << endl << "You didn't enter any grades, fool.  Terminating.";
+        cout << endl
+             << "You didn't enter any grades, fool.  Terminating." 
+             << endl;
         return 1;
     }
 
