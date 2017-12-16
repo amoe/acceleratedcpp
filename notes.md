@@ -435,4 +435,25 @@ But we discarded it, therefore it will incorrectly be seen as (2+8)/2 = 5.
 
 3-2
 
+This exercise is weird, I couldn't do it properly.
+
+3-3 
+
+Done with a weird solution
+
+3-4
+
+Done with no problems
+
+3-5
+
+I'm too lazy to do this one, it's mostly boring book keeping.
+
+3-6
+
+Find what does division by zero do.
+It makes a floating point exception and crashes the program.  It also generates
+a message in dmesg `trap divide error`!  It's shocking that this doesn't happen
+literally all the time.  The adaptation is pretty simple, you just change it
+to check if count == 0 after the loop and bail out if this is the case.
 

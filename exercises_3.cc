@@ -113,9 +113,16 @@ void ex3_4_longest_and_shortest() {
     std::cout << "Minimum length was " << min_length << endl;
 }
 
+void ex3_6_divide_by_zero() {
+    // This causes a floating point exception.
+    int y = 3 / 0;
+
+    std::cout << "y is now " << y << endl;
+}
+
 int main() {
     ex3_2_quartiles();
     ex3_3_count_distinct_words();
     ex3_4_longest_and_shortest();
-
+    ex3_6_divide_by_zero();
 }
