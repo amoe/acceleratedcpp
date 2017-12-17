@@ -2,9 +2,11 @@
 #include <string>
 #include <stdexcept>
 #include <algorithm>
+#include <iostream>
 
 using std::vector;
 using std::sort;
+using std::istream;
 
 // Organized / structured grade calculation program
 
@@ -59,4 +61,31 @@ double grade(double midterm, double final, const vector<double>& hw) {
     return grade(midterm, final, median(hw));
 }
 
-int main() { }
+// 4.1.3
+
+// We design this reading function to fill in the vector of the caller, then
+// its return value can indicate success or failure.
+// It's not that clear why not do it the other way, this is a bit of a C-ish
+// way to do things IMO.
+
+// A reference parameter without a const signals an intent to modify the 
+// argument.  This changes the way you read code.
+
+// K&M suggest clearing the caller's vector before reading, which seems like
+// a pretty clear violation to me.
+istream& read_hw(istream& in, vector<double>& hw) {
+    // For some reason this doesn't work
+    double x;
+
+    while (in >> x)
+        hw.push_back(x);
+
+    // Clear any error condition on the stream, because we want to leave the
+    // caller's stream in the same state as it was passed.
+    in.clear();
+
+    return in;
+}
+
+int main() {
+ }

@@ -524,6 +524,12 @@ New items:
 java preconditions (stdexcept)
 * the fact that vector<double> in an arguments list will copy the vector
 * const vector<double>& will "pass by const reference", a fast and immutable pass
+* overloading by function argument
+* "lvalue" -- a non-const reference argument can only be filled by a lvalue, 
+which is a nontemporary object.  You can also return references which can then
+be passed as lvalues.  That's pretty cool.
+* clear() method resets the error flag in an istream
+
 
 references are another name for an item.  Once a reference or an object X has
 constness, you can't make a nonconst reference to that object.  eg this should
@@ -531,3 +537,22 @@ fail.
 
 const int x = 42;
 int& y = x;  // should fail
+
+    error: binding reference of type 'int&' to 'const int' discards qualifiers
+
+
+How do we indicate two return values at once?  Normally through custom data
+structures.
+
+But, we can also use reference passing to fill a value of the caller.  (This
+can't really be done in other langs.)
+
+
+They suggest clearing the caller's vector which is really weird.
+
+The problem with reading grades is that you might also encounter a situation
+where you couldn't read a double, in which case -- ? 
+The iostream library will mark the input stream as being in "failure state" which 
+is  pretty stupid.
+
+So we're going to have to clear the failure state on the stream and ignore errors.
