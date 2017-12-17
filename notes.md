@@ -529,7 +529,8 @@ java preconditions (stdexcept)
 which is a nontemporary object.  You can also return references which can then
 be passed as lvalues.  That's pretty cool.
 * clear() method resets the error flag in an istream
-
+* `try` keyword to catch exceptions -- only type supported for now?
+* 
 
 references are another name for an item.  Once a reference or an object X has
 constness, you can't make a nonconst reference to that object.  eg this should
