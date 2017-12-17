@@ -457,3 +457,77 @@ a message in dmesg `trap divide error`!  It's shocking that this doesn't happen
 literally all the time.  The adaptation is pretty simple, you just change it
 to check if count == 0 after the loop and bail out if this is the case.
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+## Chapter 4 -- Organizing programs
+
+
+"when we call grade(...), the grade function's parameters are initialized to
+copies of the arguments' values, and do not refer directly to the arguments
+themselves.  This behaviour is often called 'call by value'."
+
+New items:
+
+* std::domain_error -- when arguments are wrong, basically equivalent to some
+java preconditions (stdexcept)
+* the fact that vector<double> in an arguments list will copy the vector
+* const vector<double>& will "pass by const reference", a fast and immutable pass
+
+references are another name for an item.  Once a reference or an object X has
+constness, you can't make a nonconst reference to that object.  eg this should
+fail.
+
+const int x = 42;
+int& y = x;  // should fail

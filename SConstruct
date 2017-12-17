@@ -16,3 +16,5 @@ Program(target='exercises_2', source=['exercises_2.cc'])
 Program(target='student_grades', source=['student_grades.cc'])
 Program(target='exercises_3', source=['exercises_3.cc'])
 
+Program(target='organized_grades_calculator', source=['organized_grades_calculator.cc'])
+
