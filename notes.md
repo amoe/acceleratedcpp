@@ -556,3 +556,10 @@ The iostream library will mark the input stream as being in "failure state" whic
 is  pretty stupid.
 
 So we're going to have to clear the failure state on the stream and ignore errors.
+
+
+"It is porobably not worht the bother to use const referneces for simple primitives"
+
+But it is worth it for strings and vecctors.
+
+emptyvec() is an example of an expr that is not an lvalue.

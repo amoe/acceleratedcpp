@@ -3,10 +3,17 @@
 #include <stdexcept>
 #include <algorithm>
 #include <iostream>
+#include <iomanip>
 
 using std::vector;
 using std::sort;
 using std::istream;
+using std::setprecision;
+using std::streamsize;
+using std::cin;
+using std::cout;
+using std::endl;
+using std::string;
 
 // Organized / structured grade calculation program
 
@@ -88,4 +95,33 @@ istream& read_hw(istream& in, vector<double>& hw) {
 }
 
 int main() {
- }
+
+    cout << "Please enter your first name:";
+    string name;
+    cin >> name;
+    cout << "Hello, " << name << "!" << endl;
+
+    cout << "Please enter your midterm and final exam grades: ";
+    double midterm, final;
+    
+    cin >> midterm >> final;
+
+    cout << "Enter all your homework grades, followed by eof: ";
+
+    vector<double> homework;
+    read_hw(cin, homework);
+
+    try {
+        double final_grade = grade(midterm, final, homework);
+        streamsize prec = cout.precision();
+
+        cout << "Final grade is " << setprecision(3) << final_grade
+             << setprecision(prec) << endl;
+
+    } catch (std::domain_error) {
+        cout << endl << "You must enter your grades, try again" << endl;
+        return 1;
+    }
+
+    return 0;
+}
