@@ -569,3 +569,40 @@ emptyvec() is an example of an expr that is not an lvalue.
 so we introduce a data structure for per student datum
 
 question: Why pass input stream by reference?
+
+they leave open the question of how to decide a comparator for a given sort
+
+this is determined by using the < (less-than) operator
+
+so basically you just overload the < operator to implement comparable
+
+More new items:
+* struct declarations
+* sorting custom data sttructues
+* what() method in exceptions
+* std::max from <algorithm>
+
+Both arguments to max must have the same type, *exactly*, that's 
+
+Sort takes a third argument that's a predicate.
+
+This returns true if x is less than y.
+
+ So we write a custom comparator.
+
+
+They introduce separate compilation.
+
+System headers are ones included through <> but they don't actually need to be
+implemented as header files.
+
+In the header file you need fto ... declare the function.
+
+They use std:: prefix explicitly in the header, why?
+
+"Header files should declare only the names that are necessary"
+so by adding `using` to headers, you're leaking names into the client's namespace.
+
+Hence: HEADER FILES SHOULD NEVER USE `using`.
+
+they introduce include guards.

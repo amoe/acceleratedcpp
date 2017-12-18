@@ -2,11 +2,15 @@
 #include <vector>
 #include <algorithm>
 #include <iostream>
+#include <iomanip>
 
 using std::istream;
 using std::string;
 using std::vector;
 using std::sort;
+using std::max;
+using std::cin;
+using std::cout;
 
 struct StudentInfo {
     string name;
@@ -58,9 +62,9 @@ double median(vector<double> vec) {
     }
 }
 
-// determine the grade of a student
-double grade(const StudentInfo& s) 
-{
+// determine the grade of a student.  The const reference is just a performance
+// thing.
+double grade(const StudentInfo& s) {
     // Note that here we check the condition of the function domain, even though
     // the median function will do so for us anyway.
     if (s.homework.size() == 0) {
@@ -73,5 +77,45 @@ double grade(const StudentInfo& s)
     return grade(s.midterm, s.final, median(s.homework));
 }
 
+// this will be used as a third argument to std::sort to compare studentinfo
+// by grade, not sure about performance here... schwartzian transform?
+// Actually we only need to do it by name, so ... yay
+bool lessThan(const StudentInfo& x, const StudentInfo& y) {
+    return x.name < y.name;
+}
+
 int main() {
+
+    vector<StudentInfo> students;
+
+    StudentInfo theRecord;
+
+    // This *must* be size_type because both arguments to max() need to have
+    // precisely the same type.  No idea why.
+    string::size_type maxlen = 0;
+
+
+    // Accumulate all students from cin
+    while (read(cin, theRecord)) {
+        maxlen = max(maxlen, theRecord.name.size());
+        students.push_back(theRecord);
+    }
+
+    sort(students.begin(), students.end(), lessThan);
+
+    for (vector<StudentInfo>::size_type i = 0; i < students.size(); i++) {
+        StudentInfo thisStudent = students[i];
+        cout << thisStudent.name
+             << string((maxlen + 1) - thisStudent.name.size(), ' ');
+
+        try {
+            double finalGrade = grade(thisStudent);
+            streamsize prec = cout.precision();
+
+            cout << setprecision(3) << finalGrade << setprecision(prec);
+        } catch (std::domain_error e) {
+            cout << e.what();
+        }
+    }
+    
 }
