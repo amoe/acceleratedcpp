@@ -112,6 +112,13 @@ int main() {
     read_hw(cin, homework);
 
     try {
+        // A subtle point is raised about the evaluation order here:
+        // The implementation isn't required to evaluate the exprs in << 
+        // from left to right.
+
+        // Therefore, we must force the evaluation of grade() early, allowing
+        // any exception to short-circuit the writing of "Final grade is:"
+        // text.
         double final_grade = grade(midterm, final, homework);
         streamsize prec = cout.precision();
 
