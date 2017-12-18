@@ -566,3 +566,6 @@ But it is worth it for strings and vecctors.
 emptyvec() is an example of an expr that is not an lvalue.
 
 
+so we introduce a data structure for per student datum
+
+question: Why pass input stream by reference?
