@@ -1,5 +1,5 @@
-#ifndef STUDENT_INFO_H
-#define STUDENT_INFO_H
+#ifndef STUDENT_INFO_HH
+#define STUDENT_INFO_HH
 
 #include <string>
 #include <vector>
@@ -14,4 +14,4 @@ bool lessThan(const StudentInfo&, const StudentInfo&);
 std::istream& read(std::istream&, StudentInfo&);
 std::istream& read_hw(std::istream&, std::vector<double>&);
 
-#endif // STUDENT_INFO_H
+#endif // STUDENT_INFO_HH

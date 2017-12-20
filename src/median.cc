@@ -1,4 +1,9 @@
-#include "median.h"
+#include <algorithm>
+#include <stdexcept>
+#include "median.hh"
+
+using std::vector;
+using std::sort;
 
 double median(vector<double> vec) {
     typedef vector<double>::size_type vec_sz;

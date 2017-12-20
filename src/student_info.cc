@@ -1,12 +1,19 @@
-#include "student_info.h"
+#include <iostream>
+#include "student_info.hh"
+
+using std::istream;
+using std::vector;
 
 istream& read_hw(istream& in, vector<double>& hw) {
-    double x;
+    // this "if" check is essential, because we don't check it in the main
+    // program
+    if (in) {
+        double x;
+        while (in >> x)
+            hw.push_back(x);
 
-    while (in >> x)
-        hw.push_back(x);
-
-    in.clear();
+        in.clear();
+    }
 
     return in;
 }
