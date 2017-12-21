@@ -23,4 +23,4 @@ Program(
     target='ch4_data',
     source=['ch4_data.cc', 'student_info.cc', 'grade.cc', 'median.cc']
 )
-
+Program(target='exercises_4', source=['exercises_4.cc'])

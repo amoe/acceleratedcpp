@@ -609,3 +609,50 @@ they introduce include guards.
 
 they also don't give names to the argument parameters in header files which is.
 uh.
+
+A zero member struct is legal.
+
+Overloading can distinguish between a regular reference and a const reference.
+
+More new items:
+
+* inline functions requests the function to be inline, but should be avoided
+  nowadays.
+* Several classes from stdexcept:
+
+logic-error, range_error, length-error, domain-error, out-of-range, overflow-error
+invalid-argument, runtime-error, underflow-error
+
+s1 < s2 compares using dictionary ordering
+
+s.width(n) on a stream will pad on the left to a given width.  Call width(0)
+to reset the width.  Madness.
+
+setw(n) is the I/O manipulator version of the above.  s << setw(10)
+
+## EXERCISES
+
+4-1.  in this example, X has a type of std::string::size(), ie size_type of
+a string.  But maxlen is an int.  Therefore it won't work.  You could fix it
+by defining maxlen as `string::size_type`.
+
+4-2.  This is not so hard, we pad to 2 digits using cout.width(), and note that
+the width gets reset after every call.
+
+4-3.  Now generalize to allow arbitrary maximums -- If we don't change it, then
+the width gets wrong because at 1000 boundary, it should be padded to 3 instead.
+This is interesting because you need to calculate the number of digits in the
+number to know how it will be printed.  I used this function to do so:
+
+    int nDigits(int n) {
+        int result = 0;
+
+        while (n >= 1) {
+            n /= 10;
+            result++;
+        }
+
+        return result;
+    }
+
+And indeed this is the approach that Johnny Chan uses.
