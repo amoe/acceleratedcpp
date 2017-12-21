@@ -656,3 +656,25 @@ number to know how it will be printed.  I used this function to do so:
     }
 
 And indeed this is the approach that Johnny Chan uses.
+
+# 4-4.
+
+Not doing this.
+
+# 4-5.
+
+# 4-6
+
+This is more interesting, but I'm still going to skp it.
+
+# 4-7
+
+Found out that << fixed << setprecision() is necessary to actually show zeros
+at the end of a double.  The program is easy and completed.
+
+# 4-8
+
+We can infer that the return type of f is vector<double>, barring the fact that
+it might also be an array which we don't know yet.
+
+
