@@ -775,4 +775,14 @@ access and provide iterators.
 We implement a split function using an iteration approach with two loop counters
 `i` and `j`.  I'm not a big fan of the algorithm they present here.
 
-p89
+They introduce the `getline` function which will read an entire line into a string
+which is passed by reference.
+
+### 5.8 -- putting strings together
+
+We want to write a program that contains the entire 'framed' output, like chapter
+2, in a single string.
+
+Write all the words stored in a vector and surround them with a border.
+
+

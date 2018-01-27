@@ -9,9 +9,11 @@ using std::string;
 using std::vector;
 using std::list;
 using std::isspace;
+using std::max;
 
 typedef vector<StudentInfo>::size_type vecsz;
 vector<string> split(const string& s);
+vector<string> frame(const vector<string>& words);
 
 
 int main() {
@@ -24,6 +26,12 @@ int main() {
     for (auto word : result) {
         std::cout << word << std::endl;
     }
+
+    vector<string> framed = frame(result);
+    for (auto line : framed) {
+        std::cout << line << std::endl;
+    }
+
 
     return 0;
 }
@@ -146,6 +154,36 @@ vector<string> split(const string& s) {
             i = j;
         }
     }
+
+    return result;
+}
+
+string::size_type width(const vector<string>& v) {
+    string::size_type maxlen = 0;
+
+    for (vector<string>::size_type i = 0; i < v.size(); i++) {
+        maxlen = max(maxlen, v[i].size());
+    }
+
+    return maxlen;
+}
+
+// 5.8 -- Framing a picture.
+
+vector<string> frame(const vector<string>& words) {
+    vector<string> result;
+    string::size_type maxlen = width(words);
+    string border(maxlen + 4, '*');
+
+    result.push_back(border);
+
+    for (vector<string>::size_type i = 0; i < words.size(); i++) {
+        string padding(maxlen - words[i].size(), ' ');
+        
+        result.push_back("* "  + words[i] + padding + " *");
+    }
+
+    result.push_back(border);
 
     return result;
 }
