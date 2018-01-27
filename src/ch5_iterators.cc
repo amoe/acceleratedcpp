@@ -14,6 +14,9 @@ using std::max;
 typedef vector<StudentInfo>::size_type vecsz;
 vector<string> split(const string& s);
 vector<string> frame(const vector<string>& words);
+void spew(const vector<string>& pic);
+vector<string> vcat(const vector<string>& top, const vector<string>& bottom);
+vector<string> hcat(const vector<string>& left, const vector<string>& right);
 
 
 int main() {
@@ -28,12 +31,18 @@ int main() {
     }
 
     vector<string> framed = frame(result);
-    for (auto line : framed) {
-        std::cout << line << std::endl;
-    }
+    spew(framed);
 
+    spew(vcat(result, framed));
+    spew(hcat(result, framed));
 
     return 0;
+}
+
+void spew(const vector<string>& pic) {
+    for (auto line : pic) {
+        std::cout << line << std::endl;
+    }
 }
 
 bool fgrade(const StudentInfo s) {
@@ -184,6 +193,51 @@ vector<string> frame(const vector<string>& words) {
     }
 
     result.push_back(border);
+
+    return result;
+}
+
+vector<string> vcat(const vector<string>& top, const vector<string>& bottom) {
+    vector<string> result = top;
+
+    for (
+        vector<string>::const_iterator iter = bottom.begin();
+        iter != bottom.end();
+        iter++
+    ) {
+        result.push_back(*iter);
+    }
+
+    return result;
+}
+
+
+vector<string> hcat(const vector<string>& left, const vector<string>& right) {
+    vector<string> result;
+
+    string::size_type widthLeft = width(left) + 1;
+    // i will track the rows of left, j the rows of right
+    vector<string>::size_type i = 0, j = 0;
+
+    while (i != left.size() || j != right.size()) {
+        string s;
+
+        // i may have already run out at any stage during the loop.
+        if (i != left.size()) {
+            s = left[i];
+            i++;
+        }
+
+        s += string(widthLeft - s.size(), ' ');
+
+        if (j != right.size()) {
+            s += right[j];
+            j++;
+        }
+
+        
+        result.push_back(s);
+    }
 
     return result;
 }

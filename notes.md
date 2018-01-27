@@ -785,4 +785,19 @@ We want to write a program that contains the entire 'framed' output, like chapte
 
 Write all the words stored in a vector and surround them with a border.
 
+There's no vector concatenation operation in C++, so we have to do it ourself
+with an operation `vcat`
 
+A question:
+
+We remove the constness of the top reference by copying it and then add to it??
+
+vector<string> ret = top;
+
+When you assign a const rvalue to non-const rvalue, the data gets copied
+implicitly.  ret.push_back();
+
+They define an 'hcat' algorthm for horizontal concatenation of "word pictures"
+which is relatively unremarkable -- except that it demonstrates when you can
+keep track of two indices, but probably still not go to quadratic time.  I'd
+say that this is still O(n) algorithm.
