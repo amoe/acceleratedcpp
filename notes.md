@@ -741,3 +741,31 @@ return an iterator also.
 Oh right, it's more that pointers in C-language were already actually iterators,
 inasmuch as they support ++ and `*` operations!  So the iterator system is a
 generalization of pointer arithmetic.
+
+We say that the run time of erase() is quadratic, O(n^2).  The `list` type is
+optimized for the access pattern of inserting and deleting midway through the
+container, unlike `vector`.  "If the container grows and shrinks primarily from
+the end, a vector will outperform a list".  So if you're only using push_back,
+then you can be fairly certain a vector is the right choice.  Lists don't support
+index-based access.
+
+My own thought: it's kind of slightly odd that Lisp is based on linked-lists, when
+inserting + deleting from the middle lists is a more "imperative" styled operation
+than inserting or deleting at the back.
+
+"The `list` type is a template, so we must say what kind of object the `list`
+holds by naming that type inside angle brackets, just as we do when we define
+a vector."
+
+Never save the value of `container.end()`!
+
+We can't use sort() to sort a `list` because, rather logically, it requires
+random access.  Perhaps we could use a different sorting algorithm.  Indeed,
+list provides its own method list::sort.  students.sort(compare);  I wonder
+what algorithm this one uses.
+
+The larger point of the example is that the choice of data structure can have
+a profound impact on performance.  They use a concrete example to show that
+the run time of the vector-based example can stretch up to ten minutes (!)
+
+

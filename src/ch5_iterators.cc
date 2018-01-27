@@ -3,8 +3,10 @@
 #include "grade.hh"
 #include "median.hh"
 #include <vector>
+#include <list>
 
 using std::vector;
+using std::list;
 
 typedef vector<StudentInfo>::size_type vecsz;
 
@@ -87,3 +89,20 @@ vector<StudentInfo> extract_fails_2(vector<StudentInfo>& students) {
     return fail;
 }
 
+// This is a version using lists.  We only needed to change the data type.
+list<StudentInfo> extract_fails_3(list<StudentInfo>& students) {
+    list<StudentInfo> fail;
+    list<StudentInfo>::const_iterator iter = students.begin();
+
+    while (iter != students.end()) {
+        if (fgrade(*iter)) {
+            fail.push_back(*iter);
+
+            iter = students.erase(iter);   
+        } else {
+            iter++;
+        }
+    }
+
+    return fail;
+}
