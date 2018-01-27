@@ -24,3 +24,9 @@ Program(
     source=['ch4_data.cc', 'student_info.cc', 'grade.cc', 'median.cc']
 )
 Program(target='exercises_4', source=['exercises_4.cc'])
+
+# Ch. 5
+Program(
+    target='ch5_iterators',
+    source=['ch5_iterators.cc', 'grade.cc', 'median.cc']
+)

@@ -678,3 +678,66 @@ We can infer that the return type of f is vector<double>, barring the fact that
 it might also be an array which we don't know yet.
 
 
+## Chapter 5 -- Iterators
+
+New things:
+
+They show modifying the reference of a caller's vector by replacing it with
+a totally new reference, and recommend an odd strategy of creating two outputs
+from a function using references.
+
+An in place approach would be possible but non feasible because removing items
+from vectors is obscenely slow.  i.e. it's O(n^2)
+
+We choose to address the perf / memory issue by just using a more appropriate
+data structure, although I can't really imagine what such a structure could be.
+
+The use of erase() function on a vector to remove elements.  And also the use
+of begin() when using an offset -- this is a version that's not actually using
+an index -- erase() takes a special type of arg -- and that type of arg is
+an iterator.
+
+They point out that loops using explicit indices are rather unclear because they
+don't restrict the possible range of interpretations.  You're only looping
+sequentially, but the presence of `i` means that you need to understand the whole
+loop body to ensure that access is not in fact non-sequential -- random, etc.
+This is an argument for `foreach` loops, `map`, etc.
+
+By using restricted structures, you can write code that runs more efficiently
+because the library can use implementations that have optimization properties
+that depend on those restrictions.  Like, imagine that you can use LinkedList to
+do a map() operation.  Iterators are for this.
+
+An iterator is an object that identifies both a container and a current-element.
+It provides operations for moving between other elements in various ways.
+
+You rewrite an index loop to iterator as such:
+
+for (vector<StudentInfo>::const_iterator iter = students.begin(); iter != students.end(); iter++)
+
+Note the new type `const_iterator`, we'd probably want a type alias for this.
+Or you can just use auto, I'd guess.  That's one time when auto is much nicer.
+
+To get the actual item, you need to dereference the iterator.  This is kind 
+of crazy.
+
+`(*iter).name` will access the field `name`.
+
+I don't know if this is done by operator overloading, or somehow an iterator
+simply is a pointer?
+Without const_iterator you can modify the content using *foo = bar.
+
+.begin() returns an iterator that gets automatically converted to `const_iterator`.
+This conversion is done automagically, but it's one way -- obviously you can't
+go from const to non-const.
+
+++iter is an overloaded operation.  
+
+But you can also write `foo->field` instead of `(*foo).field`.  
+
+`students.begin() + i` only works because of some overloading, so this will
+return an iterator also.
+
+Oh right, it's more that pointers in C-language were already actually iterators,
+inasmuch as they support ++ and `*` operations!  So the iterator system is a
+generalization of pointer arithmetic.
