@@ -69,6 +69,9 @@ vector<StudentInfo> extract_fails_2(vector<StudentInfo>& students) {
     
     vector<StudentInfo>::const_iterator iter = students.begin();
 
+    // Again, here we *need* to repeatedly call .end() function, because
+    // the call to erase(n) will invalidate existing iterators that are past
+    // that point -- which the end iterator certainly will be.
     while (iter != students.end()) {
         if (fgrade(*iter)) {
             fail.push_back(*iter);
