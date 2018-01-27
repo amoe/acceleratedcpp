@@ -5,20 +5,34 @@
 #include <vector>
 #include <list>
 
+using std::string;
 using std::vector;
 using std::list;
+using std::isspace;
 
 typedef vector<StudentInfo>::size_type vecsz;
+vector<string> split(const string& s);
 
 
 int main() {
     std::cout << "Hello, world!" << std::endl;
+    
+    string foo = "The quick brown fox jumped over the lazy dog";
+
+    vector<string> result = split(foo);
+
+    for (auto word : result) {
+        std::cout << word << std::endl;
+    }
+
     return 0;
 }
 
 bool fgrade(const StudentInfo s) {
     return grade(s) < 60;
 }
+
+// START extract_fails functions.
 
 // This is going to actually modify the input reference by replacing it!
 // It's kind of unclear what the memory semantics are for this.
@@ -105,4 +119,33 @@ list<StudentInfo> extract_fails_3(list<StudentInfo>& students) {
     }
 
     return fail;
+}
+
+// END extract_fails functions.
+
+
+// Koenig&Moo's index-based string split.
+vector<string> split(const string& s) {
+    vector<string> result;
+    typedef string::size_type str_sz;
+    str_sz i = 0;
+
+    while (i < s.size()) {
+        // skip leading spaces
+        while (isspace(s[i]) && i < s.size())
+            i++;
+
+        str_sz j = i;
+        while (!isspace(s[j]) && j < s.size())
+            j++;
+
+
+        if (j != i) {
+            str_sz nChars = j - i;
+            result.push_back(s.substr(i, nChars));
+            i = j;
+        }
+    }
+
+    return result;
 }

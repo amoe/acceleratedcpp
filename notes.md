@@ -768,4 +768,11 @@ The larger point of the example is that the choice of data structure can have
 a profound impact on performance.  They use a concrete example to show that
 the run time of the vector-based example can stretch up to ten minutes (!)
 
+### 5.6 -- strings.
 
+We can think of strings as containers much like vectors.  They support random
+access and provide iterators.
+We implement a split function using an iteration approach with two loop counters
+`i` and `j`.  I'm not a big fan of the algorithm they present here.
+
+p89
