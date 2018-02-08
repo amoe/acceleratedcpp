@@ -30,3 +30,5 @@ Program(
     target='ch5_iterators',
     source=['ch5_iterators.cc', 'grade.cc', 'median.cc']
 )
+Program(target='exercises_5', source=['exercises_5.cc'])
+Program(target='ex5_2', source=['ex5_2.cc', 'student_info.cc', 'grade.cc', 'median.cc'])

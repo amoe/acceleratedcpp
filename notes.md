@@ -801,3 +801,17 @@ They define an 'hcat' algorthm for horizontal concatenation of "word pictures"
 which is relatively unremarkable -- except that it demonstrates when you can
 keep track of two indices, but probably still not go to quadratic time.  I'd
 say that this is still O(n) algorithm.
+
+Exercies:
+
+# 5-0 -- Done.
+# 5-1 -- Done as a Python program, see the python playground.
+# 5-2
+ Written the vector version, generated three test files using a perl
+program..  Time is fine for 10 elements, then sortof OK for 1000 elements,
+and with 10,000 it becomes insanely slow!  This is a really interesting exercise
+on performance.
+It takes 98 seconds!  for 10,000 records for an insanely simple operation
+And that's jsut because erase() is slow on vectors
+
+The list version, on the other hand, takes a tiny bit less...  Not sure why
