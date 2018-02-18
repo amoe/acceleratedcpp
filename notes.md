@@ -815,3 +815,13 @@ It takes 98 seconds!  for 10,000 records for an insanely simple operation
 And that's jsut because erase() is slow on vectors
 
 The list version, on the other hand, takes a tiny bit less...  Not sure why
+
+# 5-3
+
+This is implemented, it's fairly simple but at this stage we only have the
+knowledge to be able to define a specific typedef like so:
+
+typedef list<StudentInfo> student_sequence;
+
+We aren't able to implement sort yet, because sort has to be handled differently
+depending on the relevant container type.
