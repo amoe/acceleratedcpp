@@ -825,3 +825,38 @@ typedef list<StudentInfo> student_sequence;
 
 We aren't able to implement sort yet, because sort has to be handled differently
 depending on the relevant container type.
+
+
+# 5-5
+
+
+
+
+
+
+
+
+
+center() returns a picture in which all the lines of the oroginal picture are padded out
+to their full width and the padding is as evenly divided as possible between the
+left and right sides of the picture.  What are the properties of pictures for which suh a
+function is useful?  How can you tell whether a given picture has those properties?
+
+This is an extension of the programs in 5.8.1.  You can find the existing
+programs in ch5_iterators.
+
+The properties of the pictues for which the function is useful is any function
+which has some strings with different lengths from the others, I'd say.
+
+You can tell whether a picture has the property by implementing an algorithm
+to test if all string size() are the same, eg:
+
+   string last_line;
+   boolean all_same = true;
+   for (string in picture) {
+       if (last_line.size() != string.size()) {
+           all_same = false; break;
+       }
+   }
+
+Just a linear search essentially

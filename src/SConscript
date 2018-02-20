@@ -33,3 +33,4 @@ Program(
 Program(target='exercises_5', source=['exercises_5.cc'])
 Program(target='ex5_2', source=['ex5_2.cc', 'student_info.cc', 'grade.cc', 'median.cc'])
 Program(target='ex5_3', source=['ex5_3.cc', 'student_info.cc', 'grade.cc', 'median.cc'])
+Program(target='ex5_5', source=['ex5_5.cc'])
