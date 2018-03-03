@@ -830,13 +830,6 @@ depending on the relevant container type.
 # 5-5
 
 
-
-
-
-
-
-
-
 center() returns a picture in which all the lines of the oroginal picture are padded out
 to their full width and the padding is as evenly divided as possible between the
 left and right sides of the picture.  What are the properties of pictures for which suh a
@@ -860,3 +853,30 @@ to test if all string size() are the same, eg:
    }
 
 Just a linear search essentially
+
+Honestly getting pretty bored of this chapter and its insane number of exercises,
+I cba to do them all, even though it's probably a nice exercise.  They're all
+just variations on linear search.
+
+
+# 5-10
+
+Palindromes: Use the reverse iterator of a string to spell it out backwards.
+Now just compare the original and the reversed one.  If reversed == original,
+it's a palindrome.
+
+To extend to find the longest, just check it's palindome, then get the string
+size().  Overwrite `max_so_far` if it's larger than `max_so_far`.
+
+
+# 5-11 -- Ascenders & descenders
+
+Write a program to determine if one word has extenders and descenders.
+Pretty easy, you just declare the letters as such:
+
+vector<string> ascenders = {"b", "d", "f", "h", "k", "l", "t"};
+
+Iterate through the string using  the string's iterator.
+Then linear-search a match in ascenders and descenders.
+
+To extend, just do the same but hold the max.
