@@ -16,6 +16,12 @@ void print_vector(const vector<string>& vec) {
 void demo_extend_vector() {
     vector<string> myvec = {"hello", "world"};
 
+    vector<string> myvec2 = {"leela", "fry"};
+
+    // Extend myvec with all elements of myvec2
+    myvec.insert(myvec.end(), myvec2.begin(), myvec2.end());
+
+
     print_vector(myvec);
 }
 
