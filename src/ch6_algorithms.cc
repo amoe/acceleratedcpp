@@ -25,8 +25,20 @@ void demo_extend_vector() {
     print_vector(myvec);
 }
 
+void demo_extend_vector_with_copy() {
+    vector<string> myvec = {"hello", "world"};
+
+    vector<string> myvec2 = {"leela", "fry"};
+
+    // this refers to std::copy, and std::back_inserter
+    copy(myvec2.begin(), myvec2.end(), back_inserter(myvec));
+
+    print_vector(myvec);
+}
+
 int main() {
     demo_extend_vector();
+    demo_extend_vector_with_copy();
 
     cout << "hello world" << endl;
 }

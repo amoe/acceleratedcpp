@@ -486,6 +486,21 @@ defined by a start and end iterator position, to an arbitrary sink:
     copy(bottom.begin(), bottom.end(), back_inserter(ret));
 
 This is pseudo code, but the expression `back_inserter(ret)` is assumed to
-return some sort of sink that ends up in `ret`.
+return some sort of sink that ends up in `ret`.  They call this an _iterator
+adaptor_.  (Actually it's not pseudocode.)
 
+So we're now getting to generic, which is pretty sweet.  In this case, `copy`
+is a generic algorithm.  And the signature looks as such:
 
+    copy(begin, end, out);
+
+They briefly give the postfix/prefix increment operators.
+
+`back_inserter()` is an actual function from `<iterator>` header.
+
+So the take-away here is that an iterator can also be a "destination" or a sink.
+I guess that this is implemented by an overload on the assignment.  Oy vey
+So you can imagine an equivalent for back_inserter that is actually going
+to overwrite elements that already exist.  Or perhaps the `back_inserter` is
+actually going to do an arbitrary tranformation on the element before adding it
+to the vector.
