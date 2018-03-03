@@ -479,3 +479,13 @@ The equivalent of `extend` in Python is the following:
 
 Assuming that they are both vectors.
 
+
+They want to invert this description so that you're basically copying a source,
+defined by a start and end iterator position, to an arbitrary sink:
+
+    copy(bottom.begin(), bottom.end(), back_inserter(ret));
+
+This is pseudo code, but the expression `back_inserter(ret)` is assumed to
+return some sort of sink that ends up in `ret`.
+
+
