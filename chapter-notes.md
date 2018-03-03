@@ -469,3 +469,13 @@ which is relatively unremarkable -- except that it demonstrates when you can
 keep track of two indices, but probably still not go to quadratic time.  I'd
 say that this is still O(n) algorithm.
 
+
+## CHAPTER 6 - USING LIBRARY ALGORITHMS
+
+
+The equivalent of `extend` in Python is the following:
+
+    ret.insert(ret.end(), bottom.begin(), bottom.end());
+
+Assuming that they are both vectors.
+
