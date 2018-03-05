@@ -504,3 +504,8 @@ So you can imagine an equivalent for back_inserter that is actually going
 to overwrite elements that already exist.  Or perhaps the `back_inserter` is
 actually going to do an arbitrary tranformation on the element before adding it
 to the vector.
+
+### Another way to split
+
+Find several things there, that now we do actually have to include algorithm,
+I think.

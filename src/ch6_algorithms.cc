@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <string>
+#include <algorithm>
 
 using std::cout;
 using std::endl;
@@ -9,7 +10,7 @@ using std::string;
 
 void print_vector(const vector<string>& vec) {
     for (string item: vec) {
-        cout << item << endl;
+        cout << '"' << item << '"' << endl;
     }
 }
 
@@ -36,9 +37,43 @@ void demo_extend_vector_with_copy() {
     print_vector(myvec);
 }
 
+bool space(char c) { return isspace(c); }
+bool not_space(char c) { return !isspace(c); }
+
+vector<string> split(const string& str) {
+    typedef string::const_iterator iter;
+    vector<string> ret;
+
+    iter i = str.begin();
+    while (i != str.end()) {
+        // get the start of the range
+        i = find_if(i, str.end(), not_space);
+
+        // get the end of the range
+        iter j = find_if(i, str.end(), space);
+        
+        if (i != str.end()) {
+            ret.push_back(string(i, j));
+        }
+
+        // jump ahead to the end of the range
+        i = j;
+    }
+
+    return ret;
+}
+
+void demo_better_split() {
+    string input = "The quick brown fox";
+
+    vector<string> result = split(input);
+    print_vector(result);
+}
+
 int main() {
     demo_extend_vector();
     demo_extend_vector_with_copy();
+    demo_better_split();
 
     cout << "hello world" << endl;
 }
