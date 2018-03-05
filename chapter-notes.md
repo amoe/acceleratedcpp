@@ -509,3 +509,12 @@ to the vector.
 
 Find several things there, that now we do actually have to include algorithm,
 I think.
+
+You can't just pass std::isspace directly to find_if, because it's overloaded
+so that it can also deal with `wchar_t`.
+You can't easily pass overloaded functions as arguments to template functions,
+because the type isn't known.
+Hence we have to make these wrappers that uncomplicatedly take `char`.
+
+One new thing is the string constructor that takes two iterators and constructs
+the string between those two iterators.
