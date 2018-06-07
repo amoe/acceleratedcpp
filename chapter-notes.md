@@ -522,3 +522,12 @@ the string between those two iterators.
 ### Palindromes
 
 Fairly uncontroversial, this is a neat and clever function.
+
+### URL detection
+
+Note their use of "static const string"
+
+This is a fairly cool algorithm that demonstrates scanning iterators using
+`find_if` and a predicate, a nearly-functional style.
+
+Some stuff is incorrigibly ugly though, for instance, see `not_url_char()`
