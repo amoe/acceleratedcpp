@@ -77,6 +77,54 @@ bool is_palindrome(const string& s) {
     return equal(s.begin(), s.end(), s.rbegin());
 }
 
+// this stub will just produce empty urls
+bool not_url_char(char c) {
+    return true;
+}
+
+string::const_iterator find_url_end(
+    string::const_iterator b, string::const_iterator e
+) {
+    // just scan the string until we reach a 'non-url' character.
+    return find_if(b, e, not_url_char);
+}
+
+string::const_iterator find_url_beginning(
+    string::const_iterator b, string::const_iterator e
+) {
+    return e;
+}
+
+
+// Find all urls in a given string
+vector<string> find_urls(const string& s) {
+    vector<string> ret;
+
+    // Standard iterator pattern.
+    typedef string::const_iterator iter;
+    iter b = s.begin();
+    iter e = s.end();
+
+    while (b != e) {
+        b = find_url_beginning(b, e);
+        
+        if (b != e)  break;
+
+        iter after = find_url_end(b, e);
+
+        // extract the substring
+        string this_url(b, after);
+        ret.push_back(this_url);
+
+        // continue from the next point
+        b = after;
+    }
+
+    return ret;
+}
+
+
+
 int main() {
     demo_extend_vector();
     demo_extend_vector_with_copy();
@@ -84,6 +132,16 @@ int main() {
 
     cout << is_palindrome("racecar") << endl;
     cout << is_palindrome("foobar") << endl;
+
+    vector<string> result = find_urls(
+        "Go to http://www.foo.com/bar/ and check out my ftp://site immediately"
+    );
+
+    cout << "found " << result.size() << " urls" << endl;
+
+    for (auto url: result) {
+        std::cout << url << std::endl;
+    }
 
     cout << "hello world" << endl;
 }
