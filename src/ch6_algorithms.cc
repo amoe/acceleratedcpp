@@ -70,10 +70,20 @@ void demo_better_split() {
     print_vector(result);
 }
 
+// Reverse iterator
+// the equal function is defined by <algorithm>
+// equal assumes that the second sequence is the same size as the first.
+bool is_palindrome(const string& s) {
+    return equal(s.begin(), s.end(), s.rbegin());
+}
+
 int main() {
     demo_extend_vector();
     demo_extend_vector_with_copy();
     demo_better_split();
+
+    cout << is_palindrome("racecar") << endl;
+    cout << is_palindrome("foobar") << endl;
 
     cout << "hello world" << endl;
 }

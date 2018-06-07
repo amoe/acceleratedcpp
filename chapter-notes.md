@@ -518,3 +518,7 @@ Hence we have to make these wrappers that uncomplicatedly take `char`.
 
 One new thing is the string constructor that takes two iterators and constructs
 the string between those two iterators.
+
+### Palindromes
+
+Fairly uncontroversial, this is a neat and clever function.
