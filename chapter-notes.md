@@ -531,3 +531,29 @@ This is a fairly cool algorithm that demonstrates scanning iterators using
 `find_if` and a predicate, a nearly-functional style.
 
 Some stuff is incorrigibly ugly though, for instance, see `not_url_char()`
+
+### Comparing grading schemes
+
+Note the use of the `.empty()` member function on vectors which predictably
+returns true if something is empty.
+
+They'll pass functions to the writing procedures to parameterize them.
+
+They introduce map() -- under the name transform()
+transform() fails due to an ambiguous function
+grade() may throw exceptions which ain't what we want
+so we need to write a wrapper, grade_aux
+
+function signatures are actually legal in the middle of a prototype.  o.o
+eg this:
+
+    void write_analysis(
+        std::ostream& out,
+        const string& name,
+        double analysis(const vector<StudentInfo>&),
+        const vector<StudentInfo>& did,
+        const vector<StudentInfo>& did_not
+    );
+
+This is 100% valid code o.O
+

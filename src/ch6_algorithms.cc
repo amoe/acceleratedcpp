@@ -2,7 +2,12 @@
 #include <vector>
 #include <string>
 #include <algorithm>
+#include "student_info.hh"
+#include "median.hh"
+#include "grade.hh"
 
+using std::transform;
+using std::cin;
 using std::cout;
 using std::endl;
 using std::vector;
@@ -175,7 +180,78 @@ vector<string> find_urls(const string& s) {
     return ret;
 }
 
+bool student_did_all_homework_p(const StudentInfo& s) {
+    // We pass a 0 here -- looking for 0 homeworks.
+    // The result is "some iterator type".
+    auto result = find(s.homework.begin(), s.homework.end(), 0);
+    
+    return result == s.homework.end();
+}
 
+
+
+// non-overloaded wrapper for grade() that allows passing through transform()
+double grade_aux(const StudentInfo& s) {
+    try {
+        return grade(s);
+    } catch (std::domain_error) {
+        return grade(s.midterm, s.final, 0);
+    }
+}
+
+// A type of grade analyzer
+double median_analysis(const vector<StudentInfo>& students) {
+    vector<double> grades;
+
+    transform(
+        students.begin(), students.end(),
+        std::back_inserter(grades),
+        grade_aux
+    );
+
+    return median(grades);
+}
+
+void write_analysis(
+    std::ostream& out,
+    const string& name,
+    double analysis(const vector<StudentInfo>&),
+    const vector<StudentInfo>& did,
+    const vector<StudentInfo>& did_not
+) {
+    out << name
+        << ": median(did) = " << analysis(did)
+        << ": median(did_not) = " << analysis(did_not)
+        << std::endl;
+}
+
+int demo_comparing_grading_schemes() {
+    vector<StudentInfo> did, did_not;
+    StudentInfo the_student;
+
+    while (read(cin, the_student)) {
+        // This would be a partition() in a more lispy style.
+        if (student_did_all_homework_p(the_student)) {
+            did.push_back(the_student);
+        } else {
+            did_not.push_back(the_student);
+        }
+    }
+    
+    if (did.empty()) {
+        std::cout << "no one did all the homework, sad" << std::endl;
+        return 1;
+    }
+
+    if (did_not.empty()) {
+        std::cout << "nice, every student did all the homework" << std::endl;
+        return 1;
+    }
+
+    write_analysis(std::cout, "median", median_analysis, did, did_not);
+
+    return 0;
+}
 
 int main() {
     demo_extend_vector();
@@ -194,6 +270,8 @@ int main() {
     for (auto url: result) {
         std::cout << url << std::endl;
     }
+
+    demo_comparing_grading_schemes();
 
     cout << "hello world" << endl;
 }
