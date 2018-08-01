@@ -7,6 +7,7 @@
 #include "median.hh"
 #include "grade.hh"
 
+using std::remove_copy;
 using std::transform;
 using std::accumulate;
 using std::cin;
@@ -233,6 +234,33 @@ double average_analysis(const vector<StudentInfo>& students) {
     return median(grades);
 }
 
+double optimistic_median(const StudentInfo& s) {
+    vector<double> nonzero;
+
+    remove_copy(
+        s.homework.begin(), s.homework.end(),
+        std::back_inserter(nonzero), 0
+    );
+
+    if (nonzero.empty()) {
+        return grade(s.midterm, s.final, 0);
+    } else {
+        return grade(s.midterm, s.final, median(nonzero));
+    }
+}
+
+// this is nearly identical to the other analysis-calling functions
+double optimistic_median_analysis(const vector<StudentInfo>& students) {
+    vector<double> grades;
+    
+    transform(
+        students.begin(), students.end(), std::back_inserter(grades),
+        optimistic_median
+    );
+
+    return median(grades);
+}
+
 void write_analysis(
     std::ostream& out,
     const string& name,
@@ -271,6 +299,7 @@ int demo_comparing_grading_schemes() {
 
     write_analysis(std::cout, "median", median_analysis, did, did_not);
     write_analysis(std::cout, "average", average_analysis, did, did_not);
+    write_analysis(std::cout, "optimistic-median", optimistic_median_analysis, did, did_not);
 
     return 0;
 }
