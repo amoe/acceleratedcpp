@@ -2,11 +2,13 @@
 #include <vector>
 #include <string>
 #include <algorithm>
+#include <numeric>
 #include "student_info.hh"
 #include "median.hh"
 #include "grade.hh"
 
 using std::transform;
+using std::accumulate;
 using std::cin;
 using std::cout;
 using std::endl;
@@ -212,6 +214,25 @@ double median_analysis(const vector<StudentInfo>& students) {
     return median(grades);
 }
 
+// Average a vector of any doubles
+double average(const vector<double>& v) {
+    return accumulate(v.begin(), v.end(), 0.0) / v.size();
+}
+
+double average_grade(const StudentInfo& s) {
+    return grade(s.midterm, s.final, average(s.homework));
+}
+
+double average_analysis(const vector<StudentInfo>& students) {
+    vector<double> grades;
+
+    transform(
+        students.begin(), students.end(), std::back_inserter(grades), average_grade
+    );
+
+    return median(grades);
+}
+
 void write_analysis(
     std::ostream& out,
     const string& name,
@@ -249,6 +270,7 @@ int demo_comparing_grading_schemes() {
     }
 
     write_analysis(std::cout, "median", median_analysis, did, did_not);
+    write_analysis(std::cout, "average", average_analysis, did, did_not);
 
     return 0;
 }

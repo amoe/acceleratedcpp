@@ -557,3 +557,4 @@ eg this:
 
 This is 100% valid code o.O
 
+accumulate() is doing a similar thing to sum().
