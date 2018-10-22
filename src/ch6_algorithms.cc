@@ -3,6 +3,7 @@
 #include <string>
 #include <algorithm>
 #include <numeric>
+#include <fstream>
 #include "student_info.hh"
 #include "median.hh"
 #include "grade.hh"
@@ -15,6 +16,8 @@ using std::cout;
 using std::endl;
 using std::vector;
 using std::string;
+using std::istream;
+using std::ifstream;
 
 void print_vector(const vector<string>& vec) {
     for (string item: vec) {
@@ -274,11 +277,11 @@ void write_analysis(
         << std::endl;
 }
 
-int demo_comparing_grading_schemes() {
+int demo_comparing_grading_schemes(istream& in) {
     vector<StudentInfo> did, did_not;
     StudentInfo the_student;
 
-    while (read(cin, the_student)) {
+    while (read(in, the_student)) {
         // This would be a partition() in a more lispy style.
         if (student_did_all_homework_p(the_student)) {
             did.push_back(the_student);
@@ -322,7 +325,16 @@ int main() {
         std::cout << url << std::endl;
     }
 
-    demo_comparing_grading_schemes();
+
+    ifstream in_file;
+    in_file.open("data/students-medium.dat");
+    if (!in_file) {
+        throw std::runtime_error("open of student data failed");
+    }
+
+    demo_comparing_grading_schemes(in_file);
+
+    in_file.close();
 
     cout << "hello world" << endl;
 }
