@@ -322,9 +322,11 @@ int main() {
     cout << "found " << result.size() << " urls" << endl;
 
     for (auto url: result) {
-        std::cout << url << std::endl;
+        std::cout << "Found URL: " << url << std::endl;
     }
 
+
+    cout << "Starting to run grading scheme comparison code, please wait." << endl;
 
     ifstream in_file;
     in_file.open("data/students-medium.dat");
@@ -336,5 +338,7 @@ int main() {
 
     in_file.close();
 
-    cout << "hello world" << endl;
+    cout << "Finished grading scheme comparison." << endl;
+
+
 }
