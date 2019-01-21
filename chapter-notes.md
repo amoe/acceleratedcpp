@@ -569,3 +569,5 @@ so you can remove all zeroes quite easy.
 
 ## 6.3 Classifying students, revisited
 
+6-3-2: They give a library function that works slightly like 'partition' would.
+And it's even called partition.  They use stable_partition though.

@@ -320,6 +320,7 @@ bool pgrade(const StudentInfo& s) {
 }
 
 // This is a follow-up to extract_fails functions from chapter 5.
+// Two-pass solution that iterates twice on students.
 vector<StudentInfo> extract_fails_4(vector<StudentInfo>& students) {
     vector<StudentInfo> fail;
 
@@ -338,11 +339,27 @@ vector<StudentInfo> extract_fails_4(vector<StudentInfo>& students) {
     return fail;
 }
 
-void demo_extract_fails_4() {
+// This solution only iterates students once.
+vector<StudentInfo> extract_fails_5(vector<StudentInfo> students) {
+    vector<StudentInfo>::iterator iter;
+
+    iter = stable_partition(students.begin(), students.end(), pgrade);
+
+    // Copy all students in the fails vector; iter now points at the start
+    // of the failing students.
+    vector<StudentInfo> fail(iter, students.end());
+
+    // And remove them from the source vector
+    students.erase(iter, students.end());
+    
+    return fail;
+}
+
+void demo_extract_fails_4(string input_path) {
     cout << "Demo extract_fails_4." << endl;
  
     ifstream in_file;
-    in_file.open("data/students-small.dat");
+    in_file.open(input_path);
     if (!in_file) {
         throw std::runtime_error("open of student data failed");
     }
@@ -365,6 +382,35 @@ void demo_extract_fails_4() {
 
     cout << "Done." << endl;
 }
+
+void demo_extract_fails_5(string input_path) {
+    cout << "Demo extract_fails_5." << endl;
+ 
+    ifstream in_file;
+    in_file.open(input_path);
+    if (!in_file) {
+        throw std::runtime_error("open of student data failed");
+    }
+
+    StudentInfo the_student;
+    vector<StudentInfo> students;
+
+    while (read(in_file, the_student)) {
+        students.push_back(the_student);
+    }
+
+    vector<StudentInfo> fails;
+    fails = extract_fails_5(students);
+
+    cout << "Fails: " << fails.size() << endl;
+    cout << "Passes: " << students.size() << endl;
+    
+    in_file.close();
+
+    cout << "Done." << endl;
+}
+
+
 
 int main() {
     demo_extend_vector();
@@ -395,7 +441,6 @@ int main() {
     in_file.close();
     cout << "Finished grading scheme comparison." << endl;
 
-    demo_extract_fails_4();
-
-    
+    demo_extract_fails_4("data/students-small.dat");
+    demo_extract_fails_5("data/students-large.dat");
 }
