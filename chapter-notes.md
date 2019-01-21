@@ -561,6 +561,11 @@ accumulate() is doing a similar thing to sum().  it's sort of like a reduce() as
 well, except that it's always doing the + operator.
 
 there's also remove_copy() -- this copies a list while filtering out a certain value
-it's something like (filter #(not (= % val)) foo)
+it's something like (filter #(not (= % val)) foo).  
+
+Note that remove_copy does not modify the array.
 
 so you can remove all zeroes quite easy.
+
+## 6.3 Classifying students, revisited
+

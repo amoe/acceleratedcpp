@@ -18,6 +18,8 @@ using std::vector;
 using std::string;
 using std::istream;
 using std::ifstream;
+using std::remove_if;
+using std::remove_copy_if;
 
 void print_vector(const vector<string>& vec) {
     for (string item: vec) {
@@ -307,6 +309,63 @@ int demo_comparing_grading_schemes(istream& in) {
     return 0;
 }
 
+// Return true if a student failed.
+bool fgrade(const StudentInfo s) {
+    return grade(s) < 60;
+}
+
+// Return true if a student passed.
+bool pgrade(const StudentInfo& s) {
+    return !fgrade(s);
+}
+
+// This is a follow-up to extract_fails functions from chapter 5.
+vector<StudentInfo> extract_fails_4(vector<StudentInfo>& students) {
+    vector<StudentInfo> fail;
+
+    // 'fail' becomes a filtered set of students that did NOT pass.
+    remove_copy_if(
+        students.begin(), students.end(), back_inserter(fail), pgrade
+    );
+    
+    // remove_if will filter out failing students.  We use this to
+    // find a sequence to then later pass to 'erase', which does modify the
+    // array.
+    students.erase(
+        remove_if(students.begin(), students.end(), fgrade), students.end()
+    );
+
+    return fail;
+}
+
+void demo_extract_fails_4() {
+    cout << "Demo extract_fails_4." << endl;
+ 
+    ifstream in_file;
+    in_file.open("data/students-small.dat");
+    if (!in_file) {
+        throw std::runtime_error("open of student data failed");
+    }
+
+    StudentInfo the_student;
+    vector<StudentInfo> students;
+
+    while (read(in_file, the_student)) {
+        students.push_back(the_student);
+    }
+
+    vector<StudentInfo> fails;
+    fails = extract_fails_4(students);
+
+    
+    cout << "Fails: " << fails.size() << endl;
+    cout << "Passes: " << students.size() << endl;
+    
+    in_file.close();
+
+    cout << "Done." << endl;
+}
+
 int main() {
     demo_extend_vector();
     demo_extend_vector_with_copy();
@@ -335,4 +394,8 @@ int main() {
     demo_comparing_grading_schemes(in_file);
     in_file.close();
     cout << "Finished grading scheme comparison." << endl;
+
+    demo_extract_fails_4();
+
+    
 }
