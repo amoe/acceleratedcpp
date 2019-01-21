@@ -327,18 +327,12 @@ int main() {
 
 
     cout << "Starting to run grading scheme comparison code, please wait." << endl;
-
     ifstream in_file;
     in_file.open("data/students-medium.dat");
     if (!in_file) {
         throw std::runtime_error("open of student data failed");
     }
-
     demo_comparing_grading_schemes(in_file);
-
     in_file.close();
-
     cout << "Finished grading scheme comparison." << endl;
-
-
 }
