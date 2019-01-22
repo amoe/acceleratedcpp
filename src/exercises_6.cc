@@ -10,6 +10,43 @@ vector<string> frame(const vector<string>& words);
 void spew(const vector<string>& pic);
 vector<string> split(const string& s);
 string::size_type width(const vector<string>& v);
+vector<string> hcat(const vector<string>& left, const vector<string>& right);
+vector<string> vcat(const vector<string>& top, const vector<string>& bottom);
+
+
+// Exercise 6-1, hcat() with iterators.
+vector<string> hcat(const vector<string>& left, const vector<string>& right) {
+    vector<string> result;
+
+    string::size_type widthLeft = width(left) + 1;
+
+    typedef vector<string>::const_iterator iter;
+    iter i = left.begin();
+    iter j = right.begin();
+
+    while (i != left.end() || j != right.end()) {
+        string s;
+
+        // i may have already run out at any stage during the loop.
+        if (i != left.end()) {
+            s = *i;
+            i++;
+        }
+
+        s += string(widthLeft - s.size(), ' ');
+
+        if (j != right.end()) {
+            s += *j;
+            j++;
+        }
+
+        
+        result.push_back(s);
+    }
+
+    return result;
+}
+
 
 
 // Exercise 6-1, reimplementing frame() with iterators.
@@ -76,6 +113,21 @@ void spew(const vector<string>& pic) {
     }
 }
 
+vector<string> vcat(const vector<string>& top, const vector<string>& bottom) {
+    vector<string> result = top;
+
+    for (
+        vector<string>::const_iterator iter = bottom.begin();
+        iter != bottom.end();
+        iter++
+    ) {
+        result.push_back(*iter);
+    }
+
+    return result;
+}
+
+
 
 int main() {
     std::cout << "Hello, world!" << std::endl;
@@ -92,8 +144,8 @@ int main() {
     spew(framed);
 
 
-    //spew(vcat(result, framed));
-    //spew(hcat(result, framed));
+    spew(vcat(result, framed));
+    spew(hcat(result, framed));
 
     return 0;
 

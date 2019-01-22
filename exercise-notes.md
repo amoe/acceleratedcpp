@@ -344,3 +344,4 @@ To extend, just do the same but hold the max.
 
 The main thing to note is that we iterate over words.  We can use a const
 iterator.  words[i].size() becomes it->size().
+In hcat, we have two iterators that we move in parallel.
