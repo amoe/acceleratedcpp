@@ -360,3 +360,9 @@ I thought that this would copy u into v.
 However, this actually gives a segfault for me.
 I presume because v hasn't been allocated properly, to have 10 spaces.
 Indeed, pre-allocating v causes it to work.
+
+### 6-4
+
+Correct the program, there are two ways.  One way is to pre-allocate the vector
+to correct size, the other is to use l.insert() instead of copy.  Prellocation
+solution is probably better in this case.  But less flexible overall.
