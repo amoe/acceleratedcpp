@@ -336,3 +336,11 @@ Iterate through the string using  the string's iterator.
 Then linear-search a match in ascenders and descenders.
 
 To extend, just do the same but hold the max.
+
+## Exercises ch6
+
+### 6-0 -- Done.
+### 6-1 -- Done in exercises_6.cc.
+
+The main thing to note is that we iterate over words.  We can use a const
+iterator.

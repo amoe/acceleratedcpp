@@ -571,3 +571,16 @@ so you can remove all zeroes quite easy.
 
 6-3-2: They give a library function that works slightly like 'partition' would.
 And it's even called partition.  They use stable_partition though.
+
+
+Algorithms act on the elements of containers but never the container itself.
+Eg they don't change the size of containers.
+
+Details:
+
+* The static storage class modifier causes storage to persist across scopes
+* "Iterator adapters" are functions that yield iterators, one is `back_inserter`
+* Algorithm defines:
+** accumulate, find, find_if, search, copy, remove_copy, remove_if, remove_copy_if
+** remove, transform, partition, stable_partition
+* `if` variants take a predicate instead of a concrete value

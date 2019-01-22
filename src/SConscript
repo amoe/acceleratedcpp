@@ -44,3 +44,4 @@ env.Program(
     target='ch6_algorithms',
     source=['ch6_algorithms.cc', 'student_info.cc', 'grade.cc', 'median.cc']
 )
+env.Program(target='exercises_6', source=['exercises_6.cc'])
