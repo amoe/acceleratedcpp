@@ -377,11 +377,11 @@ Already done in ch6_algorithms.cc: `demo_comparing_grading_schemes`.
 
 ### 6-7
 
-Not done yet -- needs clarification
+Not done yet -- needs clarification -- what's expected format of answer?
 
 ### 6-8
 
-Not done yet -- needs clarification
+Not done yet -- needs clarification ... what's expected format of answer?
 
 ### 6-9
 
