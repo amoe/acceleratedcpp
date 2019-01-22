@@ -340,8 +340,23 @@ To extend, just do the same but hold the max.
 ## Exercises ch6
 
 ### 6-0 -- Done.
-### 6-1 -- Done in exercises_6.cc.
+### 6-1 -- Done in ex6_1.cc.
 
 The main thing to note is that we iterate over words.  We can use a const
 iterator.  words[i].size() becomes it->size().
 In hcat, we have two iterators that we move in parallel.
+
+### 6-2 -- Done in ex6_2.cc
+
+### 6-3
+
+> What does this program fragment do?
+
+    vector<int> u(10, 100);
+    vector<int> v;
+    copy(u.begin(), u.end(), v.begin());
+
+I thought that this would copy u into v.
+However, this actually gives a segfault for me.
+I presume because v hasn't been allocated properly, to have 10 spaces.
+Indeed, pre-allocating v causes it to work.
