@@ -366,3 +366,36 @@ Indeed, pre-allocating v causes it to work.
 Correct the program, there are two ways.  One way is to pre-allocate the vector
 to correct size, the other is to use l.insert() instead of copy.  Prellocation
 solution is probably better in this case.  But less flexible overall.
+
+### 6-5
+
+Already done in ch6_algorithms.cc.
+
+### 6-6
+
+Already done in ch6_algorithms.cc: `demo_comparing_grading_schemes`.
+
+### 6-7
+
+Not done yet -- needs clarification
+
+### 6-8
+
+Not done yet -- needs clarification
+
+### 6-9
+
+Done in ex6_9.cc.
+Note that this literal translation of fold-left won't work:
+
+    return accumulate(v.begin(), v.end(), "");
+
+because this tries to pass a `const char*` (the type of a literal string)
+instead of an empty string.
+
+This will work though:
+
+    return accumulate(v.begin(), v.end(), string());
+
+The key here is to realize that elements are combined using the `+` operator
+which is defined on strings as well as on numbers.
