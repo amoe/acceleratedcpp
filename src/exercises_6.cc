@@ -14,16 +14,17 @@ string::size_type width(const vector<string>& v);
 
 // Exercise 6-1, reimplementing frame() with iterators.
 vector<string> frame(const vector<string>& words) {
+    typedef vector<string>::const_iterator iter;
+
     vector<string> result;
     string::size_type maxlen = width(words);
     string border(maxlen + 4, '*');
 
     result.push_back(border);
 
-    for (vector<string>::size_type i = 0; i < words.size(); i++) {
-        string padding(maxlen - words[i].size(), ' ');
-        
-        result.push_back("* "  + words[i] + padding + " *");
+    for (iter it = words.begin(); it != words.end(); it++) {
+        string padding(maxlen - it->size(), ' ');
+        result.push_back("* "  + *it + padding + " *");
     }
 
     result.push_back(border);

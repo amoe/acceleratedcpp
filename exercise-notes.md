@@ -343,4 +343,4 @@ To extend, just do the same but hold the max.
 ### 6-1 -- Done in exercises_6.cc.
 
 The main thing to note is that we iterate over words.  We can use a const
-iterator.
+iterator.  words[i].size() becomes it->size().
