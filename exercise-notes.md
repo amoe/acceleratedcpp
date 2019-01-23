@@ -377,7 +377,15 @@ Already done in ch6_algorithms.cc: `demo_comparing_grading_schemes`.
 
 ### 6-7
 
-Not done yet -- needs clarification -- what's expected format of answer?
+> The portion of the grading analysis program from S6.2.1/110 that read and
+> classified student records depending on whether they did (or did not) do all the
+> homework is similar to the problem we solved in extract_fails. Write a function
+> to handle this subproblem.
+
+In short, the approach here is to reuse the `extract_fails_5` approach (which uses
+`stable_partition`) and rework it using predicate function
+`student_did_all_homework_p`.
+We write `extract_incomplete_hw_students` and it seems quite simple.
 
 ### 6-8
 
