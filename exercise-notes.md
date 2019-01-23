@@ -389,7 +389,13 @@ We write `extract_incomplete_hw_students` and it seems quite simple.
 
 ### 6-8
 
-Not done yet -- needs clarification ... what's expected format of answer?
+> Write a single function that can be used to classify students based on criteria
+> of your choice. Test this function by using it in place of the extract_fails
+> program, and use it in the program to analyse student grades.
+
+
+
+
 
 ### 6-9
 
