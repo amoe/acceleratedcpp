@@ -393,8 +393,19 @@ We write `extract_incomplete_hw_students` and it seems quite simple.
 > of your choice. Test this function by using it in place of the extract_fails
 > program, and use it in the program to analyse student grades.
 
+OK, so Mathalope uses a function pointer for this.  This is clearly gesturing
+towards generic programming.  However I'm not sure that function pointers have
+yet been introduced.  This is essentially a refactoring and it's done in
+ex6_8.cc.
 
 
+The signature looks like
+
+    vector<StudentInfo> extract_with_criteria(
+        vector<StudentInfo> students, bool criteria(const StudentInfo&)
+    ) {
+        ...
+    }
 
 
 ### 6-9
