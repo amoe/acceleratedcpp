@@ -584,3 +584,5 @@ Details:
 ** accumulate, find, find_if, search, copy, remove_copy, remove_if, remove_copy_if
 ** remove, transform, partition, stable_partition
 * `if` variants take a predicate instead of a concrete value
+
+FINISHED ch6!

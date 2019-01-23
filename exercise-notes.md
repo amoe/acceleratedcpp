@@ -424,3 +424,5 @@ This will work though:
 
 The key here is to realize that elements are combined using the `+` operator
 which is defined on strings as well as on numbers.
+
+FINISHED Ch6!
