@@ -90,17 +90,21 @@ void print_xref_table(map<string, vector<int>> the_xref) {
 
 map<string, vector<int>> xref(istream& in, word_finder_t find_words) {
     map<string, vector<int>> result;
+    int line_number = 1;
     string line;
 
     while (getline(in, line)) {
         vector<string> words = find_words(line);
-        print_vector(words);
-
 
         typedef vector<string>::const_iterator iter_t;
         for (iter_t it = words.begin(); it != words.end(); it++) {
-            result[*it] = {0};
+            // Note that we don't need to handle the null-array case here, which
+            // is kind of cool.  We skip the dynamic-language manual
+            // initialization crap.
+            result[*it].push_back(line_number);
         }
+
+        line_number++;
     }
 
 
