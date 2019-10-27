@@ -39,7 +39,7 @@ env.Program(target='ex5_2', source=['ex5_2.cc', 'student_info.cc', 'grade.cc', '
 env.Program(target='ex5_3', source=['ex5_3.cc', 'student_info.cc', 'grade.cc', 'median.cc'])
 env.Program(target='ex5_5', source=['ex5_5.cc'])
 
-# Ch. 5
+# Ch. 6
 env.Program(
     target='ch6_algorithms',
     source=['ch6_algorithms.cc', 'student_info.cc', 'grade.cc', 'median.cc']
@@ -52,3 +52,10 @@ env.Program(target='ex6_4', source=['ex6_4.cc'])
 env.Program(target='ex6_7', source=['ex6_7.cc', 'student_info.cc'])
 env.Program(target='ex6_8', source=['ex6_8.cc', 'student_info.cc'])
 env.Program(target='ex6_9', source=['ex6_9.cc'])
+
+# Ch. 7
+env.Program(
+    target='ch7_associative',
+    source=['ch7_associative.cc']
+)
+

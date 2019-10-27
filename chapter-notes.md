@@ -586,3 +586,12 @@ Details:
 * `if` variants take a predicate instead of a concrete value
 
 FINISHED ch6!
+
+## Chapter 7
+
+"Associative containers" -- aka hash tables or maps have keys.  An index of a
+vector could be considered a type of key, with the following caveat: "Every time
+we insert or delete an element form a vector, we implicitly change the index of
+every element _after_ the one we touched".
+
+
