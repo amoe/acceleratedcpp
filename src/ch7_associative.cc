@@ -60,6 +60,8 @@ void print_line_number_list(const vector<int>& line_numbers) {
 
     // Loop and a half to emulate a join function.
 
+    // We always know that there will be more than zero numbers in the vector,
+    // so this is safe when used with 'xref' function.
     iter_t it = line_numbers.begin();
     cout << *it;
     it++;   // scroll past it
