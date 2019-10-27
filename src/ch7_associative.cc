@@ -14,8 +14,12 @@ using std::string;
 using std::stringstream;
 using std::vector;
 
-void create_cross_reference_table(istream& input);
+using word_finder_t = vector<string> (*)(const string&);
+
+void demo_cross_reference_table(istream& input);
 void demo_word_count_using_map(istream& input);
+map<string, vector<int>> xref(istream& in, word_finder_t find_words);
+
 
 const string multi_line_input = R"(
 Alice was beginning to get very tired of sitting by her sister on the
@@ -37,20 +41,32 @@ int main() {
     demo_word_count_using_map(sin1);
 
     stringstream sin2(multi_line_input);
-    create_cross_reference_table(sin2);
+    demo_cross_reference_table(sin2);
 
     cout << "Finish ch7." << endl;
 
     return 0;
 }
 
-void create_cross_reference_table(istream& input) {
+void demo_cross_reference_table(istream& input) {
+    cout << "Generating xref" << endl;
+    auto result = xref(input, split);
+    cout << "Done" << endl;
+}
+
+
+map<string, vector<int>> xref(istream& in, word_finder_t find_words) {
+    map<string, vector<int>> result;
+
     string line;
 
-    while (getline(input, line)) {
-        vector<string> words = split(line);
+    while (getline(in, line)) {
+        vector<string> words = find_words(line);
         print_vector(words);
     }
+
+
+    return result;
 }
 
 void demo_word_count_using_map(istream& input) {
