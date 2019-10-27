@@ -607,3 +607,4 @@ The `it->first`, `it->second` pattern is implemented by a type called
 
 Here, `it` is of type `pair<const string, int>`.  The pair itself is an lvalue
 but the const type of 'first' prevents modifications.
+

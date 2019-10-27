@@ -11,6 +11,7 @@ using std::cin;
 using std::string;
 using std::stringstream;
 
+void create_cross_reference_table(istream& input);
 void demo_word_count_using_map(istream& input);
 
 const string multi_line_input = R"(
@@ -29,12 +30,23 @@ int main() {
     // the user type in input every time, we use stringstream to feed input
     // via an istream&.
     string s = "It was the best of times, it was the worst of times";
-    stringstream sin(s);
-    demo_word_count_using_map(sin);
+    stringstream sin1(s);
+    demo_word_count_using_map(sin1);
+
+    stringstream sin2(multi_line_input);
+    create_cross_reference_table(sin2);
 
     cout << "Finish ch7." << endl;
 
     return 0;
+}
+
+void create_cross_reference_table(istream& input) {
+    string line;
+
+    while (getline(input, line)) {
+        cout << "read line" << endl;
+    }
 }
 
 void demo_word_count_using_map(istream& input) {
