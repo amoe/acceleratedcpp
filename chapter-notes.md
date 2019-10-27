@@ -594,4 +594,16 @@ vector could be considered a type of key, with the following caveat: "Every time
 we insert or delete an element form a vector, we implicitly change the index of
 every element _after_ the one we touched".
 
+From the word-counting example, we know that the map<foo, int> implicitly
+initializes its ints to zero.  (Lazily at lookup time.)  This is called 'value
+initialization'.
 
+The `it->first`, `it->second` pattern is implemented by a type called
+`std::pair`.
+
+    for (iter it = counters.begin(); it != counters.end(); ++it) {
+        cout << it->first << ": " << it->second << endl;
+    }
+
+Here, `it` is of type `pair<const string, int>`.  The pair itself is an lvalue
+but the const type of 'first' prevents modifications.
