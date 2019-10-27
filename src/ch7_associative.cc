@@ -2,6 +2,8 @@
 #include <map>
 #include <string>
 #include <sstream>
+#include "split.hh"
+#include "util.hh"
 
 using std::cout;
 using std::endl;
@@ -10,6 +12,7 @@ using std::istream;
 using std::cin;
 using std::string;
 using std::stringstream;
+using std::vector;
 
 void create_cross_reference_table(istream& input);
 void demo_word_count_using_map(istream& input);
@@ -45,7 +48,8 @@ void create_cross_reference_table(istream& input) {
     string line;
 
     while (getline(input, line)) {
-        cout << "read line" << endl;
+        vector<string> words = split(line);
+        print_vector(words);
     }
 }
 
@@ -62,3 +66,4 @@ void demo_word_count_using_map(istream& input) {
         cout << it->first << ": " << it->second << endl;
     }
 }
+

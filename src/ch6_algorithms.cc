@@ -7,6 +7,7 @@
 #include "student_info.hh"
 #include "median.hh"
 #include "grade.hh"
+#include "util.hh"
 
 using std::remove_copy;
 using std::transform;
@@ -20,12 +21,6 @@ using std::istream;
 using std::ifstream;
 using std::remove_if;
 using std::remove_copy_if;
-
-void print_vector(const vector<string>& vec) {
-    for (string item: vec) {
-        cout << '"' << item << '"' << endl;
-    }
-}
 
 void demo_extend_vector() {
     vector<string> myvec = {"hello", "world"};
