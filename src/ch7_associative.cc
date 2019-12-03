@@ -16,10 +16,16 @@ using std::vector;
 
 using word_finder_t = vector<string> (*)(const string&);
 
+using Rule = vector<string>;
+using RuleCollection = vector<Rule>;
+using Grammar = map<string, RuleCollection>;
+
 void demo_cross_reference_table(istream& input);
 void demo_word_count_using_map(istream& input);
 map<string, vector<int>> xref(istream& in, word_finder_t find_words);
 void print_xref_table(map<string, vector<int>> the_xref);
+void demo_generating_sentences();
+Grammar read_grammar(istream& input);
 
 const string multi_line_input = R"(
 Alice was beginning to get very tired of sitting by her sister on the
@@ -27,6 +33,23 @@ bank, and of having nothing to do: once or twice she had peeped into the
 book her sister was reading, but it had no pictures or conversations in
 it, ‘and what is the use of a book,’ thought Alice ‘without pictures or
 conversations?’
+)";
+
+const string demo_grammar = R"(
+<noun>          cat
+<noun>          dog
+<noun>          table
+<noun-phrase>   <noun>
+<noun-phrase>   <adjective> <noun-phrase>
+<adjective>     large
+<adjective>     brown
+<adjective>     absurd
+<verb>          jumps
+<verb>          sits
+<location>      on the stairs
+<location>      under the sky
+<location>      wherever it wants
+<sentence>      the <noun-phrase> <verb> <location>
 )";
 
 
@@ -43,9 +66,47 @@ int main() {
     stringstream sin2(multi_line_input);
     demo_cross_reference_table(sin2);
 
+    demo_generating_sentences();
+
     cout << "Finish ch7." << endl;
 
     return 0;
+}
+
+Grammar read_grammar(istream& input) {
+    Grammar result;
+    string line;
+
+    while (getline(input, line)) {
+        vector<string> entry = split(line);
+        if (!entry.empty()) {
+            string key = entry.at(0);
+            // 'at' will not work here.
+            result[key].push_back(
+                // WTF is going on here?    Constructing a vector<string>
+                // from the list slice.  Equivalent to entry[1:] in python.
+                Rule(entry.begin() + 1, entry.end())
+            );
+        }
+    }
+
+    return result;
+}
+
+vector<string> generate_sentence(Grammar grammar) {
+    vector<string> result;
+
+    // Here we need to do a recursive expansion.
+    
+    return result;
+}
+
+void demo_generating_sentences() {
+    cout << "I would generate some sentences." << endl;
+    stringstream sin(demo_grammar);
+    Grammar g = read_grammar(sin);
+    vector<string> sentence = generate_sentence(g);
+    print_vector(sentence);
 }
 
 void demo_cross_reference_table(istream& input) {

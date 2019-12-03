@@ -611,3 +611,5 @@ but the const type of 'first' prevents modifications.
 K&M say that you need to write `map<string, vector<int> >` (note the weird
 space) to unconfuse the compiler, though I don't think this is the case.  (This
 fails in C++98 but was defined in C++03)
+
+
