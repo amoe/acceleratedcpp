@@ -634,4 +634,6 @@ Look at this (regarding the bracket operator):
 > A similar member function, map::at, has the same behavior when an element with
 > the key exists, but throws an exception when it does not.
 
-Bonkers
+Bonkers.
+Maps are not typically implemented using hash tables.  Rather they are backed by
+'balanced self-adjusting trees'.
