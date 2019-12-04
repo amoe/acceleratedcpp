@@ -93,11 +93,35 @@ Grammar read_grammar(istream& input) {
     return result;
 }
 
-vector<string> generate_sentence(Grammar grammar) {
+bool is_production(string str) {
+    const char& first = str.at(0);
+    const char& last = str.at(str.size() - 1);
+
+    return first == '<' && last == '>';
+}
+
+vector<string> expand_word(Grammar grammar, const string& word) {
+    RuleCollection all_rules = grammar.at(word);
+    Rule chosen_rule = all_rules.at(0);
+
     vector<string> result;
 
-    // Here we need to do a recursive expansion.
-    
+    for (string w: chosen_rule) {
+        if (is_production(w)) {
+            vector<string> r = expand_word(grammar, w);
+            result.insert(result.end(), r.begin(), r.end());
+        } else {
+            result.push_back(w);
+        }
+    }
+
+    return result;
+}
+
+// Kick off the recursive expansion
+vector<string> generate_sentence(Grammar grammar) {
+    vector<string> result;
+    result = expand_word(grammar, "<sentence>");
     return result;
 }
 

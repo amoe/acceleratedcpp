@@ -612,4 +612,7 @@ K&M say that you need to write `map<string, vector<int> >` (note the weird
 space) to unconfuse the compiler, though I don't think this is the case.  (This
 fails in C++98 but was defined in C++03)
 
-
+I wrote this implementation based on a Clojure one which does a tree-recursion
+using a recurse-inside-map pattern.  This is a bit easier because you don't
+need to flatten the list afterward.  They use an accumulator pattern which is
+tail recursive.  nrand is left undefined.
