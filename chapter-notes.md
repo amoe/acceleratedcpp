@@ -616,3 +616,8 @@ I wrote this implementation based on a Clojure one which does a tree-recursion
 using a recurse-inside-map pattern.  This is a bit easier because you don't
 need to flatten the list afterward.  They use an accumulator pattern which is
 tail recursive.  nrand is left undefined.
+
+cstdlib header defines rand.  Why is nrand necessary?  There's some quirkiness
+to rand-in-range with C++, as a result there are about 4 different approaches to
+this simple problem.
+

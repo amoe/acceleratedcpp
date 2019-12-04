@@ -2,6 +2,7 @@
 #include <map>
 #include <string>
 #include <sstream>
+#include <cstdlib>
 #include "split.hh"
 #include "util.hh"
 
@@ -54,6 +55,8 @@ const string demo_grammar = R"(
 
 
 int main() {
+    srand(time(NULL));
+
     cout << "Starting ch7." << endl;
 
     // As we use the >> operator to word-split, and don't want to make
@@ -100,9 +103,15 @@ bool is_production(string str) {
     return first == '<' && last == '>';
 }
 
+
+int nrand(int n) {
+    return (int)((double)rand() / ((double)RAND_MAX + 1) * n);
+}
+
 vector<string> expand_word(Grammar grammar, const string& word) {
     RuleCollection all_rules = grammar.at(word);
-    Rule chosen_rule = all_rules.at(0);
+    int choice = nrand(all_rules.size());
+    Rule chosen_rule = all_rules.at(choice);
 
     vector<string> result;
 
