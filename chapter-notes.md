@@ -621,3 +621,17 @@ cstdlib header defines rand.  Why is nrand necessary?  There's some quirkiness
 to rand-in-range with C++, as a result there are about 4 different approaches to
 this simple problem.
 
+They avoid using the [] lookup (the bracket operator) because it auto creates
+the key, apparently ?!  at() is c++11
+
+Look at this (regarding the bracket operator):
+
+> If k does not match the key of any element in the container, the function
+> inserts a new element with that key and returns a reference to its mapped
+> value. Notice that this always increases the container size by one, even if no
+> mapped value is assigned to the element (the element is constructed using its
+> default constructor).
+> A similar member function, map::at, has the same behavior when an element with
+> the key exists, but throws an exception when it does not.
+
+Bonkers

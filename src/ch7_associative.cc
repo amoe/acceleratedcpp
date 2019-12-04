@@ -109,6 +109,8 @@ int nrand(int n) {
 }
 
 vector<string> expand_word(Grammar grammar, const string& word) {
+    // K&M use find() instead -- long-winded.  This is safe and won't create
+    // spurious elements.  It has different behaviour from tbe bracket operator.
     RuleCollection all_rules = grammar.at(word);
     int choice = nrand(all_rules.size());
     Rule chosen_rule = all_rules.at(choice);
