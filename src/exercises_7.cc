@@ -18,16 +18,28 @@ using std::vector;
 // How would we do this?
 // Reconstruct post hoc.
 void ex7_1(istream& input) {
+    typedef map<string, int>::const_iterator iter1_t;
+    typedef map<int, vector<string>>::const_iterator iter2_t;
     string s;
     map<string, int> counters;
 
     while (input >> s)
         ++counters[s];
 
-    typedef map<string, int>::const_iterator iter;
+    map<int, vector<string>> grouped;
 
-    for (iter it = counters.begin(); it != counters.end(); ++it) {
-        cout << it->first << ": " << it->second << endl;
+    // Basically invert the map
+    for (iter1_t it = counters.begin(); it != counters.end(); ++it) {
+        string word = it->first;
+        int occurrences = it->second;
+
+        grouped[occurrences].push_back(word);
+    }
+
+    for (iter2_t it = grouped.begin(); it != grouped.end(); ++it) {
+        int occurrences = it->first;
+        cout << "Occurrences: " << occurrences << endl;
+        print_vector(it->second);
     }
 }
 

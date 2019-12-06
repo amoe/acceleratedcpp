@@ -59,6 +59,6 @@ env.Program(
     source=['ch7_associative.cc', 'split.cc', 'util.cc']
 )
 
-env.Program(target='exercises_7', source=['exercises_7.cc'])
+env.Program(target='exercises_7', source=['exercises_7.cc', 'util.cc'])
 
 

@@ -426,3 +426,11 @@ The key here is to realize that elements are combined using the `+` operator
 which is defined on strings as well as on numbers.
 
 FINISHED Ch6!
+
+
+## Exercises ch7
+
+### 7-1
+
+Group word count by occurrences.  The invert-map solution is the same
+one as suggested by Mathalope.
