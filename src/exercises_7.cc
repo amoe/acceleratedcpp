@@ -51,15 +51,9 @@ void ex7_1(istream& input) {
 
 void ex7_2(istream& input) {
     vector<StudentInfo> students;
-
     StudentInfo theRecord;
-
-    // This *must* be size_type because both arguments to max() need to have
-    // precisely the same type.  No idea why.
     string::size_type maxlen = 0;
 
-
-    // Accumulate all students from cin
     while (read(input, theRecord)) {
         maxlen = max(maxlen, theRecord.name.size());
         students.push_back(theRecord);
@@ -69,19 +63,8 @@ void ex7_2(istream& input) {
 
     for (vector<StudentInfo>::size_type i = 0; i < students.size(); i++) {
         StudentInfo thisStudent = students[i];
-        cout << thisStudent.name
-             << string((maxlen + 1) - thisStudent.name.size(), ' ');
-
-        try {
-            double finalGrade = grade(thisStudent);
-            streamsize prec = cout.precision();
-
-            cout << setprecision(3) << finalGrade << setprecision(prec);
-        } catch (std::domain_error& e) {
-            cout << e.what();
-        }
-
-        cout << endl;
+        double finalGrade = grade(thisStudent);
+        cout << finalGrade << endl;
     }
 }
 

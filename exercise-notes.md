@@ -435,4 +435,14 @@ FINISHED Ch6!
 Group word count by occurrences.  The invert-map solution is the same
 one as suggested by Mathalope.
 
-##
+## 7-2
+
+Ranges
+
+A 90-100
+B 80 - <90
+C 70 - <80
+D 60 - <70
+F <60
+
+output should list how many fall into each category
