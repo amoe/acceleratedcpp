@@ -49,37 +49,6 @@ void ex7_1(istream& input) {
     }
 }
 
-void ex7_2(istream& input) {
-    vector<StudentInfo> students;
-    StudentInfo theRecord;
-    string::size_type maxlen = 0;
-
-    while (read(input, theRecord)) {
-        maxlen = max(maxlen, theRecord.name.size());
-        students.push_back(theRecord);
-    }
-
-    sort(students.begin(), students.end(), lessThan);
-
-    for (vector<StudentInfo>::size_type i = 0; i < students.size(); i++) {
-        StudentInfo thisStudent = students[i];
-        double finalGrade = grade(thisStudent);
-        cout << finalGrade << endl;
-    }
-}
-
-const string students_small_input = R"(Gamlin 94 89 14 96 16 63
-Capener 7 10 32 68 61 76
-Zutell 31 75 81 54 18 87
-Jervis 10 45 37 22 74 70
-Ottem 55 25 88 4 51 55
-Hellen 13 75 20 42 66 54
-Droney 17 82 29 73 36 75
-Pyne 25 77 14 26 93 49
-Hebert 35 83 24 69 24 80
-Orrico 90 54 27 3 2 11
-)";
-
 
 int main() {
     std::cout << "Hello, world!" << std::endl;
@@ -87,9 +56,6 @@ int main() {
     string s = "It was the best of times, it was the worst of times";
     stringstream sin1(s);
     ex7_1(sin1);
-
-    stringstream sin2(students_small_input);
-    ex7_2(sin2);
 
     return 0;
 }
