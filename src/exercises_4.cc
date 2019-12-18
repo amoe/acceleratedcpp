@@ -50,11 +50,9 @@ void ex4_4_doubles() {
     // We use a simple minded way here.  A "better" way might be to convert
     // to string, but we don't know how to do so yet.
     int max = 1000;
-    int desiredWidth = nDigits(max) - 1;
 
     for (double i = 1.0; i < max; i++) {
         double square = i * i;
-
         cout << i << " " << setprecision(10) << square << endl;
     }
 }
@@ -64,7 +62,7 @@ void ex4_7_average() {
     typedef vector<double>::size_type  vec_sz;
 
     double sum = 0;
-    for (int i = 0; i < input.size(); i++) {
+    for (vec_sz i = 0; i < input.size(); i++) {
         sum += input[i];
     }
 

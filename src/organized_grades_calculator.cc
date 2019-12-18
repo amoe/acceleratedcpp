@@ -125,7 +125,7 @@ int main() {
         cout << "Final grade is " << setprecision(3) << final_grade
              << setprecision(prec) << endl;
 
-    } catch (std::domain_error) {
+    } catch (std::domain_error&) {
         cout << endl << "You must enter your grades, try again" << endl;
         return 1;
     }

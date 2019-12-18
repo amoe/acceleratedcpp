@@ -45,7 +45,7 @@ int main() {
             streamsize prec = cout.precision();
 
             cout << setprecision(3) << finalGrade << setprecision(prec);
-        } catch (std::domain_error e) {
+        } catch (std::domain_error& e) {
             cout << e.what();
         }
 

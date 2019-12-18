@@ -6,6 +6,8 @@ using std::endl;
 using std::string;
 
 int main() {
+    typedef string::size_type str_sz;
+
     cout << "Please enter your first name: ";
     string name;
     cin >> name;   // read a single word name
@@ -38,7 +40,7 @@ int main() {
     const int row_count = greeting_height + padding_total + (frame_height * 2);
 
     // Now we must calculate how to actually write a row.
-    const int border_width = 1;
+    const str_sz border_width = 1;
 
 
     // Note that this must be derived from size_type because this comes from
@@ -46,6 +48,7 @@ int main() {
     // take values up to 32767.  (!)
     const string::size_type width
        = greeting.size() + (padding_left + padding_right) + (border_width * 2);
+
 
 
     //
@@ -57,7 +60,7 @@ int main() {
     // r is equal 0.
     for (int r = 0; r != row_count; r++) {
         // We don't yet know how to write a real row.
-        int c = 0;
+        str_sz c = 0;
 
         // invariant: we have written c characters so far in this row
         while (c != width) {

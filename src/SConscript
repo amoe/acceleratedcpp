@@ -1,6 +1,11 @@
 env = Environment()
 
-env.Append(CCFLAGS=['-Wall'])
+env.Append(
+    CCFLAGS=[
+        '-Wall'
+#        '-Werror',
+    ]
+)
 
 env.Program(target='hello', source=['hello.cc'])
 env.Program(target='exercises_0', source=['exercises_0.cc'])

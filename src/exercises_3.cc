@@ -54,7 +54,10 @@ void ex3_3_count_distinct_words() {
 
     vector<string> seen;
 
-    for (int i = 0; i < input.size(); i++) {
+    typedef vector<string>::size_type sz;
+
+
+    for (sz i = 0; i < input.size(); i++) {
         string this_word = input.at(i);
 
         // Insanely dumb linear search to see if we already saw it.
@@ -64,7 +67,7 @@ void ex3_3_count_distinct_words() {
         // However that also depends on knowing that you can meaningfully
         // sort string vectors (which is a larger assumption... maybe).
         bool is_already_seen = false;
-        int j = 0;
+        sz j = 0;
         while (!is_already_seen && j < seen.size()) {
             is_already_seen = (this_word == seen.at(j));
             j++;
@@ -98,8 +101,10 @@ void ex3_4_longest_and_shortest() {
     // Zero items should be an error case.
     int max_length = input.at(0).size();
     int min_length = input.at(0).size();
+
+    typedef vector<string>::size_type sz;
     
-    for (int i = 1; i < input.size(); i++) {
+    for (sz i = 1; i < input.size(); i++) {
         int this_len = input.at(i).size();
 
         if (this_len > max_length)
@@ -116,7 +121,6 @@ void ex3_4_longest_and_shortest() {
 void ex3_6_divide_by_zero() {
     // This causes a floating point exception.
     int y = 3 / 0;
-
     std::cout << "y is now " << y << endl;
 }
 

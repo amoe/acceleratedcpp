@@ -39,6 +39,8 @@ string find_grade_band(double final_grade) {
             return grade_name;
         }
     }
+
+    throw std::runtime_error("can't happen");
 }
 
 

@@ -197,7 +197,7 @@ bool student_did_all_homework_p(const StudentInfo& s) {
 double grade_aux(const StudentInfo& s) {
     try {
         return grade(s);
-    } catch (std::domain_error) {
+    } catch (std::domain_error&) {
         return grade(s.midterm, s.final, 0);
     }
 }
