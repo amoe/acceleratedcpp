@@ -446,3 +446,8 @@ D 60 - <70
 F <60
 
 output should list how many fall into each category
+
+## 7-3
+
+Deduplicate line number occurrences.  Just use a map with bool keys to emulate a
+set.

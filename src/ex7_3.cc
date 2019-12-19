@@ -15,6 +15,8 @@ using std::endl;
 
 using word_finder_t = vector<string> (*)(const string&);
 
+using CrossReferenceTable = map<string, map<int, bool>>;
+
 /*
 "The cross reference program: as it stands, if a word occurs more than once on a line,
 program will report line multiple itimes.  Change so it detects multiple occurrences
@@ -25,8 +27,8 @@ or something similar.
 */
 
 void demo_cross_reference_table(istream& input);
-map<string, vector<int>> xref(istream& in, word_finder_t find_words);
-void print_xref_table(map<string, vector<int>> the_xref);
+CrossReferenceTable xref(istream& in, word_finder_t find_words);
+void print_xref_table(CrossReferenceTable the_xref);
 
 
 const string multi_line_input = R"(
@@ -44,31 +46,31 @@ void demo_cross_reference_table(istream& input) {
     cout << "Done" << endl;
 }
 
-void print_line_number_list(const vector<int>& line_numbers) {
-    typedef vector<int>::const_iterator iter_t;
+void print_line_number_list(map<int, bool> line_numbers) {
+    typedef map<int, bool>::const_iterator iter_t;
 
     // Loop and a half to emulate a join function.
 
     // We always know that there will be more than zero numbers in the vector,
     // so this is safe when used with 'xref' function.
     iter_t it = line_numbers.begin();
-    cout << *it;
+    cout << it->first;
     it++;   // scroll past it
 
     while (it != line_numbers.end()) {
-        cout << ", " << *it;
+        cout << ", " << it->first;
         it++;
     }
 }
 
-void print_xref_table(map<string, vector<int>> the_xref) {
+void print_xref_table(CrossReferenceTable the_xref) {
     cout << "Table is listed:" << endl;
 
-    typedef map<string, vector<int>>::const_iterator iter_t;
+    typedef CrossReferenceTable::const_iterator iter_t;
 
     for (iter_t it = the_xref.begin(); it != the_xref.end(); it++) {
         string word = it->first;
-        vector<int> line_numbers = it->second;
+        map<int, bool> line_numbers = it->second;
         
         cout << word << ": [";
         print_line_number_list(line_numbers);
@@ -79,8 +81,8 @@ void print_xref_table(map<string, vector<int>> the_xref) {
 }
 
 
-map<string, vector<int>> xref(istream& in, word_finder_t find_words) {
-    map<string, vector<int>> result;
+CrossReferenceTable xref(istream& in, word_finder_t find_words) {
+    CrossReferenceTable result;
     int line_number = 1;
     string line;
 
@@ -92,12 +94,11 @@ map<string, vector<int>> xref(istream& in, word_finder_t find_words) {
             // Note that we don't need to handle the null-array case here, which
             // is kind of cool.  We skip the dynamic-language manual
             // initialization crap.
-            result[*it].push_back(line_number);
+            result[*it][line_number] = true;
         }
 
         line_number++;
     }
-
 
     return result;
 }
