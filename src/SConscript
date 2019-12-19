@@ -68,7 +68,7 @@ env.Program(
 # all programs are quite large.
 env.Program(target='ex7_1', source=['ex7_1.cc', 'util.cc'])
 env.Program(target='ex7_2', source=['ex7_2.cc', 'student_info.cc', 'grade.cc', 'median.cc'])
-env.Program(target='ex7_3', source=['ex7_3.cc'])
+env.Program(target='ex7_3', source=['ex7_3.cc', 'split.cc'])
 env.Program(target='ex7_4', source=['ex7_4.cc'])
 env.Program(target='ex7_7', source=['ex7_7.cc', 'student_info.cc'])
 env.Program(target='ex7_8', source=['ex7_8.cc', 'student_info.cc'])
