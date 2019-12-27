@@ -47,6 +47,7 @@ void demo_cross_reference_table(istream& input) {
     cout << "Generating xref" << endl;
     auto result = xref(input, split);
 
+    // Fuck up the xref by shoving a bunch of fake stuff into it.
     typedef map<string, vector<int>>::iterator iter_t;
     for (iter_t it = result.begin(); it != result.end(); it++) {
         for (int i = 0; i < 100; i++) {
@@ -57,23 +58,6 @@ void demo_cross_reference_table(istream& input) {
 
     print_xref_table(result);
     cout << "Done" << endl;
-}
-
-void print_line_number_list(const vector<int>& line_numbers) {
-    typedef vector<int>::const_iterator iter_t;
-
-    // Loop and a half to emulate a join function.
-
-    // We always know that there will be more than zero numbers in the vector,
-    // so this is safe when used with 'xref' function.
-    iter_t it = line_numbers.begin();
-    cout << *it;
-    it++;   // scroll past it
-
-    while (it != line_numbers.end()) {
-        cout << ", " << *it;
-        it++;
-    }
 }
 
 
