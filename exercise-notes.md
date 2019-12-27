@@ -451,3 +451,14 @@ output should list how many fall into each category
 
 Deduplicate line number occurrences.  Just use a map with bool keys to emulate a
 set.
+
+## 7-4
+
+Break long lines.  Think about the definition of this.  A small word looks like
+this:
+
+    Alice: [2, 5]
+
+T is the token length.  = 5.
+": " length = 2.
+C++11 adds to_string for estimating the string length of integers.

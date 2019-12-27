@@ -3,6 +3,7 @@
 #include <string>
 #include <sstream>
 #include <vector>
+#include <cmath>
 #include "split.hh"
 
 using std::vector;
@@ -12,6 +13,7 @@ using std::istream;
 using std::map;
 using std::cout;
 using std::endl;
+using std::log10;
 
 using word_finder_t = vector<string> (*)(const string&);
 
@@ -44,6 +46,15 @@ int main() {
 void demo_cross_reference_table(istream& input) {
     cout << "Generating xref" << endl;
     auto result = xref(input, split);
+
+    typedef map<string, vector<int>>::iterator iter_t;
+    for (iter_t it = result.begin(); it != result.end(); it++) {
+        for (int i = 0; i < 100; i++) {
+            it->second.push_back(i);
+        }
+    }
+
+
     print_xref_table(result);
     cout << "Done" << endl;
 }
@@ -65,17 +76,57 @@ void print_line_number_list(const vector<int>& line_numbers) {
     }
 }
 
+
 void print_xref_table(map<string, vector<int>> the_xref) {
     cout << "Table is listed:" << endl;
 
+    typedef vector<int>::size_type vec_sz;
     typedef map<string, vector<int>>::const_iterator iter_t;
 
     for (iter_t it = the_xref.begin(); it != the_xref.end(); it++) {
         string word = it->first;
         vector<int> line_numbers = it->second;
-        
-        cout << word << ": [";
-        print_line_number_list(line_numbers);
+
+        string post_token_canned_text = ": [";
+        cout << word << post_token_canned_text;
+        int column_counter = word.size() + post_token_canned_text.size();
+
+
+        for (vec_sz i = 0; i < line_numbers.size(); i++) {
+            bool is_last_index = (i == line_numbers.size() - 1);
+            int this_line_number = line_numbers.at(i);
+
+            int digits;
+            if (this_line_number == 0) {
+                digits = 1;
+            } else {
+                digits = floor(log10(this_line_number)) + 1;
+            }
+
+
+            int hypothesized_column = column_counter + digits;
+
+            // Account for the comma
+            if (!is_last_index) {
+                hypothesized_column += 2;
+            }
+
+            // Break the line if necessary
+            if (hypothesized_column > 80) {
+                cout << endl << "... ";
+                column_counter = 4;
+            }
+
+            cout << this_line_number;
+            if (is_last_index) {
+                column_counter += digits;
+            } else {
+                cout << ", ";
+                column_counter += digits;
+                column_counter += 2;
+            }
+        }
+
         cout << "]" << endl;
     }
     
