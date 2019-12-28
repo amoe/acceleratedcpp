@@ -462,3 +462,64 @@ this:
 T is the token length.  = 5.
 ": " length = 2.
 C++11 adds to_string for estimating the string length of integers.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+rewrite the grammar program using a list as the data structure in which to build
+the sentence.
+
+This is using std::list which is just an STL container so it should be the same
+code, only changing the types.  But we also need to change our printing function
+as we need separate functions with separate type signatures to print a list.
+
+I guess that this exercise is only here to demonstrate the need for generics.
