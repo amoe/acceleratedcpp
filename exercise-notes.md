@@ -512,12 +512,10 @@ on some architectures RAND_MAX is 32767 while the maximum int is (2^31)-1
 reimplement so it works well for all values of n.  But on my architecture,
 RAND_MAX == INT_MAX...
 
-Let's hypothesize about a system where RAND_MAX was 32767.
-Now let's imagine that we had a value of 32768.
+We basically just keep picking numbers until one falls into the bucket.
 
-In that case bucket_size would be 0.65
-As a result, r would increase.
-
+However, if n >= RAND_MAX, that can't happen.  K&M have a solution that I don't
+understand.
 
 
 
