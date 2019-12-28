@@ -502,3 +502,22 @@ Not so difficult, just an if condition.
 Cross reference program except that it finds URLs and reports lines on which
 distinct urls occur.  This is actually quite straightforward after factoring
 out the url finding code from chapter 6 into a separate header file.
+
+## 7-9
+
+nrand() will not work for arguments greater than RAND_MAX
+
+on some architectures RAND_MAX is 32767 while the maximum int is (2^31)-1
+
+reimplement so it works well for all values of n.  But on my architecture,
+RAND_MAX == INT_MAX...
+
+Let's hypothesize about a system where RAND_MAX was 32767.
+Now let's imagine that we had a value of 32768.
+
+In that case bucket_size would be 0.65
+As a result, r would increase.
+
+
+
+
