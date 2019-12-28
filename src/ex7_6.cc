@@ -59,33 +59,33 @@ bool is_production(string str) {
     return first == '<' && last == '>';
 }
 
-int nrand(int n) {
-    return (int)((double)rand() / ((double)RAND_MAX + 1) * n);
-}
-
-vector<string> expand_word(Grammar grammar, const string& word) {
-    RuleCollection all_rules = grammar.at(word);
-    int choice = nrand(all_rules.size());
-    Rule chosen_rule = all_rules.at(choice);
-
-    vector<string> result;
-
-    for (string w: chosen_rule) {
-        if (is_production(w)) {
-            vector<string> r = expand_word(grammar, w);
-            result.insert(result.end(), r.begin(), r.end());
-        } else {
-            result.push_back(w);
-        }
-    }
-
-    return result;
-}
-
 
 vector<string> generate_sentence(Grammar grammar) {
     vector<string> result;
-    result = expand_word(grammar, "<sentence>");
+    vector<string> word_stack;
+    word_stack.push_back("<sentence>");
+    
+    while (!word_stack.empty()) {
+        string this_word = word_stack.back();   // Should invoke the copy constructor.
+        word_stack.pop_back();
+
+        if (is_production(this_word)) {
+            RuleCollection all_rules = grammar.at(this_word);
+            int choice = 0;
+            Rule chosen_rule = all_rules.at(choice);
+
+            // Add in reverse order.  This has the effect of causing the rules
+            // to be processed in order.
+            word_stack.insert(
+                word_stack.end(),
+                chosen_rule.rbegin(),
+                chosen_rule.rend()
+            );
+        } else {
+            result.push_back(this_word);
+        }        
+    }
+
     return result;
 }
 
@@ -98,6 +98,8 @@ int main() {
     Grammar g = read_grammar(sin);
     vector<string> sentence = generate_sentence(g);
     print_vector(sentence);
+
+    cout << "Finished printing sentence." << endl;
 
     return 0;
 }

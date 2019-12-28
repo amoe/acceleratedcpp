@@ -527,3 +527,48 @@ I guess that this exercise is only here to demonstrate the need for generics.
 > Reimplement the gen_sentence program using two vectors: One will hold the
 > fully unwound, generated sentence, and the other will hold the rules and will
 > be used as a stack.  Do not use any recursive calls.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Think about how this works -- that's why you can't rewrite it using a
+vector<string>
+it must be a vector<rule>
+Because
+
+First: <sentence>
+
+next:
+the <noun-phrase>
+
+x = [the]
+
+stack = noun-phrase verb location
+
+So this is actually quite devious.  You can use the vector as a stack.
+
+You can use pop_back() to remove the last element which is an efficient
+operation.
+
+HOWEVER -- your sentence is going to be in the wrong order -- why?
+Because words will get put on to the stack and the last word will be processed
+first.
+
+I find it easier to use rbegin() and rend() to reverse the rule when it's being
+added to the stack.  This makes the semantics like a queue.
+
+
