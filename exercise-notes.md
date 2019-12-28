@@ -500,4 +500,5 @@ Not so difficult, just an if condition.
 ## 7-8
 
 Cross reference program except that it finds URLs and reports lines on which
-distinct urls occur.
+distinct urls occur.  This is actually quite straightforward after factoring
+out the url finding code from chapter 6 into a separate header file.
