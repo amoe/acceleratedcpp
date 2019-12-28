@@ -496,3 +496,8 @@ Mathalope did the same solution.
 ## 7-7
 
 Not so difficult, just an if condition.
+
+## 7-8
+
+Cross reference program except that it finds URLs and reports lines on which
+distinct urls occur.
