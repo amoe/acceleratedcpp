@@ -463,57 +463,7 @@ T is the token length.  = 5.
 ": " length = 2.
 C++11 adds to_string for estimating the string length of integers.
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+## 7-5
 
 rewrite the grammar program using a list as the data structure in which to build
 the sentence.
@@ -524,40 +474,11 @@ as we need separate functions with separate type signatures to print a list.
 
 I guess that this exercise is only here to demonstrate the need for generics.
 
+## 7-6
+
 > Reimplement the gen_sentence program using two vectors: One will hold the
 > fully unwound, generated sentence, and the other will hold the rules and will
 > be used as a stack.  Do not use any recursive calls.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Think about how this works -- that's why you can't rewrite it using a
-vector<string>
-it must be a vector<rule>
-Because
-
-First: <sentence>
-
-next:
-the <noun-phrase>
-
-x = [the]
-
-stack = noun-phrase verb location
 
 So this is actually quite devious.  You can use the vector as a stack.
 
@@ -569,6 +490,5 @@ Because words will get put on to the stack and the last word will be processed
 first.
 
 I find it easier to use rbegin() and rend() to reverse the rule when it's being
-added to the stack.  This makes the semantics like a queue.
-
-
+added to the stack.  This makes the semantics like a queue.  And actually Johnny
+Mathalope did the same solution.
