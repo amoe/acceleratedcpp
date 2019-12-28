@@ -523,3 +523,7 @@ code, only changing the types.  But we also need to change our printing function
 as we need separate functions with separate type signatures to print a list.
 
 I guess that this exercise is only here to demonstrate the need for generics.
+
+> Reimplement the gen_sentence program using two vectors: One will hold the
+> fully unwound, generated sentence, and the other will hold the rules and will
+> be used as a stack.  Do not use any recursive calls.
