@@ -73,8 +73,18 @@ void print_xref_table(map<string, vector<int>> the_xref) {
     for (iter_t it = the_xref.begin(); it != the_xref.end(); it++) {
         string word = it->first;
         vector<int> line_numbers = it->second;
+
         
-        cout << "The token '" << word << "' occurs on line(s) ";
+        
+        cout << "The token '" << word << "' occurs on ";
+        
+        if (line_numbers.size() > 1) {
+            cout << "lines";
+        } else {
+            cout << "line";
+        }
+
+        cout << " ";
         print_line_number_list(line_numbers);
         cout << endl;
     }

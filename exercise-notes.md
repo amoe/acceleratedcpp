@@ -492,3 +492,7 @@ first.
 I find it easier to use rbegin() and rend() to reverse the rule when it's being
 added to the stack.  This makes the semantics like a queue.  And actually Johnny
 Mathalope did the same solution.
+
+## 7-7
+
+Not so difficult, just an if condition.
