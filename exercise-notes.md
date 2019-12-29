@@ -517,5 +517,9 @@ We basically just keep picking numbers until one falls into the bucket.
 However, if n >= RAND_MAX, that can't happen.  K&M have a solution that I don't
 understand.
 
-
-
+The key insight is really that if your system doesn't produce 'enough' to fill
+the space, you just keep calling rand() until it does.  OTOH it's not that clear
+how to fairly deal with remainders.  Eg if rand(65536) is requested, a fair
+result can be obtained by calling rand() twice, adding the result and dividing
+by 2, but in the case of odd numbers I'm not sure what would happen, and not
+even sure how to measure the result.
