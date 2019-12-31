@@ -77,3 +77,7 @@ env.Program(target='ex7_8', source=['ex7_8.cc', 'url_finder.cc'])
 env.Program(target='ex7_9', source=['ex7_9.cc'])
 
 
+env.Program(
+    target='ch8_generic',
+    source=['ch8_generic.cc']
+)

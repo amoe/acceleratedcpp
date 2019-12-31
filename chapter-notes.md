@@ -637,3 +637,7 @@ Look at this (regarding the bracket operator):
 Bonkers.
 Maps are not typically implemented using hash tables.  Rather they are backed by
 'balanced self-adjusting trees'.
+
+## Chapter 8
+
+

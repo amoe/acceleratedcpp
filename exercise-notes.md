@@ -523,3 +523,6 @@ how to fairly deal with remainders.  Eg if rand(65536) is requested, a fair
 result can be obtained by calling rand() twice, adding the result and dividing
 by 2, but in the case of odd numbers I'm not sure what would happen, and not
 even sure how to measure the result.
+
+# Chapter 8
+
