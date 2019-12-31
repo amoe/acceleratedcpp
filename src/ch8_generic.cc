@@ -3,7 +3,9 @@
 #include <vector>
 #include <algorithm>
 #include <string>
+#include <numeric>
 
+using std::accumulate;
 using std::string;
 using std::sort;
 using std::vector;
@@ -43,5 +45,16 @@ int main() {
     cout << "Median value was " << median_value << endl;
 
     cout << "End." << endl;
+
+    int sum = accumulate(scores.begin(), scores.end(), 0);
+
+
+    vector<double> scores2 = {0.0, 1.0, 1.8, 1.0};
+
+    int sum2 = accumulate(scores2.begin(), scores2.end(), 0);
+
+    cout << "Sum2 was " << sum2 << endl;
+
+
     return 0;
 }

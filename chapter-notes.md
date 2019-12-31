@@ -671,3 +671,22 @@ build/ch8_generic.cc:30:38: error: no match for 'operator/' (operand types are '
 
 So basically the compiler tries to 'instantiate' the template, and complains
 that it can't match `"fry" / 2` for example.
+
+Instantiation seems to be taken very literally, eg multiple function objects
+being generated in the resulting code.
+
+Instantiation often happens at link time.
+
+
+In this call:
+
+    accumulate(v.begin(), v.end(), 0.0)
+
+The 0.0 is of type double.  That ensures that the accumulator containing the sum
+receives the type double also.  Otherwise we'd get an all-integer summation.
+
+If we'd used 0, note that 0 + 1.2 would still be defined, so no error would
+happen.  but presumably the summation would lose precision at every step, and
+would ultimately be returned as an int.
+
+
