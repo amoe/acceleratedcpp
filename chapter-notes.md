@@ -640,4 +640,34 @@ Maps are not typically implemented using hash tables.  Rather they are backed by
 
 ## Chapter 8
 
+There are five types of iterator.  What does this mean?
 
+We write a generic median function.  It works on any type vector<T>.
+But how do we know that we can add types of T together?  There's no typeclass
+system.
+
+This syntax `template <class T>` is called the TEMPLATE HEADER.  T is called a
+TYPE PARAMETER.
+
+Note this line:
+
+    typedef typename vector<T>::size_type vec_sz;
+
+WTF does this do?  `typename` is special syntax that's required to be used
+in the case where type parameters are present in a type name.
+
+"We can't call median for a vector<string> because the median function uses
+division and the string type does not have a division operator."
+
+If we do try, we get this error:
+
+```
+build/ch8_generic.cc: In instantiation of 'T median(std::vector<T>) [with T = std::__cxx11::basic_string<char>]':
+build/ch8_generic.cc:47:37:   required from here
+build/ch8_generic.cc:30:38: error: no match for 'operator/' (operand types are 'std::__cxx11::basic_string<char>' and 'int')
+         return (v[mid] + v[mid - 1]) / 2;
+                ~~~~~~~~~~~~~~~~~~~~~~^~~
+```
+
+So basically the compiler tries to 'instantiate' the template, and complains
+that it can't match `"fry" / 2` for example.
