@@ -14,6 +14,7 @@ using std::cout;
 using std::endl;
 using std::domain_error;
 
+// Requires a forward iterator
 template <class T, class U>
 void my_replace(T begin, T end, const U& old_value, const U& new_value) {
     while (begin != end) {
@@ -24,7 +25,6 @@ void my_replace(T begin, T end, const U& old_value, const U& new_value) {
         begin++;
     }
 }
-
 
 // Requires an input iterator.
 template <class T, class X>
@@ -37,7 +37,6 @@ T my_find(T begin, T end, const X& x) {
 }
 
 // Requires an output iterator in its third argument.
-
 template <class T, class U>
 U my_copy(T begin, T end, U destination) {
     while (begin != end) {
