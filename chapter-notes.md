@@ -733,3 +733,8 @@ able to tell whether your iterator has this feature AFAICT.  And I don't know
 if the compiler can pick it up.
 
 
+The next one is a *FORWARD ITERATOR*.  This means that you want read-write
+access.  But you only need it sequentially.  The example is std::replace, which
+replaces `old_value` with `new_value`.  So it's obvious that here you need:
+
+*x = foo, *x, and ++.

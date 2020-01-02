@@ -14,6 +14,17 @@ using std::cout;
 using std::endl;
 using std::domain_error;
 
+template <class T, class U>
+void my_replace(T begin, T end, const U& old_value, const U& new_value) {
+    while (begin != end) {
+        if (*begin == old_value) {
+            *begin = new_value;
+        }
+
+        begin++;
+    }
+}
+
 
 // Requires an input iterator.
 template <class T, class X>
@@ -96,6 +107,13 @@ int main() {
     my_copy(haystack.begin(), haystack.end(), target.begin());
     print_vector(target);
     cout << target.size() << endl;
+
+    print_vector(haystack);
+
+    // Using char will fail here, we must explicitly coerce to string.
+    my_replace(haystack.begin(), haystack.end(), string("bender"), string("Hedonism-Bot"));
+
+    print_vector(haystack);
 
     return 0;
 }
