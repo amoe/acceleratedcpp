@@ -736,5 +736,8 @@ if the compiler can pick it up.
 The next one is a *FORWARD ITERATOR*.  This means that you want read-write
 access.  But you only need it sequentially.  The example is std::replace, which
 replaces `old_value` with `new_value`.  So it's obvious that here you need:
+*x = foo, *x, and ++.  This also removes the write-once requirement of plain
+output iterators.  We don't have --x still, though.
 
-*x = foo, *x, and ++.
+The next version ALSO supports `--`, and that's called a *BIDIRECTIONAL
+ITERATOR*.

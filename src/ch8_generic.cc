@@ -14,6 +14,35 @@ using std::cout;
 using std::endl;
 using std::domain_error;
 
+template <class T, class U>
+bool my_binary_search(T begin, T end, const U& value) {
+    while (begin < end) {
+        T midpoint = begin + ((end - begin) / 2);
+        U midpoint_value = *midpoint;    // Not totally sure about the type here.
+
+        if (midpoint_value > value) {
+            end = midpoint;
+        } else if (midpoint_value < value) {
+            begin = midpoint + 1;
+        } else {
+            return true;
+        }        
+    }
+
+    return false;
+}
+
+// Requires a bidirectional iterator.
+template <class T>
+void my_reverse(T begin, T end) {
+    while (begin != end) {
+        --end;
+        if (begin != end) {
+            swap(*begin++, *end);
+        }
+    }
+}
+
 // Requires a forward iterator
 template <class T, class U>
 void my_replace(T begin, T end, const U& old_value, const U& new_value) {
@@ -113,6 +142,20 @@ int main() {
     my_replace(haystack.begin(), haystack.end(), string("bender"), string("Hedonism-Bot"));
 
     print_vector(haystack);
+
+    my_reverse(haystack.begin(), haystack.end());
+
+    print_vector(haystack);
+
+    vector<int> h1 = {0, 1, 2, 3, 4, 5};
+
+    bool found = my_binary_search(h1.begin(), h1.end(), 3);
+
+    cout << "Found 3: " << found << endl;
+
+    bool found2 = my_binary_search(h1.begin(), h1.end(), 10);
+
+    cout << "Found 10: " << found2 << endl;
 
     return 0;
 }
