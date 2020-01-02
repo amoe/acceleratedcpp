@@ -741,3 +741,18 @@ output iterators.  We don't have --x still, though.
 
 The next version ALSO supports `--`, and that's called a *BIDIRECTIONAL
 ITERATOR*.
+
+The next level is a *RANDOM-ACCESS ITERATOR*.  It requires the ability to
+subtract iterators and add integers to iterators.  It also requires x[n], the
+indexing syntax, and p > q -- the ability to compare iterators and see which are
+larger or smaller.
+
+Vectors and strings are random-access iterators but lists are not.
+
+You use != and == in iterator loops because this imposes the smallest set of
+requirements on the iterator.  Even an input iterator, the lowest tower level,
+supports == whereas it may not support the `<` operator.  So by writing loops
+with == end as a stopping condition, we make the fewest assumptions.
+
+Some functions can use x.end() as an error code when they return.  This is a
+funky solution to the lack of an Optional / Maybe type.
