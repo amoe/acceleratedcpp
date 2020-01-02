@@ -4,6 +4,7 @@
 #include <algorithm>
 #include <string>
 #include <numeric>
+#include "util.hh"
 
 using std::accumulate;
 using std::string;
@@ -14,7 +15,7 @@ using std::endl;
 using std::domain_error;
 
 
-// An implementation of std::find.
+// Requires an input iterator.
 template <class T, class X>
 T my_find(T begin, T end, const X& x) {
     while (begin != end && *begin != x) {
@@ -23,6 +24,17 @@ T my_find(T begin, T end, const X& x) {
 
     return begin;
 }
+
+// Requires an output iterator in its third argument.
+
+template <class T, class U>
+U my_copy(T begin, T end, U destination) {
+    while (begin != end) {
+        *destination++ = *begin++;
+    }
+    return destination;
+}
+
 
 template <class T>
 T median(vector<T> v) {
@@ -79,6 +91,11 @@ int main() {
     iter_t result = my_find(it1, it2, "bender");
 
     cout << "result iterator points at " << *result << endl;
+
+    vector<string> target(haystack.size());
+    my_copy(haystack.begin(), haystack.end(), target.begin());
+    print_vector(target);
+    cout << target.size() << endl;
 
     return 0;
 }

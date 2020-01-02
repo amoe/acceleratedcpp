@@ -691,6 +691,7 @@ would ultimately be returned as an int.
 
 They make an argument for having to pass the start and end points of collections
 explicitly.  Certainly, I find the argument for rbegin() and rend() convincing.
+[And bear in mind things like back_inserter.)
 The idea of abstracting this iteration protocol is quite convincing.  Apparently
 it's totally possible to overload the libraries to accept collections directly
 but "it's far from clear that the extra convenience would outweigh the extra
@@ -718,4 +719,17 @@ iterator.  The supported operations are:
    x == something
    x != something
    x->some_field
+
+An *OUTPUT ITERATOR* is the next step.  This is exemplified by std::copy from
+the <algorithm> header.
+
+There is an additional requirement, and that's a write-once requirement.  If
+something is an output iterator, you're only allowed to execute *x = "foo"
+ONCE.  Then you must execute ++x.  However this is a requirement only on this
+low-level of the iterator tower.  Therefore only back_inserter is affected by
+this.  Something like v.begin() is a more complete iterator, and therefore does
+not suffer from this restriction.  However at template write time you won't be
+able to tell whether your iterator has this feature AFAICT.  And I don't know
+if the compiler can pick it up.
+
 

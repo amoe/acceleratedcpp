@@ -79,5 +79,5 @@ env.Program(target='ex7_9', source=['ex7_9.cc'])
 
 env.Program(
     target='ch8_generic',
-    source=['ch8_generic.cc']
+    source=['ch8_generic.cc', 'util.cc']
 )
