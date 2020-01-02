@@ -689,4 +689,23 @@ If we'd used 0, note that 0 + 1.2 would still be defined, so no error would
 happen.  but presumably the summation would lose precision at every step, and
 would ultimately be returned as an int.
 
+They make an argument for having to pass the start and end points of collections
+explicitly.  Certainly, I find the argument for rbegin() and rend() convincing.
+The idea of abstracting this iteration protocol is quite convincing.  Apparently
+it's totally possible to overload the libraries to accept collections directly
+but "it's far from clear that the extra convenience would outweigh the extra
+complexity in the library" (LOL).
+
+Not all algorithms work with all iteration variants.  sort() has the most
+requirements and only works with vector and string iterators.  So don't try to
+sort a list.  K&M go on to describe each type of iterator.
+
+### Iterator types
+
+Sequential read-only access -- You can only do ++ and *.
+
+Why is the template header syntax using the `class` keyword?
+
+It's not that clear why the caller's variable doesn't get modified.  I think
+that this happens because the copy constructor is called on the iterator.
 
