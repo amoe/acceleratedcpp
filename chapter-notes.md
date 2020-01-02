@@ -709,3 +709,13 @@ Why is the template header syntax using the `class` keyword?
 It's not that clear why the caller's variable doesn't get modified.  I think
 that this happens because the copy constructor is called on the iterator.
 
+There's a tower of iterators.  An *INPUT ITERATOR* is this simplest form of
+iterator.  The supported operations are:
+
+   ++x
+   x++
+   *x
+   x == something
+   x != something
+   x->some_field
+
