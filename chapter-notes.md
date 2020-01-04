@@ -767,4 +767,13 @@ magic value that seems equal to any stream iterator with an EOF condition.
 
 Very inconveniently, template functions must be declared within a header file.
 
+In the case where you just return a value of type T the compiler doesn't know
+how to instantiate the template:
+
+    double x = zero();
+
+The compiler doesn't know that a `double` is expected.  So it can't deduce the
+type parameter T.  You have to write instead.
+
+    double x = zero<double>();
 

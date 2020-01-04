@@ -113,6 +113,11 @@ T median(vector<T> v) {
     }
 }
 
+template <typename T>
+T zero() {
+    return 0;
+}
+
 void demo_stream_iterator_input() {
     vector<int> v;
 
@@ -213,6 +218,8 @@ int main() {
 
     demo_using_iterator_split();
 
+    // demo explicit hinting of template value.
+    double foo = zero<double>();
 
     return 0;
 }
