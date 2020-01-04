@@ -756,3 +756,12 @@ with == end as a stopping condition, we make the fewest assumptions.
 
 Some functions can use x.end() as an error code when they return.  This is a
 funky solution to the lack of an Optional / Maybe type.
+
+Using stream iterators in <iterator>, you can wrap I/O streams in iterators.
+Using this call 
+
+    copy(my_stream_iterator, sentinel, back_inserter(v));
+
+You can treat the stream as if it was just a container type.  Sentinel is a
+magic value that seems equal to any stream iterator with an EOF condition.
+

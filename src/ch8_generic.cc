@@ -4,6 +4,8 @@
 #include <algorithm>
 #include <string>
 #include <numeric>
+#include <sstream>
+#include <iterator>
 #include "util.hh"
 
 using std::accumulate;
@@ -13,6 +15,18 @@ using std::vector;
 using std::cout;
 using std::endl;
 using std::domain_error;
+using std::stringstream;
+using std::istream_iterator;
+
+const string multi_line_input = R"(
+5
+4
+3
+2
+1
+42
+)";
+
 
 template <class T, class U>
 bool my_binary_search(T begin, T end, const U& value) {
@@ -97,6 +111,21 @@ T median(vector<T> v) {
     }
 }
 
+void demo_stream_iterator_input() {
+    vector<int> v;
+
+    stringstream sin1(multi_line_input);
+    istream_iterator<int> my_stream_iterator(sin1);
+    istream_iterator<int> sentinel;
+
+    copy(my_stream_iterator, sentinel, back_inserter(v));
+
+    using iter_t = vector<int>::const_iterator;
+    for (iter_t it = v.begin(); it != v.end(); it++) {
+        cout << "'" << *it << "'" << endl;
+    }
+}
+
 int main() {
     cout << "Starting." << endl;
 
@@ -156,6 +185,8 @@ int main() {
     bool found2 = my_binary_search(h1.begin(), h1.end(), 10);
 
     cout << "Found 10: " << found2 << endl;
+
+    demo_stream_iterator_input();
 
     return 0;
 }
