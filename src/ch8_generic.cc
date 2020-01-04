@@ -17,6 +17,7 @@ using std::endl;
 using std::domain_error;
 using std::stringstream;
 using std::istream_iterator;
+using std::ostream_iterator;
 
 const string multi_line_input = R"(
 5
@@ -126,6 +127,17 @@ void demo_stream_iterator_input() {
     }
 }
 
+void demo_stream_iterator_output() {
+    vector<int> v = {3, 5, 2, 27};
+
+    // construct output stream iterator using a sentinel
+    ostream_iterator<int> my_stream_iterator(cout, " ");
+
+    copy(v.begin(), v.end(), my_stream_iterator);
+
+    cout << endl;
+}
+
 int main() {
     cout << "Starting." << endl;
 
@@ -187,6 +199,7 @@ int main() {
     cout << "Found 10: " << found2 << endl;
 
     demo_stream_iterator_input();
+    demo_stream_iterator_output();
 
     return 0;
 }
