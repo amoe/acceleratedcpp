@@ -7,6 +7,7 @@
 #include <sstream>
 #include <iterator>
 #include "util.hh"
+#include "split.hh"
 
 using std::accumulate;
 using std::string;
@@ -138,6 +139,15 @@ void demo_stream_iterator_output() {
     cout << endl;
 }
 
+void demo_using_iterator_split() {
+    string foo = "the quick brown fox jumped over the lazy dog";
+    vector<string> result;
+
+
+    split_to_iterator(foo, back_inserter(result));
+    print_vector(result);
+}
+
 int main() {
     cout << "Starting." << endl;
 
@@ -200,6 +210,9 @@ int main() {
 
     demo_stream_iterator_input();
     demo_stream_iterator_output();
+
+    demo_using_iterator_split();
+
 
     return 0;
 }

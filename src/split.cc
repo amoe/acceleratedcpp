@@ -1,8 +1,5 @@
 #include "split.hh"
 
-bool space(char c) { return isspace(c); }
-bool not_space(char c) { return !isspace(c); }
-
 vector<string> split(const string& str) {
     typedef string::const_iterator iter;
     vector<string> ret;
@@ -25,3 +22,4 @@ vector<string> split(const string& str) {
 
     return ret;
 }
+

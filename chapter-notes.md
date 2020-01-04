@@ -765,3 +765,6 @@ Using this call
 You can treat the stream as if it was just a container type.  Sentinel is a
 magic value that seems equal to any stream iterator with an EOF condition.
 
+Very inconveniently, template functions must be declared within a header file.
+
+
