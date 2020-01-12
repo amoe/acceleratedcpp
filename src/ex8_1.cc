@@ -110,7 +110,7 @@ int main() {
     StudentInfo the_student;
 
     ifstream in;
-    in.open("data/students-small.dat");
+    in.open("data/students-medium.dat");
     if (!in) {
         throw std::runtime_error("open of student data failed");
     }
