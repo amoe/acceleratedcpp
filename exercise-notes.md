@@ -526,3 +526,12 @@ even sure how to measure the result.
 
 # Chapter 8
 
+## 8-1
+
+Re p110:
+Note that the analysis functions share the same behaviour, they only differ in
+terms of the functions they call to calculate the final grade.  Write a template
+function, parameterized by the type of the grading function, and use that
+function to evaluate the grading schemes.
+
+They refer to median_analysis, average_analysis, optimistic_median_analysis.

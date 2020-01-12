@@ -81,3 +81,13 @@ env.Program(
     target='ch8_generic',
     source=['ch8_generic.cc', 'util.cc', 'split.cc', 'characters.cc']
 )
+
+env.Program(target='ex8_1', source=['ex8_1.cc', 'student_info.cc', 'median.cc', 'grade.cc'])
+env.Program(target='ex8_2', source=['ex8_2.cc'])
+env.Program(target='ex8_3', source=['ex8_3.cc'])
+env.Program(target='ex8_4', source=['ex8_4.cc'])
+env.Program(target='ex8_5', source=['ex8_5.cc'])
+env.Program(target='ex8_6', source=['ex8_6.cc'])
+env.Program(target='ex8_7', source=['ex8_7.cc'])
+env.Program(target='ex8_8', source=['ex8_8.cc'])
+
