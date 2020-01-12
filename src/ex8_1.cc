@@ -7,6 +7,7 @@
 #include "student_info.hh"
 #include "median.hh"
 #include "grade.hh"
+#include "ex8_1.hh"
 
 using std::string;
 using std::vector;
@@ -16,6 +17,16 @@ using std::ifstream;
 using std::find;
 using std::accumulate;
 
+
+double grade_aux(const StudentInfo& s) {
+    try {
+        return grade(s);
+    } catch (std::domain_error&) {
+        return grade(s.midterm, s.final, 0);
+    }
+}
+
+// Average a vector of any doubles
 double average(const vector<double>& v) {
     return accumulate(v.begin(), v.end(), 0.0) / v.size();
 }
@@ -23,6 +34,7 @@ double average(const vector<double>& v) {
 double average_grade(const StudentInfo& s) {
     return grade(s.midterm, s.final, average(s.homework));
 }
+
 
 double optimistic_median(const StudentInfo& s) {
     vector<double> nonzero;
@@ -39,68 +51,11 @@ double optimistic_median(const StudentInfo& s) {
     }
 }
 
-
-
-double grade_aux(const StudentInfo& s) {
-    try {
-        return grade(s);
-    } catch (std::domain_error&) {
-        return grade(s.midterm, s.final, 0);
-    }
-}
-
-
 bool student_did_all_homework_p(const StudentInfo& s) {
     auto result = find(s.homework.begin(), s.homework.end(), 0);
     return result == s.homework.end();
 }
 
-void write_analysis(
-    std::ostream& out,
-    const string& name,
-    double analysis(const vector<StudentInfo>&),
-    const vector<StudentInfo>& did,
-    const vector<StudentInfo>& did_not
-) {
-    out << name
-        << ": median(did) = " << analysis(did)
-        << ": median(did_not) = " << analysis(did_not)
-        << std::endl;
-}
-
-double median_analysis(const vector<StudentInfo>& students) {
-    vector<double> grades;
-
-    transform(
-        students.begin(), students.end(),
-        std::back_inserter(grades),
-        grade_aux
-    );
-
-    return median(grades);
-}
-
-double average_analysis(const vector<StudentInfo>& students) {
-    vector<double> grades;
-
-    transform(
-        students.begin(), students.end(), std::back_inserter(grades), average_grade
-    );
-
-    return median(grades);
-}
-
-
-double optimistic_median_analysis(const vector<StudentInfo>& students) {
-    vector<double> grades;
-    
-    transform(
-        students.begin(), students.end(), std::back_inserter(grades),
-        optimistic_median
-    );
-
-    return median(grades);
-}
 
 
 int main() {
@@ -114,7 +69,6 @@ int main() {
     if (!in) {
         throw std::runtime_error("open of student data failed");
     }
-
 
     while (read(in, the_student)) {
         if (student_did_all_homework_p(the_student)) {
@@ -134,9 +88,12 @@ int main() {
         return 1;
     }
 
-    write_analysis(cout, "median", median_analysis, did, did_not);
-    write_analysis(cout, "average", average_analysis, did, did_not);
-    write_analysis(cout, "optimistic-median", optimistic_median_analysis, did, did_not);
+    write_analysis(cout, "median", grade_aux, did, did_not);
+    write_analysis(cout, "average", average_grade, did, did_not);
+    write_analysis(cout, "optimistic-median", optimistic_median, did, did_not);
+    // write_analysis(cout, "median", median_analysis, did, did_not);
+    // write_analysis(cout, "average", average_analysis, did, did_not);
+    // write_analysis(cout, "optimistic-median", optimistic_median_analysis, did, did_not);
 
     cout << "End." << endl;
     return 0;

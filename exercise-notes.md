@@ -535,3 +535,38 @@ function, parameterized by the type of the grading function, and use that
 function to evaluate the grading schemes.
 
 They refer to median_analysis, average_analysis, optimistic_median_analysis.
+
+The confusing thing about this: There's actually zero need to template this,
+because you can just use function pointers as parameters.  And the template
+version is IMHO strictly inferior.
+
+Function pointer version:
+
+    using xform_t = double (*)(const StudentInfo&);
+
+    double analysis(const vector<StudentInfo>& students, xform_t grading_function) {
+        vector<double> grades;
+
+        transform(
+            students.begin(), students.end(),
+            std::back_inserter(grades),
+            grading_function
+        );
+
+        return median(grades);
+    }
+
+    void write_analysis(
+        ostream& out,
+        const string& name,
+        xform_t grading_function,
+        const vector<StudentInfo>& did,
+        const vector<StudentInfo>& did_not
+    ) {
+        out << name
+            << ": median(did) = " << analysis(did, grading_function)
+            << ": median(did_not) = " << analysis(did_not, grading_function)
+            << std::endl;
+    }
+
+
