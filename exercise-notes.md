@@ -570,3 +570,27 @@ Function pointer version:
     }
 
 
+
+## 8-2
+
+Implement these functions:
+
+* equal(b, e, b2)
+* find(b, e, t)
+* copy(b, e, d)
+* remove_copy_if(b, e, d, p)
+* transform(b, e, d, f)
+* accumulate(b, e, t)
+* search(b, e, b2, e2)
+* find_if(b, e, p)
+* remove_copy(b, e, d, t)
+* remove(b, e, t)
+* partition(b, e, p)
+
+Try to use the lowest-common-denominator of iterator operations.
+
+cplusplus.com has some good examples of using each function, but skip past the
+definition.
+
+### equal
+
