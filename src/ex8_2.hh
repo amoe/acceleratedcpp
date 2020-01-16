@@ -13,3 +13,12 @@ bool my_equal(T b, T e, U b2) {
 
     return true;
 }
+
+template <typename T, typename U>
+T my_find(T b, T e, U t) {
+    while (b != e && *b != t) {
+        b++;
+    }
+
+    return b;
+}
