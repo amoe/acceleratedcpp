@@ -1,7 +1,9 @@
 #include <iostream>
 #include <vector>
-//#include <algorithm>
 #include "ex8_2.hh"
+
+#include <algorithm>
+using std::find;
 
 using std::vector;
 using std::cout;
@@ -34,10 +36,31 @@ void demo_equal() {
 
 }
 
+void demo_find() {
+    vector<int> myvector = {10, 20, 30, 40};
+    using iter_t = vector<int>::const_iterator;
+
+    iter_t it1;
+    it1 = find(myvector.begin(), myvector.end(), 30);
+    cout << "Value found: " << *it1 << endl;
+
+
+    iter_t it2;
+    it2 = find(myvector.begin(), myvector.end(), 50);
+    if (it2 == myvector.end()) {
+        cout << "Value 50 not found, as expected." << endl;
+    } else {
+        cout << "DANGER: Something weird happened." << endl;
+    }
+}
+
 int main() {
     cout << "Starting." << endl;
 
     demo_equal();
+    demo_find();
+
+//find(b, e, t)
 
     cout << "End." << endl;
     return 0;
