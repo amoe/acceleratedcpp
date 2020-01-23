@@ -32,3 +32,19 @@ T my_copy(T b, T e, U d) {
 
     return b;
 }
+
+
+// Could V be a function type parameterized by T?  Probably not
+template <typename T, typename U, typename V>
+U my_remove_copy_if(T b, T e, U d, V p) {
+    while (b != e) {
+        bool result = p(*b);
+        if (!result)
+            *d = *b;
+
+        b++;
+        d++;
+    }
+
+    return d;
+}

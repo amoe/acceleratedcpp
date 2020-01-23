@@ -80,7 +80,7 @@ void demo_remove_copy_if() {
     vector<string> source_vec = {"foo", "bar", "baz"};
     vector<string> destination_vec;
 
-    remove_copy_if(
+    my_remove_copy_if(
         source_vec.begin(), source_vec.end(), back_inserter(destination_vec), contains_f
     );
     print_vector(destination_vec);
