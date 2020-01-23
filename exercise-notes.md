@@ -596,3 +596,6 @@ definition.
 
 
 	
+### find
+
+copy(b, e, d)

@@ -1,7 +1,10 @@
 #include <iostream>
 #include <vector>
+#include <algorithm>
 #include "ex8_2.hh"
+#include "util.hh"
 
+using std::copy;
 using std::vector;
 using std::cout;
 using std::endl;
@@ -51,13 +54,29 @@ void demo_find() {
     }
 }
 
+void demo_copy() {
+    // The destination must be able to accommodate all elements of the
+    // source.
+    vector<string> source_vec = {"foo", "bar", "baz"};
+    vector<string> destination_vec(source_vec.size());
+
+    using iter_t = vector<string>::const_iterator;
+    iter_t result = my_copy(source_vec.begin(), source_vec.end(), destination_vec.begin());
+
+    cout << "Destination content is now:" << endl;
+
+    print_vector(destination_vec);
+
+    cout << "Result is end: " << (result == destination_vec.end()) << endl;
+
+}
+
 int main() {
     cout << "Starting." << endl;
 
     demo_equal();
     demo_find();
-
-//find(b, e, t)
+    demo_copy();
 
     cout << "End." << endl;
     return 0;

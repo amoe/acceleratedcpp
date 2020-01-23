@@ -22,3 +22,13 @@ T my_find(T b, T e, U t) {
 
     return b;
 }
+
+
+template <typename T, typename U>
+T my_copy(T b, T e, U d) {
+    while (b != e) {
+        *d++ = *b++;
+    }
+
+    return b;
+}
