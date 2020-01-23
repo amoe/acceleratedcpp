@@ -8,6 +8,7 @@ using std::copy;
 using std::vector;
 using std::cout;
 using std::endl;
+using std::back_inserter;
 
 void demo_equal() {
     // Call our implementation of std::equal.
@@ -71,12 +72,27 @@ void demo_copy() {
 
 }
 
+bool contains_f(string value) {
+    return value.find("f") != string::npos;
+}
+
+void demo_remove_copy_if() {
+    vector<string> source_vec = {"foo", "bar", "baz"};
+    vector<string> destination_vec;
+
+    remove_copy_if(
+        source_vec.begin(), source_vec.end(), back_inserter(destination_vec), contains_f
+    );
+    print_vector(destination_vec);
+}
+
 int main() {
     cout << "Starting." << endl;
 
     demo_equal();
     demo_find();
     demo_copy();
+    demo_remove_copy_if();
 
     cout << "End." << endl;
     return 0;
