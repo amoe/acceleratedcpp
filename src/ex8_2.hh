@@ -48,3 +48,19 @@ U my_remove_copy_if(T b, T e, U d, V p) {
 
     return d;
 }
+
+// Transform is just map.
+template <typename T, typename U, typename V>
+U my_transform(T b, T e, U d, V f) {
+    while (b != e) {
+        // AFAICS it's impossible to store the variable here, because
+        // we can't write the type.  On the other hand, even if we could write
+        // the type using auto, does it actually make sense to do any operations
+        // on it?  Because it might be fully parametrically polymorphic.
+        *d = f(*b);
+        b++;
+        d++;
+    }
+
+    return d;
+}

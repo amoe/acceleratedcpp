@@ -104,7 +104,7 @@ void demo_transform() {
     vector<string> source_vec = {"foo", "bar", "baz"};
     vector<string> destination_vec;
 
-    transform(
+    my_transform(
         source_vec.begin(), source_vec.end(), back_inserter(destination_vec),
         uppercase
     );
