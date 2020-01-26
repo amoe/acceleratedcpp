@@ -1,9 +1,11 @@
 #include <iostream>
 #include <vector>
 #include <algorithm>
+#include <cctype>
 #include "ex8_2.hh"
 #include "util.hh"
 
+using std::toupper;
 using std::copy;
 using std::vector;
 using std::cout;
@@ -86,6 +88,30 @@ void demo_remove_copy_if() {
     print_vector(destination_vec);
 }
 
+// Sample a -> a function for using with the transform algorithm.
+string uppercase(const string& input) {
+    string result;
+    using iter_t = string::const_iterator;
+
+    for (iter_t it = input.begin(); it != input.end(); it++) {
+        result.push_back(toupper(*it));
+    }
+
+    return result;
+}
+
+void demo_transform() {
+    vector<string> source_vec = {"foo", "bar", "baz"};
+    vector<string> destination_vec;
+
+    transform(
+        source_vec.begin(), source_vec.end(), back_inserter(destination_vec),
+        uppercase
+    );
+
+    print_vector(destination_vec);
+}
+
 int main() {
     cout << "Starting." << endl;
 
@@ -93,6 +119,7 @@ int main() {
     demo_find();
     demo_copy();
     demo_remove_copy_if();
+    demo_transform();
 
     cout << "End." << endl;
     return 0;
