@@ -64,3 +64,20 @@ U my_transform(T b, T e, U d, V f) {
 
     return d;
 }
+
+// Several notable points here.
+// We parameterize the return type, and it's not just an iterator.
+// Here it's probably a numeric type like int or double.
+// The type U needs to support the + operator.
+// I'm not sure on this point: 
+//   Hopefully, the type U is passed by-value, because otherwise += could modify
+//   the caller's value of t -- couldn't it?
+template <typename T, typename U>
+U my_accumulate(T b, T e, U t) {
+    while (b != e) {
+        t += *b;
+        b++;
+    }
+
+    return t;
+}

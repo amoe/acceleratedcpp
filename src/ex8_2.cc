@@ -2,6 +2,7 @@
 #include <vector>
 #include <algorithm>
 #include <cctype>
+#include <numeric>
 #include "ex8_2.hh"
 #include "util.hh"
 
@@ -112,6 +113,15 @@ void demo_transform() {
     print_vector(destination_vec);
 }
 
+void demo_accumulate() {
+    vector<int> source_vec = {1,2,3};
+    int seed = 0;
+
+    int result = my_accumulate(source_vec.begin(), source_vec.end(), seed);
+
+    cout << "Result is " << result << endl;
+}
+
 int main() {
     cout << "Starting." << endl;
 
@@ -120,6 +130,7 @@ int main() {
     demo_copy();
     demo_remove_copy_if();
     demo_transform();
+    demo_accumulate();
 
     cout << "End." << endl;
     return 0;
