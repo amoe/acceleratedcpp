@@ -72,6 +72,10 @@ U my_transform(T b, T e, U d, V f) {
 // I'm not sure on this point: 
 //   Hopefully, the type U is passed by-value, because otherwise += could modify
 //   the caller's value of t -- couldn't it?
+// No, this won't happen.  The type won't be passed by reference unless the
+// formal parameters have & in the type.  So if I used `U&`, the caller *would*
+// 'accidentally' pass their reference in, but there's nothing template-specific
+// about that behaviour.
 template <typename T, typename U>
 U my_accumulate(T b, T e, U t) {
     while (b != e) {

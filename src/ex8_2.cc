@@ -120,6 +120,13 @@ void demo_accumulate() {
     int result = my_accumulate(source_vec.begin(), source_vec.end(), seed);
 
     cout << "Result is " << result << endl;
+
+    int seed2 = 0;
+    int& seed3 = seed2;
+
+    int result2 = my_accumulate(source_vec.begin(), source_vec.end(), seed3);
+
+    cout << "Seed2 is " << seed2 << endl;
 }
 
 int main() {
