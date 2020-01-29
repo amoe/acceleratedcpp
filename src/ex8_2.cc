@@ -129,6 +129,24 @@ void demo_accumulate() {
     cout << "Seed2 is " << seed2 << endl;
 }
 
+// Search finds an entire subsequence.
+void demo_search() {
+    vector<string> source_vec = {"foo", "bar", "baz", "quux"};
+    vector<string> target_vec = {"bar", "baz"};
+
+    using iter_t = vector<string>::const_iterator;
+
+    iter_t result = search(
+        source_vec.begin(), source_vec.end(), target_vec.begin(), target_vec.end()
+    );
+
+    if (result == source_vec.end()) {
+        cout << "std::search: subsequence not found" << endl;
+    } else {
+        cout << "std::search: the subsequence was found" << endl;
+    }
+}
+
 int main() {
     cout << "Starting." << endl;
 
@@ -138,6 +156,7 @@ int main() {
     demo_remove_copy_if();
     demo_transform();
     demo_accumulate();
+    demo_search();
 
     cout << "End." << endl;
     return 0;

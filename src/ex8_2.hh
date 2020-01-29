@@ -85,3 +85,9 @@ U my_accumulate(T b, T e, U t) {
 
     return t;
 }
+
+
+// Not really clear how to implement this.  Isn't it O(mn)?
+template <typename T>
+T my_search(T b, T e, T b2, T e2) {
+}

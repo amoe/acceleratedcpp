@@ -592,3 +592,15 @@ Try to use the lowest-common-denominator of iterator operations.
 cplusplus.com has some good examples of using each function, but skip past the
 definition.
 
+
+
+
+
+
+
+
+
+
+
+
+search(b, e, b2, e2)
