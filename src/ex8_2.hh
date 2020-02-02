@@ -87,7 +87,34 @@ U my_accumulate(T b, T e, U t) {
 }
 
 
-// Not really clear how to implement this.  Isn't it O(mn)?
-template <typename T>
-T my_search(T b, T e, T b2, T e2) {
+// Somewhat complicated, the key being that we need the ability to copy the
+// iterator in order to do the hypothetical check.
+// Doesn't work for std::string because the == operator isn't defined there.
+template <typename T, typename U>
+T my_search(T haystack_begin, T haystack_end, U needle_begin, U needle_end) {
+    while (haystack_begin != haystack_end) {
+        if (*haystack_begin == *needle_begin) {
+            T cursor1(haystack_begin);
+            U cursor2(needle_begin);
+            bool matched = true;
+            
+            while (cursor1 != haystack_end && cursor2 != needle_end) {
+                if (*cursor1 != *cursor2) {
+                    matched = false;
+                    break;
+                }
+
+                cursor1++;
+                cursor2++;
+            }
+
+            if (matched && cursor2 == needle_end) {
+                break;
+            }
+        }
+
+        haystack_begin++;
+    }
+
+    return haystack_begin;
 }

@@ -127,23 +127,24 @@ void demo_accumulate() {
     int result2 = my_accumulate(source_vec.begin(), source_vec.end(), seed3);
 
     cout << "Seed2 is " << seed2 << endl;
+    cout << "Result2 is " << result2 << endl;
 }
 
 // Search finds an entire subsequence.
 void demo_search() {
-    vector<string> source_vec = {"foo", "bar", "baz", "quux"};
-    vector<string> target_vec = {"bar", "baz"};
+    vector<int> source_vec = {10,20,30,40};
+    vector<int> target_vec = {20,30};
 
-    using iter_t = vector<string>::const_iterator;
+    using iter_t = vector<int>::const_iterator;
 
-    iter_t result = search(
+    iter_t result = my_search(
         source_vec.begin(), source_vec.end(), target_vec.begin(), target_vec.end()
     );
 
     if (result == source_vec.end()) {
         cout << "std::search: subsequence not found" << endl;
     } else {
-        cout << "std::search: the subsequence was found" << endl;
+        cout << "std::search: the subsequence was found, first item " << *result << endl;
     }
 }
 
