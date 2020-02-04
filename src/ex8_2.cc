@@ -148,6 +148,21 @@ void demo_search() {
     }
 }
 
+// Find the first element where pred returns true.
+void demo_find_if() {
+    vector<string> vec = {"bar", "foo", "baz"};
+
+    using iter_t = vector<string>::const_iterator;
+
+    iter_t result = my_find_if(vec.begin(), vec.end(), contains_f);
+
+    if (result == vec.end()) {
+        cout << "find_if could not find anything satisfying predicate." << endl;
+    } else {
+        cout << "find_if: first element satisfying pred is " << *result << endl;
+    }
+}
+
 int main() {
     cout << "Starting." << endl;
 
@@ -158,6 +173,7 @@ int main() {
     demo_transform();
     demo_accumulate();
     demo_search();
+    demo_find_if();
 
     cout << "End." << endl;
     return 0;

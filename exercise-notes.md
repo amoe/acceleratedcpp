@@ -604,3 +604,4 @@ definition.
 
 
 search(b, e, b2, e2)
+find_if(b, e, p)

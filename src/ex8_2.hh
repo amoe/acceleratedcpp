@@ -118,3 +118,17 @@ T my_search(T haystack_begin, T haystack_end, U needle_begin, U needle_end) {
 
     return haystack_begin;
 }
+
+
+template <typename T, typename U>
+T my_find_if(T b, T e, U p) {
+    while (b != e) {
+        if (p(*b) != false) {
+            return b;
+        }
+
+        b++;
+    }
+
+    return b;
+}
