@@ -132,3 +132,17 @@ T my_find_if(T b, T e, U p) {
 
     return b;
 }
+
+template <typename T, typename U, typename V>
+U my_remove_copy(T b, T e, U d, V t) {
+    while (b != e) {
+        if (*b != t) {
+            *d = *b;
+        }
+
+        b++;
+        d++;
+    }
+
+    return d;
+}

@@ -163,6 +163,17 @@ void demo_find_if() {
     }
 }
 
+void demo_remove_copy() {
+    vector<string> vec = {"foo", "bar", "baz"};
+    vector<string> destination_vec;
+
+    my_remove_copy(vec.begin(), vec.end(), back_inserter(destination_vec), "bar");
+
+    cout << "remove_copy:" << endl;
+
+    print_vector(destination_vec);
+}
+
 int main() {
     cout << "Starting." << endl;
 
@@ -174,6 +185,7 @@ int main() {
     demo_accumulate();
     demo_search();
     demo_find_if();
+    demo_remove_copy();
 
     cout << "End." << endl;
     return 0;
