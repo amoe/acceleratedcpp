@@ -164,14 +164,33 @@ void demo_find_if() {
 }
 
 void demo_remove_copy() {
-    vector<string> vec = {"foo", "bar", "baz"};
-    vector<string> destination_vec;
+    vector<int> vec = {10, 20, 30, 40};
+    vector<int> destination_vec;
 
-    my_remove_copy(vec.begin(), vec.end(), back_inserter(destination_vec), "bar");
+    my_remove_copy(vec.begin(), vec.end(), back_inserter(destination_vec), 30);
 
     cout << "remove_copy:" << endl;
 
-    print_vector(destination_vec);
+    print_vector_int(destination_vec);
+}
+
+// What does remove actually do?
+
+// Remove() is a weird function because it can't modify the bounds of the
+// array.  Instead you have to use the return value.
+void demo_remove() {
+    vector<int> vec = {10, 20, 30, 30, 20, 10, 10, 20};
+
+    using iter_t = vector<int>::const_iterator;
+    iter_t new_end = my_remove(vec.begin(), vec.end(), 30);
+
+    // XXX: After this, can't rely on vec.end()!  Accessing past 'new_end'
+    // is UB -- guaranteed to not crash the program but with unspecified content.
+    cout << "remove():" << endl;
+
+    for (iter_t it = vec.begin(); it != new_end; it++) {
+        cout << *it << endl;
+    }
 }
 
 int main() {
@@ -186,6 +205,7 @@ int main() {
     demo_search();
     demo_find_if();
     demo_remove_copy();
+    demo_remove();
 
     cout << "End." << endl;
     return 0;

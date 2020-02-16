@@ -1,3 +1,8 @@
+#include <iostream>
+
+using std::cout;
+using std::endl;
+
 // XXX: Is this actually safe?  What happens if we fall off the end of b2?
 template <typename T, typename U>
 bool my_equal(T b, T e, U b2) {
@@ -145,4 +150,23 @@ U my_remove_copy(T b, T e, U d, V t) {
     }
 
     return d;
+}
+
+// The key to this function is taking copies of iterators similar to search().
+template <typename T, typename U>
+T my_remove(T b, T e, U t) {
+    T result = b;
+
+    while (b != e) {
+        if (*b != t) {
+            // Copy it in if it wasn't specified to be removed.
+            *result = *b;
+            result++;
+        }
+
+        b++;
+
+    }
+
+    return result;
 }

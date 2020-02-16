@@ -9,6 +9,12 @@ void print_vector(const vector<string>& vec) {
     }
 }
 
+void print_vector_int(const vector<int>& vec) {
+    for (int item: vec) {
+        cout << item << endl;
+    }
+}
+
 void print_list(const list<string>& lst) {
     for (string item: lst) {
         cout << '"' << item << '"' << endl;
