@@ -193,6 +193,29 @@ void demo_remove() {
     }
 }
 
+void demo_partition() {
+    vector<string> source_vec = {"bar", "foo", "baz"};
+
+    using iter_t = vector<string>::const_iterator;
+    iter_t boundary = my_partition(source_vec.begin(), source_vec.end(), contains_f);
+
+    cout << "partition()" << endl;
+
+    cout << "True elements:" << endl;
+
+    iter_t it;
+
+    for (it = source_vec.begin(); it != boundary; it++) {
+        cout << *it << endl;
+    }
+
+    cout << "False elements:" << endl;
+
+    for (it = boundary; it != source_vec.end(); it++) {
+        cout << *it << endl;
+    }
+}
+
 int main() {
     cout << "Starting." << endl;
 
@@ -206,6 +229,7 @@ int main() {
     demo_find_if();
     demo_remove_copy();
     demo_remove();
+    demo_partition();
 
     cout << "End." << endl;
     return 0;

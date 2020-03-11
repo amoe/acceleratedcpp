@@ -170,3 +170,25 @@ T my_remove(T b, T e, U t) {
 
     return result;
 }
+
+
+// U is a predicate
+
+// The key here is to use swap, which is in <algorithm>.  We can't actually
+// write the swap function ourselves, AFAICT.  Well we can, but only
+// by calling out to another template (std::swap).
+template <typename T, typename U>
+T my_partition(T b, T e, U p) {
+    T next_true = b;
+
+    while (b != e) {
+        if (p(*b)) {
+            swap(*b, *next_true);
+            next_true++;
+        }
+
+        b++;
+    }
+
+    return next_true;
+}

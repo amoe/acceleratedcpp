@@ -610,3 +610,10 @@ find_if(b, e, p)
 
 
 
+partition -- wanted output is
+
+True elements:
+foo
+False elements:
+bar
+baz
