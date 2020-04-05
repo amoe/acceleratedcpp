@@ -15,6 +15,12 @@ void print_vector_int(const vector<int>& vec) {
     }
 }
 
+void print_vector_double(const vector<double>& vec) {
+    for (double item: vec) {
+        cout << item << endl;
+    }
+}
+
 void print_list(const list<string>& lst) {
     for (string item: lst) {
         cout << '"' << item << '"' << endl;
