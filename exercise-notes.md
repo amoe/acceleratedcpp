@@ -622,3 +622,27 @@ baz
 
 median takes arguments by values.  modify to pass iterator.
 However it can't be a const iterator because we need to modify the vector.
+
+What would you expect the performance impact to be?  We just avoid an O(n) copy.
+
+10:42         amoe > In the book "Accelerated C++" they ask you to write a 'median()' function that operates on iterators rather than taking a vector.  They ask "if we did so, what would you expect 
+                     the performance impact to be?"  What would the answer to this question be?  My answer would be that the iterator version avoids an O(n) copy of the vector, do you think that's 
+                     correct?
+10:45    causative > no, you wouldn't copy the vector, you'd pass it by reference or pointer
+10:46         amoe > causative: They explicitly contrast it to a version with signature "double median(vector<double> v)"
+10:47        ville > causative: but then it wouldn't be a function taking a vector
+10:48        ville > amoe: and yes you would be correct
+10:48         amoe > ok, I was just wondering if there was anything more to say in answer to that question
+10:49    causative > well, what operations are you allowed to do on these iterators?  at some point you're going to need to partially sort the array to find the median efficiently
+10:50    causative > so you'd end up having to either modify or copy the vector
+10:50    causative > median-of-medians?
+10:52    causative > I believe the runtime of median-of-medians would be substantially more than the time needed to make a copy
+10:53    causative > er, hang on, median of medians is only an approximate median anyway.  I believe to find the actual median you need to actually sort
+10:53    causative > (partially)
+10:56    causative > e.g. you could do a quicksort-like algorithm where you only continue the sort on the side of the pivot where the median might reside
+10:56         tane > causative, it's called "quickselect" :)
+11:01    causative > if you don't copy the array you'd end up using the iterators for random access instead of iteration
+11:02    causative > which doesn't seem idiomatic
+11:02    causative > so I think you shouldn't do it that way
+11:14      rindolf > causative: there is an O(N) median algorithm on an unsorted array
+11:15    causative > yeah it's quickselect
