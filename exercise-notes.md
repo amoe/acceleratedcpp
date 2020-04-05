@@ -620,4 +620,5 @@ baz
 
 ## 8-3
 
-
+median takes arguments by values.  modify to pass iterator.
+However it can't be a const iterator because we need to modify the vector.

@@ -84,7 +84,7 @@ env.Program(
 
 env.Program(target='ex8_1', source=['ex8_1.cc', 'student_info.cc', 'median.cc', 'grade.cc'])
 env.Program(target='ex8_2', source=['ex8_2.cc', 'util.cc'])
-env.Program(target='ex8_3', source=['ex8_3.cc'])
+env.Program(target='ex8_3', source=['ex8_3.cc', 'util.cc'])
 env.Program(target='ex8_4', source=['ex8_4.cc'])
 env.Program(target='ex8_5', source=['ex8_5.cc'])
 env.Program(target='ex8_6', source=['ex8_6.cc'])
