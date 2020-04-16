@@ -646,3 +646,9 @@ What would you expect the performance impact to be?  We just avoid an O(n) copy.
 11:02    causative > so I think you shouldn't do it that way
 11:14      rindolf > causative: there is an O(N) median algorithm on an unsorted array
 11:15    causative > yeah it's quickselect
+
+## 8-4
+
+Implement the swap function, why did we call swap rather than exchanging the
+values of *beg and *end directly?  Try it and see
+
