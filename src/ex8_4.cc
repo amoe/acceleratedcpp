@@ -11,7 +11,8 @@ void my_reverse(T begin, T end) {
     while (begin != end) {
         --end;
         if (begin != end) {
-            swap(*begin++, *end);
+            swap(*begin, *end);
+            begin++;
         }
     }
 }
