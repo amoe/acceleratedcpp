@@ -652,3 +652,17 @@ What would you expect the performance impact to be?  We just avoid an O(n) copy.
 Implement the swap function, why did we call swap rather than exchanging the
 values of *beg and *end directly?  Try it and see
 
+## 8-5
+
+Reimplement the `gen_sentence` and `xref` functions from Chapter 7 to use output
+iterators rather than putting their entire output in one data structure.  Test
+these new versions by writing programs that attach the output iterator directly
+to the standard output, and by storing the results in a list<string> and a
+map<string, vector<int>> respectively.
+
+i.e. `xref` should be tested by attaching directly to the standard output.
+How is this done?
+See 8.4  where we templateize split.
+Instead of returning a value we takean templated output parameter.
+So wherever you push you now just increment the iterator.
+An `ostream_iterator<TYPE>(cout, " ")` can be used to write to stdout.
