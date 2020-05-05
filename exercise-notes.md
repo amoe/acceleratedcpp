@@ -666,3 +666,5 @@ See 8.4  where we templateize split.
 Instead of returning a value we takean templated output parameter.
 So wherever you push you now just increment the iterator.
 An `ostream_iterator<TYPE>(cout, " ")` can be used to write to stdout.
+
+push_back is obvious how to do, but insert()
