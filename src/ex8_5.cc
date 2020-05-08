@@ -42,7 +42,8 @@ Grammar read_grammar(istream& in) {
         vector<string> entry = split(line);
         if (!entry.empty()) {
             string production_name = entry.at(0);
-            result[production_name].push_back({"foo"});
+            Rule this_rule(entry.begin() + 1, entry.end());
+            result[production_name].push_back(this_rule);
         }
     }
 
