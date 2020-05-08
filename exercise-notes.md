@@ -654,11 +654,11 @@ values of *beg and *end directly?  Try it and see
 
 ## 8-5
 
-Reimplement the `gen_sentence` and `xref` functions from Chapter 7 to use output
-iterators rather than putting their entire output in one data structure.  Test
-these new versions by writing programs that attach the output iterator directly
-to the standard output, and by storing the results in a list<string> and a
-map<string, vector<int>> respectively.
+> Reimplement the `gen_sentence` and `xref` functions from Chapter 7 to use output
+> iterators rather than putting their entire output in one data structure.  Test
+> these new versions by writing programs that attach the output iterator directly
+> to the standard output, and by storing the results in a list<string> and a
+> map<string, vector<int>> respectively.
 
 i.e. `xref` should be tested by attaching directly to the standard output.
 How is this done?
@@ -667,4 +667,6 @@ Instead of returning a value we takean templated output parameter.
 So wherever you push you now just increment the iterator.
 An `ostream_iterator<TYPE>(cout, " ")` can be used to write to stdout.
 
-push_back is obvious how to do, but insert()
+Note that in the end we used the recursive version of gen_sentence from chapter
+7 rather than the iterative version.  I don't know if the iterative version
+is possible.
