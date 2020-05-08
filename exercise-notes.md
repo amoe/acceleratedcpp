@@ -692,4 +692,14 @@ is possible.
 
 
 
-xref
+xref seems impossible
+yes it's impossible using a map iterator -- specifically
+
+      ret[*it].push_back(line_number);
+
+this associative lookup can't be done with an iterator
+
+So we have to do something else ... and what they do is -- cheekily copy the
+results to the output iterator!!! >.< >.<
+
+

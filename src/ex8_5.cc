@@ -108,7 +108,8 @@ void demo_generating_sentences() {
 
 void demo_cross_reference_table(istream& input) {
     cout << "Generating xref" << endl;
-    map<string, vector<int>> result = xref(input, split);
+    map<string, vector<int>> result;
+    xref(input, inserter(result, result.end()), split);
     print_xref_table(result);
     cout << "Done" << endl;
 }

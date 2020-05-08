@@ -38,8 +38,10 @@ void gen_sentence(const Grammar& g, T d) {
     gen_aux(g, "<sentence>", d);
 }
 
-map<string, vector<int>> xref(
+template <typename T>
+void xref(
     istream& in,
+    T d,
     vector<string> find_words(const string&) = split
 ) {
     string line;
@@ -61,7 +63,9 @@ map<string, vector<int>> xref(
         }
     }
 
-    return ret;
+    // Cheat by copying it all into an output iterator.
+    // XXX: No idea if this is a deep or a shallow copy.
+    copy(ret.begin(), ret.end(), d);
 }
 
 template <typename T>
