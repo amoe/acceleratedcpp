@@ -8,9 +8,10 @@ bool is_production(const string& s) {
     return s.size() > 1 && s[0] == '<' && s[s.size() - 1] == '>';
 }
 
-void gen_aux(const Grammar& g, const string& word, vector<string>& ret) {
+template <typename T>
+void gen_aux(const Grammar& g, const string& word, T d) {
     if (!is_production(word)) {
-        ret.push_back(word);
+        *d++ = word;
     } else {
         Grammar::const_iterator it = g.find(word);
         if (it == g.end()) {
@@ -21,16 +22,16 @@ void gen_aux(const Grammar& g, const string& word, vector<string>& ret) {
         const Rule& r = c[nrand(c.size())];
 
         for (Rule::const_iterator i = r.begin(); i != r.end(); i++) {
-            gen_aux(g, *i, ret);
+            gen_aux(g, *i, d);
         }
     }
 }    
 
 
-vector<string> gen_sentence(const Grammar& g) {
-    vector<string> ret;
-    gen_aux(g, "<sentence>", ret);
-    return ret;
+// destination output iterator is d
+template <typename T>
+void gen_sentence(const Grammar& g, T d) {
+    gen_aux(g, "<sentence>", d);
 }
 
 #endif /* EX8_5_HH */

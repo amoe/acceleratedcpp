@@ -47,20 +47,23 @@ Grammar read_grammar(istream& in) {
     return result;
 }
 
-int main() {
-    cout << "Starting." << endl;
-
+void demo_generating_sentences() {
     srand(time(NULL));
-
     stringstream sin(demo_grammar);
     Grammar g = read_grammar(sin);
 
     cout << "size read (number of unique productions) is " << g.size() << endl;
 
-    vector<string> sentence = gen_sentence(g);
-
+    vector<string> sentence;
+    gen_sentence(g, back_inserter(sentence));
     print_vector(sentence);
+}
 
+int main() {
+    cout << "Starting." << endl;
+
+    demo_generating_sentences();
+    
     cout << "End." << endl;
     return 0;
 }
