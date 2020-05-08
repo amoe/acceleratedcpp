@@ -1,10 +1,16 @@
 #include <iostream>
+#include <map>
 #include "util.hh"
 #include "split.hh"
 #include "ex8_5.hh"
 
 using std::cout;
 using std::endl;
+using std::map;
+
+using Rule = vector<string>;
+using RuleCollection = vector<Rule>;
+using Grammar = map<string, RuleCollection>;
 
 const string demo_grammar = R"(
 <noun>          cat
