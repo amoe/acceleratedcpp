@@ -56,7 +56,8 @@ map<string, vector<int>> xref(
             it != words.end();
             it++
         ) {
-            ret[*it].push_back(line_number);
+            string this_word = *it;
+            ret[this_word].push_back(line_number);
         }
     }
 
