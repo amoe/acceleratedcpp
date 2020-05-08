@@ -61,5 +61,15 @@ map<string, vector<int>> xref(
     return ret;
 }
 
+map<string, int> fill_map() {
+    map<string, int> result;
+    
+    result["foo"] = 42;
+    result["bar"] = 56;
+    result["baz"] = 17;
+
+    return result;
+}
+
 
 #endif /* EX8_5_HH */

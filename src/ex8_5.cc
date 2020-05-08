@@ -115,10 +115,20 @@ void demo_cross_reference_table(istream& input) {
 int main() {
     cout << "Starting." << endl;
 
-    demo_generating_sentences();
+    // demo_generating_sentences();
 
-    stringstream sin2(multi_line_input);
-    demo_cross_reference_table(sin2);
+    // stringstream sin2(multi_line_input);
+    // demo_cross_reference_table(sin2);
+
+
+
+    map<string, int> result = fill_map();
+
+    for (map<string, int>::const_iterator it = result.begin();
+         it != result.end();
+         it++) {
+        cout << it->first << ": " << it->second << endl;
+    }
     
     cout << "End." << endl;
     return 0;
