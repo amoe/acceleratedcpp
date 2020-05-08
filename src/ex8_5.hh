@@ -4,7 +4,9 @@
 #include "grammar_types.hh"
 #include "random.hh"
 
+// This is bad but whatever
 using std::istream;
+using std::pair;
 
 bool is_production(const string& s) {
     return s.size() > 1 && s[0] == '<' && s[s.size() - 1] == '>';
@@ -63,6 +65,10 @@ map<string, vector<int>> xref(
 
 map<string, int> fill_map() {
     map<string, int> result;
+
+    pair<string, int> foo("foo", 42);
+    pair<string, int> bar("bar", 56);
+    pair<string, int> baz("baz", 17);
     
     result["foo"] = 42;
     result["bar"] = 56;
