@@ -13,6 +13,14 @@ using std::cout;
 using std::endl;
 using std::stringstream;
 
+const string multi_line_input = R"(
+Alice was beginning to get very tired of sitting by her sister on the
+bank, and of having nothing to do: once or twice she had peeped into the
+book her sister was reading, but it had no pictures or conversations in
+it, ‘and what is the use of a book,’ thought Alice ‘without pictures or
+conversations?’
+)";
+
 const string demo_grammar = R"(
 <noun>          cat
 <noun>          dog
@@ -29,6 +37,42 @@ const string demo_grammar = R"(
 <location>      wherever it wants
 <sentence>      the <noun-phrase> <verb> <location>
 )";
+
+void print_line_number_list(const vector<int>& line_numbers) {
+    typedef vector<int>::const_iterator iter_t;
+
+    // Loop and a half to emulate a join function.
+
+    // We always know that there will be more than zero numbers in the vector,
+    // so this is safe when used with 'xref' function.
+    iter_t it = line_numbers.begin();
+    cout << *it;
+    it++;   // scroll past it
+
+    while (it != line_numbers.end()) {
+        cout << ", " << *it;
+        it++;
+    }
+}
+
+
+void print_xref_table(map<string, vector<int>> the_xref) {
+    cout << "Table is listed:" << endl;
+
+    typedef map<string, vector<int>>::const_iterator iter_t;
+
+    for (iter_t it = the_xref.begin(); it != the_xref.end(); it++) {
+        string word = it->first;
+        vector<int> line_numbers = it->second;
+        
+        cout << word << ": [";
+        print_line_number_list(line_numbers);
+        cout << "]" << endl;
+    }
+    
+    cout << "Table listing done." << endl;
+}
+
 
 
 Grammar read_grammar(istream& in) {
@@ -59,10 +103,46 @@ void demo_generating_sentences() {
     print_vector(sentence);
 }
 
+map<string, vector<int>> xref(
+    istream& in,
+    vector<string> find_words(const string&) = split
+) {
+    string line;
+    int line_number = 0;
+    map<string, vector<int>> ret;
+
+    while (getline(in, line)) {
+        ++line_number;
+
+        vector<string> words = find_words(line);
+        
+        for (
+            vector<string>::const_iterator it = words.begin();
+            it != words.end();
+            it++
+        ) {
+            ret[*it].push_back(line_number);
+        }
+    }
+
+    return ret;
+}
+
+void demo_cross_reference_table(istream& input) {
+    cout << "Generating xref" << endl;
+    auto result = xref(input, split);
+    print_xref_table(result);
+    cout << "Done" << endl;
+}
+
+
 int main() {
     cout << "Starting." << endl;
 
     demo_generating_sentences();
+
+    stringstream sin2(multi_line_input);
+    demo_cross_reference_table(sin2);
     
     cout << "End." << endl;
     return 0;

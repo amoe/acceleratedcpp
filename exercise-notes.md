@@ -670,3 +670,26 @@ An `ostream_iterator<TYPE>(cout, " ")` can be used to write to stdout.
 Note that in the end we used the recursive version of gen_sentence from chapter
 7 rather than the iterative version.  I don't know if the iterative version
 is possible.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+xref
