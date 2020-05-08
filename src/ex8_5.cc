@@ -2,20 +2,16 @@
 #include <sstream>
 #include <map>
 #include <string>
+#include "grammar_types.hh"
 #include "util.hh"
 #include "split.hh"
 #include "ex8_5.hh"
 
-using std::getline;
 using std::istream;
-using std::stringstream;
+using std::getline;
 using std::cout;
 using std::endl;
-using std::map;
-
-using Rule = vector<string>;
-using RuleCollection = vector<Rule>;
-using Grammar = map<string, RuleCollection>;
+using std::stringstream;
 
 const string demo_grammar = R"(
 <noun>          cat
@@ -34,10 +30,6 @@ const string demo_grammar = R"(
 <sentence>      the <noun-phrase> <verb> <location>
 )";
 
-int nrand(int n) {
-    return (int)((double)rand() / ((double)RAND_MAX + 1) * n);
-}
-
 
 Grammar read_grammar(istream& in) {
     Grammar result;
@@ -54,36 +46,6 @@ Grammar read_grammar(istream& in) {
 
     return result;
 }
-
-bool is_production(const string& s) {
-    return s.size() > 1 && s[0] == '<' && s[s.size() - 1] == '>';
-}
-
-void gen_aux(const Grammar& g, const string& word, vector<string>& ret) {
-    if (!is_production(word)) {
-        ret.push_back(word);
-    } else {
-        Grammar::const_iterator it = g.find(word);
-        if (it == g.end()) {
-            throw std::runtime_error("empty rule");
-        }
-
-        const RuleCollection& c = it->second;
-        const Rule& r = c[nrand(c.size())];
-
-        for (Rule::const_iterator i = r.begin(); i != r.end(); i++) {
-            gen_aux(g, *i, ret);
-        }
-    }
-}    
-
-vector<string> gen_sentence(const Grammar& g) {
-    vector<string> ret;
-    gen_aux(g, "<sentence>", ret);
-    return ret;
-}
-
-
 
 int main() {
     cout << "Starting." << endl;
