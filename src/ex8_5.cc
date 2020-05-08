@@ -1,9 +1,11 @@
 #include <iostream>
+#include <sstream>
 #include <map>
 #include "util.hh"
 #include "split.hh"
 #include "ex8_5.hh"
 
+using std::stringstream;
 using std::cout;
 using std::endl;
 using std::map;
