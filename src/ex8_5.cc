@@ -34,6 +34,11 @@ const string demo_grammar = R"(
 <sentence>      the <noun-phrase> <verb> <location>
 )";
 
+int nrand(int n) {
+    return (int)((double)rand() / ((double)RAND_MAX + 1) * n);
+}
+
+
 Grammar read_grammar(istream& in) {
     Grammar result;
     string line;
@@ -50,13 +55,49 @@ Grammar read_grammar(istream& in) {
     return result;
 }
 
+bool is_production(const string& s) {
+    return s.size() > 1 && s[0] == '<' && s[s.size() - 1] == '>';
+}
+
+void gen_aux(const Grammar& g, const string& word, vector<string>& ret) {
+    if (!is_production(word)) {
+        ret.push_back(word);
+    } else {
+        Grammar::const_iterator it = g.find(word);
+        if (it == g.end()) {
+            throw std::runtime_error("empty rule");
+        }
+
+        const RuleCollection& c = it->second;
+        const Rule& r = c[nrand(c.size())];
+
+        for (Rule::const_iterator i = r.begin(); i != r.end(); i++) {
+            gen_aux(g, *i, ret);
+        }
+    }
+}    
+
+vector<string> gen_sentence(const Grammar& g) {
+    vector<string> ret;
+    gen_aux(g, "<sentence>", ret);
+    return ret;
+}
+
+
+
 int main() {
     cout << "Starting." << endl;
+
+    srand(time(NULL));
 
     stringstream sin(demo_grammar);
     Grammar g = read_grammar(sin);
 
     cout << "size read (number of unique productions) is " << g.size() << endl;
+
+    vector<string> sentence = gen_sentence(g);
+
+    print_vector(sentence);
 
     cout << "End." << endl;
     return 0;
