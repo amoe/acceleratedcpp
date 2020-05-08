@@ -31,6 +31,11 @@ const string demo_grammar = R"(
 
 int main() {
     cout << "Starting." << endl;
+
+    stringstream sin(demo_grammar);
+//    Grammar g = read_grammar(sin);
+
+
     cout << "End." << endl;
     return 0;
 }
