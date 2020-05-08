@@ -130,7 +130,7 @@ map<string, vector<int>> xref(
 
 void demo_cross_reference_table(istream& input) {
     cout << "Generating xref" << endl;
-    auto result = xref(input, split);
+    map<string, vector<int>> result = xref(input, split);
     print_xref_table(result);
     cout << "Done" << endl;
 }
