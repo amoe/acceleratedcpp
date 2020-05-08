@@ -12,6 +12,8 @@ using std::getline;
 using std::cout;
 using std::endl;
 using std::stringstream;
+using std::inserter;
+using std::insert_iterator;
 
 const string multi_line_input = R"(
 Alice was beginning to get very tired of sitting by her sister on the
@@ -117,18 +119,19 @@ int main() {
 
     // demo_generating_sentences();
 
-    // stringstream sin2(multi_line_input);
-    // demo_cross_reference_table(sin2);
+    stringstream sin2(multi_line_input);
+    demo_cross_reference_table(sin2);
 
 
+    // map<string, int> result;
+    // insert_iterator<map<string, int>> ii = inserter(result, result.begin());
+    // fill_map(ii);
 
-    map<string, int> result = fill_map();
-
-    for (map<string, int>::const_iterator it = result.begin();
-         it != result.end();
-         it++) {
-        cout << it->first << ": " << it->second << endl;
-    }
+    // for (map<string, int>::const_iterator it = result.begin();
+    //      it != result.end();
+    //      it++) {
+    //     cout << it->first << ": " << it->second << endl;
+    // }
     
     cout << "End." << endl;
     return 0;

@@ -63,18 +63,15 @@ map<string, vector<int>> xref(
     return ret;
 }
 
-map<string, int> fill_map() {
-    map<string, int> result;
-
+template <typename T>
+void fill_map(T d) {
     pair<string, int> foo("foo", 42);
     pair<string, int> bar("bar", 56);
     pair<string, int> baz("baz", 17);
-    
-    result["foo"] = 42;
-    result["bar"] = 56;
-    result["baz"] = 17;
 
-    return result;
+    *d++ = foo;
+    *d++ = bar;
+    *d++ = baz;
 }
 
 
