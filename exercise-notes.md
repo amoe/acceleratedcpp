@@ -719,3 +719,8 @@ But it fails at copy time, after template expansion.  back_inserter() still
 works.
 
 
+
+## 8-7
+
+> Why doesn't the max function use two template parameters, one for each argument
+> type?

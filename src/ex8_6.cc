@@ -29,10 +29,12 @@ void demo_copy1() {
 
     copy(m.begin(), m.end(), back_inserter(x));
 
-    auto foo = back_inserter(m);
-
     cout << "Size of x is now " << x.size() << endl;
 }
+
+
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wunused-but-set-variable"
 
 void demo_copy2() {
     map<int, string> m;
@@ -45,6 +47,8 @@ void demo_copy2() {
     // lack of a 'push_back' member.
     //copy(x.begin(), x.end(), it);
 }
+
+#pragma GCC diagnostic pop
 
 int main() {
     cout << "Starting." << endl;
