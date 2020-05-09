@@ -713,3 +713,9 @@ must have some type that supports `push_back`.  We also know that m.begin()
 will yield `pair<int, string>`.  So we can infer that one valid type for x
 would be `vector<pair<int, string>>`.
 
+What if the call were `copy(x.begin(), x.end(), back_inserter(m))`?
+This call fails!  Because m does not support `push_back`.
+But it fails at copy time, after template expansion.  back_inserter() still
+works.
+
+
