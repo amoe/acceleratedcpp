@@ -724,3 +724,35 @@ works.
 
 > Why doesn't the max function use two template parameters, one for each argument
 > type?
+
+Well, let's try it.
+It seems to work.
+I don't know how it worked.
+The fundamental problem is that the runtime return type could vary in that case,
+which would cause 
+
+    template <typename T, typename U>
+    T my_max2(T a, U b) {
+        if (a >= b) {
+            return a;
+        } else {
+            return b;
+        }
+    }
+
+to expand to
+
+    double my_max2(double a, int b) {
+        if (a >= b) {
+            return a;
+        } else {
+            return b;   // ATTEMPT TO RETURN INT FROM DOUBLE FUNCTION
+        }
+    }
+
+BUT this is a sneaky case I think where the compiler is cheating.
+The compiler does implicit conversion from int to double that allows this 
+specific case to pass.
+What stuff can be compared?  Iterator maybe -- yes, iterators support comparison
+operations and also expose the failure of this logic.
+

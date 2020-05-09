@@ -32,10 +32,6 @@ void demo_copy1() {
     cout << "Size of x is now " << x.size() << endl;
 }
 
-
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wunused-but-set-variable"
-
 void demo_copy2() {
     map<int, string> m;
     vector<pair<int, string>> x = {{42, "foo"}};
@@ -47,8 +43,6 @@ void demo_copy2() {
     // lack of a 'push_back' member.
     //copy(x.begin(), x.end(), it);
 }
-
-#pragma GCC diagnostic pop
 
 int main() {
     cout << "Starting." << endl;
