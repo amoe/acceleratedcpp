@@ -708,4 +708,8 @@ results to the output iterator!!! >.< >.<
 > of x?  What if the call were `copy(x.begin(), x.end(), back_inserter(m))`
 > instead?
 
+The first thing is that back_inserter call must be valid.  That means that x
+must have some type that supports `push_back`.  We also know that m.begin()
+will yield `pair<int, string>`.  So we can infer that one valid type for x
+would be `vector<pair<int, string>>`.
 
