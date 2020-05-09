@@ -5,6 +5,8 @@ template <typename T, typename U>
 bool binary_search(T begin, T end, const U& x) {
     while (begin < end) {
         T mid = begin + ((end - begin) / 2);
+
+
         if (x < *mid) {
             end = mid;
         } else if (*mid < x) {

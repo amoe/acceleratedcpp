@@ -756,3 +756,22 @@ specific case to pass.
 What stuff can be compared?  Iterator maybe -- yes, iterators support comparison
 operations and also expose the failure of this logic.
 
+## 8-8
+
+> Why didn't we write `(begin + end) / 2` instead of `begin + ((end - begin) / 2)
+
+First confirm that these are actually identical which they are.
+seems to me the answer is likely that (begin + end) yields an iterator which
+does not support the division operator.
+
+WRONG.  Actually (begin + end) is itself invalid, you can only add things that
+are convertible to 'ptrdiff_t' (long) to an iterator.
+
+But, you can subtract begin from end, why?
+The actual answer is because the set of operations for random access iterators
+mandates that p - q be supported, but not p + q.
+Why?
+The reason for this is that `p - q` returns an INTEGER, the DISTANCE between
+two iterators, and does not itself return an iterator.  So it's in no way
+equivalent to saying `p - 2` which returns an iterator.  As such, `p + q` would
+not make any sense.
