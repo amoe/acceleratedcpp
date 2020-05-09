@@ -703,3 +703,9 @@ So we have to do something else ... and what they do is -- cheekily copy the
 results to the output iterator!!! >.< >.<
 
 
+> Suppose that m has type `map<int, string>` and that we encounter a call to
+> `copy(m.begin(), m.end(), back_inserter(x))`.  What can we say about the type
+> of x?  What if the call were `copy(x.begin(), x.end(), back_inserter(m))`
+> instead?
+
+
