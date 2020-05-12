@@ -777,3 +777,7 @@ type parameter T.  You have to write instead.
 
     double x = zero<double>();
 
+
+## Chapter 9
+
+Defining new types.

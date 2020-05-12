@@ -76,6 +76,7 @@ env.Program(target='ex7_7', source=['ex7_7.cc', 'split.cc', 'characters.cc'])
 env.Program(target='ex7_8', source=['ex7_8.cc', 'url_finder.cc'])
 env.Program(target='ex7_9', source=['ex7_9.cc'])
 
+# Ch 8
 
 env.Program(
     target='ch8_generic',
@@ -91,3 +92,10 @@ env.Program(target='ex8_6', source=['ex8_6.cc', 'util.cc'])
 env.Program(target='ex8_7', source=['ex8_7.cc'])
 env.Program(target='ex8_8', source=['ex8_8.cc'])
 
+
+# Ch 9
+
+env.Program(
+    target='ch9_new_types',
+    source=['ch9_new_types.cc']
+)
