@@ -788,3 +788,23 @@ Defining new types.
 > ... As a matter of good practice, we use the qualified names in code that goes
 > into header files, [but not in source files].
 
+The double-equals :: is being referred to as the 'scope operator' and is the
+same operator (in some sense) as the one in `string::size_type`.
+
+Remember that the `this` is a reference.  I can't see if that really has
+implications.  For instance the type of `this` in a StudentInfo member function
+is `StudentInfo&`.
+
+Look at this:
+
+    double StudentInfo::grade() const {
+        return ::grade(midterm, final, homework);
+    }
+
+The empty scope operator forces a call to the non-member function `grade`.
+Otherwise, this would be an attempted recursion on the member function.  
+
+The member function is const qualified.  If you have a function that accepts a
+StudentInfo with the signature `foo(const StudentInfo&)` you'll only be able to
+call const members of StudentInfo.  This seems quite useful and I can't think
+of an analogous thing in Java.

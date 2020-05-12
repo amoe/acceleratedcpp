@@ -97,5 +97,5 @@ env.Program(target='ex8_8', source=['ex8_8.cc'])
 
 env.Program(
     target='ch9_new_types',
-    source=['ch9_new_types.cc']
+    source=['ch9_new_types.cc', 'median.cc']
 )
