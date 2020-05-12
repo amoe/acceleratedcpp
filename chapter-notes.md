@@ -781,3 +781,10 @@ type parameter T.  You have to write instead.
 ## Chapter 9
 
 Defining new types.
+
+> It is worth reviewing why we are using the fully qualified names for
+> std::string and std::vector [instead of `using`].  ... Code that is intended
+> for use by others should contain the minimum number of declarations necessary.
+> ... As a matter of good practice, we use the qualified names in code that goes
+> into header files, [but not in source files].
+
