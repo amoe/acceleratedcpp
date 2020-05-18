@@ -18,13 +18,15 @@ using std::vector;
 
 istream& read_hw(istream& in, vector<double>& hw);
 
-struct StudentInfo {
+class StudentInfo {
+public:
+    double grade() const;
+    istream& read(istream&);
+
+private:
     string name;
     double midterm, final;
     vector<double> homework;
-
-    istream& read(istream&);
-    double grade() const;
 };
 
 double grade(double midterm, double final, double homework) {
@@ -77,17 +79,12 @@ int main() {
     StudentInfo student;
     student.read(sin1);
 
-    string::size_type maxlen = student.name.size();
-
-
-    cout << student.name
-         << string((maxlen + 1) - student.name.size(), ' ');
+    // Can't do this now
+    //cout << student.name;
 
     try {
         double finalGrade = student.grade();
-        cout << finalGrade << endl;
         streamsize prec = cout.precision();
-        
         cout << setprecision(3) << finalGrade << setprecision(prec);
     } catch (std::domain_error& e) {
         cout << e.what();

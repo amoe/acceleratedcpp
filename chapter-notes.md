@@ -817,4 +817,9 @@ that object."
 There is some advantage to defining this as a global function rather than a
 class function (not shown which, deferred at pg159.)
 
+They refer to 'public', 'private' as a 'protection label'; the more standard
+term is "access specifier".
+
+
+
 
