@@ -808,3 +808,13 @@ The member function is const qualified.  If you have a function that accepts a
 StudentInfo with the signature `foo(const StudentInfo&)` you'll only be able to
 call const members of StudentInfo.  This seems quite useful and I can't think
 of an analogous thing in Java.
+
+Compare function?  We compare two students based on their name.
+
+"If a function changes the state of an object, then it ought to be a member of
+that object."
+
+There is some advantage to defining this as a global function rather than a
+class function (not shown which, deferred at pg159.)
+
+
