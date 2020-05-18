@@ -4,8 +4,13 @@
 #include <vector>
 #include <stdexcept>
 #include <sstream>
+#include <numeric>
+#include <algorithm>
 #include "median.hh"
 
+
+using std::sort;
+using std::max;
 using std::streamsize;
 using std::setprecision;
 using std::stringstream;
@@ -22,8 +27,13 @@ class StudentInfo {
 public:
     double grade() const;
     istream& read(istream&);
-    string name() const {
+    string name() const {    // Likely to be inlined, because defined inline
         return n;
+    }
+
+    // User can check that the object is valid before requesting a grade.
+    bool valid() const {
+        return !homework.empty();
     }
 
 private:
@@ -68,6 +78,12 @@ istream& read_hw(istream& in, vector<double>& hw) {
     return in;
 }
 
+// The `compare` function should be declared in the same header file that
+// contains the student info stuff, it's part of the interface.
+bool compare(const StudentInfo& x, const StudentInfo& y) {
+    return x.name() < y.name();
+}
+
 const string multi_line_input = R"(
 Gamlin 94 89 14 96 16 63
 Capener 7 10 32 68 61 76
@@ -77,28 +93,42 @@ Capener 7 10 32 68 61 76
 int main() {
     cout << "Starting." << endl;
 
+    vector<StudentInfo> students;
+    StudentInfo the_record;
+    string::size_type maxlen = 0;
 
     stringstream sin1(multi_line_input);
-    StudentInfo student;
-    student.read(sin1);
 
-    // This should actually be the max of the whole collection.
-    string::size_type maxlen = student.name().size();
-
-    // Can't do this now
-    cout << student.name()
-         << string((maxlen + 1) - student.name().size(), ' ');
-        
-
-    try {
-        double finalGrade = student.grade();
-        streamsize prec = cout.precision();
-        cout << setprecision(3) << finalGrade << setprecision(prec);
-    } catch (std::domain_error& e) {
-        cout << e.what();
+    // Note that push_back here must copy the entire record.  Otherwise the
+    // read would be overwriting the value.
+    while (the_record.read(sin1)) {
+        maxlen = max(maxlen, the_record.name().size());
+        students.push_back(the_record);
     }
 
-    cout << endl;
+    sort(students.begin(), students.end(), compare);
+
+    for (vector<StudentInfo>::size_type i = 0; i < students.size(); i++) {
+        StudentInfo this_student = students[i];
+        cout << this_student.name()
+             << string((maxlen + 1) - this_student.name().size(), ' ');
+
+        try {
+            // Should never happen
+            if (!this_student.valid()) {
+                cout << "skipping invalid student" << endl;
+            }
+
+            double final_grade = this_student.grade();
+            streamsize prec = cout.precision();
+
+            cout << setprecision(3) << final_grade << setprecision(prec);
+        } catch (std::domain_error& e) {
+            cout << e.what();
+        }
+
+        cout << endl;
+    }
 
 
     cout << "End." << endl;

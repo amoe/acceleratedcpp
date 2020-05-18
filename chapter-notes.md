@@ -822,4 +822,12 @@ term is "access specifier".
 
 A member function cannot have the same name as a member variable.
 
+Defining a simple member function at the point of declaration can actually
+serve as a hint to the compiler to inline that function.
 
+> Accessors should be provided only when they are part of the abstract interface
+> of the class. ... Notion of a student name is part of our abstraction, and it
+> is fitting to provide a name() function.
+
+So basically provide accessors on a JIT basis and question whether behaviour
+could be moved into the class.  This will always be subjective.
