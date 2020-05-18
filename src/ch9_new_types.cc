@@ -22,9 +22,12 @@ class StudentInfo {
 public:
     double grade() const;
     istream& read(istream&);
+    string name() const {
+        return n;
+    }
 
 private:
-    string name;
+    string n;
     double midterm, final;
     vector<double> homework;
 };
@@ -47,7 +50,7 @@ double StudentInfo::grade() const {
 
 // Why return an istream?
 istream& StudentInfo::read(istream& in) {
-    in >> name >> midterm >> final;
+    in >> n >> midterm >> final;
     read_hw(in, homework);
     return in;
 }
@@ -79,8 +82,13 @@ int main() {
     StudentInfo student;
     student.read(sin1);
 
+    // This should actually be the max of the whole collection.
+    string::size_type maxlen = student.name().size();
+
     // Can't do this now
-    //cout << student.name;
+    cout << student.name()
+         << string((maxlen + 1) - student.name().size(), ' ');
+        
 
     try {
         double finalGrade = student.grade();

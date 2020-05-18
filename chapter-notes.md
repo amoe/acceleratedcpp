@@ -820,6 +820,6 @@ class function (not shown which, deferred at pg159.)
 They refer to 'public', 'private' as a 'protection label'; the more standard
 term is "access specifier".
 
-
+A member function cannot have the same name as a member variable.
 
 
