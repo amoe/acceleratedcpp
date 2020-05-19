@@ -845,6 +845,9 @@ assign in the constructor body explicitly you are overwriting the value
 that was initialized before.  ALWAYS initialize built-in types.  Anything else
 will be implicitly value-initialized.
 
-
+Initializer lists are executed in the order of declaration.  So if multiple data
+members depend on each other, just eschew the initializer lists, and use the
+constructor body to assign them instead, which makes the order-dependency more
+clear.
 
 
