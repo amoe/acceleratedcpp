@@ -831,3 +831,20 @@ serve as a hint to the compiler to inline that function.
 
 So basically provide accessors on a JIT basis and question whether behaviour
 could be moved into the class.  This will always be subjective.
+
+An automatically generated constructor is called a "synthesized constructor"
+in ACPP.
+
+Primitives are 'default-initialized' meaning that they can contain garbage
+(dangerous).
+Containers are either empty or 'value-initialized' which means they get zero
+values.
+
+Initializer lists will execute before the body of constructors.  Hence, if you
+assign in the constructor body explicitly you are overwriting the value
+that was initialized before.  ALWAYS initialize built-in types.  Anything else
+will be implicitly value-initialized.
+
+
+
+

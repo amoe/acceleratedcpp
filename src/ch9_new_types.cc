@@ -25,6 +25,9 @@ istream& read_hw(istream& in, vector<double>& hw);
 
 class StudentInfo {
 public:
+    StudentInfo();
+    StudentInfo(istream&);
+
     double grade() const;
     istream& read(istream&);
     string name() const {    // Likely to be inlined, because defined inline
@@ -37,10 +40,26 @@ public:
     }
 
 private:
-    string n;
-    double midterm, final;
+    // These container types are value-initialized by default.
     vector<double> homework;
+    string n;
+
+    // This would be default-initialized if no constructor were defined.  That
+    // means it contains undefined crap.
+    double midterm, final;
 };
+
+// Use initializer list to define the data members that would otherwise
+// default-initialize.
+StudentInfo::StudentInfo(): midterm(0), final(0) {
+}
+
+
+// NOTE that in this case we don't initialize the primitive members (because
+// we're just about to overwrite them in the constructor body.)
+StudentInfo::StudentInfo(istream& is) {
+    read(is);
+}
 
 double grade(double midterm, double final, double homework) {
     return 0.2 * midterm + 0.4 * final + 0.4 * homework;
