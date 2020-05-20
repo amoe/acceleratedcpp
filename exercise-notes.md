@@ -778,3 +778,8 @@ not make any sense.
 
 # Exercises ch9
 
+## 9-1
+
+Reimplement the studentinfo classs so that it calculates the  final grade when
+reading the students' record and stores that grade in the object.  Reimplement
+the grade function to use the precomputed value
