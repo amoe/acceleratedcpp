@@ -775,3 +775,6 @@ The reason for this is that `p - q` returns an INTEGER, the DISTANCE between
 two iterators, and does not itself return an iterator.  So it's in no way
 equivalent to saying `p - 2` which returns an iterator.  As such, `p + q` would
 not make any sense.
+
+# Exercises ch9
+
