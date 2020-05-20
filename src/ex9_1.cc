@@ -74,24 +74,28 @@ private:
     vector<double> homework;
     string n;
     double midterm, final;
+    double final_grade;
 };
 
 bool compare(const StudentInfo& x, const StudentInfo& y) {
     return x.name() < y.name();
 }
 
-StudentInfo::StudentInfo(): midterm(0), final(0) {
+StudentInfo::StudentInfo(): midterm(0), final(0), final_grade(0) {
 }
 
 istream& StudentInfo::read(istream& in) {
     in >> n >> midterm >> final;
     read_hw(in, homework);
+
+    final_grade = ::grade(midterm, final, homework);
+
     return in;
 }
 
 
 double StudentInfo::grade() const {
-    return ::grade(midterm, final, homework);
+    return final_grade;
 }
 
 
