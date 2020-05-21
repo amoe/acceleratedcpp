@@ -783,3 +783,9 @@ not make any sense.
 Reimplement the studentinfo classs so that it calculates the  final grade when
 reading the students' record and stores that grade in the object.  Reimplement
 the grade function to use the precomputed value
+
+## 9-2
+
+If we define the `name` function as a plain nonconst member function what other
+functions in our system must change and why?
+
