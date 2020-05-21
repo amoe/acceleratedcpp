@@ -21,7 +21,6 @@ using std::endl;
 using std::string;
 using std::vector;
 
-istream& read_hw(istream& in, vector<double>& hw);
 
 class StudentInfo {
 public:
@@ -30,35 +29,21 @@ public:
 
     double grade() const;
     istream& read(istream&);
-    string name() const {    // Likely to be inlined, because defined inline
+    string name() const {
         return n;
     }
 
-    // User can check that the object is valid before requesting a grade.
     bool valid() const {
         return !homework.empty();
     }
 
 private:
-    // These container types are value-initialized by default.
     vector<double> homework;
     string n;
-
-    // This would be default-initialized if no constructor were defined.  That
-    // means it contains undefined crap.
     double midterm, final;
 };
 
-// Use initializer list to define the data members that would otherwise
-// default-initialize.
 StudentInfo::StudentInfo(): midterm(0), final(0) {
-}
-
-
-// NOTE that in this case we don't initialize the primitive members (because
-// we're just about to overwrite them in the constructor body.)
-StudentInfo::StudentInfo(istream& is) {
-    read(is);
 }
 
 double grade(double midterm, double final, double homework) {
@@ -77,78 +62,23 @@ double StudentInfo::grade() const {
     return ::grade(midterm, final, homework);
 }
 
-// Why return an istream?
-istream& StudentInfo::read(istream& in) {
-    in >> n >> midterm >> final;
-    read_hw(in, homework);
-    return in;
-}
-
-// XXX: Identical to student_info.cc code
-istream& read_hw(istream& in, vector<double>& hw) {
-    if (in) {
-        double x;
-        while (in >> x)
-            hw.push_back(x);
-
-        in.clear();
-    }
-
-    return in;
-}
-
-// The `compare` function should be declared in the same header file that
-// contains the student info stuff, it's part of the interface.
-bool compare(const StudentInfo& x, const StudentInfo& y) {
-    return x.name() < y.name();
-}
-
-const string multi_line_input = R"(
-Gamlin 94 89 14 96 16 63
-Capener 7 10 32 68 61 76
-)";
-
-
 int main() {
     cout << "Starting." << endl;
+    
+    cout << "Catching the exception." << endl;
 
-    vector<StudentInfo> students;
-    StudentInfo the_record;
-    string::size_type maxlen = 0;
-
-    stringstream sin1(multi_line_input);
-
-    // Note that push_back here must copy the entire record.  Otherwise the
-    // read would be overwriting the value.
-    while (the_record.read(sin1)) {
-        maxlen = max(maxlen, the_record.name().size());
-        students.push_back(the_record);
+    try {
+        StudentInfo s1;
+        s1.grade();
+    } catch (domain_error& e) {
+        cout << "An exception occurred." << endl;
+        cout << e.what() << endl;
     }
 
-    sort(students.begin(), students.end(), compare);
+    cout << "Not catching the exception, this should kill the program." << endl;
 
-    for (vector<StudentInfo>::size_type i = 0; i < students.size(); i++) {
-        StudentInfo this_student = students[i];
-        cout << this_student.name()
-             << string((maxlen + 1) - this_student.name().size(), ' ');
-
-        try {
-            // Should never happen
-            if (!this_student.valid()) {
-                cout << "skipping invalid student" << endl;
-            }
-
-            double final_grade = this_student.grade();
-            streamsize prec = cout.precision();
-
-            cout << setprecision(3) << final_grade << setprecision(prec);
-        } catch (std::domain_error& e) {
-            cout << e.what();
-        }
-
-        cout << endl;
-    }
-
+    StudentInfo s1;
+    s1.grade();
 
     cout << "End." << endl;
     return 0;
