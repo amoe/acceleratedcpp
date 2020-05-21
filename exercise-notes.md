@@ -786,6 +786,17 @@ the grade function to use the precomputed value
 
 ## 9-2
 
-If we define the `name` function as a plain nonconst member function what other
-functions in our system must change and why?
+> If we define the `name` function as a plain nonconst member function what
+> other functions in our system must change and why?
+
+The compiler tells us:
+
+    bool compare(const StudentInfo& x, const StudentInfo& y) {
+        return x.name() < y.name();
+    }
+
+StudentInfo is const so you can't call the now-non-const .name() member function
+on it.  Fix is to remove const qualifiers from these parameters.
+
+Nothing else uses const so it doesn't matter.
 

@@ -30,7 +30,7 @@ public:
 
     double grade() const;
     istream& read(istream&);
-    string name() const {
+    string name() {
         return n;
     }
 
@@ -87,7 +87,7 @@ istream& read_hw(istream& in, vector<double>& hw) {
     return in;
 }
 
-bool compare(const StudentInfo& x, const StudentInfo& y) {
+bool compare(StudentInfo& x, StudentInfo& y) {
     return x.name() < y.name();
 }
 
