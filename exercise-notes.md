@@ -860,4 +860,8 @@ Nothing else uses const so it doesn't matter.
 >Rewrite pass/fail grading program so that it shows all students who passed
 >then all students who failed.
 
-The logical approach is stable_partition.  how to refer to member function though
+The logical approach is stable_partition.  how to refer to member function
+though
+
+several interesting things here, need to create a free function to
+print stuff.  use of stable_partition.
