@@ -800,3 +800,57 @@ on it.  Fix is to remove const qualifiers from these parameters.
 
 Nothing else uses const so it doesn't matter.
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# 9-5
+
+> Write a class and associated functions to generate grades for students who take
+> the course for pass/fail credit.  Assume that only the midterm and final grades
+> matter,  and that a stuent passes with an average exam grade score greater
+> than 60.  The report should list the students in alphabetical order,  and
+> indicate P or F as the grade.
