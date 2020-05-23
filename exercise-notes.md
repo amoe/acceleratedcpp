@@ -854,3 +854,10 @@ Nothing else uses const so it doesn't matter.
 > matter,  and that a stuent passes with an average exam grade score greater
 > than 60.  The report should list the students in alphabetical order,  and
 > indicate P or F as the grade.
+
+# 9-6
+
+>Rewrite pass/fail grading program so that it shows all students who passed
+>then all students who failed.
+
+The logical approach is stable_partition.
