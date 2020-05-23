@@ -3,11 +3,13 @@
 #include <vector>
 #include <algorithm>
 
+using std::stable_partition;
 using std::sort;
 using std::vector;
 using std::string;
 using std::cout;
 using std::endl;
+
 
 class StudentInfo {
 public:
@@ -23,6 +25,8 @@ private:
     double final;
     double midterm;
 };
+
+using iter_t = vector<StudentInfo>::const_iterator;
 
 StudentInfo::StudentInfo(string student_name, double final, double midterm) 
     : student_name(student_name), final(final), midterm(midterm) {
@@ -40,6 +44,20 @@ bool compare(const StudentInfo& s1, const StudentInfo& s2) {
     return s1.name() < s2.name();
 }
 
+// Can't pass member function directly to stable_partition, so need this
+// piece of indirection.
+bool is_pass(const StudentInfo& s1) {
+    return s1.is_pass();
+}
+
+void print_students(iter_t b, iter_t e) {
+    for (iter_t it = b; it != e; it++) {
+        cout << it->name() << " "
+             << (it->is_pass() ? "P" : "F") << endl;
+    }
+}
+
+
 int main() {
     cout << "Starting." << endl;
 
@@ -50,18 +68,10 @@ int main() {
 
     vector<StudentInfo> students = {s1, s2, s3, s4};
 
-    sort(students.begin(), students.end(), compare);
+    iter_t fails_group = stable_partition(students.begin(), students.end(), is_pass);
 
-
-    using iter_t = vector<StudentInfo>::const_iterator;
-    for (
-        iter_t it = students.begin();
-        it != students.end();
-        it++
-    ) {
-        cout << it->name() << " "
-             <<(it->is_pass() ? "P" : "F") << endl;
-    }
+    print_students(students.begin(), fails_group);
+    print_students(fails_group, students.end());
 
     cout << "End." << endl;
     return 0;
