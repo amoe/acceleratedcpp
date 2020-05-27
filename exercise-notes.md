@@ -865,3 +865,8 @@ though
 
 several interesting things here, need to create a free function to
 print stuff.  use of stable_partition.
+
+## 9-7
+
+The read_hw function solves a general problem.  How would you integrate it with
+StudentInfo?  (paraphrase)
