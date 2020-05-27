@@ -870,3 +870,5 @@ print stuff.  use of stable_partition.
 
 The read_hw function solves a general problem.  How would you integrate it with
 StudentInfo?  (paraphrase)
+
+The answer is just to make it private.

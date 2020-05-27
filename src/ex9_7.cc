@@ -21,7 +21,6 @@ using std::endl;
 using std::string;
 using std::vector;
 
-istream& read_hw(istream& in, vector<double>& hw);
 
 class StudentInfo {
 public:
@@ -40,6 +39,8 @@ public:
     }
 
 private:
+    istream& read_hw(istream& in, vector<double>& hw);
+
     // These container types are value-initialized by default.
     vector<double> homework;
     string n;
@@ -85,7 +86,7 @@ istream& StudentInfo::read(istream& in) {
 }
 
 // XXX: Identical to student_info.cc code
-istream& read_hw(istream& in, vector<double>& hw) {
+istream& StudentInfo::read_hw(istream& in, vector<double>& hw) {
     if (in) {
         double x;
         while (in >> x)
