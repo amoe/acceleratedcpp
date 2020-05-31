@@ -859,3 +859,26 @@ They will introduce arrays and pointers.
 iterator."
 
 They introduce this backwards.
+
+To take the address of an object x, write `&x`.  In this context, `&` is called
+the **address operator**.  While `*p` is using the **dereference operator**.
+
+> The constant 0 is the only integer value that can be converted to a pointer
+> type
+
+Interesting.  So, in C++ we use `char *foo = 0`;
+
+Pointers have types, but why?  They don't need a type to contain their value.
+eg a pointer to `int64_t` has the same size as a pointer to `int32_t`.
+Obviously though they do need types when you dereference them, and also when you
+do arithmetic on them.
+
+K&M mention a weirdness of the type notation for pointers:
+
+    int* p, q;
+
+In this example, p is defined as a pointer, but q is NOT defined as a pointer!
+Although it looks like it should be.
+Just never declare multiple variables on the same line to avoid this problem.
+
+
