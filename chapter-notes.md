@@ -881,3 +881,52 @@ In this example, p is defined as a pointer, but q is NOT defined as a pointer!
 Although it looks like it should be.
 Just never declare multiple variables on the same line to avoid this problem.
 
+The name of a bare function turns into a pointer to that function automatically.
+Whenever we say `find_if(x.begin(), x.end(), is_negative)` we are passing a
+function pointer.  It doesn't matter that it happens to be a template parameter
+in this case, it still just becomes a function pointer.
+
+`size_t` is the type denoting the size of an array.  The size of an array must
+be known at compile time.
+
+Whenever we use the name of an array as a value, that value is a pointer to the
+initial element of the array.
+
+eg:
+    double coords[3];
+    *coords = 1;   // initial element is 1
+
+
+Here's how we can create a memory unsafe program:
+
+    vector<double> dv;
+    const int number_of_dimensions = 3;
+    double coords[number_of_dimensions] = {4,5,6};
+    copy(
+        coords,   // Has a pointer type
+        coords + 3,  // Is still usable for comparisons
+        back_inserter(dv)
+    );
+
+
+    using iter_t = vector<double>::const_iterator;
+    for (iter_t it = dv.begin(); it != dv.end(); it++) {
+        cout << *it << endl;
+    }
+
+The final value of `dv` is an arbitrarily-valued point in memory.
+
+    Starting.
+    x = 5
+    x = 6
+    result (call-through-pointer) is 16
+    4
+    5
+    6
+    4.6457e-310
+    End.
+
+The final value changes with every run.
+
+Pointers support the indexing operator.  Indexing provides the value itself
+inside a given array.
