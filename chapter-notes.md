@@ -851,3 +851,11 @@ constructor body to assign them instead, which makes the order-dependency more
 clear.
 
 
+## Chapter 10
+
+They will introduce arrays and pointers.
+
+"An array is a kind of container; a pointer is a kind of random-access
+iterator."
+
+They introduce this backwards.

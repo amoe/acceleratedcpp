@@ -107,3 +107,10 @@ env.Program(target='ex9_4', source=['ex9_4.cc', 'median.cc'])
 env.Program(target='ex9_5', source=['ex9_5.cc'])
 env.Program(target='ex9_6', source=['ex9_6.cc'])
 env.Program(target='ex9_7', source=['ex9_7.cc', 'median.cc'])
+
+# Ch 10
+
+env.Program(
+    target='ch10_memory',
+    source=['ch10_memory.cc']
+)
