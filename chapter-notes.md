@@ -881,4 +881,3 @@ In this example, p is defined as a pointer, but q is NOT defined as a pointer!
 Although it looks like it should be.
 Just never declare multiple variables on the same line to avoid this problem.
 
-

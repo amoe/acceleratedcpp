@@ -11,6 +11,9 @@ int main() {
 
     cout << "x = " << x << endl;
 
+    *p = 6;
+    cout << "x = " << x << endl;
+
     cout << "End." << endl;
     return 0;
 }
