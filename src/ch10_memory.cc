@@ -3,7 +3,9 @@
 #include <algorithm>
 #include <string>
 #include <fstream>
+#include <cstring>
 
+using std::strlen;
 using std::cerr;
 using std::ifstream;
 using std::ofstream;
@@ -14,6 +16,42 @@ using std::copy;
 using std::cout;
 using std::endl;
 using std::string;
+
+// K&M implementation of strcpy() with C++ primitives.
+char* duplicate_chars(const char* p) {
+    size_t length = strlen(p) + 1;
+    char* result = new char[length];
+    copy(p, p + length, result);
+    return result;
+}
+
+void demo_dyncopy() {
+    const char* s1 = "foobar";
+    char* s2 = duplicate_chars(s1);
+    cout << "Original string is " << s1 << endl;
+    cout << "New string is " << s2 << endl;
+
+    // Demonstrate that it was actually copied by changing it
+    s2[2] = 'b';
+    cout << "Original string is " << s1 << endl;
+    cout << "New string is " << s2 << endl;
+
+    // Caller must delete after use!
+    delete s2;
+}
+
+void demo_newdelete() {
+    // Dynamic allocation examples
+    int* p = new int(42);
+
+    cout << "P was initialized to " << *p << endl;
+
+    ++*p;
+
+    cout << "P was updated to " << *p << endl;
+
+    delete p;
+}
 
 void copyfile(string input_path) {
     cout << "Reading from '" << input_path << "'" << endl;
@@ -181,6 +219,11 @@ int main() {
 
     char* cat_args[] = {"/etc/hosts", "/etc/nonexistenshit", "/etc/issue"};
     catfiles(2, cat_args);
+
+    demo_newdelete();
+
+    demo_dyncopy();
+
 
     cout << "End." << endl;
     return 0;

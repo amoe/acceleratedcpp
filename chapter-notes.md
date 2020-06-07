@@ -948,4 +948,27 @@ arrays rather than C++ strings.  If you want to use a std::string, you have to
 coerce it to a C-style string using `c_str()` member function. -- C++11 added a
 new constructor for ifstream that accepts plain strings.
 
+File stuff is all pretty clear, although note that we don't explicitly close
+files?  I guess this is RAII?
 
+Definitions:
+
+Automatic memory management, this is used for variables on the stack and they
+are automatically deallocated.
+
+Static allocation -- this means that the variable only ever gets allocated
+once.  You can return pointers to variables on the stack in this way.
+
+Dynamic allocation -- uses new and delete.
+
+You can initialize arrays with 'new'.  If you initialize an array of a class
+type, the class will be initialized using its default constructor.  They refer
+to a 'more flexible mechanism for dynamically allocating arrays' which they will
+discuss, not sure what it is yet?
+
+You can also initialize zero-length arrays with new, you can't do anything with
+them, but you can pass them to `delete[]` (which is an array-specific operator).
+Why does `delete` and `delete[]` exist?  Not super clear, guess to do with array
+decay?  Yes, `delete p` is just going to delete the first element.  `delete[]`
+destroys each element in reverse order when it deallocates, which is unexpected
+to me.
