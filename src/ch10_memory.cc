@@ -2,13 +2,31 @@
 #include <vector>
 #include <algorithm>
 #include <string>
+#include <fstream>
 
+using std::ifstream;
+using std::ofstream;
+using std::getline;
 using std::vector;
 using std::back_inserter;
 using std::copy;
 using std::cout;
 using std::endl;
 using std::string;
+
+void copyfile(string input_path) {
+    cout << "Reading from '" << input_path << "'" << endl;
+
+    // Only works in C++11, otherwise need to coerce with .c_str()
+    ifstream infile(input_path);
+    ofstream outfile("/dev/null");
+
+    string s;
+    
+    while (getline(infile, s)) {
+        outfile << s << endl;
+    }
+}
 
 string letter_grade(double grade) {
     // grading thresholds
@@ -137,8 +155,12 @@ int main() {
 
     // warning: ISO C++ forbids converting a string constant to 'char*' [-Wwrite-strings]
     char* args[] = {"fry", "bender", "leela"};
-
     faux_main(3, args);
+
+
+
+    cout << "Copy file demo." << endl;
+    copyfile("/etc/hosts");
 
     cout << "End." << endl;
     return 0;

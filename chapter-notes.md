@@ -938,3 +938,14 @@ decay to a pointer?
 
 When attempting to call main we get 'ISO C++ forbids converting a string
 constant to char*'.  Why?
+
+discuss cerr and clog..  Cerr is unbuffered!  clog should be the default choice.
+
+ifstream  and ofstream are used for writing to files.
+
+For historical reasons interactions with fstream classes often take character
+arrays rather than C++ strings.  If you want to use a std::string, you have to
+coerce it to a C-style string using `c_str()` member function. -- C++11 added a
+new constructor for ifstream that accepts plain strings.
+
+
