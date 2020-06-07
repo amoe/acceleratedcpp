@@ -4,6 +4,7 @@
 #include <string>
 #include <fstream>
 
+using std::cerr;
 using std::ifstream;
 using std::ofstream;
 using std::getline;
@@ -25,6 +26,23 @@ void copyfile(string input_path) {
     
     while (getline(infile, s)) {
         outfile << s << endl;
+    }
+}
+
+void catfiles(int argc, char** argv) {
+    for (int i = 0; i < argc; i++) {
+        char* this_path = argv[i];
+        ifstream infile(this_path);
+
+        if (!infile) {
+            cerr << "cannot open file " << this_path << endl;
+            continue;
+        }
+
+        string line;
+        while (getline(infile, line)) {
+            cout << line << endl;
+        }
     }
 }
 
@@ -158,9 +176,11 @@ int main() {
     faux_main(3, args);
 
 
-
     cout << "Copy file demo." << endl;
     copyfile("/etc/hosts");
+
+    char* cat_args[] = {"/etc/hosts", "/etc/nonexistenshit", "/etc/issue"};
+    catfiles(2, cat_args);
 
     cout << "End." << endl;
     return 0;
