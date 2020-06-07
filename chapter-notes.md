@@ -931,3 +931,10 @@ The final value changes with every run.
 Pointers support the indexing operator.  Indexing provides the value itself
 inside a given array.
 
+Evaluating 'sizeof' on an array will give you the entire size of that array in
+bytes.  I find this surprising because I thought that it gave the element
+number, but it doesn't, I must have misremembered.  Also why doesn't sizeof
+decay to a pointer?  
+
+When attempting to call main we get 'ISO C++ forbids converting a string
+constant to char*'.  Why?
