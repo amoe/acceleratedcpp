@@ -2,7 +2,7 @@ env = Environment()
 
 env.Append(
     CCFLAGS=[
-        '-Wall', '-Wno-unused-but-set-variable'
+        '-Wall', '-Wno-unused-but-set-variable', '-Wno-unused-variable'
 #        '-Werror',
     ]
 )

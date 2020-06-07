@@ -10,6 +10,17 @@ using std::cout;
 using std::endl;
 using std::string;
 
+string letter_grade(double grade) {
+    // grading thresholds
+    static const double numbers[] = {
+        97, 94, 90, 87, 84, 80, 77, 74, 70, 60, 0
+    };
+
+    string result;
+
+    return result;
+}
+
 int square(int x) {
     return x * x;
 }
@@ -75,6 +86,7 @@ int main() {
     const int month_lengths[] = {
         31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31
     };
+    
 
 
     // String literals are just nul-terminated arrays.
