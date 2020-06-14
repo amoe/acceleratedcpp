@@ -32,12 +32,13 @@ double vector_median(vector<double> vec) {
 
 void test_vector_median() {
     // should be 1.75
-    vector<double> foo = {-10, 1, 1.5, 2, 3, 10};
-    double found_median = vector_median(foo);
+    vector<double> inputs = {-10, 1, 1.5, 2, 3, 10};
+    double found_median = vector_median(inputs);
     cout << "The median was " << found_median << endl;
 }
 
 void test_array_median() {
+    double inputs[] = {-10, 1, 1.5, 2, 3, 10};
     // should be 1.75
     // vector<double> foo = {-10, 1, 1.5, 2, 3, 10};
     // double found_median = vector_median(foo);
