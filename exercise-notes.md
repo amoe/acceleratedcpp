@@ -883,3 +883,10 @@ The answer is just to make it private.
 
 This means the full completed chapter 9 program.  At the moment it generates
 double grades.
+
+## 10-2
+
+> Rewrite the median function so that it works with either vectors or arrays.
+> The function should allow containers of any arithmetic type.
+
+???
