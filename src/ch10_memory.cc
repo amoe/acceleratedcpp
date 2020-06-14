@@ -95,6 +95,9 @@ string letter_grade(double grade) {
 
     // ??? Not really clear how to read this definition.  What part of the
     // declaration refers to what part of the type?
+    // Second const refers to the pointer.  First const refers to the type
+    // behind the pointer.
+
     static const char* const letters[] = {
         "A+", "A", "A-", "B+", "B", "B-", "C+", "C", "C-", "D", "F"
     };

@@ -872,3 +872,13 @@ The read_hw function solves a general problem.  How would you integrate it with
 StudentInfo?  (paraphrase)
 
 The answer is just to make it private.
+
+
+# 10
+
+## 10-1
+
+> Rewrite the student grading program from p166 to generate letter grades.
+> (ch9)
+
+This means the full completed chapter 9 program.
