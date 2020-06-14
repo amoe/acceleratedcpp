@@ -881,4 +881,5 @@ The answer is just to make it private.
 > Rewrite the student grading program from p166 to generate letter grades.
 > (ch9)
 
-This means the full completed chapter 9 program.
+This means the full completed chapter 9 program.  At the moment it generates
+double grades.
