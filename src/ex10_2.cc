@@ -8,7 +8,11 @@ using std::endl;
 using std::vector;
 using std::sort;
 
-double median(vector<double> vec) {
+double array_median(double* numbers) {
+    
+}
+
+double vector_median(vector<double> vec) {
     typedef vector<double>::size_type vec_sz;
     
     vec_sz size = vec.size();
@@ -26,16 +30,26 @@ double median(vector<double> vec) {
     }
 }
 
+void test_vector_median() {
+    // should be 1.75
+    vector<double> foo = {-10, 1, 1.5, 2, 3, 10};
+    double found_median = vector_median(foo);
+    cout << "The median was " << found_median << endl;
+}
+
+void test_array_median() {
+    // should be 1.75
+    // vector<double> foo = {-10, 1, 1.5, 2, 3, 10};
+    // double found_median = vector_median(foo);
+    // cout << "The median was " << found_median << endl;
+}
+
 
 int main() {
     cout << "Starting." << endl;
 
-    vector<double> foo = {-10, 1, 1.5, 2, 3, 10};
-    
-    double found_median = median(foo);
-
-    // should be 1.75
-    cout << "The median was " << found_median << endl;
+    test_vector_median();
+    test_array_median();
 
     cout << "End." << endl;
     return 0;
