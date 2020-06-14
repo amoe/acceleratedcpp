@@ -27,7 +27,7 @@ public:
     StudentInfo();
     StudentInfo(istream&);
 
-    double grade() const;
+    string grade() const;
     istream& read(istream&);
     string name() const {
         return n;
@@ -63,8 +63,25 @@ double grade(double midterm, double final, const vector<double>& hw) {
     return grade(midterm, final, median(hw));
 }
 
-double StudentInfo::grade() const {
-    return ::grade(midterm, final, homework);
+string StudentInfo::grade() const {
+    static const double thresholds[] = {
+        97, 94, 90, 87, 84, 80, 77, 74, 70, 60, 0
+    };
+    static const int thresholds_length = sizeof(thresholds) / sizeof(*thresholds);
+
+    static const char* const letters[] = {
+        "A+", "A", "A-", "B+", "B", "B-", "C+", "C", "C-", "D", "F"
+    };
+
+    double numeric_grade = ::grade(midterm, final, homework);
+    
+    for (int i = 0; i < thresholds_length; i++) {
+        if (numeric_grade >= thresholds[i]) {
+            return letters[i];
+        }
+    }
+
+    return "?";
 }
 
 istream& StudentInfo::read(istream& in) {
@@ -122,10 +139,8 @@ int main() {
                 cout << "skipping invalid student" << endl;
             }
 
-            double final_grade = this_student.grade();
-            streamsize prec = cout.precision();
-
-            cout << setprecision(3) << final_grade << setprecision(prec);
+            string letter_grade = this_student.grade();
+            cout << letter_grade;
         } catch (std::domain_error& e) {
             cout << e.what();
         }
