@@ -889,4 +889,19 @@ double grades.
 > Rewrite the median function so that it works with either vectors or arrays.
 > The function should allow containers of any arithmetic type.
 
-???
+Thought provoking problem.  We get around the main frustration by just saying
+that the templat always returns `double`.   
+
+This was actually 'wrong', we need to use the template calling code (not sure
+where it's referred to) to templatize the return type as a separate type
+variable.
+
+https://github.com/bitsai/book-exercises/blob/master/Accelerated%20C%2B%2B/chapter10/10-2.hpp
+
+## 10-3
+
+> Write a test program to verify that the median function operates correctly.
+> Ensure that calling median does not change the order of the elements in the
+> container.
+
+

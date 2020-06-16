@@ -2,6 +2,7 @@
 #include <algorithm>
 #include <stdexcept>
 #include <iostream>
+#include "ex10_2.hh"
 
 using std::domain_error;
 using std::cout;
@@ -57,12 +58,25 @@ void test_array_median() {
     cout << "Array median was " << found_median << endl;
 }
 
+void test_generic_median() {
+    vector<double> inputs = {1.5, -10, 10, 2, 1,  3};
+    double fm1 = generic_median(inputs.begin(), inputs.end());
+    cout << "Generic median (vector) was " << fm1 << endl;
+
+    double array_inputs[] = {1.5, -10, 10, 2, 1,  3};
+    int inputs_length = sizeof(array_inputs) / sizeof(*array_inputs);
+  
+    double fm2 = generic_median(array_inputs, array_inputs + inputs_length);
+    cout << "Generic median (array) was " << fm2 << endl;
+}
+
 
 int main() {
     cout << "Starting." << endl;
 
     test_vector_median();
     test_array_median();
+    test_generic_median();
 
     cout << "End." << endl;
     return 0;

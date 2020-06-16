@@ -117,7 +117,7 @@ env.Program(
 
 env.Program(target='ex10_1', source=['ex10_1.cc', 'median.cc'])
 env.Program(target='ex10_2', source=['ex10_2.cc'])
-env.Program(target='ex10_3', source=['ex10_3.cc'])
+env.Program(target='ex10_3', source=['ex10_3.cc', 'util.cc'])
 env.Program(target='ex10_4', source=['ex10_4.cc'])
 env.Program(target='ex10_5', source=['ex10_5.cc'])
 env.Program(target='ex10_6', source=['ex10_6.cc'])
