@@ -905,3 +905,5 @@ https://github.com/bitsai/book-exercises/blob/master/Accelerated%20C%2B%2B/chapt
 > container.
 
 
+Eureka, now we can declare a vector of the result type, copy into it, and we
+just use vec_sz to avoid the hassle of dealing with ptrdiffs.

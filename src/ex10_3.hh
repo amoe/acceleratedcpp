@@ -1,27 +1,28 @@
 #ifndef EX10_2_HH
 #define EX10_2_HH
 
-template <typename T>
-double generic_median(T begin, T end) {
-    // There is a small bug here which is that ptrdiff_t cannot store
-    // the size of all arrays :(
-    std::ptrdiff_t size = end - begin;
+using std::vector;
 
-    if (size == 0) {
+template <typename T, typename U>
+T generic_median(U begin, U end) {
+    vector<T> temporary(begin, end);
+
+    if (temporary.empty()) {
         throw std::domain_error("no sensible median");
     }
+    using vec_sz = typename vector<T>::size_type;
+    vec_sz size = temporary.size();
 
-    std::sort(begin, end);
+    sort(temporary.begin(), temporary.end());
 
-    std::ptrdiff_t mid = size / 2;
+    vec_sz mid = size / 2;
 
     if ((size % 2) == 0) {
-        T e1 = begin + mid;
-        T e2 = begin + (mid - 1);
-
-        return (*e1 + *e2) / 2;
+        vec_sz e1 = mid;
+        vec_sz e2 = mid - 1;
+        return (temporary[e1] + temporary[e2]) / 2;
     } else {
-        return *(begin + mid);
+        return temporary[mid];
     }
 }
 
