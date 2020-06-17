@@ -907,3 +907,9 @@ https://github.com/bitsai/book-exercises/blob/master/Accelerated%20C%2B%2B/chapt
 
 Eureka, now we can declare a vector of the result type, copy into it, and we
 just use vec_sz to avoid the hassle of dealing with ptrdiffs.
+
+## 10-4
+
+> Write a class that implements a list that holds `string`s.
+
+Hmm
