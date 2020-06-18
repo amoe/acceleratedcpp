@@ -912,4 +912,13 @@ just use vec_sz to avoid the hassle of dealing with ptrdiffs.
 
 > Write a class that implements a list that holds `string`s.
 
-Hmm
+Hmm, not clear what methods such a class should have
+
+## 10-5
+
+boils down to -- implement .begin() and .end() on your class .
+
+## 10-6
+
+boils down to -- implement String_list split(const string& str).
+We only need to support `push_back()`.
