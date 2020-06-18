@@ -1,6 +1,9 @@
 #include <iostream>
 #include <string>
 
+// XXX: This is a half done version that didn't really work
+// See ex10_6 for the real implementation
+
 using std::cout;
 using std::string;
 using std::endl;

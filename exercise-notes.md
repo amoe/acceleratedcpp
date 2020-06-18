@@ -922,3 +922,7 @@ boils down to -- implement .begin() and .end() on your class .
 
 boils down to -- implement String_list split(const string& str).
 We only need to support `push_back()`.
+
+These are all implement in 10-6.  The key insights are that you define a
+using-alias in the public section of your class that becomes your
+myclass:iterator, but is really just a pointer.
