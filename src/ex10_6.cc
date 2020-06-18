@@ -1,13 +1,12 @@
 #include <iostream>
 #include <algorithm>
 #include <string>
+#include "characters.hh"
 
 using std::copy;
 using std::cout;
 using std::endl;
 using std::string;
-
-
 
 class StringList {
 
@@ -33,12 +32,12 @@ private:
 
 void StringList::push_back(const string& value) {
     grow(1);
-    cout << "length is now " << contents_length << endl;
+//    cout << "length is now " << contents_length << endl;
     contents[contents_length - 1] = value;
 }
 
 void StringList::grow(size_t n_members) {
-    cout << "reallocating" << endl;
+//    cout << "reallocating" << endl;
 
     size_t old_length = contents_length;
     size_t new_length = contents_length + n_members;
@@ -51,7 +50,7 @@ void StringList::grow(size_t n_members) {
     contents = new_contents;
     contents_length = new_length;
 
-    cout << "finished reallocating " << endl;
+//    cout << "finished reallocating " << endl;
 }
 
 void StringList::print_contents() {
@@ -60,8 +59,34 @@ void StringList::print_contents() {
     }
 }
 
+StringList split(const string& str) {
+    typedef string::const_iterator iter;
+    StringList ret;
+
+    iter i = str.begin();
+    while (i != str.end()) {
+        // get the start of the range
+        i = find_if(i, str.end(), not_space);
+
+        // get the end of the range
+        iter j = find_if(i, str.end(), space);
+        
+        if (i != str.end()) {
+            ret.push_back(string(i, j));
+        }
+
+        // jump ahead to the end of the range
+        i = j;
+    }
+
+    return ret;
+}
+
+
 int main() {
     cout << "Starting." << endl;
+
+    cout << "Manual usage" << endl;
 
     StringList my_list;
     my_list.push_back("the");
@@ -76,6 +101,18 @@ int main() {
     ) {
         cout << *it << endl;
     }
+
+    cout << "Use from split function" << endl;
+
+    StringList result = split("the quick brown fox jumped");
+    for (
+        StringList::iterator it = result.begin();
+        it != result.end();
+        it++
+    ) {
+        cout << *it << endl;
+    }
+
 
     cout << "End." << endl;
     return 0;
