@@ -972,3 +972,10 @@ Why does `delete` and `delete[]` exist?  Not super clear, guess to do with array
 decay?  Yes, `delete p` is just going to delete the first element.  `delete[]`
 destroys each element in reverse order when it deallocates, which is unexpected
 to me.
+
+
+## CHAPTER 11 - "Defining abstract data types"
+
+Here they will talk about copy constructor, amongst other things.  They note
+that these topics are v important.  And also that we will build a vector class
+named `Vec`.
