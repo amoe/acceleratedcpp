@@ -979,3 +979,20 @@ to me.
 Here they will talk about copy constructor, amongst other things.  They note
 that these topics are v important.  And also that we will build a vector class
 named `Vec`.
+
+A non-obvious point: Using `new T[n]` (as we did in 10-6) to initialize the data
+on the heap would require that the type `T` be initializable.  (as that's how
+'new' behaves.)  But, `std::vector` doesn't behave like this: it just allocates
+space for the items, but does not initialize them.  That behaviour was ok for
+10-6 which only allows `string` contents, as `string` is default-constructable.
+But it's not OK here when `T` could be any type.
+
+The `explicit` keyword makes sure that a certain constructor does not get
+implicitly invoked when doing some assignment.  eg, `string x = "foo"` is
+calling an implicit constructor.  `string x("foo")` is calling an explicit
+constructor.  Probably explicit should just be used on all constructors.
+There's no point using explicit on a constructor like `Vec() { }` because this
+could never be called implicitly anyway.  `explicit Vec() { }` would not
+prohibit `Vec foo;`.  Only assignments trigger implicit constructor calls and
+there's no assignment in `Vec foo;`.
+
