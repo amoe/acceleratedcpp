@@ -999,5 +999,13 @@ there's no assignment in `Vec foo;`.
 Many iterators are implemented as classes, so that they can implement the
 required iterator operations using operator overloading.
 
+K&M implement the index operator and return a reference.  It's not clear whether
+this decision is dictated by the STL 'specification' in some sense or it's just
+a personal choice.   But there are two separate operators defined, one for
+const, one for non-const.  And note that these operators take identical argument
+lists, so it's not super clear how the call gets resolved.  The const-qualifier
+of the vector itself determines which one gets called, it's not any nebulous
+notion of the continuation or something like that.  Unless your Vec is itself
+const, you'll always get the non-const reference from indexing.
 
 

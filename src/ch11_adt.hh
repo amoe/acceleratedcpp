@@ -3,6 +3,8 @@
 
 #include <cstddef>
 
+using std::cout;
+using std::endl;
 using std::size_t;
 
 template <typename T> class Vec {
@@ -24,6 +26,21 @@ public:
     explicit Vec(size_type n, const T& val) {
         create(n, val);
     }
+
+    size_type size() const {
+        return limit - data;
+    }
+
+    T& operator[](size_type i) {
+        cout << "inside index operator non-const" << endl;
+        return data[i];
+    }
+
+    const T& operator[](size_type i) const {
+        cout << "inside index operator const" << endl;
+        return data[i];
+    }
+
 
 private:
     void create() {
