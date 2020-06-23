@@ -996,3 +996,8 @@ could never be called implicitly anyway.  `explicit Vec() { }` would not
 prohibit `Vec foo;`.  Only assignments trigger implicit constructor calls and
 there's no assignment in `Vec foo;`.
 
+Many iterators are implemented as classes, so that they can implement the
+required iterator operations using operator overloading.
+
+
+

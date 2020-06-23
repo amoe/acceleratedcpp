@@ -14,6 +14,9 @@ int main() {
 
     Vec<string> foo;
 
+    Vec<string>::iterator iter1;
+
+
     cout << "End." << endl;
     return 0;
 }
