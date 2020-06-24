@@ -18,6 +18,7 @@ int main() {
     Vec<string>::iterator iter1;
 
     using sz1 = Vec<string>::size_type;
+    sz1 baz;
 
     auto& foo = stuff_alias[0];
     auto& bar = stuff[0];
