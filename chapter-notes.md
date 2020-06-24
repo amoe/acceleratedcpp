@@ -1008,4 +1008,41 @@ of the vector itself determines which one gets called, it's not any nebulous
 notion of the continuation or something like that.  Unless your Vec is itself
 const, you'll always get the non-const reference from indexing.
 
+The compiler will synthesize copy constructors that might not be correct.
+Copying happens on both by-value return and by-value pass.
 
+The copy constructor could just copy all members, but that would mean that stuff
+gets shared because only the pointers would be copied rather than the underlying
+memory.  Is it a deep or shallow copy?  I'm not clear on this behaviour even
+from within the library `vector` class.  As it just calls the copy constructor,
+it's kind-of-undefined whether it's shallow or deep.  It's as deep as the
+tree of copy constructor calls allow.
+
+They differentiate two concepts: initialization and assignment.  The assignment
+operator is often used to initialize variables.  Most of the time you're doing
+initialization, except in the case where you're modifying a variable that has
+already been initialized.  Hence:
+
+     MyClass foo;
+     foo = someValue();
+
+This calls the default constructor, then calls the assignment operator, because
+`foo` has already been initialized.  Since MyClass is a class, the copy
+constructor will also get called to copy the result into a temporary.  So this
+should call all 3 constructors in total.
+
+     MyClass foo = someValue();
+
+This calls the copy constructor on the result of `someValue()`!
+
+
+The compiler will generate copy constructor, assignment, destructors for classes
+that don't have it.  This works recursively but it doesn't free pointers.  Using
+the vec class will just copy pointers instead of copying their contents, and
+will also cause memory leaks on object destruction.  If you define only the
+destructor but not copy constructor, you'll get a crash because any "copies"
+already made share memory and accessing them is invalid.
+
+The rule of three:
+  If a class needs a destructor then it also needs a copy constructor and
+  assignment operator.

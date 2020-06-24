@@ -27,6 +27,28 @@ public:
         create(n, val);
     }
 
+    // "The language allows us to omit the type parameters when we are
+    // within the scope of the template."
+    Vec(const Vec& source) {
+        create(source.begin(), source.end());
+    }
+
+    // Argument indicates the right hand side, eg the source of assignment.
+    Vec& operator=(const Vec& source) {
+        // &source yields a pointer.  comparable to this pointer.
+        if (&source != this) {
+            uncreate();   // Free all storage we have already
+            create(source.begin(), source.end());
+        }
+
+        return *this;
+    }
+
+    // Destructor
+    ~Vec() {
+        uncreate();
+    }
+
     size_type size() const {
         return limit - data;
     }
@@ -53,6 +75,15 @@ private:
     };
 
     void create(size_type n, T val) {
+    }
+
+    // TODO: Some version which takes two iterators?
+    /*
+    void create(size_type n, T val) {
+    }
+    */
+
+    void uncreate() {
     }
 
     // Points at the first item of the array.
