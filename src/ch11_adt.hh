@@ -83,28 +83,22 @@ public:
 
 
 private:
-    void create() {
-    };
+    // Construct a totally empty Vec with zero capacity
+    void create();
 
-    void create(size_type n, T val) {
-    }
+    // Fill with a single value
+    void create(size_type n, const T& val);
 
-    // TODO: Some version which takes two iterators?
-    /*
-    void create(size_type n, T val) {
-    }
-    */
+    // Copy from an existing iterator range
+    void create(const_iterator b, const_iterator e);
 
-    void uncreate() {
-    }
+    void uncreate();
 
     // Allocate 2* more space than we need.
     void grow();
 
     // Append the value, assuming we already have enough space.
-    void unchecked_append(const T& val) {
-        
-    }
+    void unchecked_append(const T& val);
 
     // Points at the first item of the array.
     iterator data;
@@ -117,5 +111,72 @@ private:
 
     allocator<T> alloc;
 };
+
+template <typename T> void Vec<T>::create() {
+    data = 0;
+    avail = 0;
+    limit = 0;
+};
+
+template <typename T> void Vec<T>::create(size_type n, const T& val) {
+    data = alloc.allocate(n);
+    iterator valid_end = data + n;
+
+    limit = valid_end;
+    avail = valid_end;
+
+    uninitialized_fill(data, limit, val);
+}
+
+template <typename T> void Vec<T>::create(const_iterator b, const_iterator e) {
+    data = alloc.allocate(e - b);
+    iterator valid_end = uninitialized_copy(b, e, data);
+    limit = valid_end;
+    avail = valid_end;
+}
+
+template <typename T> void Vec<T>::uncreate() {
+    // Destroy all items backwards
+
+    // don't need to dealloc if nothing was ever allocated, and
+    // deallocate won't work on a null pointer
+    if (data) {
+        iterator it = avail;
+        while (it != data) {
+            alloc.destroy(it);
+            it--;
+        }
+
+        alloc.deallocate(data, limit - data);
+    }
+
+    data = 0;
+    limit = 0;
+    avail = 0;
+}
+
+template <typename T> void Vec<T>::grow() {
+    // ptrdiff_t because both args of max must have same type.
+    // The result is implicitly widened to size_type.
+    // 1 is to deal with the case of an empty vector.
+    size_type new_size = max(2 * (limit - data), ptrdiff_t(1));
+
+    // Temps needed here so that uncreate doesn't destroy the new storage.
+    iterator new_data = alloc.allocate(new_size);
+    iterator new_avail = uninitialized_copy(data, avail, new_data);
+
+    uncreate();
+
+    data = new_data;
+    avail = new_avail;
+    limit = data + new_size;
+}
+
+template <typename T> void Vec<T>::unchecked_append(const T& val) {
+    // Move the pointer onward and construct it from val.
+    avail++;
+    alloc.construct(avail, val);
+}
+
 
 #endif /* CH11_ADT_HH */

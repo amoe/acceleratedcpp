@@ -1056,3 +1056,9 @@ deallocation.
 
 also provides `uninitialized_copy` which works like copy() - copies from source
 into target.
+
+K&M discuss the "class invariants": these are basically the statements that are
+always true about the class.
+
+As none of the public members change the values of the storage pointers they
+can't invalidate the class invariant.
