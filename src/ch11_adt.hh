@@ -4,10 +4,13 @@
 #include <cstddef>
 #include <memory>
 
+using std::max;
 using std::cout;
 using std::endl;
 using std::size_t;
 using std::allocator;
+using std::uninitialized_copy;
+using std::uninitialized_fill;
 
 template <typename T> class Vec {
 public:
@@ -156,6 +159,8 @@ template <typename T> void Vec<T>::uncreate() {
 }
 
 template <typename T> void Vec<T>::grow() {
+//    cout << "growing" << endl;
+
     // ptrdiff_t because both args of max must have same type.
     // The result is implicitly widened to size_type.
     // 1 is to deal with the case of an empty vector.
@@ -173,9 +178,8 @@ template <typename T> void Vec<T>::grow() {
 }
 
 template <typename T> void Vec<T>::unchecked_append(const T& val) {
-    // Move the pointer onward and construct it from val.
-    avail++;
     alloc.construct(avail, val);
+    avail++;
 }
 
 
