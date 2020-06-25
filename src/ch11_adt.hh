@@ -2,10 +2,12 @@
 #define CH11_ADT_HH
 
 #include <cstddef>
+#include <memory>
 
 using std::cout;
 using std::endl;
 using std::size_t;
+using std::allocator;
 
 template <typename T> class Vec {
 public:
@@ -112,6 +114,8 @@ private:
 
     // Points one past the last item of the array.
     iterator limit;
+
+    allocator<T> alloc;
 };
 
 #endif /* CH11_ADT_HH */

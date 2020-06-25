@@ -1046,3 +1046,13 @@ already made share memory and accessing them is invalid.
 The rule of three:
   If a class needs a destructor then it also needs a copy constructor and
   assignment operator.
+
+
+They introduce a class `allocator<T>` which allocates without initializing.
+
+Allocator has 'construct' and 'destroy' functions which will allow construction
+and destruction in a block of pointers, separately from their allocation and
+deallocation.
+
+also provides `uninitialized_copy` which works like copy() - copies from source
+into target.
