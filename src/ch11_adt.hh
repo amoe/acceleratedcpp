@@ -105,13 +105,13 @@ private:
     }
 
     // Points at the first item of the array.
-    T* data;
+    iterator data;
 
     // Points at the last allocated item.
-    T* avail;
+    iterator avail;
 
     // Points one past the last item of the array.
-    T* limit;
+    iterator limit;
 };
 
 #endif /* CH11_ADT_HH */
