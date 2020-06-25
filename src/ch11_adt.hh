@@ -50,7 +50,7 @@ public:
     }
 
     size_type size() const {
-        return limit - data;
+        return avail - data;
     }
 
     T& operator[](size_type i) {
@@ -66,8 +66,18 @@ public:
     iterator begin() { return data; }
     const_iterator begin() const { return data; }
     
-    iterator end() { return limit; }
-    const_iterator end() const { return limit; }
+    iterator end() { return avail; }
+    const_iterator end() const { return avail; }
+
+    void push_back(const T& val) {
+        // We are guaranteed to eventually hit the limit as we can only
+        // push_back a single element at a time.
+        if (avail == limit) {   
+            grow();
+        }
+
+        unchecked_append(val);
+    }
 
 
 private:
@@ -86,8 +96,19 @@ private:
     void uncreate() {
     }
 
+    // Allocate 2* more space than we need.
+    void grow();
+
+    // Append the value, assuming we already have enough space.
+    void unchecked_append(const T& val) {
+        
+    }
+
     // Points at the first item of the array.
     T* data;
+
+    // Points at the last allocated item.
+    T* avail;
 
     // Points one past the last item of the array.
     T* limit;
