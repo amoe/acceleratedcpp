@@ -926,3 +926,16 @@ We only need to support `push_back()`.
 These are all implement in 10-6.  The key insights are that you define a
 using-alias in the public section of your class that becomes your
 myclass:iterator, but is really just a pointer.
+
+
+
+
+
+
+
+
+
+
+## 11-1
+
+the ch9 student info type didnt define copy, destructor or assigment, why?
