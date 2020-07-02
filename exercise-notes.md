@@ -938,7 +938,7 @@ myclass:iterator, but is really just a pointer.
 
 ## 11-1
 
-the ch9 student info type didnt define copy, destructor or assigment, why?
+> the ch9 student info type didnt define copy, destructor or assigment, why?
 
 The compiler will synthesize an empty default constructor.
 It will synthesize a copy constructor that works by either copying the values of
@@ -946,3 +946,13 @@ builtin types or calling copy constructor of library or user types.  eg, string
 and vector in these classes are copied using the copy constructor of those
 classes.  So the default copy constructor should work fine and create a
 completely dissociated object.
+
+## 11-2
+
+> That structure did define a default constructor, why?
+
+Because otherwise the member variables that are of fundamental types in the
+StudentInfo class will be default-initialized by the synthesized default
+constructor.  That means they will contain garbage values.  See ex11_2 for
+demonstration of this fact.
+
