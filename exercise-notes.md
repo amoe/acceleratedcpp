@@ -956,3 +956,30 @@ StudentInfo class will be default-initialized by the synthesized default
 constructor.  That means they will contain garbage values.  See ex11_2 for
 demonstration of this fact.
 
+## 11-3
+
+> What does the synthesized assignment operator for StudentInfo objects do?
+
+Look at the Vec assignment operator
+
+    Vec& operator=(const Vec& source) {
+        if (&source != this) {
+            uncreate();
+            create(source.begin(), source.end());
+        }
+
+        return *this;
+    }
+
+It frees the memory in this object, which is the LHS of the assignment, and
+copies in data from the RHS.  Remember it only applies to objects that have
+already been constructed.
+
+So the synthesized assignment operator for StudentInfo will do the following:
+
+    StudentInfo& operator=(const StudentInfo& source) {
+        homework = source.homework;   // Call operator= in vector (deletes mem)
+        n = source.n;    // Call operator= in string (deletes mem)
+        midterm = source.midterm;    // Fundamental type, just overwritten
+        final = source.final;       // ...same
+    }
