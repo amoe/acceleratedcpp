@@ -983,3 +983,24 @@ So the synthesized assignment operator for StudentInfo will do the following:
         midterm = source.midterm;    // Fundamental type, just overwritten
         final = source.final;       // ...same
     }
+
+## 11-4
+
+> How many members does the synthesized StudentInfo destructor destroy?
+
+The answer is 2, because it doesn't destroy the members that have fundamental
+types (double midterm and final).  Those members are just 'deallocated' in the
+same sense as any stack variable (this is rather mysterious).  There's no real
+way to prove this because you can't ever demonstrate that the
+fundamentally-typed members don't get destroyed by the destructor.  They just
+do.
+
+## 11-5
+
+> Instrument the studentinfo class to count how often objects are created
+> copied assigned and destroyed.  Use the instrumented version to execute the
+> student record programs from chapter 6.  Using the instrumented studeninfo
+> class will let you see how many copies the library algorithms are doing.
+> Comparing the number of copies will let you estimate what proportion of the
+> cost difference s we saw are accounted for by the use of each library class.
+> Do this instrumentations and analysis.
