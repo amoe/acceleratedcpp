@@ -1004,3 +1004,6 @@ do.
 > Comparing the number of copies will let you estimate what proportion of the
 > cost difference s we saw are accounted for by the use of each library class.
 > Do this instrumentations and analysis.
+
+There is a problem here, that we don't know how to apply methods using a
+template like transform.
