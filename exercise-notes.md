@@ -1006,4 +1006,4 @@ do.
 > Do this instrumentations and analysis.
 
 There is a problem here, that we don't know how to apply methods using a
-template like transform.
+template like transform.  Actually you can't, so ignore.

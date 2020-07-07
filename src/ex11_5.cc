@@ -97,44 +97,6 @@ Capener 7 10 32 68 61 76
 int main() {
     cout << "Starting." << endl;
 
-    vector<StudentInfo> students;
-    StudentInfo the_record;
-    string::size_type maxlen = 0;
-
-    stringstream sin1(multi_line_input);
-
-    // Note that push_back here must copy the entire record.  Otherwise the
-    // read would be overwriting the value.
-    while (the_record.read(sin1)) {
-        maxlen = max(maxlen, the_record.name().size());
-        students.push_back(the_record);
-    }
-
-    sort(students.begin(), students.end(), compare);
-
-    for (vector<StudentInfo>::size_type i = 0; i < students.size(); i++) {
-        StudentInfo this_student = students[i];
-        cout << this_student.name()
-             << string((maxlen + 1) - this_student.name().size(), ' ');
-
-        try {
-            // Should never happen
-            if (!this_student.valid()) {
-                cout << "skipping invalid student" << endl;
-            }
-
-            double final_grade = this_student.grade();
-            streamsize prec = cout.precision();
-
-            cout << setprecision(3) << final_grade << setprecision(prec);
-        } catch (std::domain_error& e) {
-            cout << e.what();
-        }
-
-        cout << endl;
-    }
-
-
     cout << "End." << endl;
     return 0;
 }
