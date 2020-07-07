@@ -22,6 +22,10 @@ using std::string;
 using std::vector;
 using std::ifstream;
 
+double average(const vector<double>& v) {
+    return accumulate(v.begin(), v.end(), 0.0) / v.size();
+}
+
 istream& read_hw(istream& in, vector<double>& hw);
 
 class StudentInfo {
@@ -30,6 +34,10 @@ public:
     StudentInfo(istream&);
 
     double grade() const;
+    double optimistic_median_grade() const;
+    double average_grade() const;
+    bool did_all_homework_p() const;
+
     istream& read(istream&);
     string name() const {
         return n;
@@ -74,6 +82,30 @@ istream& StudentInfo::read(istream& in) {
     return in;
 }
 
+bool StudentInfo::did_all_homework_p() const {
+    auto result = find(homework.begin(), homework.end(), 0);
+    return result == homework.end();
+}
+
+double StudentInfo::average_grade() const {
+    return ::grade(midterm, final, average(homework));
+}
+
+double StudentInfo::optimistic_median_grade() const {
+    vector<double> nonzero;
+
+    remove_copy(
+        homework.begin(), homework.end(),
+        std::back_inserter(nonzero), 0
+    );
+
+    if (nonzero.empty()) {
+        return ::grade(midterm, final, 0);
+    } else {
+        return ::grade(midterm, final, median(nonzero));
+    }
+}
+
 istream& read_hw(istream& in, vector<double>& hw) {
     if (in) {
         double x;
@@ -90,12 +122,17 @@ bool compare(const StudentInfo& x, const StudentInfo& y) {
     return x.name() < y.name();
 }
 
-bool student_did_all_homework_p(const StudentInfo& s) {
-    auto result = find(s.homework.begin(), s.homework.end(), 0);
-    
-    return result == s.homework.end();
+double grade_aux(const StudentInfo& s) {
+    return s.grade();
 }
 
+double a_aux(const StudentInfo& s) {
+    return s.average_grade();
+}
+
+double om_aux(const StudentInfo& s) {
+    return s.optimistic_median_grade();
+}
 
 double median_analysis(const vector<StudentInfo>& students) {
     vector<double> grades;
@@ -109,39 +146,23 @@ double median_analysis(const vector<StudentInfo>& students) {
     return median(grades);
 }
 
-
 double average_analysis(const vector<StudentInfo>& students) {
     vector<double> grades;
 
     transform(
-        students.begin(), students.end(), std::back_inserter(grades), average_grade
+        students.begin(), students.end(), std::back_inserter(grades), a_aux
     );
 
     return median(grades);
 }
 
-double StudentInfo::optimistic_median(const StudentInfo& s) {
-    vector<double> nonzero;
 
-    remove_copy(
-        s.homework.begin(), s.homework.end(),
-        std::back_inserter(nonzero), 0
-    );
-
-    if (nonzero.empty()) {
-        return grade(s.midterm, s.final, 0);
-    } else {
-        return grade(s.midterm, s.final, median(nonzero));
-    }
-}
-
-// this is nearly identical to the other analysis-calling functions
 double optimistic_median_analysis(const vector<StudentInfo>& students) {
     vector<double> grades;
     
     transform(
         students.begin(), students.end(), std::back_inserter(grades),
-        optimistic_median
+        om_aux
     );
 
     return median(grades);
@@ -167,7 +188,7 @@ int demo_comparing_grading_schemes(istream& in) {
 
     while (the_student.read(in)) {
         // This would be a partition() in a more lispy style.
-        if (student_did_all_homework_p(the_student)) {
+        if (the_student.did_all_homework_p()) {
             did.push_back(the_student);
         } else {
             did_not.push_back(the_student);
