@@ -82,6 +82,8 @@ istream& StudentInfo::read(istream& in) {
     return in;
 }
 
+// A student did all the homework if there were no zeroes found in their
+// homework array.
 bool StudentInfo::did_all_homework_p() const {
     auto result = find(homework.begin(), homework.end(), 0);
     return result == homework.end();
@@ -215,21 +217,18 @@ int demo_comparing_grading_schemes(istream& in) {
 
 const string multi_line_input = R"(
 Gamlin 94 89 14 96 16 63
-Capener 7 10 32 68 61 76
+Capener 7 10 32 68 61 0
+Zutell 31 75 81 54 18 87
 )";
 
 
 int main() {
+    stringstream sin1(multi_line_input);
+
     cout << "Starting." << endl;
 
     cout << "Starting to run grading scheme comparison code, please wait." << endl;
-    ifstream in_file;
-    in_file.open("data/students-medium.dat");
-    if (!in_file) {
-        throw std::runtime_error("open of student data failed");
-    }
-    demo_comparing_grading_schemes(in_file);
-    in_file.close();
+    demo_comparing_grading_schemes(sin1);
     cout << "Finished grading scheme comparison." << endl;
 
     cout << "End." << endl;
