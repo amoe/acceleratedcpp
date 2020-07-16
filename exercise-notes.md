@@ -1017,3 +1017,6 @@ The object is never assigned.
 
 The object is destroyed 4 times.  I feel like that must be when the temporary
 variable in `demo_comparing_grading_schemes` goes out of scope.
+
+I've fucked up here, because the actual part of the code that they wanted us to
+test is the `extract_fails` code :/
