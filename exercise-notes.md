@@ -997,13 +997,23 @@ do.
 
 ## 11-5
 
-> Instrument the studentinfo class to count how often objects are created
+> Instrument the studentinfo class to count how often objects are created,
 > copied assigned and destroyed.  Use the instrumented version to execute the
-> student record programs from chapter 6.  Using the instrumented studeninfo
+> student record programs from chapter 6.  Using the instrumented StudentInfo
 > class will let you see how many copies the library algorithms are doing.
 > Comparing the number of copies will let you estimate what proportion of the
-> cost difference s we saw are accounted for by the use of each library class.
+> cost differences we saw are accounted for by the use of each library class.
 > Do this instrumentations and analysis.
 
 There is a problem here, that we don't know how to apply methods using a
 template like transform.  Actually you can't, so ignore.
+
+Instrumentation shows that only 1 object is created.  It is repeatedly read into.
+
+The object is copied when pushing it into the appropriate vectors, so it's
+copied N times or so it seems.
+
+The object is never assigned.
+
+The object is destroyed 4 times.  I feel like that must be when the temporary
+variable in `demo_comparing_grading_schemes` goes out of scope.

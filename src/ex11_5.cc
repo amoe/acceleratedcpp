@@ -22,6 +22,11 @@ using std::string;
 using std::vector;
 using std::ifstream;
 
+int objects_created = 0;
+int objects_copied = 0;
+int objects_assigned = 0;
+int objects_destroyed = 0;
+
 double average(const vector<double>& v) {
     return accumulate(v.begin(), v.end(), 0.0) / v.size();
 }
@@ -32,6 +37,12 @@ class StudentInfo {
 public:
     StudentInfo();
     StudentInfo(istream&);
+    StudentInfo(const StudentInfo& source);
+    ~StudentInfo();
+
+    StudentInfo& operator=(const StudentInfo& source);
+
+
 
     double grade() const;
     double optimistic_median_grade() const;
@@ -54,11 +65,41 @@ private:
 };
 
 StudentInfo::StudentInfo(): midterm(0), final(0) {
+    cout << "object created using default constructor" << endl;
+    objects_created++;
 }
 
 StudentInfo::StudentInfo(istream& is) {
+    cout << "object created using istream constructor" << endl;
+    objects_created++;
     read(is);
 }
+
+StudentInfo::StudentInfo(const StudentInfo& source) {
+    cout << "object copied using copy constructor" << endl;
+    homework = source.homework;
+    n = source.n;
+    midterm = source.midterm;
+    final = source.final;
+    objects_copied++;
+}
+
+StudentInfo& StudentInfo::operator=(const StudentInfo& source) { 
+    cout << "object assigned using assignment operator" << endl;
+    homework = source.homework;
+    n = source.n;
+    midterm = source.midterm;
+    final = source.final;
+    objects_assigned++;
+    return *this;
+}
+
+StudentInfo::~StudentInfo() {
+    cout << "object destroyed" << endl;
+    objects_destroyed++;
+}
+
+
 
 double grade(double midterm, double final, double homework) {
     return 0.2 * midterm + 0.4 * final + 0.4 * homework;
@@ -186,14 +227,18 @@ void write_analysis(
 
 int demo_comparing_grading_schemes(istream& in) {
     vector<StudentInfo> did, did_not;
-    StudentInfo the_student;
+    StudentInfo the_student;    // XXX: This line creates the single StudentInfo.
 
     while (the_student.read(in)) {
         // This would be a partition() in a more lispy style.
         if (the_student.did_all_homework_p()) {
+            cout << "point1 start" << endl;
             did.push_back(the_student);
+            cout << "point1 end" << endl;
         } else {
+            cout << "point2 start" << endl;
             did_not.push_back(the_student);
+            cout << "point2 end" << endl;
         }
     }
     
@@ -232,5 +277,9 @@ int main() {
     cout << "Finished grading scheme comparison." << endl;
 
     cout << "End." << endl;
+    cout << "Objects created: " << objects_created << endl;
+    cout << "Objects copied: " << objects_copied << endl;
+    cout << "Objects assigned: " << objects_assigned << endl;
+    cout << "Objects destroyed: " << objects_destroyed << endl;
     return 0;
 }
