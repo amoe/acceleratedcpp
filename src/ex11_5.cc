@@ -259,6 +259,20 @@ int demo_comparing_grading_schemes(istream& in) {
     return 0;
 }
 
+void reset_counters() {
+    objects_created = 0;
+    objects_copied = 0;
+    objects_assigned = 0;
+    objects_destroyed = 0;
+}
+
+void report_on_memory() {
+    cout << "Objects created: " << objects_created << endl;
+    cout << "Objects copied: " << objects_copied << endl;
+    cout << "Objects assigned: " << objects_assigned << endl;
+    cout << "Objects destroyed: " << objects_destroyed << endl;
+}
+
 
 const string multi_line_input = R"(
 Gamlin 94 89 14 96 16 63
@@ -275,11 +289,10 @@ int main() {
     cout << "Starting to run grading scheme comparison code, please wait." << endl;
     demo_comparing_grading_schemes(sin1);
     cout << "Finished grading scheme comparison." << endl;
+    report_on_memory();
+    reset_counters();
+
 
     cout << "End." << endl;
-    cout << "Objects created: " << objects_created << endl;
-    cout << "Objects copied: " << objects_copied << endl;
-    cout << "Objects assigned: " << objects_assigned << endl;
-    cout << "Objects destroyed: " << objects_destroyed << endl;
     return 0;
 }
