@@ -65,12 +65,12 @@ private:
 };
 
 StudentInfo::StudentInfo(): midterm(0), final(0) {
-    cout << "object created using default constructor" << endl;
+//    cout << "object created using default constructor" << endl;
     objects_created++;
 }
 
 StudentInfo::StudentInfo(istream& is) {
-    cout << "object created using istream constructor" << endl;
+//    cout << "object created using istream constructor" << endl;
     objects_created++;
     read(is);
 }
@@ -85,7 +85,7 @@ StudentInfo::StudentInfo(const StudentInfo& source) {
 }
 
 StudentInfo& StudentInfo::operator=(const StudentInfo& source) { 
-    cout << "object assigned using assignment operator" << endl;
+//    cout << "object assigned using assignment operator" << endl;
     homework = source.homework;
     n = source.n;
     midterm = source.midterm;
@@ -95,7 +95,7 @@ StudentInfo& StudentInfo::operator=(const StudentInfo& source) {
 }
 
 StudentInfo::~StudentInfo() {
-    cout << "object destroyed" << endl;
+//    cout << "object destroyed" << endl;
     objects_destroyed++;
 }
 
@@ -259,6 +259,102 @@ int demo_comparing_grading_schemes(istream& in) {
     return 0;
 }
 
+bool fgrade(const StudentInfo s) {
+    return s.grade() < 60;
+}
+
+bool pgrade(const StudentInfo& s) {
+    return !fgrade(s);
+}
+
+
+vector<StudentInfo> extract_fails_4(vector<StudentInfo>& students) {
+    vector<StudentInfo> fail;
+
+    // copy: remove_copy_if will basically build the entire array again
+    // using push_back, and cause it to resize and copy that many times.
+    remove_copy_if(
+        students.begin(), students.end(), back_inserter(fail), pgrade
+    );
+    
+    using iter_t = vector<StudentInfo>::iterator;
+
+    // This line will perform 10 copies and 2 assignments.
+    iter_t rearranged_beginning = remove_if(students.begin(), students.end(), fgrade);
+
+    students.erase(rearranged_beginning, students.end());
+
+    return fail;
+}
+
+
+vector<StudentInfo> extract_fails_5(vector<StudentInfo> students) {
+    vector<StudentInfo>::iterator iter;
+    iter = stable_partition(students.begin(), students.end(), pgrade);
+    vector<StudentInfo> fail(iter, students.end());
+    students.erase(iter, students.end());
+    return fail;
+}
+
+void demo_extract_fails_4(string input_path) {
+    cout << "Demo extract_fails_4." << endl;
+ 
+    ifstream in_file;
+    in_file.open(input_path);
+    if (!in_file) {
+        throw std::runtime_error("open of student data failed");
+    }
+
+    StudentInfo the_student;   // creation
+    vector<StudentInfo> students;
+
+    while (the_student.read(in_file)) {
+        cout << the_student.name() << endl;
+        students.push_back(the_student);  // copy
+    }
+
+    cout << "beginning extract" << endl;
+
+    vector<StudentInfo> fails;
+    fails = extract_fails_4(students);    // copy (pass by value)
+
+    
+    cout << "Fails: " << fails.size() << endl;
+    cout << "Passes: " << students.size() << endl;
+    
+    in_file.close();
+
+    cout << "Done." << endl;
+}
+
+void demo_extract_fails_5(string input_path) {
+    cout << "Demo extract_fails_5." << endl;
+ 
+    ifstream in_file;
+    in_file.open(input_path);
+    if (!in_file) {
+        throw std::runtime_error("open of student data failed");
+    }
+
+    StudentInfo the_student;
+    vector<StudentInfo> students;
+
+    while (the_student.read(in_file)) {
+        students.push_back(the_student);
+    }
+
+    vector<StudentInfo> fails;
+    fails = extract_fails_5(students);
+
+    cout << "Fails: " << fails.size() << endl;
+    cout << "Passes: " << students.size() << endl;
+    
+    in_file.close();
+
+    cout << "Done." << endl;
+}
+
+
 void reset_counters() {
     objects_created = 0;
     objects_copied = 0;
@@ -286,12 +382,17 @@ int main() {
 
     cout << "Starting." << endl;
 
-    cout << "Starting to run grading scheme comparison code, please wait." << endl;
-    demo_comparing_grading_schemes(sin1);
-    cout << "Finished grading scheme comparison." << endl;
+    // cout << "Starting to run grading scheme comparison code, please wait." << endl;
+    // demo_comparing_grading_schemes(sin1);
+    // cout << "Finished grading scheme comparison." << endl;
+    // report_on_memory();
+    // reset_counters();
+
+    demo_extract_fails_4("data/students-small.dat");
     report_on_memory();
     reset_counters();
 
+//    demo_extract_fails_5("data/students-large.dat");
 
     cout << "End." << endl;
     return 0;

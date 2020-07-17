@@ -1020,3 +1020,10 @@ variable in `demo_comparing_grading_schemes` goes out of scope.
 
 I've fucked up here, because the actual part of the code that they wanted us to
 test is the `extract_fails` code :/
+
+It makes more sense once you run on larger data sets.  You can see that the
+vector class is resizing and copying its previous contents.  It starts off with
+1 copy, but pushing the 5th item causes 4+1=5 copies, because it expands the
+internal array and copies the previous contents.  But after that, everything
+takes just 1 copy.
+
