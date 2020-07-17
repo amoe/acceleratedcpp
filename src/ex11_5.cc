@@ -259,7 +259,7 @@ int demo_comparing_grading_schemes(istream& in) {
     return 0;
 }
 
-bool fgrade(const StudentInfo s) {
+bool fgrade(const StudentInfo& s) {
     return s.grade() < 60;
 }
 
@@ -288,13 +288,6 @@ vector<StudentInfo> extract_fails_4(vector<StudentInfo>& students) {
 }
 
 
-vector<StudentInfo> extract_fails_5(vector<StudentInfo> students) {
-    vector<StudentInfo>::iterator iter;
-    iter = stable_partition(students.begin(), students.end(), pgrade);
-    vector<StudentInfo> fail(iter, students.end());
-    students.erase(iter, students.end());
-    return fail;
-}
 
 void demo_extract_fails_4(string input_path) {
     cout << "Demo extract_fails_4." << endl;
@@ -327,6 +320,20 @@ void demo_extract_fails_4(string input_path) {
     cout << "Done." << endl;
 }
 
+vector<StudentInfo> extract_fails_5(vector<StudentInfo>& students) {
+//    vector<StudentInfo> fail;
+    vector<StudentInfo>::iterator iter;
+    // 9 copies, 15 assignments as the items get moved around.
+    iter = stable_partition(students.begin(), students.end(), pgrade);
+
+    // 7 copies (because only the failing students are copied)
+    vector<StudentInfo> fail(iter, students.end());
+
+    students.erase(iter, students.end());
+    return fail;
+}
+
+
 void demo_extract_fails_5(string input_path) {
     cout << "Demo extract_fails_5." << endl;
  
@@ -340,7 +347,7 @@ void demo_extract_fails_5(string input_path) {
     vector<StudentInfo> students;
 
     while (the_student.read(in_file)) {
-        students.push_back(the_student);
+        students.push_back(the_student);   // These 25 copies are unavoidable
     }
 
     vector<StudentInfo> fails;
@@ -382,17 +389,19 @@ int main() {
 
     cout << "Starting." << endl;
 
-    // cout << "Starting to run grading scheme comparison code, please wait." << endl;
-    // demo_comparing_grading_schemes(sin1);
-    // cout << "Finished grading scheme comparison." << endl;
-    // report_on_memory();
-    // reset_counters();
-
-    demo_extract_fails_4("data/students-small.dat");
+    cout << "Starting to run grading scheme comparison code, please wait." << endl;
+    demo_comparing_grading_schemes(sin1);
+    cout << "Finished grading scheme comparison." << endl;
     report_on_memory();
     reset_counters();
 
-//    demo_extract_fails_5("data/students-large.dat");
+    demo_extract_fails_4("data/students-medium.dat");
+    report_on_memory();
+    reset_counters();
+
+    demo_extract_fails_5("data/students-medium.dat");
+    report_on_memory();
+    reset_counters();
 
     cout << "End." << endl;
     return 0;

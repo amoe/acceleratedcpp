@@ -1027,3 +1027,41 @@ vector class is resizing and copying its previous contents.  It starts off with
 internal array and copies the previous contents.  But after that, everything
 takes just 1 copy.
 
+The existing code had a bug where students wasn't passed by reference, causing
+spurious copying.
+
+Two pass solution (small):
+
+    Objects created: 1
+    Objects copied: 39
+    Objects assigned: 2
+    Objects destroyed: 40
+
+Single pass solution (small):
+
+    Objects created: 1
+    Objects copied: 41
+    Objects assigned: 17
+    Objects destroyed: 42
+
+The assignments come from stable_partition.  I had to fix a bunch of bugs in the
+code from chapter 6 where stuff wasn't being passed by reference, which skewed
+the statistics.
+
+Two pass solution (medium):
+
+    Objects created: 1
+    Objects copied: 3818
+    Objects assigned: 228
+    Objects destroyed: 3819
+
+Single pass solution (medium):
+
+    Objects created: 1
+    Objects copied: 3795
+    Objects assigned: 1773
+    Objects destroyed: 3796
+
+The difference in copying is probably due to the use of push_back and
+back_inserter which gets ameliorated in the medium case, because it grows
+geometrically.
