@@ -1065,3 +1065,9 @@ Single pass solution (medium):
 The difference in copying is probably due to the use of push_back and
 back_inserter which gets ameliorated in the medium case, because it grows
 geometrically.
+
+## 11-6
+
+> Add an operation to remove an element from the Vec and another to empty the
+> entire vec.  These should behave analogously to the erase and clear operations
+> on vectors.
