@@ -151,6 +151,9 @@ template <typename T> void Vec<T>::unchecked_append(const T& val) {
 
 template <typename T>
 typename Vec<T>::iterator Vec<T>::erase(iterator pos) {
+    iterator first = pos;
+    avail = uninitialized_copy(++first, avail, pos);
+    return avail;
 }
 
 /*

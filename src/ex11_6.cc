@@ -7,6 +7,8 @@ using std::cout;
 using std::endl;
 
 void test_erase() {
+    cout << "Testing erase()" << endl;
+
     Vec<int> fib;
     fib.push_back(8);
     fib.push_back(5);
@@ -25,6 +27,10 @@ void test_erase() {
     for (Vec<int>::const_iterator it = fib.begin(); it != fib.end(); it++) {
         cout << *it << endl;
     }
+
+    cout << "fib.size() = " << fib.size() << endl;
+
+    cout << "Finished testing erase()" << endl;
 }
 
 
@@ -39,6 +45,7 @@ void test_clear() {
     for (Vec<int>::const_iterator it = fib.begin(); it != fib.end(); it++) {
         cout << *it << endl;
     }
+
 
     fib.clear();
 
@@ -55,7 +62,7 @@ void test_clear() {
 int main() {
     cout << "Starting." << endl;
 
-//    test_erase();
+    test_erase();
     test_clear();
     
     cout << "End." << endl;

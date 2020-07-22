@@ -1071,3 +1071,7 @@ geometrically.
 > Add an operation to remove an element from the Vec and another to empty the
 > entire vec.  These should behave analogously to the erase and clear operations
 > on vectors.
+
+Note that these don't shrink the vector at all, so it's just a matter of
+physically moving the elements (in the case of erase()) and adjusting the
+`avail` pointer.
