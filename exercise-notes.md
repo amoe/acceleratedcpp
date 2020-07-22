@@ -1075,3 +1075,11 @@ geometrically.
 Note that these don't shrink the vector at all, so it's just a matter of
 physically moving the elements (in the case of erase()) and adjusting the
 `avail` pointer.
+
+## 11-7
+
+> Once you've added erase and clear to `Vec`, you can use that class instead of
+> vector in most of the earlier programs in this book. Rewrite the Student_info
+> programs from Chapter 9 and the programs that work with character pictures
+> from Chapter 5 to use `Vec`s instead of `vector`s.
+
