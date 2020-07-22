@@ -1102,3 +1102,52 @@ We also needed to port `median` to use Vec.
 This exercise illustrates that a correctly implemented class forms damn-near a
 drop-in replacement for the library class `vector`.  in other words --
 encapsulation is cool.
+
+## 11-8
+
+> Write a simplified version of the standard list class and its associated
+> iterator.
+
+What a pain.  See p127 on the list type.  It allows efficient deletion of items
+from within the container.
+
+> Just as vector s are optimized for fast random access, list s are optimized for
+> fast insertion and deletion anywhere within the container. Because list s have
+> to maintain a more complicated structure, they are slower than vector s if the
+> container is accessed only sequentially. That is, if the container grows and
+> shrinks only or primarily from the end, a vector will outperform a list
+> . However, if a program deletes many elements from the middle of the
+> container—as our program does—then list s will be faster for large inputs,
+> becoming much faster as the inputs grow.
+> 
+> One key operation that vector s support, but list s do not, is indexing. As we
+> just saw, we can write a version of `extract_fails` that uses vector s to extract
+> records that correspond to failing students, but that uses iterators instead of
+> indices. It turns out that we can transform that version of extract_fails to use
+> list s instead of vector s merely by changing the appropriate types: [...]
+>
+>
+> One important way in which the operations on list s differ from those on vector
+> s is the effect of some of the operations on iterators. For example, when we
+> erase an element from a vector , all iterators that refer to the element erased,
+> or subsequent elements, are invalidated. Using `push_back` to append an element to
+> a vector invalidates all iterators referring to that vector .  This behavior
+> follows from the fact that erasing an element moves the following elements, and
+> appending to a vector might reallocate the entire vector to make room for the
+> new element.  Loops that use these operations must be especially careful to
+> ensure that they have not saved copies of any iterators that may be
+> invalidated. Inappropriately saving the value of students.end() is a
+> particularly rich source of bugs.
+> 
+> For list s, on the other hand, the erase and push_back operations do not
+> invalidate iterators to other elements. Only iterators that refer to the element
+> actually erase d are invalidated, because that element no longer exists.
+
+One important question is how the hell are the iterators going to work?
+
+> We have already mentioned that list class iterators do not support full
+> random-access properties.
+
+Specifically they support bidirectional iterators.
+
+It doesn't specify how 'simplified' it can be, so probbaly set a low bar.
