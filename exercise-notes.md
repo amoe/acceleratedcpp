@@ -1084,5 +1084,21 @@ physically moving the elements (in the case of erase()) and adjusting the
 > from Chapter 5 to use `Vec`s instead of `vector`s.
 
 Amusingly this revealed an awful off-by-one bug in uncreate(), which I've now
-fixed in all exercises.  This can be triggered by using a non-fundamental type
+fixed in `ch11_adt.hh`.  This can be triggered by using a non-fundamental type
 as the template parameter.
+
+We also can't do initialization like this:
+
+    vector<string> foo = {"fry", "bender"};
+
+Instead we must do
+
+    vector<string> foo;
+    foo.push_back("fry");
+    foo.push_back("bender");
+
+We also needed to port `median` to use Vec.
+
+This exercise illustrates that a correctly implemented class forms damn-near a
+drop-in replacement for the library class `vector`.  in other words --
+encapsulation is cool.
