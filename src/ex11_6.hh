@@ -76,6 +76,9 @@ public:
         unchecked_append(val);
     }
 
+    iterator erase(iterator pos);
+
+
 private:
     void create();
     void create(size_type n, const T& val);
