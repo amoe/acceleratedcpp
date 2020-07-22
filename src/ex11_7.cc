@@ -7,7 +7,7 @@
 #include <numeric>
 #include <algorithm>
 #include "median.hh"
-
+#include "ex11_7.hh"
 
 using std::sort;
 using std::max;
