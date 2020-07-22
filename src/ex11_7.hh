@@ -45,6 +45,7 @@ public:
 
     // Destructor
     ~Vec() {
+        cout << "inside destructor" << endl;
         uncreate();
     }
 
@@ -69,10 +70,13 @@ public:
     const_iterator end() const { return avail; }
 
     void push_back(const T& val) {
+        cout << "inside push_back" << endl;
         if (avail == limit) {   
+            cout << "growing" << endl;
             grow();
         }
 
+        cout << "appending" << endl;
         unchecked_append(val);
     }
 
@@ -117,13 +121,13 @@ template <typename T> void Vec<T>::create(const_iterator b, const_iterator e) {
 }
 
 template <typename T> void Vec<T>::uncreate() {
+    cout << "inside uncreate" << endl;
+
     if (data) {
         iterator it = avail;
         while (it != data) {
-            alloc.destroy(it);
-            it--;
+            alloc.destroy(--it);
         }
-
         alloc.deallocate(data, limit - data);
     }
 
@@ -136,6 +140,7 @@ template <typename T> void Vec<T>::grow() {
     size_type new_size = max(2 * (limit - data), ptrdiff_t(1));
     iterator new_data = alloc.allocate(new_size);
     iterator new_avail = uninitialized_copy(data, avail, new_data);
+
 
     uncreate();
 

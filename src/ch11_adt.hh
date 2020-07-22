@@ -145,10 +145,15 @@ template <typename T> void Vec<T>::uncreate() {
     // deallocate won't work on a null pointer
     if (data) {
         iterator it = avail;
+
+        // There is a subtlety here -- avail points at *ONE PAST* the last item.
+        // Therefore we need to subtract 1 from the iterator BEFORE calling
+        // destroy, and although we compare `it != data`, we still destroy
+        // `data` itself (i.e. the item at index 0).
         while (it != data) {
-            alloc.destroy(it);
-            it--;
+            alloc.destroy(--it);
         }
+
 
         alloc.deallocate(data, limit - data);
     }

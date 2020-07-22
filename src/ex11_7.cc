@@ -95,23 +95,24 @@ Capener 7 10 32 68 61 76
 )";
 
 
-int main() {
-    cout << "Starting." << endl;
-
-    vector<StudentInfo> students;
+void do_ch9_programs() {
+    Vec<StudentInfo> students;
     StudentInfo the_record;
     string::size_type maxlen = 0;
 
     stringstream sin1(multi_line_input);
 
+    
+
     while (the_record.read(sin1)) {
         maxlen = max(maxlen, the_record.name().size());
-        students.push_back(the_record);
+         students.push_back(the_record);
     }
+
 
     sort(students.begin(), students.end(), compare);
 
-    for (vector<StudentInfo>::size_type i = 0; i < students.size(); i++) {
+    for (Vec<StudentInfo>::size_type i = 0; i < students.size(); i++) {
         StudentInfo this_student = students[i];
         cout << this_student.name()
              << string((maxlen + 1) - this_student.name().size(), ' ');
@@ -131,7 +132,106 @@ int main() {
 
         cout << endl;
     }
+}
 
+string::size_type width(const vector<string>& v) {
+    string::size_type maxlen = 0;
+
+    for (vector<string>::size_type i = 0; i < v.size(); i++) {
+        maxlen = max(maxlen, v[i].size());
+    }
+
+    return maxlen;
+}
+
+vector<string> frame(const vector<string>& words) {
+    vector<string> result;
+    string::size_type maxlen = width(words);
+    string border(maxlen + 4, '*');
+
+    result.push_back(border);
+
+    for (vector<string>::size_type i = 0; i < words.size(); i++) {
+        string padding(maxlen - words[i].size(), ' ');
+        
+        result.push_back("* "  + words[i] + padding + " *");
+    }
+
+    result.push_back(border);
+
+    return result;
+}
+
+vector<string> vcat(const vector<string>& top, const vector<string>& bottom) {
+    vector<string> result = top;
+
+    for (
+        vector<string>::const_iterator iter = bottom.begin();
+        iter != bottom.end();
+        iter++
+    ) {
+        result.push_back(*iter);
+    }
+
+    return result;
+}
+
+
+vector<string> hcat(const vector<string>& left, const vector<string>& right) {
+    vector<string> result;
+
+    string::size_type widthLeft = width(left) + 1;
+    // i will track the rows of left, j the rows of right
+    vector<string>::size_type i = 0, j = 0;
+
+    while (i != left.size() || j != right.size()) {
+        string s;
+
+        // i may have already run out at any stage during the loop.
+        if (i != left.size()) {
+            s = left[i];
+            i++;
+        }
+
+        s += string(widthLeft - s.size(), ' ');
+
+        if (j != right.size()) {
+            s += right[j];
+            j++;
+        }
+
+        
+        result.push_back(s);
+    }
+
+    return result;
+}
+
+
+
+void spew(const vector<string>& pic) {
+    for (auto line : pic) {
+        std::cout << line << std::endl;
+    }
+}
+
+void do_ch5_programs() {
+    vector<string> result = {
+        "The", "quick", "brown", "fox", "jumped", "over", "the", "lazy", "dog"
+    };
+
+    vector<string> framed = frame(result);
+    spew(framed);
+
+    spew(vcat(result, framed));
+    spew(hcat(result, framed));
+}
+
+int main() {
+    cout << "Starting." << endl;
+
+    do_ch9_programs();
+    do_ch5_programs();
 
     cout << "End." << endl;
     return 0;

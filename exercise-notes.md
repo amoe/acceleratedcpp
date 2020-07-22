@@ -1083,3 +1083,6 @@ physically moving the elements (in the case of erase()) and adjusting the
 > programs from Chapter 9 and the programs that work with character pictures
 > from Chapter 5 to use `Vec`s instead of `vector`s.
 
+Amusingly this revealed an awful off-by-one bug in uncreate(), which I've now
+fixed in all exercises.  This can be triggered by using a non-fundamental type
+as the template parameter.
