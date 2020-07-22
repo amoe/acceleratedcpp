@@ -1,12 +1,10 @@
 #include <iostream>
 #include <string>
-#include "ch11_adt.hh"
+#include "ex11_6.hh"
 
 using std::string;
 using std::cout;
 using std::endl;
-
-// Chapter 11: "Defining abstract data types"
 
 void test_iterators() {
     Vec<string> stuff;
@@ -54,7 +52,6 @@ void test_assignment() {
         cout << *it << endl;
     }
 
-    // This should never show up in the output
     nums.push_back(42);
     
     for (Vec<int>::const_iterator it = nums2.begin(); it != nums2.end(); it++) {
