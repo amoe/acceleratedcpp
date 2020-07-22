@@ -30,33 +30,23 @@ public:
 
     double grade() const;
     istream& read(istream&);
-    string name() const {    // Likely to be inlined, because defined inline
+    string name() const {
         return n;
     }
 
-    // User can check that the object is valid before requesting a grade.
     bool valid() const {
         return !homework.empty();
     }
 
 private:
-    // These container types are value-initialized by default.
     vector<double> homework;
     string n;
-
-    // This would be default-initialized if no constructor were defined.  That
-    // means it contains undefined crap.
     double midterm, final;
 };
 
-// Use initializer list to define the data members that would otherwise
-// default-initialize.
 StudentInfo::StudentInfo(): midterm(0), final(0) {
 }
 
-
-// NOTE that in this case we don't initialize the primitive members (because
-// we're just about to overwrite them in the constructor body.)
 StudentInfo::StudentInfo(istream& is) {
     read(is);
 }
@@ -77,14 +67,12 @@ double StudentInfo::grade() const {
     return ::grade(midterm, final, homework);
 }
 
-// Why return an istream?
 istream& StudentInfo::read(istream& in) {
     in >> n >> midterm >> final;
     read_hw(in, homework);
     return in;
 }
 
-// XXX: Identical to student_info.cc code
 istream& read_hw(istream& in, vector<double>& hw) {
     if (in) {
         double x;
@@ -97,8 +85,6 @@ istream& read_hw(istream& in, vector<double>& hw) {
     return in;
 }
 
-// The `compare` function should be declared in the same header file that
-// contains the student info stuff, it's part of the interface.
 bool compare(const StudentInfo& x, const StudentInfo& y) {
     return x.name() < y.name();
 }
@@ -118,8 +104,6 @@ int main() {
 
     stringstream sin1(multi_line_input);
 
-    // Note that push_back here must copy the entire record.  Otherwise the
-    // read would be overwriting the value.
     while (the_record.read(sin1)) {
         maxlen = max(maxlen, the_record.name().size());
         students.push_back(the_record);
@@ -133,7 +117,6 @@ int main() {
              << string((maxlen + 1) - this_student.name().size(), ' ');
 
         try {
-            // Should never happen
             if (!this_student.valid()) {
                 cout << "skipping invalid student" << endl;
             }
