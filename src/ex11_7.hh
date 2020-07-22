@@ -45,7 +45,7 @@ public:
 
     // Destructor
     ~Vec() {
-        cout << "inside destructor" << endl;
+//        cout << "inside destructor" << endl;
         uncreate();
     }
 
@@ -54,12 +54,12 @@ public:
     }
 
     T& operator[](size_type i) {
-        cout << "inside index operator non-const" << endl;
+//        cout << "inside index operator non-const" << endl;
         return data[i];
     }
 
     const T& operator[](size_type i) const {
-        cout << "inside index operator const" << endl;
+//        cout << "inside index operator const" << endl;
         return data[i];
     }
 
@@ -70,13 +70,13 @@ public:
     const_iterator end() const { return avail; }
 
     void push_back(const T& val) {
-        cout << "inside push_back" << endl;
+//        cout << "inside push_back" << endl;
         if (avail == limit) {   
-            cout << "growing" << endl;
+//            cout << "growing" << endl;
             grow();
         }
 
-        cout << "appending" << endl;
+//        cout << "appending" << endl;
         unchecked_append(val);
     }
 
@@ -121,7 +121,7 @@ template <typename T> void Vec<T>::create(const_iterator b, const_iterator e) {
 }
 
 template <typename T> void Vec<T>::uncreate() {
-    cout << "inside uncreate" << endl;
+//    cout << "inside uncreate" << endl;
 
     if (data) {
         iterator it = avail;

@@ -1,12 +1,10 @@
 #include <iomanip>
 #include <iostream>
 #include <string>
-#include <vector>
 #include <stdexcept>
 #include <sstream>
 #include <numeric>
 #include <algorithm>
-#include "median.hh"
 #include "ex11_7.hh"
 
 using std::sort;
@@ -19,9 +17,27 @@ using std::istream;
 using std::cout;
 using std::endl;
 using std::string;
-using std::vector;
 
-istream& read_hw(istream& in, vector<double>& hw);
+double median(Vec<double> vec) {
+    typedef Vec<double>::size_type vec_sz;
+    
+    vec_sz size = vec.size();
+    if (size == 0)
+        throw std::domain_error("cannot take the median of an empty vector");
+
+     sort(vec.begin(), vec.end());
+
+     vec_sz mid = size / 2;
+
+    if  ((size % 2) == 0) {
+        return (vec[mid] + vec[mid-1]) / 2;
+    } else {
+        return vec[mid];
+    }
+}
+
+
+istream& read_hw(istream& in, Vec<double>& hw);
 
 class StudentInfo {
 public:
@@ -35,11 +51,11 @@ public:
     }
 
     bool valid() const {
-        return !homework.empty();
+        return homework.size() != 0;
     }
 
 private:
-    vector<double> homework;
+    Vec<double> homework;
     string n;
     double midterm, final;
 };
@@ -55,7 +71,7 @@ double grade(double midterm, double final, double homework) {
     return 0.2 * midterm + 0.4 * final + 0.4 * homework;
 }
 
-double grade(double midterm, double final, const vector<double>& hw) {
+double grade(double midterm, double final, const Vec<double>& hw) {
     if (hw.size() == 0) {
         throw domain_error("student has done no homework");
     }
@@ -73,7 +89,7 @@ istream& StudentInfo::read(istream& in) {
     return in;
 }
 
-istream& read_hw(istream& in, vector<double>& hw) {
+istream& read_hw(istream& in, Vec<double>& hw) {
     if (in) {
         double x;
         while (in >> x)
@@ -134,24 +150,24 @@ void do_ch9_programs() {
     }
 }
 
-string::size_type width(const vector<string>& v) {
+string::size_type width(const Vec<string>& v) {
     string::size_type maxlen = 0;
 
-    for (vector<string>::size_type i = 0; i < v.size(); i++) {
+    for (Vec<string>::size_type i = 0; i < v.size(); i++) {
         maxlen = max(maxlen, v[i].size());
     }
 
     return maxlen;
 }
 
-vector<string> frame(const vector<string>& words) {
-    vector<string> result;
+Vec<string> frame(const Vec<string>& words) {
+    Vec<string> result;
     string::size_type maxlen = width(words);
     string border(maxlen + 4, '*');
 
     result.push_back(border);
 
-    for (vector<string>::size_type i = 0; i < words.size(); i++) {
+    for (Vec<string>::size_type i = 0; i < words.size(); i++) {
         string padding(maxlen - words[i].size(), ' ');
         
         result.push_back("* "  + words[i] + padding + " *");
@@ -162,11 +178,11 @@ vector<string> frame(const vector<string>& words) {
     return result;
 }
 
-vector<string> vcat(const vector<string>& top, const vector<string>& bottom) {
-    vector<string> result = top;
+Vec<string> vcat(const Vec<string>& top, const Vec<string>& bottom) {
+    Vec<string> result = top;
 
     for (
-        vector<string>::const_iterator iter = bottom.begin();
+        Vec<string>::const_iterator iter = bottom.begin();
         iter != bottom.end();
         iter++
     ) {
@@ -177,17 +193,15 @@ vector<string> vcat(const vector<string>& top, const vector<string>& bottom) {
 }
 
 
-vector<string> hcat(const vector<string>& left, const vector<string>& right) {
-    vector<string> result;
+Vec<string> hcat(const Vec<string>& left, const Vec<string>& right) {
+    Vec<string> result;
 
     string::size_type widthLeft = width(left) + 1;
-    // i will track the rows of left, j the rows of right
-    vector<string>::size_type i = 0, j = 0;
+    Vec<string>::size_type i = 0, j = 0;
 
     while (i != left.size() || j != right.size()) {
         string s;
 
-        // i may have already run out at any stage during the loop.
         if (i != left.size()) {
             s = left[i];
             i++;
@@ -209,18 +223,27 @@ vector<string> hcat(const vector<string>& left, const vector<string>& right) {
 
 
 
-void spew(const vector<string>& pic) {
+void spew(const Vec<string>& pic) {
     for (auto line : pic) {
         std::cout << line << std::endl;
     }
 }
 
 void do_ch5_programs() {
-    vector<string> result = {
-        "The", "quick", "brown", "fox", "jumped", "over", "the", "lazy", "dog"
-    };
+    Vec<string> result;
+    // We don't have a way to accept a static initializer list like a real
+    // vector can.
+    result.push_back("The");
+    result.push_back("quick");
+    result.push_back("brown");
+    result.push_back("fox");
+    result.push_back("jumped");
+    result.push_back("over");
+    result.push_back("the");
+    result.push_back("lazy");
+    result.push_back("dog");
 
-    vector<string> framed = frame(result);
+    Vec<string> framed = frame(result);
     spew(framed);
 
     spew(vcat(result, framed));
