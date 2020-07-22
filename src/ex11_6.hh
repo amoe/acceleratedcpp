@@ -77,7 +77,7 @@ public:
     }
 
     iterator erase(iterator pos);
-
+    void clear();
 
 private:
     void create();
@@ -147,6 +147,23 @@ template <typename T> void Vec<T>::grow() {
 template <typename T> void Vec<T>::unchecked_append(const T& val) {
     alloc.construct(avail, val);
     avail++;
+}
+
+template <typename T>
+typename Vec<T>::iterator Vec<T>::erase(iterator pos) {
+}
+
+/*
+Erases all elements from the container. After this call, size() returns zero.
+
+Invalidates any references, pointers, or iterators referring to contained
+elements. Any past-the-end iterators are also invalidated.
+
+Leaves the capacity() of the vector unchanged.
+*/
+template <typename T>
+void Vec<T>::clear() {
+    avail = data;
 }
 
 
