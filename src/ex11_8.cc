@@ -8,6 +8,7 @@ using std::string;
 // a reference wouldn't work for this case because it can never be null and we
 // don't have maybe/optional
 
+// Should really be a struct, possibly
 template <typename T>
 class Node {
 public:
@@ -62,6 +63,8 @@ public:
         return !(*this == rhs);
     }
 
+    // This is a bit of a violation of encapsulation, but there's no way to
+    // tell what an iterator refers to without this.
     Node<T>* get_current_node() {
         return current_node;
     }
