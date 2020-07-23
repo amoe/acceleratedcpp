@@ -1159,3 +1159,18 @@ It doesn't specify how 'simplified' it can be, so probbaly set a low bar.
 > much of a difference it makes, change the grow function appropriately and
 > measure the difference.
 
+Efficiency gains in what terms?  Basically, avoiding excessive copying.
+
+How to determine how many copies happen?  I wrote a CopyCounter which can be
+registered to a wrapped int.
+
+Factors:
+
+1.1    2.43s    110509157
+2      0.57s    26777215
+3      0.42s    17174453
+10     0.29s    11111111
+
+Basically increasing the factor from 1.1 to 2 gives a very large speedup by
+reducing the amount of copying.  Increasing it further gives diminishing
+returns.
