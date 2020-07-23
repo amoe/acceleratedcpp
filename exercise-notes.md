@@ -1151,3 +1151,11 @@ One important question is how the hell are the iterators going to work?
 Specifically they support bidirectional iterators.
 
 It doesn't specify how 'simplified' it can be, so probbaly set a low bar.
+
+## 11-9
+
+> The grow function in §11.5.1/208 doubles the amount of memory each time it needs
+> more. Estimate the efficiency gains of this strategy. Once you've predicted how
+> much of a difference it makes, change the grow function appropriately and
+> measure the difference.
+
