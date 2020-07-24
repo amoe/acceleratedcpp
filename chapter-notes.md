@@ -1074,3 +1074,20 @@ of this so we will define our own `string`.
 We define the Str class.
 
 Str default constructor just implicitly constructs an empty Vec.
+
+Note this interesting syntax:
+
+    Str(size_type n, char c): data(n, c) { }
+
+What does this do?  Well, it passes these arguments to the Vec constructor.
+This looks somewhat different from `x(0)` like we normally see.  Note that this
+is consistent with this rarely seen syntax:
+
+
+    int x(42);
+
+Which is equivalent to:
+
+    int x = 42;
+
+
