@@ -1174,3 +1174,6 @@ Factors:
 Basically increasing the factor from 1.1 to 2 gives a very large speedup by
 reducing the amount of copying.  Increasing it further gives diminishing
 returns.
+
+The number of copies is approximated by a formula such as 0.5^n where n is the
+factor.

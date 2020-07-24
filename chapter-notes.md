@@ -1062,3 +1062,15 @@ always true about the class.
 
 As none of the public members change the values of the storage pointers they
 can't invalidate the class invariant.
+
+## CHAPTER 11 - "Making class objects act like values"
+
+Most objects act like values i.e. when you copy them they become independent,
+much as `int x = y` creates a separate copy of y.  So does StudentInfo and Vec.
+
+K&M will show that we can also control conversions.  `string` is a good example
+of this so we will define our own `string`.
+
+We define the Str class.
+
+Str default constructor just implicitly constructs an empty Vec.
