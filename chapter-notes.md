@@ -1090,4 +1090,7 @@ Which is equivalent to:
 
     int x = 42;
 
-
+According to the rule of three, we don't need copy, assignment or destructor for
+this, because the defaults to the correct thing.  What would the destructor do?
+It would just need to destroy the `data` member, which is already handled by its
+relevant destructor on the Vec class,
