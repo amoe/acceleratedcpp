@@ -1094,3 +1094,8 @@ According to the rule of three, we don't need copy, assignment or destructor for
 this, because the defaults to the correct thing.  What would the destructor do?
 It would just need to destroy the `data` member, which is already handled by its
 relevant destructor on the Vec class,
+
+K&M talk about 'user-defined conversions': the compiler should automatically
+accept code like `Str foo = "bar"`.  It just looks for a constructor with a
+single argument of the type of the RHS value.  Apparently, the assignment
+operator is also called in this case.

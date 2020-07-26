@@ -28,6 +28,13 @@ int main() {
     cout << "s4: ";
     s4.print();
 
+
+    cout << "s5: ";
+    // User defined conversion.
+    // Implicitly calls the same constructor as s2.
+    Str s5 = "foo bar";
+    s5.print();
+
     cout << "End." << endl;
     return 0;
 }
