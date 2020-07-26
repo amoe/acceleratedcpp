@@ -14,6 +14,12 @@ public:
 
     Str() { }
 
+    Str& operator=(const Str& source) {
+        cout << "inside assignment operator";
+        data = source.data;
+        return *this;
+    }
+
     // Piggy back on the Vec constructor.
     Str(size_type n, char c): data(n, c) { }
 

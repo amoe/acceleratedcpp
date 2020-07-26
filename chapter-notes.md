@@ -1097,5 +1097,14 @@ relevant destructor on the Vec class,
 
 K&M talk about 'user-defined conversions': the compiler should automatically
 accept code like `Str foo = "bar"`.  It just looks for a constructor with a
-single argument of the type of the RHS value.  Apparently, the assignment
-operator is also called in this case.
+single argument of the type of the RHS value.  [Apparently, the assignment
+operator is also called in this case. -- No, this is actually wrong.  K&M refer
+to the following example:
+
+    Str s("foo");
+    s = "bar";
+
+In this case the second statement `s = "bar"` uses both the `const char*`
+constructor and the assignment operator, while `Str s = "bar"` would only use
+the `const char*` constructor (but not the assignment operator), as expected.
+The compiler is being quite clever here.]
