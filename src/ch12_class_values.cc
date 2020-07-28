@@ -35,6 +35,12 @@ int main() {
     Str s5 = "foo bar";
     s5.print();
 
+    char my_char = 'z';
+    cout << "xy" << my_char << my_char << "y" << endl;
+
+    char c2 = s2[6];
+    cout << c2 << c2 << c2 << endl;
+
     cout << "End." << endl;
     return 0;
 }

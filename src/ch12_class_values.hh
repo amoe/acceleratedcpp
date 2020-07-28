@@ -33,6 +33,10 @@ public:
         copy(b, e, back_inserter(data));
     }
 
+    char operator[](int i) {
+        return data[i];
+    }
+
 
     void print() {
         for (Vec<char>::const_iterator it = data.begin(); it != data.end(); it++) {
