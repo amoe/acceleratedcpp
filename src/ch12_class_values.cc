@@ -5,6 +5,7 @@
 #include "vec.hh"
 #include "ch12_class_values.hh"
 
+using std::cin;
 
 int main() {
     cout << "Starting." << endl;
@@ -40,6 +41,9 @@ int main() {
 
     char c2 = s2[6];
     cout << c2 << c2 << c2 << endl;
+
+    Str s6;
+    cin >> s6;
 
     cout << "End." << endl;
     return 0;

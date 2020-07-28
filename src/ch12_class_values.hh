@@ -7,6 +7,7 @@ using std::endl;
 using std::copy;
 using std::strlen;
 using std::back_inserter;
+using std::istream;
 
 class Str {
 public:
@@ -33,10 +34,15 @@ public:
         copy(b, e, back_inserter(data));
     }
 
-    char operator[](int i) {
+    // Called when indexing non-const Str objects.
+    char operator[](size_type i) {
         return data[i];
     }
 
+    // Only used when indexing a Str object that is itself const.
+    const char operator[](size_type i) const {
+        return data[i];
+    }
 
     void print() {
         for (Vec<char>::const_iterator it = data.begin(); it != data.end(); it++) {
@@ -48,5 +54,10 @@ public:
 private:
     Vec<char> data;
 };
+
+void operator>>(istream& x, Str& y) {
+    // FIXME: do something useful
+    cout << "reading a string" << endl;
+}
 
 #endif /* CH12_CLASS_VALUES_HH */

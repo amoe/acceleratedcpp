@@ -1108,3 +1108,27 @@ In this case the second statement `s = "bar"` uses both the `const char*`
 constructor and the assignment operator, while `Str s = "bar"` would only use
 the `const char*` constructor (but not the assignment operator), as expected.
 The compiler is being quite clever here.]
+
+
+K&M discuss the input operator, cin >> foo.
+They note that because of the calling convention for overloaded operators, *in
+the case where an overloaded operator is a member function*, the operator is
+basically parsed as written.  Eg the preceding example is parsed as.
+
+    cin.operator>>(foo);
+
+But that doesn't make sense because we don't own the definition of `cin`.
+Contrast to `operator=`, in this case an instance of the class that we control
+is on the left hand side, not the right hand side, and so we can define it as a
+member function.  I think that this refers to what's often referred to as the
+"Expression Problem" by haskell fans.
+
+However, defining it as a non-member does enable you to implement this order:
+
+    void operator>>(istream& x, Str& y)
+
+This will work, note that it MUST be an istream reference as you can't copy
+istreams.  And also note the return type can be whatever you want, as before,
+you're not compelled to follow the API design of the iostream library, which
+would return the value of `x` to enable chaining.  This definition is simply
+taking advantage of the normal rules for overloading of global functions.
