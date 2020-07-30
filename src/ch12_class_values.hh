@@ -55,9 +55,11 @@ private:
     Vec<char> data;
 };
 
-void operator>>(istream& x, Str& y) {
+istream& operator>>(istream& x, Str& y) {
     // FIXME: do something useful
     cout << "reading a string" << endl;
+    return x;
 }
+
 
 #endif /* CH12_CLASS_VALUES_HH */
