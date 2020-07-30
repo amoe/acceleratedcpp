@@ -60,10 +60,32 @@ private:
     Vec<char> data;
 };
 
-istream& operator>>(istream& x, Str& y) {
-    // FIXME: do something useful
-    cout << "reading a string" << endl;
-    return x;
+istream& operator>>(istream& is, Str& s) {
+    s.data.clear();
+    char c;
+
+    bool last_char_space = true;
+    
+    while (is.get(c) && isspace(c)) {
+        // fast-forward over leading whitespace.  clever loop and a half here
+    }
+
+    if (is) {
+        // do...while because we're reusing the already-existing value of 'c',
+        // rather than ungetting it.
+        do {
+            s.data.push_back(c);
+        } while (is.get(c) && !isspace(c));
+
+        // We might have read some whitespace to terminate the previous loop,
+        // which should still be there for the next reader.  OTOH, if we hit the
+        // end, 'is' will be false, and this will not execute.
+        if (is) {
+            is.unget();
+        }
+    }
+
+    return is;
 }
 
 ostream& operator<<(ostream& os, const Str& s) {
