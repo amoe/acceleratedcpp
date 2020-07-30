@@ -45,6 +45,8 @@ int main() {
     Str s6;
     cin >> s6;
 
+    cout << "About to write a string: " << s2 << endl;
+
     cout << "End." << endl;
     return 0;
 }

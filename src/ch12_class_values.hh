@@ -1,6 +1,7 @@
 #ifndef CH12_CLASS_VALUES_HH
 #define CH12_CLASS_VALUES_HH
 
+using std::ostream;
 using std::list;
 using std::cout;
 using std::endl;
@@ -51,6 +52,10 @@ public:
         cout << endl;
     }
 
+    size_type size() const {
+        return data.size();
+    }
+
 private:
     Vec<char> data;
 };
@@ -59,6 +64,13 @@ istream& operator>>(istream& x, Str& y) {
     // FIXME: do something useful
     cout << "reading a string" << endl;
     return x;
+}
+
+ostream& operator<<(ostream& os, const Str& s) {
+    for (Str::size_type i = 0; i < s.size(); i++) {
+        os << s[i];
+    }
+    return os;
 }
 
 
