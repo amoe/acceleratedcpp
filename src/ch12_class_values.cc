@@ -42,9 +42,13 @@ int main() {
     char c2 = s2[6];
     cout << c2 << c2 << c2 << endl;
 
+    cout << "Demo overloaded iostream operators." << endl;
+    cout << "Please type: ";
+
     Str s6;
     cin >> s6;
 
+    cout << "Read string as: " << s6 << endl;
     cout << "About to write a string: " << s2 << endl;
 
     cout << "End." << endl;

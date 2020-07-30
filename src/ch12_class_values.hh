@@ -10,7 +10,12 @@ using std::strlen;
 using std::back_inserter;
 using std::istream;
 
+
 class Str {
+    // Friend declarations are unaffected by access labels, so put them
+    // at the start.
+    friend istream& operator>>(istream&, Str&);
+
 public:
     using size_type = Vec<char>::size_type;
 
@@ -55,6 +60,7 @@ public:
     size_type size() const {
         return data.size();
     }
+
 
 private:
     Vec<char> data;
