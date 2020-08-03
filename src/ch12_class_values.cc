@@ -51,6 +51,24 @@ int main() {
     cout << "Read string as: " << s6 << endl;
     cout << "About to write a string: " << s2 << endl;
 
+    cout << "Addition/assignment" << endl;
+
+    Str s7("Foo bar");
+    Str s8("baz");
+
+    s7 += s8;
+
+    cout << "Concatenated value was " << s7 << endl;
+
+    cout << "Regular addition" << endl;
+
+    Str s9("foo bar ");
+    Str s10("baz");
+
+    Str s11 = s9 + s10;
+
+    cout << "Added value was " << s11 << endl;
+
     cout << "End." << endl;
     return 0;
 }

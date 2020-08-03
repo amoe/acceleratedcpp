@@ -27,6 +27,16 @@ public:
         return *this;
     }
 
+    // the only operation we have is push_back so we just have to do that
+    Str& operator+=(const Str& s) {
+        for (Vec<char>::const_iterator it = s.data.begin(); it != s.data.end(); it++) {
+            data.push_back(*it);
+        }
+
+        return *this;
+    }
+
+
     // Piggy back on the Vec constructor.
     Str(size_type n, char c): data(n, c) { }
 
@@ -65,6 +75,13 @@ public:
 private:
     Vec<char> data;
 };
+
+Str operator+(const Str& x, const Str& y) {
+    Str result = x;   // Make a non-const copy.
+    result += y;
+    return result;   // Also copy on returning.
+}
+
 
 istream& operator>>(istream& is, Str& s) {
     s.data.clear();
