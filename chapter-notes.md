@@ -1139,3 +1139,11 @@ Every string literal in this line gets converted to intermediate temporary
 objects of the `Str` class.
 
     const Str greeting = "Hello, " + name + "!";
+
+> If an operator is a member of a class, then that operator's left operand
+> cannot be the result of an automatic conversion.
+
+So in most cases binary operators should be defined as nonmembers.  But when we
+have things like +=, it doesn't make sense to have the LHS value be the result
+of an automatic conversion, because that would mean it's a temporary variable
+and thus ineligible for assignment.
