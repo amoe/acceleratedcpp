@@ -71,7 +71,6 @@ public:
         return data.size();
     }
 
-
 private:
     Vec<char> data;
 };

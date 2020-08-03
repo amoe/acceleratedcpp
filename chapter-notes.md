@@ -1147,3 +1147,48 @@ So in most cases binary operators should be defined as nonmembers.  But when we
 have things like +=, it doesn't make sense to have the LHS value be the result
 of an automatic conversion, because that would mean it's a temporary variable
 and thus ineligible for assignment.
+
+talking about explicit things they give an example:
+
+    void doSomething(MyClass);
+
+Now we have a non-explicit marked constructor taking an int:
+
+    MyClass(int);
+
+Now if we invoke `doSomething(42)`, the `int` constructor will be invoked.
+But the user didn't necessarily mean for that to happen.  For instance,
+`vector<int> foo(42)` will allocate 42 elements using the fill constructor, but
+this was likely just a typo.
+
+> In general, it is useful to make `explicit` the constructors that define the
+> structure of the object being constructed, rather than its contents.  Those
+> constructors whose arguments become part of the object usually should not be
+> `explicit`.
+
+That makes sense.
+
+You can define explicit conversions.  using a syntax like:
+
+
+    operator double() const;
+
+This defines how to convert the value to a double.  We already use these when we
+test the value of an istream.
+
+    operator bool() const;
+
+Long digression on how it's implemented but the answer is that istream actually
+defines `operator void*() const` instead of the bool one, in order to prevent
+some weird usages.
+
+Then a long tangent about the pitfalls of `c_str()` which is somewhat
+interesting with regard to ownership semantics.  In short, they designed
+`std::string` to provide these dangerous operations but not as implicit
+conversions, so you have to explicitly ask for the dangerous stuff by calling
+member functions.  `c_str()` has a bunch of very restrictive limitations, the
+pointer becomes completely invalid as soon as you modify the string in anyway
+(which does make sense), plus it will obviously become invalid if the string
+object goes out of scope.
+
+
