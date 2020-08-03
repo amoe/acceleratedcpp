@@ -1132,3 +1132,10 @@ istreams.  And also note the return type can be whatever you want, as before,
 you're not compelled to follow the API design of the iostream library, which
 would return the value of `x` to enable chaining.  This definition is simply
 taking advantage of the normal rules for overloading of global functions.
+
+This expression will already work because we defined a constructor accepting
+`const char*`.  It will parse as a bunch of different constructor invocations.
+Every string literal in this line gets converted to intermediate temporary
+objects of the `Str` class.
+
+    const Str greeting = "Hello, " + name + "!";

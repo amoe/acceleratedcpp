@@ -70,5 +70,14 @@ int main() {
     cout << "Added value was " << s11 << endl;
 
     cout << "End." << endl;
+
+
+    cout << "Mixed-type expressions" << endl;
+    Str name("Dave");
+    const Str greeting = "Hello, " + name + "!";
+
+    cout << greeting << endl;
+
+
     return 0;
 }
