@@ -12,11 +12,21 @@ class StrV {
     friend ostream& operator<<(ostream&, const StrV&);
 
 public:
+    explicit StrV() {
+        data = new char[0];
+    }
+
     explicit StrV(const char* b) {
         size_t input_size = strlen(b);
         data = new char[input_size];
         copy(b, b + input_size, data);
     }
+
+
+    // explicit Str(size_type n, char c): data(n, c) { 
+
+    // }
+
 
 private:
     char* data;

@@ -10,6 +10,9 @@ int main() {
     StrV foo("hello world");
     cout << foo << endl;
 
+    StrV empty;
+    cout << "Emtpy string: '" << empty << "'" << endl;
+
     cout << "End." << endl;
     return 0;
 }
