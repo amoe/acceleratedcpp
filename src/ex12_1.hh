@@ -23,17 +23,19 @@ public:
     }
 
 
-    // explicit Str(size_type n, char c): data(n, c) { 
-
-    // }
-
+    explicit StrV(size_t n, char c) { 
+        data = new char[n];
+        for (size_t i = 0; i < n; i++) {
+            *(data + i) = c;
+        }
+    }
 
 private:
     char* data;
 };
 
 ostream& operator<<(ostream& os, const StrV& s) {
-    os << s.data;
+    os << s.data;   // XXX this is wrong because we shouldn't be using nul terminators
     return os;                
 }
 

@@ -1,5 +1,4 @@
 #include <iostream>
-#include "ex12_1.hh"
 
 using std::cout;
 using std::endl;

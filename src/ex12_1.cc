@@ -11,7 +11,13 @@ int main() {
     cout << foo << endl;
 
     StrV empty;
-    cout << "Emtpy string: '" << empty << "'" << endl;
+    cout << "Empty string: '" << empty << "'" << endl;
+
+    StrV filled_string(7, 'z');
+
+    cout << "Filled string: '" << filled_string << endl;
+
+
 
     cout << "End." << endl;
     return 0;
