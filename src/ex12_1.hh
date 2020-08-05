@@ -33,6 +33,11 @@ public:
         }
     }
 
+    template <typename T>
+    StrV(T b, T e) {
+    }
+
+
 private:
     char* data;
     char* avail;

@@ -1,8 +1,10 @@
 #include <iostream>
+#include <list>
 #include "ex12_1.hh"
 
 using std::cout;
 using std::endl;
+using std::list;
 
 int main() {
     cout << "Starting." << endl;
@@ -17,6 +19,12 @@ int main() {
 
     cout << "Filled string: '" << filled_string << "'" << endl;
 
+
+    list<char> source = {'h', 'e', 'l', 'l', 'o'};
+    StrV copied_string(source.begin(), source.end());
+
+
+    cout << "Copied from container: '" << copied_string << "'" << endl;
 
     cout << "End." << endl;
     return 0;
