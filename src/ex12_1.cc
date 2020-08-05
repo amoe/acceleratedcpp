@@ -15,8 +15,7 @@ int main() {
 
     StrV filled_string(7, 'z');
 
-    cout << "Filled string: '" << filled_string << endl;
-
+    cout << "Filled string: '" << filled_string << "'" << endl;
 
 
     cout << "End." << endl;
