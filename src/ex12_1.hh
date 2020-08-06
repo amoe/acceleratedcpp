@@ -33,6 +33,9 @@ public:
         }
     }
 
+    // Range constructor
+    // Because b and e are input iterators, we can't preallocate the whole
+    // string, because we don't know the size until we add data.
     template <typename T>
     StrV(T b, T e) {
     }
