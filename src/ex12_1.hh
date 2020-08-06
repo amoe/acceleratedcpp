@@ -38,6 +38,21 @@ public:
     // string, because we don't know the size until we add data.
     template <typename T>
     StrV(T b, T e) {
+        size_t seen_so_far = 0;
+        
+        while (b != e) {
+            size_t new_size = seen_so_far + 1;
+            char* new_data = new char[new_size];
+            copy(data, data + seen_so_far, new_data);
+            delete[] data;
+            data = new_data;
+            avail = new_data + new_size;
+
+            // avail points one past the end
+            *(avail - 1) = *b;
+            seen_so_far = new_size;
+            b++;
+        }
     }
 
 
