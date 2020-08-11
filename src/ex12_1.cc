@@ -26,6 +26,9 @@ int main() {
 
     cout << "Copied from container: '" << copied_string << "'" << endl;
 
+
+    // cout << "Index non-const StrV: '" << foo[3] << "'" << endl;
+
     cout << "End." << endl;
     return 0;
 }

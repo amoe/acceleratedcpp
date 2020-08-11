@@ -12,6 +12,8 @@ class StrV {
     friend ostream& operator<<(ostream&, const StrV&);
 
 public:
+    using size_type = size_t;
+
     explicit StrV() {
         data = new char[0];
         avail = data;
@@ -33,13 +35,18 @@ public:
         }
     }
 
+
     // Range constructor
     // Because b and e are input iterators, we can't preallocate the whole
     // string, because we don't know the size until we add data.
     template <typename T>
     StrV(T b, T e) {
         size_t seen_so_far = 0;
-        
+
+        // Initialization to null is crucial here because delete[] is
+        // defined to be a no-op, allowing us to skip a conditional.
+        data = 0;
+
         while (b != e) {
             size_t new_size = seen_so_far + 1;
             char* new_data = new char[new_size];
