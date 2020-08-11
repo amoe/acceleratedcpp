@@ -3,6 +3,7 @@
 
 #include <cstring>
 
+using std::istream;
 using std::ostream;
 using std::cout;
 using std::endl;
@@ -19,7 +20,7 @@ public:
         avail = data;
     }
 
-    explicit StrV(const char* b) {
+    StrV(const char* b) {
         size_t input_size = strlen(b);
         data = new char[input_size];
         copy(b, b + input_size, data);
@@ -83,6 +84,11 @@ ostream& operator<<(ostream& os, const StrV& s) {
         position++;
     }
     return os;                
+}
+
+istream& operator>>(istream& is, StrV& s) {
+    cout << "reading input stream" << endl;
+    return is;
 }
 
 

@@ -2,6 +2,7 @@
 #include <list>
 #include "ex12_1.hh"
 
+using std::cin;
 using std::cout;
 using std::endl;
 using std::list;
@@ -31,6 +32,17 @@ int main() {
 
     StrV const c_str_v("hello universe");
     cout << "Index const StrV: '" << c_str_v[6] << "'" << endl;
+
+    StrV s_implicit_conversion = "hello world";
+    cout << "Implicit conversion: '" << s_implicit_conversion << "'" << endl;
+
+    cout << "Demo overloaded iostream operators." << endl;
+    cout << "Please type: ";
+    StrV si;
+    cin >> si;
+    cout << "Read string as: '" << si << "'" << endl;
+
+
 
     cout << "End." << endl;
     return 0;
