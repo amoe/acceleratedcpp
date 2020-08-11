@@ -27,7 +27,10 @@ int main() {
     cout << "Copied from container: '" << copied_string << "'" << endl;
 
 
-    // cout << "Index non-const StrV: '" << foo[3] << "'" << endl;
+    cout << "Index non-const StrV: '" << foo[3] << "'" << endl;
+
+    StrV const c_str_v("hello universe");
+    cout << "Index const StrV: '" << c_str_v[6] << "'" << endl;
 
     cout << "End." << endl;
     return 0;
