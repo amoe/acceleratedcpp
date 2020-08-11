@@ -10,14 +10,18 @@ using std::endl;
 using std::copy;
 
 class StrV {
-    friend ostream& operator<<(ostream&, const StrV&);
+    friend ostream& operator<<(ostream&, const StrV&);   // FIXME friend unnecessary
+    friend istream& operator>>(istream&, StrV&);
 
 public:
     using size_type = size_t;
 
     explicit StrV() {
-        data = new char[0];
-        avail = data;
+        // It's fine to not allocate here because all read loops
+        // will just check 'data != avail' and be done, plus delete[]
+        // is a no-op, so clear() will still work.
+        data = 0;
+        avail = 0;
     }
 
     StrV(const char* b) {
@@ -50,29 +54,43 @@ public:
     // string, because we don't know the size until we add data.
     template <typename T>
     StrV(T b, T e) {
-        size_t seen_so_far = 0;
 
         // Initialization to null is crucial here because delete[] is
         // defined to be a no-op, allowing us to skip a conditional.
         data = 0;
+        avail = 0;
 
         while (b != e) {
-            size_t new_size = seen_so_far + 1;
-            char* new_data = new char[new_size];
-            copy(data, data + seen_so_far, new_data);
-            delete[] data;
-            data = new_data;
-            avail = new_data + new_size;
-
-            // avail points one past the end
-            *(avail - 1) = *b;
-            seen_so_far = new_size;
+            push_back(*b);
             b++;
         }
     }
 
+    size_type size() {
+        return avail - data;
+    }
+
 
 private:
+    // Not part of the string api but used internally.
+    void push_back(char c) {
+        size_t new_size = size() + 1;
+        char* new_data = new char[new_size];
+        copy(data, avail, new_data);
+        delete[] data;
+        data = new_data;
+        avail = new_data + new_size;
+
+        // avail points one past the end
+        *(avail - 1) = c;
+    }
+
+    void clear() {
+        delete[] data;
+        data = 0;
+        avail = 0;
+    }
+
     char* data;
     char* avail;
 };
@@ -86,8 +104,32 @@ ostream& operator<<(ostream& os, const StrV& s) {
     return os;                
 }
 
+// A variation, this one has two unget calls instead of one, but
+// the logic is a bit more straightforward
 istream& operator>>(istream& is, StrV& s) {
-    cout << "reading input stream" << endl;
+    s.clear();
+    char c;
+
+    // Fast forward over all space
+    while (is.get(c)) {
+        if (!isspace(c)) {
+            is.unget();
+            break;
+        }
+    }
+
+    // Bail out now if we hit the end
+    if (!is) return is;
+    
+    while (is.get(c)) {
+        if (isspace(c)) {
+            is.unget();
+            break;
+        }
+
+        s.push_back(c);
+    }
+    
     return is;
 }
 

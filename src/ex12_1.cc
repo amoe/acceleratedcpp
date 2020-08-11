@@ -37,14 +37,11 @@ int main() {
     cout << "Implicit conversion: '" << s_implicit_conversion << "'" << endl;
 
 
-    // Should be implemented after refactoring range constructor
-    // cout << "Demo overloaded iostream operators." << endl;
-    // cout << "Please type: ";
-    // StrV si;
-    // cin >> si;
-    // cout << "Read string as: '" << si << "'" << endl;
-
-
+    cout << "Demo overloaded iostream operators." << endl;
+    cout << "Please type: ";
+    StrV si;
+    cin >> si;
+    cout << "Read string as: '" << si << "'" << endl;
 
     cout << "End." << endl;
     return 0;
