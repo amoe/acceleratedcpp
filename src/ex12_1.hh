@@ -40,15 +40,6 @@ public:
         }
     }
 
-    char operator[](size_type i) {
-        return data[i];
-    }
-
-    const char operator[](size_type i) const {
-        return data[i];
-    }
-
-
     // Range constructor
     // Because b and e are input iterators, we can't preallocate the whole
     // string, because we don't know the size until we add data.
@@ -68,6 +59,14 @@ public:
 
     size_type size() {
         return avail - data;
+    }
+
+    char operator[](size_type i) {
+        return data[i];
+    }
+
+    const char operator[](size_type i) const {
+        return data[i];
     }
 
 
@@ -131,6 +130,12 @@ istream& operator>>(istream& is, StrV& s) {
     }
     
     return is;
+}
+
+StrV operator+(const StrV& x, const StrV& y) {
+    StrV result = x;
+    result += y;
+    return result;
 }
 
 

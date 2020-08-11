@@ -43,6 +43,31 @@ int main() {
     cin >> si;
     cout << "Read string as: '" << si << "'" << endl;
 
+    cout << "Addition/assignment" << endl;
+
+    StrV s7("Foo bar");
+    StrV s8("baz");
+
+    s7 += s8;
+
+    cout << "Concatenated value was " << s7 << endl;
+
+
+    cout << "Regular addition" << endl;
+
+    StrV s9("foo bar ");
+    StrV s10("baz");
+
+    StrV s11 = s9 + s10;
+
+    cout << "Added value was " << s11 << endl;
+
+    cout << "Mixed-type expressions" << endl;
+    StrV name("Dave");
+    const StrV greeting = "Hello, " + name + "!";
+
+    cout << greeting << endl;
+
     cout << "End." << endl;
     return 0;
 }
