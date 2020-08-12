@@ -56,14 +56,14 @@ int main() {
     cin >> si;
     cout << "Read string as: '" << si << "'" << endl;
 
-    // cout << "Addition/assignment" << endl;
+    cout << "Addition/assignment" << endl;
 
-    // StrV s7("Foo bar");
-    // StrV s8("baz");
+    StrV s7("Foo bar");
+    StrV s8("baz");
 
-    // s7 += s8;
+    s7 += s8;
 
-    // cout << "Concatenated value was " << s7 << endl;
+    cout << "Concatenated value was " << s7 << endl;
 
 
     // cout << "Regular addition" << endl;

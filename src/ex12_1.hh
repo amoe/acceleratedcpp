@@ -72,6 +72,12 @@ public:
         clear();
     }
 
+    // Like initialize_from_iterator, except that we do not clear first.
+    StrV& operator+=(const StrV& s) {
+        initialize_from_iterator(s.data, s.avail);
+        return *this;
+    }
+
     size_type size() {
         return avail - data;
     }
