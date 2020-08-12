@@ -68,7 +68,9 @@ public:
         return *this;
     }
 
-
+    ~StrV() {
+        clear();
+    }
 
     size_type size() {
         return avail - data;
