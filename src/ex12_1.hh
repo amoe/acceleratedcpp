@@ -51,11 +51,24 @@ public:
         data = 0;
         avail = 0;
 
-        while (b != e) {
-            push_back(*b);
-            b++;
-        }
+        initialize_from_iterator(b, e);
     }
+
+    // Copy constructor: Use range constructor to copy source
+    StrV(const StrV& source): StrV(source.data, source.avail) {
+    }
+
+    // Assignment operator: 
+    StrV& operator=(const StrV& source) {
+        if (&source != this) {
+            clear();
+            initialize_from_iterator(source.data, source.avail);
+        }
+
+        return *this;
+    }
+
+
 
     size_type size() {
         return avail - data;
@@ -71,6 +84,14 @@ public:
 
 
 private:
+    template <typename T>
+    void initialize_from_iterator(T b, T e) {
+        while (b != e) {
+            push_back(*b);
+            b++;
+        }
+    }
+
     // Not part of the string api but used internally.
     void push_back(char c) {
         size_t new_size = size() + 1;
@@ -131,12 +152,5 @@ istream& operator>>(istream& is, StrV& s) {
     
     return is;
 }
-
-StrV operator+(const StrV& x, const StrV& y) {
-    StrV result = x;
-    result += y;
-    return result;
-}
-
 
 #endif /* EX12_1_HH */

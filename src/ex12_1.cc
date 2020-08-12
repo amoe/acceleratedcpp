@@ -7,6 +7,19 @@ using std::cout;
 using std::endl;
 using std::list;
 
+void demo_assignment_operator() {
+    cout << "Assignment" << endl;
+    StrV name1("Dave");
+    StrV name2;
+    name2 = name1;
+
+    cout << "Type something (not Dave): ";
+    cin >> name1;
+
+    cout << "name1 is " << name1 << endl;
+    cout << "name2 is " << name2 << endl;
+}
+
 int main() {
     cout << "Starting." << endl;
     
@@ -43,30 +56,45 @@ int main() {
     cin >> si;
     cout << "Read string as: '" << si << "'" << endl;
 
-    cout << "Addition/assignment" << endl;
+    // cout << "Addition/assignment" << endl;
 
-    StrV s7("Foo bar");
-    StrV s8("baz");
+    // StrV s7("Foo bar");
+    // StrV s8("baz");
 
-    s7 += s8;
+    // s7 += s8;
 
-    cout << "Concatenated value was " << s7 << endl;
+    // cout << "Concatenated value was " << s7 << endl;
 
 
-    cout << "Regular addition" << endl;
+    // cout << "Regular addition" << endl;
 
-    StrV s9("foo bar ");
-    StrV s10("baz");
+    // StrV s9("foo bar ");
+    // StrV s10("baz");
 
-    StrV s11 = s9 + s10;
+    // StrV s11 = s9 + s10;
 
-    cout << "Added value was " << s11 << endl;
+    // cout << "Added value was " << s11 << endl;
 
-    cout << "Mixed-type expressions" << endl;
-    StrV name("Dave");
-    const StrV greeting = "Hello, " + name + "!";
+    // cout << "Mixed-type expressions" << endl;
+    // StrV name("Dave");
+    // const StrV greeting = "Hello, " + name + "!";
 
-    cout << greeting << endl;
+    // cout << greeting << endl;
+
+
+    demo_assignment_operator();
+
+
+
+    cout << "Copy constructor" << endl;
+    StrV name1("Dave");
+    StrV name2 = name1;
+
+    cout << "Type something (not Dave): ";
+    cin >> name1;
+
+    cout << "name1 is " << name1 << endl;
+    cout << "name2 is " << name2 << endl;
 
     cout << "End." << endl;
     return 0;
