@@ -66,25 +66,22 @@ int main() {
     cout << "Concatenated value was " << s7 << endl;
 
 
-    // cout << "Regular addition" << endl;
+    cout << "Regular addition" << endl;
 
-    // StrV s9("foo bar ");
-    // StrV s10("baz");
+    StrV s9("foo bar ");
+    StrV s10("baz");
 
-    // StrV s11 = s9 + s10;
+    StrV s11 = s9 + s10;
 
-    // cout << "Added value was " << s11 << endl;
+    cout << "Added value was " << s11 << endl;
 
-    // cout << "Mixed-type expressions" << endl;
-    // StrV name("Dave");
-    // const StrV greeting = "Hello, " + name + "!";
+    cout << "Mixed-type expressions" << endl;
+    StrV name("Dave");
+    const StrV greeting = "Hello, " + name + "!";
 
-    // cout << greeting << endl;
-
+    cout << greeting << endl;
 
     demo_assignment_operator();
-
-
 
     cout << "Copy constructor" << endl;
     StrV name1("Dave");

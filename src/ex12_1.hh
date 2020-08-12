@@ -161,4 +161,10 @@ istream& operator>>(istream& is, StrV& s) {
     return is;
 }
 
+StrV operator+(const StrV& a, const StrV& b) {
+    StrV tmp = a;
+    tmp += b;
+    return tmp;
+}
+
 #endif /* EX12_1_HH */
