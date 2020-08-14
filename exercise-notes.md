@@ -1177,3 +1177,37 @@ returns.
 
 The number of copies is approximated by a formula such as 0.5^n where n is the
 factor.
+
+
+# 12-1
+
+Consider the cost of using Vec relative to managing our own storage --
+interesting, in terms of storage -- it's not really a fair comparison in time
+efficiency terms because we do O(n) new/delete/copy in StrV versus O(
+
+# 12-2
+
+Several interesting things about this.
+
+* We lazily always reserve space for an extra character which is pointed to by
+  *avail.  That way we can just return the buffer without having to copy it.
+* data() has basically the same implementation as c_str().  However it does not
+  explicitly null-terminate.
+* Only doing this because K&M is C++98.  C++11 has data() forced to be null
+  terminated.  So it would be an alias for c_str().
+* Regardless, gcc seems to cause `new char[x]` to be initialized to zero anyway.
+  So in practice the effects of data() and c_str() seem identical even in our
+  C++98 style definition, but that's a compiler quirk.
+* However, `char foo[x]` on the stack does indeed contain garbage at position
+  x+1.  So it seems that only heap memory is affected by this.
+* K&M actually seem to suggest earlier in the text that the c_str() *COULD*
+  actually allocate, although apparently no implementation has ever done this.
+  That would mean that the class would have to take responsibility for the
+  pointer and delete its `data()` and `c_str()` buffers in its destructors.
+* The empty string now has to allocate a buffer of size 1 rather than not
+  allocating at all, because `StrV foo; foo.c_str()` must be valid even if it's
+  nonsensical.
+
+I posted to reddit about this, see
+https://www.reddit.com/r/cpp_questions/comments/i9h2yn/accelerated_c_122_difference_between_data_and_c/
+
