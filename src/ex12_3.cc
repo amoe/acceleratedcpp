@@ -17,6 +17,9 @@ int main() {
 
     cout << ((fut3 == fut4) ? "true" : "false") << endl;
 
+    cout << ((fut1 != fut2) ? "true" : "false") << endl;
+
+
     cout << "End." << endl;
     return 0;
 }

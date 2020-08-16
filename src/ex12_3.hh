@@ -76,6 +76,10 @@ public:
         return *this;
     }
 
+    bool operator!=(const StrV& s) {
+        return !(*this == s);
+    }
+
     bool operator==(const StrV& rhs) {
         int result = strcmp(this->c_str(), rhs.c_str());
         return result == 0;
