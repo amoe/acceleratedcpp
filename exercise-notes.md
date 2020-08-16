@@ -1211,3 +1211,41 @@ Several interesting things about this.
 I posted to reddit about this, see
 https://www.reddit.com/r/cpp_questions/comments/i9h2yn/accelerated_c_122_difference_between_data_and_c/
 
+
+# 12-3
+
+Relational operators to define are
+			
+				==
+					Is Equal To
+					3 == 5 gives us false
+			
+
+			
+				!=
+					Not Equal To
+					3 != 5 gives us true
+			
+
+			
+				>
+					Greater Than
+					3 > 5 gives us false
+			
+
+			
+				<
+					Less Than
+					3 < 5 gives us true
+			
+
+			
+				>=
+					Greater Than or Equal To
+					3 >= 5 give us false
+			
+
+			
+				<=
+					Less Than or Equal To
+					3 <= 5 gives us true
