@@ -76,6 +76,11 @@ public:
         return *this;
     }
 
+    bool operator==(const StrV& rhs) {
+        int result = strcmp(this->c_str(), rhs.c_str());
+        return result == 0;
+    }
+
     size_type size() {
         return avail - buffer;
     }
