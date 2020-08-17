@@ -1249,3 +1249,24 @@ Relational operators to define are
 				<=
 					Less Than or Equal To
 					3 <= 5 gives us true
+
+## 12-4
+
+Already done in 12-3 due to not reading question properly.
+
+## 12-5
+
+> Implement concatenation for Str so as not to rely on conversions from const
+> char* .
+
+Not really sure what this means, some explicit overload
+
+I guess that it means
+
+I think the issue is that + is implemented in terms of += which is also going to
+do an implicit conversion when its RHS arg is a char*.
+
+So you also need to define +=.
+
+We can test that it was done correctly by just marking the char* constructor as
+explicit.
