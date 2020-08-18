@@ -1282,3 +1282,11 @@ this is boolean coercion eg
 operator bool();
 
 successfullly added conversion operator, this is not so hard.
+
+## 12-7
+
+> The standard string class provides random-access iterators to manipulate
+> the string 's characters. Add iterators and the iterator operations begin and
+> end to your Str class.
+
+It doesn't say whether this should operate on the Str or StrV class.
