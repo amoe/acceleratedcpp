@@ -1270,3 +1270,15 @@ So you also need to define +=.
 
 We can test that it was done correctly by just marking the char* constructor as
 explicit.
+
+## 12-6
+
+> 12-6. Give Str an operation that will let us implicitly use a Str object as a
+> condition. The test should fail if the Str is empty, and should succeed
+> otherwise.
+
+this is boolean coercion eg
+
+operator bool();
+
+successfullly added conversion operator, this is not so hard.
