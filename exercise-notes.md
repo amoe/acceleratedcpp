@@ -1297,3 +1297,4 @@ It doesn't say whether this should operate on the Str or StrV class.
 > Use class `ostream_iterator` to reimplement the `Str` output operator. Why didn't
 > we ask you to reimplement the input operator using class `istream_iterator`?
 
+What is ostream_iterator?
