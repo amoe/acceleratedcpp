@@ -148,7 +148,7 @@ ostream& operator<<(ostream& os, const StrV& s) {
 // A variation, this one has two unget calls instead of one, but
 // the logic is a bit more straightforward
 istream& operator>>(istream& is, StrV& s) {
-    copy(istream_iterator<char>(is), istream_iterator<char>(), );
+    // copy(istream_iterator<char>(is), istream_iterator<char>(), );
     return is;
 }
 
