@@ -1,7 +1,9 @@
+#include <list>
 #include <iostream>
 #include <vector>
 #include "ex12_10.hh"
 
+using std::list;
 using std::vector;
 using std::cout;
 using std::endl;
@@ -39,6 +41,11 @@ int main() {
     }
 
     test_copy();
+
+    vector<char> foo = {'h', 'e', 'l', 'l', 'o'};
+    Str s4(foo.begin(), foo.end());
+
+    cout << "String value: '" << s4 << "'" << endl;
 
     cout << "End." << endl;
     return 0;
