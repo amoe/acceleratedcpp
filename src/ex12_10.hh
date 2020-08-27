@@ -22,8 +22,14 @@ public:
     using reference = T&;
     using const_reference = const T&;
 
+
     Vec() {
         create();
+    }
+
+    template <typename U>
+    explicit Vec(U b, U e) {
+        create(b, e);
     }
 
     explicit Vec(size_type n, const T& val) {
@@ -81,7 +87,14 @@ private:
 
     void create(size_type n, const T& val);
 
-    void create(const_iterator b, const_iterator e);
+    template <typename U>
+    void create(U b, U e) {
+        data = alloc.allocate(e - b);
+        iterator valid_end = uninitialized_copy(b, e, data);
+        limit = valid_end;
+        avail = valid_end;
+    }
+
 
     void uncreate();
 
@@ -113,13 +126,6 @@ template <typename T> void Vec<T>::create(size_type n, const T& val) {
     uninitialized_fill(data, limit, val);
 }
 
-template <typename T> void Vec<T>::create(const_iterator b, const_iterator e) {
-    data = alloc.allocate(e - b);
-    iterator valid_end = uninitialized_copy(b, e, data);
-    limit = valid_end;
-    avail = valid_end;
-}
-
 template <typename T> void Vec<T>::uncreate() {
     if (data) {
         iterator it = avail;
@@ -127,7 +133,6 @@ template <typename T> void Vec<T>::uncreate() {
         while (it != data) {
             alloc.destroy(--it);
         }
-
 
         alloc.deallocate(data, limit - data);
     }

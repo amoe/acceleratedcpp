@@ -154,4 +154,5 @@ env.Program(target='ex12_6', source=['ex12_6.cc'])
 env.Program(target='ex12_7', source=['ex12_7.cc'])
 env.Program(target='ex12_8', source=['ex12_8.cc'])
 env.Program(target='ex12_9', source=['ex12_9.cc'])
+env.Program(target='ex12_10', source=['ex12_10.cc'])
 

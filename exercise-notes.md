@@ -1303,6 +1303,10 @@ What is ostream_iterator?  Actually very easy, it just does a copy.
 > we ask you to reimplement the input operator using class `istream_iterator`?
 
 I believe the reason is that the input operator will always read up to EOF?
+It could also be due to memory allocation because we can't use back_inserter.
+
+##c++        PJBoy > amoe, I think they were alluding to the fact that istream_iterator skips spaces
+
 
 ## 12-10
 
