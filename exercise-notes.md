@@ -1294,7 +1294,19 @@ It doesn't say whether this should operate on the Str or StrV class.
 
 ## 12-9
 
-> Use class `ostream_iterator` to reimplement the `Str` output operator. Why didn't
+> Use class `ostream_iterator` to reimplement the `Str` output operator. 
+
+What is ostream_iterator?  Actually very easy, it just does a copy.
+
+
+> Why didn't
 > we ask you to reimplement the input operator using class `istream_iterator`?
 
-What is ostream_iterator?
+I believe the reason is that the input operator will always read up to EOF?
+
+## 12-10
+
+> 0. Having seen in §12.1/212 how Str defined a constructor that takes a pair 
+> iterators, we can imagine that such a constructor would be useful in class Vec
+> . Add this constructor to Vec , and reimplement Str to use the Vec constructor
+> instead of calling copy .

@@ -4,6 +4,8 @@
 #include <cstring>
 #include <iterator>
 
+using std::back_inserter;
+using std::istream_iterator;
 using std::ostream_iterator;
 using std::istream;
 using std::ostream;
@@ -146,29 +148,7 @@ ostream& operator<<(ostream& os, const StrV& s) {
 // A variation, this one has two unget calls instead of one, but
 // the logic is a bit more straightforward
 istream& operator>>(istream& is, StrV& s) {
-    s.clear();
-    char c;
-
-    // Fast forward over all space
-    while (is.get(c)) {
-        if (!isspace(c)) {
-            is.unget();
-            break;
-        }
-    }
-
-    // Bail out now if we hit the end
-    if (!is) return is;
-    
-    while (is.get(c)) {
-        if (isspace(c)) {
-            is.unget();
-            break;
-        }
-
-        s.push_back(c);
-    }
-    
+    copy(istream_iterator<char>(is), istream_iterator<char>(), );
     return is;
 }
 
