@@ -9,9 +9,9 @@ using std::string;
 using std::vector;
 
 // Koenig&Moo's index-based string split.
-vector<string> split(const string& s) {
+vector<StrV> split(const StrV& s) {
     vector<string> result;
-    typedef string::size_type str_sz;
+    typedef StrV::size_type str_sz;
     str_sz i = 0;
 
     while (i < s.size()) {
@@ -38,7 +38,7 @@ vector<string> split(const string& s) {
 int main() {
     cout << "Starting." << endl;
     
-    string foo = "The quick brown fox jumped over the lazy dog";
+    StrV foo("The quick brown fox jumped over the lazy dog");
 
     using iter_t = vector<string>::const_iterator;
     vector<string> result = split(foo);
