@@ -1,17 +1,19 @@
 #include <iostream>
 #include <vector>
 #include <string>
+#include <list>
 #include "ex12_11.hh"
 
+using std::list;
 using std::cout;
 using std::endl;
 using std::string;
 using std::vector;
 
 // Koenig&Moo's index-based string split.
-vector<StrV> split(const StrV& s) {
+vector<Str> split(const Str& s) {
     vector<string> result;
-    typedef StrV::size_type str_sz;
+    typedef Str::size_type str_sz;
     str_sz i = 0;
 
     while (i < s.size()) {
@@ -38,7 +40,7 @@ vector<StrV> split(const StrV& s) {
 int main() {
     cout << "Starting." << endl;
     
-    StrV foo("The quick brown fox jumped over the lazy dog");
+    Str foo("The quick brown fox jumped over the lazy dog");
 
     using iter_t = vector<string>::const_iterator;
     vector<string> result = split(foo);
