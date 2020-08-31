@@ -1314,3 +1314,13 @@ It could also be due to memory allocation because we can't use back_inserter.
 > iterators, we can imagine that such a constructor would be useful in class Vec
 > . Add this constructor to Vec , and reimplement Str to use the Vec constructor
 > instead of calling copy .
+
+## 12-11
+
+> If you add the operations listed in these exercises, then you can use this Str
+> class in all the examples in this book. Reimplement the operations on character
+> pictures from Chapter 5 and the split functions from §5.6/87 and §6.1.1/103.
+
+Refer back to  chapter 5.  There is a ch5 implementation of split and a ch6
+implementation that uses `find_if`.
+
