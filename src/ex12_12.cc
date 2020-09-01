@@ -28,7 +28,7 @@ void test_vector_insert() {
     source.push_back("amy");
     source.push_back("farnsworth");
 
-    using iter_t = Vec<string>::const_iterator;
+    using iter_t = Vec<string>::iterator;
     iter_t insert_pos = target.begin();
     insert_pos++;
 
@@ -63,7 +63,7 @@ int main() {
     cout << "Starting." << endl;
 
     test_vector_insert();
-    test_string_insert();
+    // test_string_insert();
  
     cout << "End." << endl;
     return 0;

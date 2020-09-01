@@ -75,6 +75,10 @@ public:
         unchecked_append(val);
     }
 
+    template <typename U>
+    void insert(iterator position, U b, U e) {
+    }
+
 
 private:
     void create();
