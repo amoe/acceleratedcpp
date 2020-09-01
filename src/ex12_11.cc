@@ -1,9 +1,11 @@
 #include <iostream>
 #include <vector>
 #include <list>
+#include <algorithm>
 #include "ex12_11.hh"
 
 using std::list;
+using std::find_if;
 using std::cout;
 using std::endl;
 using std::vector;
@@ -32,6 +34,9 @@ vector<Str> ch5_split(const Str& s) {
 
     return result;
 }
+
+bool space(char c) { return isspace(c); }
+bool not_space(char c) { return !isspace(c); }
 
 vector<Str> ch6_split(const Str& str) {
     typedef Str::const_iterator iter;
@@ -63,6 +68,7 @@ void test_substr() {
 }
 
 void test_ch5_split() {
+    Str foo("The quick brown fox jumped over the lazy dog");
     using iter_t = vector<Str>::const_iterator;
     vector<Str> components = ch5_split(foo);
 

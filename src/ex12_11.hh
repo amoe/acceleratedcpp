@@ -23,6 +23,7 @@ class Str {
 public:
     using size_type = size_t;
     using iterator = char*;
+    using const_iterator = const char*;
 
     explicit Str() {
         data = 0;
@@ -90,9 +91,18 @@ public:
         return data;
     }
 
+    const_iterator begin() const {
+        return data;
+    }
+
     iterator end() {
         return avail;
     }
+
+    const_iterator end() const {
+        return avail;
+    }
+
 
     Str substr(size_type pos, size_t len) const {
         iterator start = data + pos;
