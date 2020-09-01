@@ -74,7 +74,7 @@ public:
         return *this;
     }
 
-    size_type size() {
+    size_type size() const {
         return avail - data;
     }
 
