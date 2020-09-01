@@ -77,11 +77,23 @@ void test_ch5_split() {
     }
 }
 
+void test_ch6_split() {
+    Str foo("The quick brown fox jumped over the lazy dog");
+    using iter_t = vector<Str>::const_iterator;
+    vector<Str> components = ch6_split(foo);
+
+    for (iter_t it = components.begin(); it != components.end(); it++) {
+        std::cout << *it << std::endl;
+    }
+}
+
+
 int main() {
     cout << "Starting." << endl;
 
     test_substr();
     test_ch5_split();
+    test_ch6_split();
 
     cout << "End." << endl;
     return 0;
