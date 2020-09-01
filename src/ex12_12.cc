@@ -18,17 +18,17 @@ using std::endl;
 // before d .
 
 void test_vector_insert() {
-    vector<string> target;
+    Vec<string> target;
     target.push_back("fry");
     target.push_back("bender");
     target.push_back("leela");
 
-    vector<string> source;
+    Vec<string> source;
     source.push_back("hermes");
     source.push_back("amy");
     source.push_back("farnsworth");
 
-    using iter_t = vector<string>::const_iterator;
+    using iter_t = Vec<string>::const_iterator;
     iter_t insert_pos = target.begin();
     insert_pos++;
 
