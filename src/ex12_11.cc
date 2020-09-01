@@ -33,6 +33,29 @@ vector<Str> ch5_split(const Str& s) {
     return result;
 }
 
+vector<Str> ch6_split(const Str& str) {
+    typedef Str::const_iterator iter;
+    vector<Str> ret;
+
+    iter i = str.begin();
+    while (i != str.end()) {
+        // get the start of the range
+        i = find_if(i, str.end(), not_space);
+
+        // get the end of the range
+        iter j = find_if(i, str.end(), space);
+        
+        if (i != str.end()) {
+            ret.push_back(Str(i, j));
+        }
+
+        // jump ahead to the end of the range
+        i = j;
+    }
+
+    return ret;
+}
+
 void test_substr() {
     Str foo("The quick brown fox jumped over the lazy dog");
     Str result = foo.substr(1, 2);
