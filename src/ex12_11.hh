@@ -3,6 +3,13 @@
 
 #include <cstring>
 
+// Missing:
+// * getline
+// * begin/end
+// * iterator aliases
+// * bool conversion
+// * equality / relational operators
+
 using std::istream;
 using std::ostream;
 using std::cout;
@@ -15,6 +22,7 @@ class Str {
 
 public:
     using size_type = size_t;
+    using iterator = char*;
 
     explicit Str() {
         data = 0;
@@ -76,6 +84,19 @@ public:
 
     const char operator[](size_type i) const {
         return data[i];
+    }
+
+    iterator begin() {
+        return data;
+    }
+
+    iterator end() {
+        return avail;
+    }
+
+    Str substr(size_type pos, size_t len) const {
+        iterator start = data + pos;
+        return Str(start, start + len);
     }
 
 

@@ -43,7 +43,7 @@ int main() {
     Str foo("The quick brown fox jumped over the lazy dog");
     Str result = foo.substr(1, 2);
 
-    cout << "result was " << result << endl;
+    cout << "result was '" << result << "'" << endl;
 
     /*
     using iter_t = vector<string>::const_iterator;
