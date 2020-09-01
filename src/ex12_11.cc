@@ -11,13 +11,13 @@ using std::string;
 using std::vector;
 
 // Koenig&Moo's index-based string split.
+/*
 vector<Str> split(const Str& s) {
     vector<string> result;
     typedef Str::size_type str_sz;
     str_sz i = 0;
 
     while (i < s.size()) {
-        // skip leading spaces
         while (isspace(s[i]) && i < s.size())
             i++;
 
@@ -35,13 +35,17 @@ vector<Str> split(const Str& s) {
 
     return result;
 }
-
+*/
 
 int main() {
     cout << "Starting." << endl;
     
     Str foo("The quick brown fox jumped over the lazy dog");
+    Str result = foo.substr(1, 2);
 
+    cout << "result was " << result << endl;
+
+    /*
     using iter_t = vector<string>::const_iterator;
     vector<string> result = split(foo);
 
@@ -51,4 +55,5 @@ int main() {
 
     cout << "End." << endl;
     return 0;
+    */
 }

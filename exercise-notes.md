@@ -1324,3 +1324,4 @@ It could also be due to memory allocation because we can't use back_inserter.
 Refer back to  chapter 5.  There is a ch5 implementation of split and a ch6
 implementation that uses `find_if`.
 
+we have to implement substr() in our Str class.
