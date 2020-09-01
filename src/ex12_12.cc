@@ -18,7 +18,6 @@ using std::endl;
 // before d .
 
 void test_vector_insert() {
-
     vector<string> target;
     target.push_back("fry");
     target.push_back("bender");
@@ -46,12 +45,26 @@ void test_vector_insert() {
         cout << *it << endl;
 }
 
+void test_string_insert() {
+    string target = "Hello, world!";
+    string source = "cruel ";
+    
+    using iter_t = string::const_iterator;
+    iter_t insert_pos = target.begin();
+    insert_pos += 7;
+    
+    target.insert(insert_pos, source.begin(), source.end());
+
+    cout << target << endl;
+}
+
 
 int main() {
     cout << "Starting." << endl;
 
     test_vector_insert();
-
+    test_string_insert();
+ 
     cout << "End." << endl;
     return 0;
 }
