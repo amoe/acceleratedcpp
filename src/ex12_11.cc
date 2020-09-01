@@ -9,7 +9,7 @@ using std::endl;
 using std::vector;
 
 // Koenig&Moo's index-based string split.
-vector<Str> split(const Str& s) {
+vector<Str> ch5_split(const Str& s) {
     vector<Str> result;
     typedef Str::size_type str_sz;
     str_sz i = 0;
@@ -33,21 +33,26 @@ vector<Str> split(const Str& s) {
     return result;
 }
 
-int main() {
-    cout << "Starting." << endl;
-    
+void test_substr() {
     Str foo("The quick brown fox jumped over the lazy dog");
     Str result = foo.substr(1, 2);
-
     cout << "result was '" << result << "'" << endl;
+}
 
-
+void test_ch5_split() {
     using iter_t = vector<Str>::const_iterator;
-    vector<Str> components = split(foo);
+    vector<Str> components = ch5_split(foo);
 
     for (iter_t it = components.begin(); it != components.end(); it++) {
         std::cout << *it << std::endl;
     }
+}
+
+int main() {
+    cout << "Starting." << endl;
+
+    test_substr();
+    test_ch5_split();
 
     cout << "End." << endl;
     return 0;
