@@ -45,6 +45,37 @@ void test_vector_insert() {
         cout << *it << endl;
 }
 
+void test_vector_insert_without_realloc() {
+    Vec<string> target;
+    target.push_back("red");
+    target.push_back("orange");
+    target.push_back("yellow");
+    target.push_back("green");
+    target.push_back("blue");
+
+    Vec<string> source;
+    source.push_back("hermes");
+    source.push_back("amy");
+    source.push_back("farnsworth");
+
+    using iter_t = Vec<string>::iterator;
+    iter_t insert_pos = target.begin();
+    insert_pos++;
+
+    cout << "Before:" << endl;
+
+    for (iter_t it = target.begin(); it != target.end(); it++)
+        cout << *it << endl;
+
+    target.insert(insert_pos, source.begin(), source.end());
+
+    cout << "After:" << endl;
+
+    for (iter_t it = target.begin(); it != target.end(); it++)
+        cout << *it << endl;
+}
+
+
 void test_string_insert() {
     string target = "Hello, world!";
     string source = "cruel ";
@@ -63,6 +94,7 @@ int main() {
     cout << "Starting." << endl;
 
     test_vector_insert();
+    test_vector_insert_without_realloc();
     // test_string_insert();
  
     cout << "End." << endl;

@@ -77,6 +77,30 @@ public:
 
     template <typename U>
     void insert(iterator position, U b, U e) {
+        U pos_copy = b;
+        size_type range_size = 0;
+
+        while (pos_copy++ != e) { range_size++; }
+
+        cout << "distance is " << range_size << endl;
+
+        size_type remaining_space = limit - avail;
+        cout << "remaining is " << remaining_space << endl;
+
+        if (range_size > remaining_space) {
+            cout << "need to reallocate" << endl;
+            size_type new_size = (avail - data) + range_size;
+            iterator new_data = alloc.allocate(new_size);
+            iterator part1 = uninitialized_copy(data, position, new_data);
+            iterator part2 = uninitialized_copy(b, e, part1);
+            iterator part3 = uninitialized_copy(position, avail, part2);
+            uncreate();
+            data = new_data;
+            avail = part3;
+            limit = part3;
+        } else {
+            cout << "undefined behaviour here" << endl;
+        }
     }
 
 
