@@ -99,7 +99,28 @@ public:
             avail = part3;
             limit = part3;
         } else {
-            cout << "undefined behaviour here" << endl;
+            iterator new_start_pos = position + range_size - 1;
+            size_type slice_size = avail - position;
+            iterator new_end_pos = new_start_pos + slice_size;
+
+            cout << "slice size is " << slice_size << endl;
+
+            // starting from the back of the array, shunt the items downwards
+            // pretty sure it has to happen from the back
+            iterator it = avail;
+
+            cout << "start loop" << endl;
+
+
+            iterator write_pos = new_end_pos;
+            while (it-- != position) {
+                cout << *it << endl;
+                *write_pos = *it;
+                write_pos--;
+            }
+
+            uninitialized_copy(b, e, position);
+            avail = new_end_pos + 1;
         }
     }
 
