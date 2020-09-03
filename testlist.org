@@ -1,3 +1,0 @@
-TEST LIST
-
-* need to figure out how to test a function like hello
