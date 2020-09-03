@@ -3,6 +3,7 @@
 
 #include <cstddef>
 #include <memory>
+#include <cstring>
 
 using std::max;
 using std::cout;
@@ -11,6 +12,10 @@ using std::size_t;
 using std::allocator;
 using std::uninitialized_copy;
 using std::uninitialized_fill;
+using std::strlen;
+using std::istream;
+using std::ostream;
+using std::back_inserter;
 
 template <typename T> class Vec {
 public:
@@ -52,12 +57,10 @@ public:
     }
 
     T& operator[](size_type i) {
-        cout << "inside index operator non-const" << endl;
         return data[i];
     }
 
     const T& operator[](size_type i) const {
-        cout << "inside index operator const" << endl;
         return data[i];
     }
 
@@ -124,6 +127,7 @@ public:
         }
     }
 
+    void clear();
 
 private:
     void create();
@@ -196,5 +200,121 @@ template <typename T> void Vec<T>::unchecked_append(const T& val) {
     alloc.construct(avail, val);
     avail++;
 }
+
+
+class Str {
+    friend istream& operator>>(istream&, Str&);
+
+public:
+    using size_type = Vec<char>::size_type;
+    using iterator = Vec<char>::iterator;
+    using const_iterator = Vec<char>::const_iterator;
+
+    Str() { }
+
+    Str& operator=(const Str& source) {
+        cout << "inside assignment operator";
+        data = source.data;
+        return *this;
+    }
+
+    Str& operator+=(const Str& s) {
+        for (Vec<char>::const_iterator it = s.data.begin(); it != s.data.end(); it++) {
+            data.push_back(*it);
+        }
+
+        return *this;
+    }
+
+
+    Str(size_type n, char c): data(n, c) { }
+
+    Str(const char* cp) {
+        copy(cp, cp + strlen(cp), back_inserter(data));
+    }
+
+    template <typename T>
+    Str(T b, T e) {
+        copy(b, e, back_inserter(data));
+    }
+
+    char operator[](size_type i) {
+        return data[i];
+    }
+
+    const char operator[](size_type i) const {
+        return data[i];
+    }
+
+    void print() {
+        for (Vec<char>::const_iterator it = data.begin(); it != data.end(); it++) {
+            cout << *it;
+        }
+        cout << endl;
+    }
+
+    size_type size() const {
+        return data.size();
+    }
+
+    iterator begin() {
+        return data.begin();
+    }
+
+    iterator end() {
+        return data.end();
+    }
+
+    
+    template <typename T>
+    void insert(iterator position, T b, T e) {
+        data.insert(position, b, e);
+    }
+
+private:
+    Vec<char> data;
+};
+
+Str operator+(const Str& x, const Str& y) {
+    Str result = x;
+    result += y;
+    return result;
+}
+
+
+istream& operator>>(istream& is, Str& s) {
+    s.data.clear();
+    char c;
+
+    bool last_char_space = true;
+    
+    while (is.get(c) && isspace(c)) {
+    }
+
+    if (is) {
+        do {
+            s.data.push_back(c);
+        } while (is.get(c) && !isspace(c));
+
+        if (is) {
+            is.unget();
+        }
+    }
+
+    return is;
+}
+
+ostream& operator<<(ostream& os, const Str& s) {
+    for (Str::size_type i = 0; i < s.size(); i++) {
+        os << s[i];
+    }
+    return os;
+}
+
+template <typename T>
+void Vec<T>::clear() {
+    avail = data;
+}
+
 
 #endif /* EX12_12_HH */

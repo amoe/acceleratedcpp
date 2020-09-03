@@ -77,10 +77,11 @@ void test_vector_insert_without_realloc() {
 
 
 void test_string_insert() {
-    string target = "Hello, world!";
-    string source = "cruel ";
+    Str target = "Hello, world!";
+    Str source = "cruel ";
     
-    using iter_t = string::const_iterator;
+    // C++98 had this taking iterator rather than const_iterator
+    using iter_t = Str::iterator;   
     iter_t insert_pos = target.begin();
     insert_pos += 7;
     
@@ -93,9 +94,13 @@ void test_string_insert() {
 int main() {
     cout << "Starting." << endl;
 
+    cout << "VECTOR STUFF:" << endl;
+
     test_vector_insert();
     test_vector_insert_without_realloc();
-    // test_string_insert();
+
+    cout << "STRING STUFF:" << endl;
+    test_string_insert();
  
     cout << "End." << endl;
     return 0;
