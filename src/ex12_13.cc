@@ -1,10 +1,8 @@
 #include <iostream>
-#include <vector>
 #include <string>
 #include "ex12_13.hh"
 
 using std::string;
-using std::vector;
 using std::cout;
 using std::endl;
 
@@ -14,9 +12,13 @@ using std::endl;
 int main() {
     cout << "Starting." << endl;
 
-    vector<int> foo = {8, 5, 3, 2};
+    Vec<int> foo;
+    foo.push_back(8);
+    foo.push_back(5);
+    foo.push_back(3);
+    foo.push_back(2);
 
-    using iter_t = vector<int>::const_iterator;
+    using iter_t = Vec<int>::const_iterator;
     for (iter_t it = foo.begin(); it != foo.end(); it++) {
         cout << *it << endl;
     }

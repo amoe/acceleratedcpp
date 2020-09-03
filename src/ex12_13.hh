@@ -47,6 +47,12 @@ public:
         uncreate();
     }
 
+    template <typename U>
+    void assign(U b, U e) {
+        uncreate();
+        create(b, e);
+    }
+
     size_type size() const {
         return avail - data;
     }
@@ -74,6 +80,8 @@ public:
 
         unchecked_append(val);
     }
+
+    
 
 
 private:
