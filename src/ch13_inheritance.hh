@@ -7,8 +7,8 @@ public:
     CoreStudent(std::istream&);
     std::string name() const;
     std::istream& read(std::istream&);
-    double grade() const;
-
+    virtual double grade() const;
+    
 protected:
     std::istream& read_common(std::istream&);
     double midterm_grade, final_grade;

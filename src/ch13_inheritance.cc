@@ -87,9 +87,12 @@ Gamlin 94 89 14 96 16 63
 Capener 7 10 32 68 61 76
 )";
 
+// The 3rd item is the thesis grade.  A really low thesis grade should
+// "dominate" a very good set of homework grades, hence Zutell should
+// be sorted to the top (the lowest effective grade).
 const string grad_students_input = R"(
-Zutell 31 75 81 54 18 87 83
-Droney 10 45 37 22 74 70 26
+Droney 31 75 83 81 54 18 87 
+Zutell 99 99 26 99 99 99 99 
 )";
 
 int main() {
@@ -109,10 +112,12 @@ int main() {
     stringstream sin2(grad_students_input);
     while (rec2.read(sin2)) {
         maxlen = max(maxlen, rec2.name().size());
+        // XXX: Copying rec2 into the vector seems to mash it back into a
+        // CoreStudent :(
         students.push_back(rec2);
     }
 
-    sort(students.begin(), students.end(), compare);
+    sort(students.begin(), students.end(), compare_grades);
 
     for (vector<CoreStudent>::size_type i = 0; i < students.size(); i++) {
         CoreStudent this_student = students[i];
