@@ -1325,3 +1325,48 @@ Refer back to  chapter 5.  There is a ch5 implementation of split and a ch6
 implementation that uses `find_if`.
 
 we have to implement substr() in our Str class.
+
+## 12-12
+
+Interesting for vec, not so interesting for Str because we just reuse the vec
+implementation.
+
+## 12-13
+
+Just a case of clear and reinitialize with range constructor.
+
+## 12-14
+
+Not sure what the intention behind this exercise was, it seems that it can be
+implemented just using the range constructor we previously did in 12-10.
+
+## 12-15
+
+> The read_hw function from §4.1.3/57 checked the stream from which it read to
+> determine whether the function had hit end-of-file, or had encountered an
+> invalid input. Our Str input operator does no such check. Why? Will it leave
+> the stream in an invalid state?
+
+> In the second case, when we have encountered something that isn't a grade, the
+> library will mark the input stream as being in failure state, which means that
+> future input requests will fail, just as if we had reached end-of
+> file. Therefore, our caller will think that something is wrong with the input
+> data, when the only problem was that the last homework grade was followed by
+> something that was not a homework grade
+
+
+The answer I think:
+
+* There's no explicit check because is.get(c) described:
+
+ The first signature returns the character read, or the end-of-file value (EOF)
+ if no characters are available in the stream (note that in this case, the
+ failbit flag is also set).
+
+We DO check for eof in the second part.
+
+It won't leave the stream in an invalid state because unlike >>, istream::get
+cannot set the failbit for any other reason than EOF.
+
+See my reddit post for more discussion on this:
+https://www.reddit.com/r/cpp_questions/comments/im2nsf/accelerated_c_exercise_1213/
