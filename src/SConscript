@@ -163,5 +163,5 @@ env.Program(target='ex12_14', source=['ex12_14.cc'])
 
 env.Program(
     target='ch13_inheritance',
-    source=['ch13_inheritance.cc']
+    source=['ch13_inheritance.cc', 'median.cc', 'read_hw.cc', 'grading_functions.cc']
 )
