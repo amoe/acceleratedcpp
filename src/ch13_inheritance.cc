@@ -82,23 +82,34 @@ double GradStudent::grade() const {
     return min(CoreStudent::grade(), thesis);
 }
 
-const string multi_line_input = R"(
+const string students_input = R"(
 Gamlin 94 89 14 96 16 63
 Capener 7 10 32 68 61 76
+)";
+
+const string grad_students_input = R"(
+Zutell 31 75 81 54 18 87 83
+Droney 10 45 37 22 74 70 26
 )";
 
 int main() {
     cout << "Starting." << endl;
 
     vector<CoreStudent> students;
-    CoreStudent the_record;
+    CoreStudent rec1;
     string::size_type maxlen = 0;
 
-    stringstream sin1(multi_line_input);
+    stringstream sin1(students_input);
+    while (rec1.read(sin1)) {
+        maxlen = max(maxlen, rec1.name().size());
+        students.push_back(rec1);
+    }
 
-    while (the_record.read(sin1)) {
-        maxlen = max(maxlen, the_record.name().size());
-        students.push_back(the_record);
+    GradStudent rec2;
+    stringstream sin2(grad_students_input);
+    while (rec2.read(sin2)) {
+        maxlen = max(maxlen, rec2.name().size());
+        students.push_back(rec2);
     }
 
     sort(students.begin(), students.end(), compare);
