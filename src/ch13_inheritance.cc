@@ -43,6 +43,8 @@ istream& CoreStudent::read(istream& in) {
 GradStudent::GradStudent(): thesis(0) {
 }
 
+// Note: If we called CoreStudent(is) here as the base class, the behaviour
+// would be wrong.  We implicitly call the default constructor.
 GradStudent::GradStudent(istream& is) {
     read(is);
 }
