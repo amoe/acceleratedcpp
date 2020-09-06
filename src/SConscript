@@ -159,5 +159,9 @@ env.Program(target='ex12_11', source=['ex12_11.cc'])
 env.Program(target='ex12_12', source=['ex12_12.cc'])
 env.Program(target='ex12_13', source=['ex12_13.cc'])
 env.Program(target='ex12_14', source=['ex12_14.cc'])
-env.Program(target='ex12_15', source=['ex12_15.cc'])
 
+
+env.Program(
+    target='ch13_inheritance',
+    source=['ch13_inheritance.cc']
+)

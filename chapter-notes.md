@@ -1063,7 +1063,7 @@ always true about the class.
 As none of the public members change the values of the storage pointers they
 can't invalidate the class invariant.
 
-## CHAPTER 11 - "Making class objects act like values"
+## CHAPTER 12 - "Making class objects act like values"
 
 Most objects act like values i.e. when you copy them they become independent,
 much as `int x = y` creates a separate copy of y.  So does StudentInfo and Vec.
@@ -1190,5 +1190,7 @@ member functions.  `c_str()` has a bunch of very restrictive limitations, the
 pointer becomes completely invalid as soon as you modify the string in anyway
 (which does make sense), plus it will obviously become invalid if the string
 object goes out of scope.
+
+## CHAPTER 13 - "Using inheritance and dynamic binding"
 
 

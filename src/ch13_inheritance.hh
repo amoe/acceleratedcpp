@@ -1,0 +1,6 @@
+#ifndef CH13_INHERITANCE_HH
+#define CH13_INHERITANCE_HH
+
+
+
+#endif /* CH13_INHERITANCE_HH */
