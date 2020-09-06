@@ -20,6 +20,7 @@ CoreStudent::CoreStudent(istream& is) {
     read(is);
 }
 
+
 string CoreStudent::name() const {
     return n;
 }
@@ -37,6 +38,13 @@ istream& CoreStudent::read(istream& in) {
     read_common(in);
     read_hw(in, homework);
     return in;
+}
+
+GradStudent::GradStudent(): thesis(0) {
+}
+
+GradStudent::GradStudent(istream& is) {
+    read(is);
 }
 
 istream& GradStudent::read(istream& in) {
