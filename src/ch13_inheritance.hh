@@ -6,7 +6,7 @@ public:
     CoreStudent();
     CoreStudent(std::istream&);
     std::string name() const;
-    std::istream& read(std::istream&);
+    virtual std::istream& read(std::istream&);
     virtual double grade() const;
     
 protected:
