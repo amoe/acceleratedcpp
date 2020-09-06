@@ -2,20 +2,32 @@
 #include <string>
 #include <vector>
 #include <numeric>
+#include <iomanip>
+#include <algorithm>
+#include <sstream>
 #include "ch13_inheritance.hh"
 #include "read_hw.hh"
 #include "grading_functions.hh"
 
+using std::max;
+using std::streamsize;
 using std::string;
 using std::vector;
 using std::istream;
 using std::cout;
 using std::endl;
 using std::min;
+using std::setprecision;
+using std::sort;
+using std::stringstream;
 
 bool compare(const CoreStudent& c1, const CoreStudent& c2) {
     // This will work on GradStudent and sensibly return the name.
     return c1.name() < c2.name();
+}
+
+bool compare_grades(const CoreStudent& c1, const CoreStudent& c2) {
+    return c1.grade() < c2.grade();
 }
 
 CoreStudent::CoreStudent(): midterm_grade(0), final_grade(0) {
@@ -70,9 +82,46 @@ double GradStudent::grade() const {
     return min(CoreStudent::grade(), thesis);
 }
 
+const string multi_line_input = R"(
+Gamlin 94 89 14 96 16 63
+Capener 7 10 32 68 61 76
+)";
+
 int main() {
     cout << "Starting." << endl;
+
+    vector<CoreStudent> students;
+    CoreStudent the_record;
+    string::size_type maxlen = 0;
+
+    stringstream sin1(multi_line_input);
+
+    while (the_record.read(sin1)) {
+        maxlen = max(maxlen, the_record.name().size());
+        students.push_back(the_record);
+    }
+
+    sort(students.begin(), students.end(), compare);
+
+    for (vector<CoreStudent>::size_type i = 0; i < students.size(); i++) {
+        CoreStudent this_student = students[i];
+        cout << this_student.name()
+             << string((maxlen + 1) - this_student.name().size(), ' ');
+
+        try {
+            double final_grade = this_student.grade();
+            streamsize prec = cout.precision();
+
+            cout << setprecision(3) << final_grade << setprecision(prec);
+        } catch (std::domain_error& e) {
+            cout << e.what();
+        }
+
+        cout << endl;
+    }
+
 
     cout << "End." << endl;
     return 0;
 }
+
