@@ -1205,3 +1205,20 @@ public interface of CoreStudent, which becomes part of the public interface to
 GradStudent".  What happens if we don't?
 
 They introduce the `protected` access specifier which works as you would expect.
+
+As we would expect from Java, when we instantiate a derived class, both
+constructors will execute, the one from the superclass and the one from the
+derived class.
+
+You can explicitly choose a constructor to use to initialize the base class
+part.  Here's an example not from the book:
+
+    Class ( int x )
+      : Base ( 123 ), // initialize base class
+        x ( x ),      // x (member) is initialized with x (parameter)
+        y { 0 }       // y initialized to 0
+    {}                // empty compound statement
+
+If you don't choose a constructor explicitly then the default constructor will
+be chosen.
+

@@ -13,6 +13,13 @@ using std::cout;
 using std::endl;
 using std::min;
 
+CoreStudent::CoreStudent(): midterm_grade(0), final_grade(0) {
+}
+
+CoreStudent::CoreStudent(istream& is) {
+    read(is);
+}
+
 string CoreStudent::name() const {
     return n;
 }
