@@ -24,6 +24,17 @@ private:
     vector<double> homework;
 };
 
+class GradStudent: public CoreStudent {
+public:
+    GradStudent();
+    GradStudent(istream&);
+    double grade() const;    // Note that we re-declare methods we will override
+    istream& read(istream&);
+
+private:
+    double thesis;
+};
+
 int main() {
     cout << "Starting." << endl;
 

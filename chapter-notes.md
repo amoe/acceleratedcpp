@@ -1193,4 +1193,13 @@ object goes out of scope.
 
 ## CHAPTER 13 - "Using inheritance and dynamic binding"
 
+> Every member of CoreStudent is also a member of GradStudent -- except for the
+> constructors, the assignment operator, and the destructor.
 
+New syntax for inheritance introduced:
+
+    class GradStudent: public CoreStudent { ... }
+
+What does this mean?  "The use of public says that... GradStudent inherits the
+public interface of CoreStudent, which becomes part of the public interface to
+GradStudent".  What happens if we don't?
