@@ -1203,3 +1203,5 @@ New syntax for inheritance introduced:
 What does this mean?  "The use of public says that... GradStudent inherits the
 public interface of CoreStudent, which becomes part of the public interface to
 GradStudent".  What happens if we don't?
+
+They introduce the `protected` access specifier which works as you would expect.

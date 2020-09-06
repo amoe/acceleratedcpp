@@ -17,11 +17,13 @@ public:
     istream& read(istream&);
     double grade() const;
 
-private:
+protected:
     istream& read_common(istream&);
-    string n;
     double midterm_grade, final_grade;
     vector<double> homework;
+
+private:
+    string n;
 };
 
 class GradStudent: public CoreStudent {
