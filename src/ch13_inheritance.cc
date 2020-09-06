@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <numeric>
 #include "ch13_inheritance.hh"
 #include "read_hw.hh"
 #include "grading_functions.hh"
@@ -10,7 +11,7 @@ using std::vector;
 using std::istream;
 using std::cout;
 using std::endl;
-
+using std::min;
 
 string CoreStudent::name() const {
     return n;
@@ -29,6 +30,22 @@ istream& CoreStudent::read(istream& in) {
     read_common(in);
     read_hw(in, homework);
     return in;
+}
+
+istream& GradStudent::read(istream& in) {
+    // Directly using the scope operator to refer to members from the parent
+    // class.
+    CoreStudent::read_common(in);
+    in >> thesis;
+    read_hw(in, CoreStudent::homework);
+    return in;
+}
+
+// "The student receives the lesser of the grade ontained on the thesis and the
+// grade that would have been obtained if we just counted the exams and homework
+// scores."
+double GradStudent::grade() const {
+    return min(CoreStudent::grade(), thesis);
 }
 
 int main() {
