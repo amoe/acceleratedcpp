@@ -1221,4 +1221,3 @@ part.  Here's an example not from the book:
 
 If you don't choose a constructor explicitly then the default constructor will
 be chosen.
-

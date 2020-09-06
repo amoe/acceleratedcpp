@@ -13,6 +13,11 @@ using std::cout;
 using std::endl;
 using std::min;
 
+bool compare(const CoreStudent& c1, const CoreStudent& c2) {
+    // This will work on GradStudent and sensibly return the name.
+    return c1.name() < c2.name();
+}
+
 CoreStudent::CoreStudent(): midterm_grade(0), final_grade(0) {
 }
 
