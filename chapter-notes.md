@@ -1236,3 +1236,7 @@ interesting, I never thought of doing this.  You need to reimplement wrappers
 for all the methods which kind of sucks.  I would think you can do some clever
 template solution.  It sounds like a pre-C++11 solution to the problem that
 smart pointers solve.  Hence they implement StudentInfo.
+
+Started to blind implement the handle class but ran at a snag, how to implement
+the copy constructor?  The answer is to provide a polymorphic clone() function
+which encodes the specific `new X(*foo)` call.  Whew!

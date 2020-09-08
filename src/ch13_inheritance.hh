@@ -30,5 +30,44 @@ private:
     double thesis;
 };
 
+class StudentInfo {
+public:
+    StudentInfo(char type_code, istream& is) {
+        if (type_code == 'U') {
+            student = new CoreStudent(is);
+        } else {
+            student = new GradStudent(is);
+        }
+    }
+
+    StudentInfo& operator=(const StudentInfo& source) {
+        student = source.student;
+        return *this;
+    }
+
+    StudentInfo(const StudentInfo& source) {
+        // no idea how to copy this correctly without storing type code on the
+        // object
+//        student = new source.student;
+    }
+    
+    
+    
+    double grade() const {
+        return student->grade();
+    }
+    
+    std::string name() {
+        return student->name();
+    }
+
+    ~StudentInfo() {
+        delete student;
+    }
+    
+private:
+    CoreStudent* student;
+};
+
 
 #endif /* CH13_INHERITANCE_HH */

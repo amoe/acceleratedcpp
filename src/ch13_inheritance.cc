@@ -99,19 +99,13 @@ G Zutell 99 99 26 99 99 99 99
 int main() {
     cout << "Starting." << endl;
 
-    vector<CoreStudent*> students;
-    CoreStudent* rec;
+    vector<StudentInfo> students;
     string::size_type maxlen = 0;
 
     stringstream sin(students_input);
     char type_code;
     while (sin >> type_code) {
-        if (type_code == 'U') {
-            rec = new CoreStudent(sin);
-        } else {
-            // XXX tweak me
-            rec = new GradStudent(sin);
-        }
+        StudentInfo rec(type_code, sin);
         maxlen = max(maxlen, rec->name().size());
         students.push_back(rec);
     }
