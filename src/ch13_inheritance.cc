@@ -86,6 +86,23 @@ double GradStudent::grade() const {
     return min(CoreStudent::grade(), thesis);
 }
 
+// StudentInfo -- handle class
+
+istream& StudentInfo::read(istream& is) {
+    delete student;
+    
+    char ch;
+    is >> ch;
+
+    if (ch == 'U') {
+        student = new CoreStudent(is);
+    } else {
+        student = new GradStudent(is);
+    }
+
+    return is;
+}
+
 // The 3rd item is the thesis grade.  A really low thesis grade should
 // "dominate" a very good set of homework grades, hence Zutell should
 // be sorted to the top (the lowest effective grade).
@@ -99,28 +116,34 @@ G Zutell 99 99 26 99 99 99 99
 int main() {
     cout << "Starting." << endl;
 
+    // Why did we read 5 records?
+    
     vector<StudentInfo> students;
     string::size_type maxlen = 0;
 
     stringstream sin(students_input);
-    char type_code;
-    while (sin >> type_code) {
-        StudentInfo rec(type_code, sin);
-        maxlen = max(maxlen, rec->name().size());
+    while (sin) {
+        StudentInfo rec(sin);
+        maxlen = max(maxlen, rec.name().size());
         students.push_back(rec);
     }
 
     cout << "Read " << students.size() << " records" << endl;
 
-    sort(students.begin(), students.end(), compare_ptr);
-
-    for (vector<CoreStudent*>::size_type i = 0; i < students.size(); i++) {
-        CoreStudent* this_student = students[i];
-        cout << this_student->name()
-             << string((maxlen + 1) - this_student->name().size(), ' ');
+    // Sort is going to call the assignment operator a lot!
+    // Hence the assignment operator must be correctly implemented
+    // and must copy its managed contents.
+    // This is a perfect example of the rule of three.
+    sort(students.begin(), students.end(), StudentInfo::compare);
+    
+    for (vector<StudentInfo>::size_type i = 0; i < students.size(); i++) {
+        // This will copy the student.
+        StudentInfo this_student(students[i]);
+        cout << this_student.name()
+             << string((maxlen + 1) - this_student.name().size(), ' ');
 
         try {
-            double final_grade = this_student->grade();
+            double final_grade = this_student.grade();
             streamsize prec = cout.precision();
 
             cout << setprecision(3) << final_grade << setprecision(prec);
@@ -130,7 +153,7 @@ int main() {
 
         cout << endl;
 
-        delete this_student;
+        // The copy of the student is freed here.
     }
 
 

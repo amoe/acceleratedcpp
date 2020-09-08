@@ -9,11 +9,15 @@ public:
     virtual std::istream& read(std::istream&);
     virtual double grade() const;
     virtual ~CoreStudent() { }
+    virtual CoreStudent* clone() const {
+        return new CoreStudent(*this);
+    }
     
 protected:
     std::istream& read_common(std::istream&);
     double midterm_grade, final_grade;
     std::vector<double> homework;
+
 
 private:
     std::string n;
@@ -25,6 +29,9 @@ public:
     GradStudent(std::istream&);
     double grade() const;    // Note that we re-declare methods we will override
     std::istream& read(std::istream&);
+    GradStudent* clone() const {
+        return new GradStudent(*this);
+    }
 
 private:
     double thesis;
@@ -32,37 +39,48 @@ private:
 
 class StudentInfo {
 public:
-    StudentInfo(char type_code, istream& is) {
-        if (type_code == 'U') {
-            student = new CoreStudent(is);
-        } else {
-            student = new GradStudent(is);
-        }
+    StudentInfo(): student(0) { }
+    
+    StudentInfo(std::istream& is): student(0) {
+        read(is);
     }
 
+    std::istream& read(std::istream& is);
+
     StudentInfo& operator=(const StudentInfo& source) {
-        student = source.student;
+        if (&source != this) {
+            delete student;
+            if (source.student) {
+                student = source.student->clone();
+            } else{
+                student = 0;
+            }
+        }
+
         return *this;
     }
 
     StudentInfo(const StudentInfo& source) {
-        // no idea how to copy this correctly without storing type code on the
-        // object
-//        student = new source.student;
+        // Polymorphically call through to the clone function.
+        if (source.student) 
+            student = source.student->clone();
     }
-    
     
     
     double grade() const {
         return student->grade();
     }
     
-    std::string name() {
+    std::string name() const {
         return student->name();
     }
 
     ~StudentInfo() {
         delete student;
+    }
+
+    static bool compare(const StudentInfo& s1, const StudentInfo& s2) {
+        return s1.name() < s2.name();
     }
     
 private:
