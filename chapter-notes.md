@@ -1221,3 +1221,18 @@ part.  Here's an example not from the book:
 
 If you don't choose a constructor explicitly then the default constructor will
 be chosen.
+
+Virtual destructors.  Because we need to delete them, we end up calling the
+wrong destructor.  It's basically always an actual bug to do this because
+nothing in the derived class will be destroyed, as the synthetic destructor
+doesn't know about the derived class.  So `virtual Foo~()` is needed basically
+any time you use an inheritance hierarchy.  But you mostly only need it in the
+base class because the derived destructor will then be called automatically, as
+long as it doesn't need to deallocate pointers etc.
+
+They introduce a technique called a handle class.  This is basically a wrapper
+for a polymorphic pointer that encapsulates all of the memory management.  Very
+interesting, I never thought of doing this.  You need to reimplement wrappers
+for all the methods which kind of sucks.  I would think you can do some clever
+template solution.  It sounds like a pre-C++11 solution to the problem that
+smart pointers solve.  Hence they implement StudentInfo.

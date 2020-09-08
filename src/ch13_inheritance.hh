@@ -8,6 +8,7 @@ public:
     std::string name() const;
     virtual std::istream& read(std::istream&);
     virtual double grade() const;
+    virtual ~CoreStudent() { }
     
 protected:
     std::istream& read_common(std::istream&);
