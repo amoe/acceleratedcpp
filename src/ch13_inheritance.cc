@@ -122,8 +122,8 @@ int main() {
     string::size_type maxlen = 0;
 
     stringstream sin(students_input);
-    while (sin) {
-        StudentInfo rec(sin);
+    StudentInfo rec;
+    while (rec.read(sin)) {
         maxlen = max(maxlen, rec.name().size());
         students.push_back(rec);
     }
