@@ -12,6 +12,9 @@ public:
     virtual CoreStudent* clone() const {
         return new CoreStudent(*this);
     }
+    void regrade(double d) {
+        final_grade = d;
+    }
     
 protected:
     std::istream& read_common(std::istream&);
@@ -31,6 +34,10 @@ public:
     std::istream& read(std::istream&);
     GradStudent* clone() const {
         return new GradStudent(*this);
+    }
+    void regrade(double d1, double d2) {
+        final_grade = d1;
+        thesis = d2;
     }
 
 private:

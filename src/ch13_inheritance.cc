@@ -113,11 +113,18 @@ G Droney 31 75 83 81 54 18 87
 G Zutell 99 99 26 99 99 99 99 
 )";
 
-int main() {
-    cout << "Starting." << endl;
+const string corestudents_only = R"(
+Gamlin 94 89 14 96 16 63
+Capener 7 10 32 68 61 76
+)";
 
-    // Why did we read 5 records?
-    
+const string gradstudents_only = R"(
+Droney 31 75 83 81 54 18 87 
+Zutell 99 99 26 99 99 99 99 
+)";
+
+
+void demo_read_students() {
     vector<StudentInfo> students;
     string::size_type maxlen = 0;
 
@@ -155,7 +162,67 @@ int main() {
 
         // The copy of the student is freed here.
     }
+}
 
+void demo_thing() {
+    stringstream sin(corestudents_only);
+    CoreStudent rec1;
+    rec1.read(sin);
+    
+    CoreStudent& r = rec1;
+
+    cout << "grade of rec1 is " << r.grade() << endl;
+    
+    r.regrade(100);
+
+    cout << "new grade of rec1 is " << r.grade() << endl;
+
+    // Compile error as expected -- regrade(double, double) is only
+    // defined on GradStudent.
+    //r.regrade(100, 100);
+
+    stringstream sin2(gradstudents_only);
+    GradStudent rec2;
+    rec2.read(sin2);
+
+    cout << "rec2 (grad student): Old grade is " << rec2.grade() << endl;
+    
+    // Works because GradStudent has the method defined.
+    rec2.regrade(100, 100);
+
+    cout << "rec2 (grad student): New grade is " << rec2.grade() << endl;
+
+    stringstream sin3(gradstudents_only);
+    GradStudent rec3;
+    rec3.read(sin3);
+
+    CoreStudent& ref2 = rec3;
+
+    // Still a compile error as we should expect.  The virtual status of
+    // CoreStudent::regrade(double) does not affect whether this works or not.
+    // It is always a compile error because virtual calls need to exactly match.
+    //ref2.regrade(100, 100);
+    
+    GradStudent& ref3 = rec3;
+    
+    // A compile error... but why?
+    // It seems like this method should be inherited, but:
+    // "Even though there is a base-class version that takes a single argument,
+    // that version is effectively hidden by the existence of 'regrade' in the
+    // derived class."
+    // This would definitely not happen in java!
+    //ref3.regrade(100);
+
+
+    // But you can use this bonkers syntax to call the base class version:
+    ref3.CoreStudent::regrade(100);
+}
+
+int main() {
+    cout << "Starting." << endl;
+
+    demo_read_students();
+    demo_thing();
 
     cout << "End." << endl;
     return 0;

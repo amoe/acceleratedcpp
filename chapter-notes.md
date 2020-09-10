@@ -1240,3 +1240,6 @@ smart pointers solve.  Hence they implement StudentInfo.
 Started to blind implement the handle class but ran at a snag, how to implement
 the copy constructor?  The answer is to provide a polymorphic clone() function
 which encodes the specific `new X(*foo)` call.  Whew!
+
+Some very interesting subtleties regarding virtual call resolution.  It works
+very differently to Java.
