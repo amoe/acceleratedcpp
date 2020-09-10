@@ -1241,5 +1241,13 @@ Started to blind implement the handle class but ran at a snag, how to implement
 the copy constructor?  The answer is to provide a polymorphic clone() function
 which encodes the specific `new X(*foo)` call.  Whew!
 
+> virtual Core* clone() const { return new Core(*this); }
+
+What is this actually doing?  It's dereferencing the 'this' pointer and using
+the synthetic copy constructor of Core to copy.   The syntax is not really
+special in anyway, you are always able to use `new` and call a certain
+constructor with a certain value.  It's simply that in this case the memory
+backing the value will be on the heap rather than on the stack as normal.
+
 Some very interesting subtleties regarding virtual call resolution.  It works
 very differently to Java.
