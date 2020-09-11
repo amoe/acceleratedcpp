@@ -1,10 +1,16 @@
 #include <iostream>
 #include <vector>
+#include <sstream>
+#include <string>
+#include <numeric>
 #include "ex13_1.hh"
 #include "read_hw.hh"
 #include "median.hh"
 #include "grading_functions.hh"
 
+using std::min;
+using std::string;
+using std::stringstream;
 using std::cerr;
 using std::istream;
 using std::cout;
@@ -16,10 +22,26 @@ using std::vector;
     // GradStudent();
     // GradStudent(std::istream&);
 
+const string corestudents_only = R"(
+Gamlin 94 89 14 96 16 63
+Capener 7 10 32 68 61 76
+)";
+
+const string gradstudents_only = R"(
+Droney 31 75 83 81 54 18 87 
+Zutell 99 99 26 99 99 99 99 
+)";
+
+
 CoreStudent::CoreStudent(): midterm_grade(0), final_grade(0) {
-    cerr << "CoreStudent::CoreStudent()" << endl;
+    cerr << "    CoreStudent::CoreStudent()" << endl;
 }
 
+CoreStudent::CoreStudent(istream& is) {
+    cerr << "    CoreStudent::CoreStudent(istream&)" << endl;
+    read(is);
+
+}
 double CoreStudent::grade() const {
     return ::grade(midterm_grade, final_grade, homework);
 }
@@ -35,12 +57,46 @@ istream& CoreStudent::read(istream& in) {
     return in;
 }
 
+GradStudent::GradStudent(): thesis(0) {
+    cerr << "    GradStudent::GradStudent()" << endl;
+}
+
+GradStudent::GradStudent(istream& is) {
+    cerr << "    GradStudent::GradStudent(istream&)" << endl;
+    read(is);
+}
+
+istream& GradStudent::read(istream& in) {
+    CoreStudent::read_common(in);
+    in >> thesis;
+    read_hw(in, CoreStudent::homework);
+    return in;
+}
+
+double GradStudent::grade() const {
+    return min(CoreStudent::grade(), thesis);
+}
+
 
 int main() {
     cout << "Starting." << endl;
 
+    cout << "Default Core constructor:" << endl;
     // Default constructor
     CoreStudent s1;
+
+    // istream constructor
+    cout << "istream Core constructor:" << endl;
+    stringstream sin(corestudents_only);
+    CoreStudent s2(sin);
+
+    // Grad default constructor
+    cout << "Default Grad constructor:" << endl;
+    GradStudent s3;
+    stringstream sin2(gradstudents_only);
+    
+    cout << "istream Grad constructor:" << endl;
+    GradStudent s4(sin2);
     
     cout << "End." << endl;
     return 0;

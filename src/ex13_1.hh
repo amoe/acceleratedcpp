@@ -26,7 +26,6 @@ private:
     std::string n;
 };
 
-/*
 class GradStudent: public CoreStudent {
 public:
     GradStudent();
@@ -93,7 +92,6 @@ public:
 private:
     CoreStudent* student;
 };
-*/
 
 #endif /* EX13_1_HH */
 

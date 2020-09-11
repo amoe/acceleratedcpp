@@ -1370,3 +1370,15 @@ cannot set the failbit for any other reason than EOF.
 
 See my reddit post for more discussion on this:
 https://www.reddit.com/r/cpp_questions/comments/im2nsf/accelerated_c_exercise_1213/
+
+# Chapter 13
+
+## 13-1
+
+Semi-unexpectedly the gradstudent constructor implicitly calls the CoreStudent
+constructor which is not as it is in Java IIRC but is as expected given what K&M
+have said before.  There's nothing too crazy about the rest.  As I expected, but
+as may not be immediately obvious, the istream Grad constructor does not call
+the istream Core constructor, rather it calls the default Core constructor
+implicitly; this happens before we event enter the body of the GradStudent
+constructor.
