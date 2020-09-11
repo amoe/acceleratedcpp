@@ -165,3 +165,12 @@ env.Program(
     target='ch13_inheritance',
     source=['ch13_inheritance.cc', 'median.cc', 'read_hw.cc', 'grading_functions.cc']
 )
+env.Program(target='ex13_1', source=['ex13_1.cc'])
+env.Program(target='ex13_2', source=['ex13_2.cc'])
+env.Program(target='ex13_3', source=['ex13_3.cc'])
+env.Program(target='ex13_4', source=['ex13_4.cc'])
+env.Program(target='ex13_5', source=['ex13_5.cc'])
+env.Program(target='ex13_6', source=['ex13_6.cc'])
+env.Program(target='ex13_7', source=['ex13_7.cc'])
+env.Program(target='ex13_8', source=['ex13_8.cc'])
+env.Program(target='ex13_9', source=['ex13_9.cc'])
