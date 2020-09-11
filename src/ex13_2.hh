@@ -1,5 +1,5 @@
-#ifndef EX13_1_HH
-#define EX13_1_HH
+#ifndef EX13_2_HH
+#define EX13_2_HH
 
 class CoreStudent {
 public:
@@ -44,5 +44,5 @@ private:
     double thesis;
 };
 
-#endif /* EX13_1_HH */
 
+#endif /* EX13_2_HH */
