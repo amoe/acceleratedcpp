@@ -1,11 +1,12 @@
 #include <iostream>
 #include <numeric>
 #include <vector>
+#include <string>
 #include "ex13_2.hh"
 #include "read_hw.hh"
 #include "median.hh"
-#include "grading_functions.hh"
 
+using std::string;
 using std::min;
 using std::istream;
 using std::vector;
@@ -13,11 +14,28 @@ using std::cout;
 using std::endl;
 using std::cerr;
 
+double grade(double midterm, double final, double homework) {
+    return 0.2 * midterm + 0.4 * final + 0.4 * homework;
+}
+
+
+double grade(double midterm, double final, const vector<double>& hw) {
+    // Technically wrong but we can't throw in this exercise as we don't want
+    // to abort the program.
+    if (hw.size() == 0) {
+        return 0;
+    }
+
+    return grade(midterm, final, median(hw));
+}
+
+
 CoreStudent::CoreStudent(): midterm_grade(0), final_grade(0) {
     cerr << "  CoreStudent::CoreStudent()" << endl;
 }
 
 double CoreStudent::grade() const {
+    cerr << "  CoreStudent::grade()" << endl;
     return ::grade(midterm_grade, final_grade, homework);
 }
 
@@ -30,6 +48,11 @@ istream& CoreStudent::read(istream& in) {
     read_common(in);
     read_hw(in, homework);
     return in;
+}
+
+string CoreStudent::name() const {
+    cerr << "  CoreStudent::name()" << endl;
+    return n;
 }
 
 GradStudent::GradStudent(): thesis(0) {
@@ -49,6 +72,7 @@ istream& GradStudent::read(istream& in) {
 }
 
 double GradStudent::grade() const {
+    cerr << "  GradStudent::grade()" << endl;
     return min(CoreStudent::grade(), thesis);
 }
 
@@ -68,16 +92,33 @@ int main() {
     
     // Should call CoreStudent::CoreStudent, then GradStudent::GradStudent() ✓
     GradStudent s2;
-    
-    // p1->grade();
-    // p1->name();
-    // p2->grade();
-    // p2->name();
-    // s1.grade();
-    // s1.name();
-    // s2.name();
-    // s2.grade();
 
+    // Should call CoreStudent::grade()
+    p1->grade();
+
+    // Should call CoreStudent::name()
+    p1->name();
+
+    // Should call GradStudent::grade(), then (explicitly) CoreStudent::grade().
+    p2->grade();
+
+    // Should call CoreStudent::name() as there's no implementation for GradStudent.
+    // Note that it doesn't matter that `name` isn't virtual.
+    p2->name();
+
+    // Should call CoreStudent::grade()
+    s1.grade();
+    
+    // Should call CoreStudent::name()
+    s1.name();
+
+    // Should call CoreStudent::name() as again no implementation for Grad.
+    s2.name();
+
+    // Should call GradStudent::grade(), then (explicitly) CoreStudent::grade().
+    // It doesn't matter that this isn't a polymorphic call, GradStudent::grade
+    // can still call down to its base class method.
+    s2.grade();
     
     cout << "End." << endl;
     return 0;

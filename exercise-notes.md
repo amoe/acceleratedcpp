@@ -1385,19 +1385,9 @@ constructor.
 
 ## 13-2
 
-Given the Core and Grad classes defined in this chapter, indicate which function is
-called for each of these invocations:
+Given the Core and Grad classes defined in this chapter, indicate which function
+is called for [some invocations].  This was all fairly obvious.  The important
+thing to learn here is that inheritance is a different mechanism from
+polymorphism.  Polymorphism needs a pointer or reference to function whereas
+inheritance does not.
 
-Core* p1 = new Core;
-Core* p2 = new Grad;
-Core s1;
-Grad s2;
-p1->grade();
-p1->name();
-p2->grade();
-p2->name();
-s1.grade();
-s1.name();
-s2.name();
-s2.grade();
-Check whether you are correct by adding output state
