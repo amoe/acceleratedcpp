@@ -1391,3 +1391,7 @@ thing to learn here is that inheritance is a different mechanism from
 polymorphism.  Polymorphism needs a pointer or reference to function whereas
 inheritance does not.
 
+## 13-3
+
+Add a 'valid' member function to check whether the object holds values.
+
