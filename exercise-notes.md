@@ -1405,4 +1405,9 @@ work for GradStudent.  But when inside GradStudent, we can only test `thesis`,
 which is the only part of GradStudent that makes sense to test.  Arguably though
 we should also be calling the super method and testing homework vector.
 
+## 13-4
+
+Add to these classes a function that will map a numeric grade to a letter grade
+according to the grading policy outlined in §10.3/177.
+
 
