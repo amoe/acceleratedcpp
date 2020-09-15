@@ -8,7 +8,6 @@ public:
     std::string name() const;
     virtual std::istream& read(std::istream&);
     virtual double grade() const;
-    std::string letter_grade() const;
     virtual ~CoreStudent() { }
     virtual CoreStudent* clone() const {
         return new CoreStudent(*this);
