@@ -1412,3 +1412,9 @@ according to the grading policy outlined in §10.3/177.
 
 p351
 
+## 13-5
+
+> Write a predicate to check whether a particular student met all the relevant
+> requirements. That is, check whether a student did all the homework, and if a
+> graduate student, whether the student wrote a thesis.
+
