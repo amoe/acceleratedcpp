@@ -80,7 +80,11 @@ CoreStudent::operator bool() const {
 }
 
 GradStudent::operator bool() const {
-//     return CoreStudent::op() && thesis != 0;
+    // This looks REALLY WEIRD but it's actually fine.
+    // Note that whether 'operator bool()' is virtual doesn't matter at all here.
+    // There's no polymorphism involved, just inheritance.
+    bool result = CoreStudent::operator bool();
+    return result && thesis != 0;
 }
 
 int main() {
@@ -95,11 +99,11 @@ int main() {
     GradStudent s4(grad_ss);
     GradStudent s5(grad_ss);
 
-    // cout << "s1: " << (s1.met_requirements() ? "true" : "false") << endl;
-    // cout << "s2: " << (s2.met_requirements() ? "true" : "false") << endl;
-    // cout << "s3: " << (s3.met_requirements() ? "true" : "false") << endl;
-    // cout << "s4: " << (s4.met_requirements() ? "true" : "false") << endl;
-    // cout << "s5: " << (s5.met_requirements() ? "true" : "false") << endl;
+    cout << "s1: " << (s1 ? "true" : "false") << endl;
+    cout << "s2: " << (s2 ? "true" : "false") << endl;
+    cout << "s3: " << (s3 ? "true" : "false") << endl;
+    cout << "s4: " << (s4 ? "true" : "false") << endl;
+    cout << "s5: " << (s5 ? "true" : "false") << endl;
 
     cout << "End." << endl;
     return 0;

@@ -1423,5 +1423,22 @@ wrapped in a function if needed.
 
 Oh, by predicate they mean the overloaded operator
 
-https://stackoverflow.com/questions/4734846/calling-operators-of-base-class-safe
+This introduces a valuable idiom:
 
+    CoreStudent::operator bool() const {
+        vector<double>::const_iterator found = find(
+            homework.begin(), homework.end(), 0
+        );
+
+        return found == homework.end();
+    }
+
+    GradStudent::operator bool() const {
+        // This looks REALLY WEIRD but it's actually fine.
+        // Note that whether 'operator bool()' is virtual doesn't matter at all here.
+        // There's no polymorphism involved, just inheritance.
+        bool result = CoreStudent::operator bool();
+        return result && thesis != 0;
+    }
+
+We can add user defined conversions and inherit them appropriately.

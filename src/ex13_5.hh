@@ -10,9 +10,7 @@ public:
     virtual double grade() const;
     virtual ~CoreStudent() { }
 
-    virtual operator bool() const {
-        return true;
-    }
+    operator bool() const;
     
     virtual CoreStudent* clone() const {
         return new CoreStudent(*this);
