@@ -9,13 +9,17 @@ public:
     virtual std::istream& read(std::istream&);
     virtual double grade() const;
     virtual ~CoreStudent() { }
+
+    virtual operator bool() const {
+        return true;
+    }
+    
     virtual CoreStudent* clone() const {
         return new CoreStudent(*this);
     }
     void regrade(double d) {
         final_grade = d;
     }
-    virtual bool met_requirements() const;
     
 protected:
     std::istream& read_common(std::istream&);
@@ -40,7 +44,7 @@ public:
         final_grade = d1;
         thesis = d2;
     }
-    bool met_requirements() const;
+    operator bool() const;
 
 private:
     double thesis;

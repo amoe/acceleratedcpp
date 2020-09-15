@@ -1423,3 +1423,5 @@ wrapped in a function if needed.
 
 Oh, by predicate they mean the overloaded operator
 
+https://stackoverflow.com/questions/4734846/calling-operators-of-base-class-safe
+

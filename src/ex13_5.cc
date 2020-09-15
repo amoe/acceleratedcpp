@@ -71,7 +71,7 @@ double GradStudent::grade() const {
     return min(CoreStudent::grade(), thesis);
 }
 
-bool CoreStudent::met_requirements() const {
+CoreStudent::operator bool() const {
     vector<double>::const_iterator found = find(
         homework.begin(), homework.end(), 0
     );
@@ -79,8 +79,8 @@ bool CoreStudent::met_requirements() const {
     return found == homework.end();
 }
 
-bool GradStudent::met_requirements() const {
-    return CoreStudent::met_requirements() && thesis != 0;
+GradStudent::operator bool() const {
+    return CoreStudent::op() && thesis != 0;
 }
 
 int main() {
@@ -95,11 +95,11 @@ int main() {
     GradStudent s4(grad_ss);
     GradStudent s5(grad_ss);
 
-    cout << "s1: " << (s1.met_requirements() ? "true" : "false") << endl;
-    cout << "s2: " << (s2.met_requirements() ? "true" : "false") << endl;
-    cout << "s3: " << (s3.met_requirements() ? "true" : "false") << endl;
-    cout << "s4: " << (s4.met_requirements() ? "true" : "false") << endl;
-    cout << "s5: " << (s5.met_requirements() ? "true" : "false") << endl;
+    // cout << "s1: " << (s1.met_requirements() ? "true" : "false") << endl;
+    // cout << "s2: " << (s2.met_requirements() ? "true" : "false") << endl;
+    // cout << "s3: " << (s3.met_requirements() ? "true" : "false") << endl;
+    // cout << "s4: " << (s4.met_requirements() ? "true" : "false") << endl;
+    // cout << "s5: " << (s5.met_requirements() ? "true" : "false") << endl;
 
     cout << "End." << endl;
     return 0;
