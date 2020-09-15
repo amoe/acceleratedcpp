@@ -1393,5 +1393,16 @@ inheritance does not.
 
 ## 13-3
 
-Add a 'valid' member function to check whether the object holds values.
+> Add a 'valid' member function to check whether the object holds values.
+
+There is a problem here.
+
+valid() normally checks to see if homework is empty.  It doesn't check to see if
+the `final_grade`, `midterm_grade` members have been initialized.  As zero is a
+valid value for these member variables.  Reading the author's minds, they
+probably intend for us to make valid() a virtual function, otherwise it wouldn't
+work for GradStudent.  But when inside GradStudent, we can only test `thesis`,
+which is the only part of GradStudent that makes sense to test.  Arguably though
+we should also be calling the super method and testing homework vector.
+
 

@@ -60,7 +60,18 @@ istream& CoreStudent::read(istream& in) {
     return in;
 }
 
+bool CoreStudent::valid() const {
+    cout << "  CoreStudent::valid()" << endl;
+    return !homework.empty();
+}
+
 GradStudent::GradStudent(): thesis(0) {
+    
+}
+
+bool GradStudent::valid() const {
+    cout << "   GradStudent::valid()" << endl;
+    return CoreStudent::valid() && thesis != 0;
 }
 
 // Note: If we called CoreStudent(is) here as the base class, the behaviour
@@ -99,13 +110,21 @@ Zutell 99 99 26 99 99 99 99
 int main() {
     cout << "Starting." << endl;
 
-    stringstream coress(corestudents_only);
-    stringstream gradss(corestudents_only);
+    stringstream core_ss(corestudents_only);
+    stringstream grad_ss(corestudents_only);
     
-    CoreStudent s1(coress);
-
+    CoreStudent s1(core_ss);
     cout << "s1 is valid? " << (s1.valid() ? "true" : "false") << endl;
-    
+
+    CoreStudent s2;
+    cout << "s2 is valid? " << (s2.valid() ? "true" : "false") << endl;
+
+    GradStudent s3(grad_ss);
+    cout << "s3 is valid? " << (s3.valid() ? "true" : "false") << endl;
+
+    GradStudent s4;
+    cout << "s4 is valid? " << (s4.valid() ? "true" : "false") << endl;
+
     cout << "End." << endl;
     return 0;
 }

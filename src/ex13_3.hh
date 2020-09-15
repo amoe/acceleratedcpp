@@ -6,6 +6,7 @@ public:
     CoreStudent();
     CoreStudent(std::istream&);
     std::string name() const;
+    virtual bool valid() const;
     virtual std::istream& read(std::istream&);
     virtual double grade() const;
     virtual ~CoreStudent() { }
@@ -32,6 +33,7 @@ public:
     GradStudent(std::istream&);
     double grade() const;    // Note that we re-declare methods we will override
     std::istream& read(std::istream&);
+    bool valid() const;
     GradStudent* clone() const {
         return new GradStudent(*this);
     }
