@@ -3,11 +3,13 @@
 #include <sstream>
 #include <string>
 #include <numeric>
-#include "ex13_1.hh"
+#include <map>
+#include "ex13_4.hh"
 #include "read_hw.hh"
 #include "median.hh"
 #include "grading_functions.hh"
 
+using std::map;
 using std::min;
 using std::string;
 using std::stringstream;
@@ -72,9 +74,50 @@ double GradStudent::grade() const {
     return min(CoreStudent::grade(), thesis);
 }
 
+string CoreStudent::letter_grade() const {
+    double found_grade = grade();
+
+    map<double, string> thresholds = {
+        {97, "A+"},
+        {94, "A"},
+        {90, "A-"},
+        {87, "B+"},
+        {84, "B"},
+        {80, "B-"},
+        {77, "C+"},
+        {74, "C"},
+        {70, "C-"},
+        {60, "D"},
+        {0, "F"}
+    };
+
+    using iter_t = map<double, string>::reverse_iterator;
+
+    for (iter_t it = thresholds.rbegin(); it != thresholds.rend(); it++) {
+        cout << "thresh is " << it->first << endl;
+        if (found_grade >= it->first) {
+            return it->second;
+        }
+    }
+
+    return "?";
+}
+
+
 int main() {
     cout << "Starting." << endl;
 
+    stringstream core_ss(corestudents_only);
+    stringstream grad_ss(corestudents_only);
+    
+    CoreStudent s1(core_ss);
+    GradStudent s2(grad_ss);
+
+    cout << "Grade for s1: " << s1.letter_grade() << "(" << s1.grade() << ")" << endl;
+    cout << "Grade for s2: " << s2.letter_grade() << "(" << s2.grade() << ")" << endl;
+    
+    
+    
     cout << "End." << endl;
     return 0;
 }
