@@ -15,6 +15,7 @@ public:
     void regrade(double d) {
         final_grade = d;
     }
+    virtual bool met_requirements() const;
     
 protected:
     std::istream& read_common(std::istream&);
@@ -39,6 +40,7 @@ public:
         final_grade = d1;
         thesis = d2;
     }
+    bool met_requirements() const;
 
 private:
     double thesis;

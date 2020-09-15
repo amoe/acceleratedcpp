@@ -108,7 +108,7 @@ int main() {
     cout << "Starting." << endl;
 
     stringstream core_ss(corestudents_only);
-    stringstream grad_ss(corestudents_only);
+    stringstream grad_ss(gradstudents_only);
     
     CoreStudent s1(core_ss);
     GradStudent s2(grad_ss);

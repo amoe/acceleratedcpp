@@ -3,11 +3,13 @@
 #include <sstream>
 #include <string>
 #include <numeric>
+#include <algorithm>
 #include "ex13_5.hh"
 #include "read_hw.hh"
 #include "median.hh"
 #include "grading_functions.hh"
 
+using std::find;
 using std::min;
 using std::string;
 using std::stringstream;
@@ -19,21 +21,20 @@ using std::vector;
 
 const string corestudents_only = R"(
 Gamlin 94 89 14 96 16 63
-Capener 7 10 32 68 61 76
+Capener 7 10 32 0 61 76
 )";
 
 const string gradstudents_only = R"(
 Droney 31 75 83 81 54 18 87 
-Zutell 99 99 26 99 99 99 99 
+Zutell 99 99 26 99 0 99 99 
+Jervis 99 99 0 99 99 99 99 
 )";
 
 
 CoreStudent::CoreStudent(): midterm_grade(0), final_grade(0) {
-    cerr << "    CoreStudent::CoreStudent()" << endl;
 }
 
 CoreStudent::CoreStudent(istream& is) {
-    cerr << "    CoreStudent::CoreStudent(istream&)" << endl;
     read(is);
 
 }
@@ -53,11 +54,9 @@ istream& CoreStudent::read(istream& in) {
 }
 
 GradStudent::GradStudent(): thesis(0) {
-    cerr << "    GradStudent::GradStudent()" << endl;
 }
 
 GradStudent::GradStudent(istream& is) {
-    cerr << "    GradStudent::GradStudent(istream&)" << endl;
     read(is);
 }
 
@@ -72,8 +71,36 @@ double GradStudent::grade() const {
     return min(CoreStudent::grade(), thesis);
 }
 
+bool CoreStudent::met_requirements() const {
+    vector<double>::const_iterator found = find(
+        homework.begin(), homework.end(), 0
+    );
+
+    return found == homework.end();
+}
+
+bool GradStudent::met_requirements() const {
+    return CoreStudent::met_requirements() && thesis != 0;
+}
+
 int main() {
     cout << "Starting." << endl;
+
+    stringstream core_ss(corestudents_only);
+    stringstream grad_ss(gradstudents_only);
+    
+    CoreStudent s1(core_ss);
+    CoreStudent s2(core_ss);
+    GradStudent s3(grad_ss);
+    GradStudent s4(grad_ss);
+    GradStudent s5(grad_ss);
+
+    cout << "s1: " << (s1.met_requirements() ? "true" : "false") << endl;
+    cout << "s2: " << (s2.met_requirements() ? "true" : "false") << endl;
+    cout << "s3: " << (s3.met_requirements() ? "true" : "false") << endl;
+    cout << "s4: " << (s4.met_requirements() ? "true" : "false") << endl;
+    cout << "s5: " << (s5.met_requirements() ? "true" : "false") << endl;
+
     cout << "End." << endl;
     return 0;
 }

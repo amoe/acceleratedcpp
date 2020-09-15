@@ -1418,3 +1418,8 @@ p351
 > requirements. That is, check whether a student did all the homework, and if a
 > graduate student, whether the student wrote a thesis.
 
+Just a virtual predicate that calls the superclass method really.  Could be
+wrapped in a function if needed.
+
+Oh, by predicate they mean the overloaded operator
+
