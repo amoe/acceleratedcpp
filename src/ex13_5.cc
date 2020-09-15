@@ -80,7 +80,7 @@ CoreStudent::operator bool() const {
 }
 
 GradStudent::operator bool() const {
-    return CoreStudent::op() && thesis != 0;
+//     return CoreStudent::op() && thesis != 0;
 }
 
 int main() {
