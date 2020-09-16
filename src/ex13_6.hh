@@ -26,5 +26,9 @@ private:
     std::string n;
 };
 
+class PassFailStudent: public CoreStudent {
+    double grade() const;
+};
+
 #endif /* EX13_1_HH */
 
