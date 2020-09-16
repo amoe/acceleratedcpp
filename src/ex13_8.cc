@@ -105,7 +105,10 @@ istream& StudentInfo::read(istream& is) {
         student = new GradStudent(is);
     } else if (ch == 'A') {
         student = new AuditStudent(is);
-    } 
+    } else {
+        cout << "char was '" << ch << "'" << endl;
+        throw runtime_error("bad student code");
+    }
 
     return is;
 }
@@ -119,8 +122,15 @@ int main() {
     string::size_type maxlen = 0;
 
     stringstream sin(students_input);
+
+    // There's something wrong about the way this loop is structured.
+    // Maybe it needs a do...while or something that's somehow different, either
+    // way it seems to do an off by one, and it's nothing to do with the raw
+    // string literal being used.  We need to be checking the result of 'read'
+    // and bailing out if it failed *inside* the loop.
     StudentInfo rec;
     while (rec.read(sin)) {
+        cout << "Read a record: " << rec.name() << endl;
         maxlen = max(maxlen, rec.name().size());
         students.push_back(rec);
     }
