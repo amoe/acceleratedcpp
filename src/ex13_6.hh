@@ -30,6 +30,8 @@ class PassFailStudent: public CoreStudent {
 public:
     PassFailStudent(std::istream&);
     double grade() const;
+
+    bool student_passed() const;
 };
 
 #endif /* EX13_1_HH */

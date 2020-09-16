@@ -56,7 +56,19 @@ PassFailStudent::PassFailStudent(istream& is) {
 }
 
 double PassFailStudent::grade() const {
-    return 0.0;
+    double result;
+    
+    if (homework.empty()) {
+        result = (midterm_grade + final_grade) / 2;
+    } else {
+        result = CoreStudent::grade();
+    }
+
+    return result;
+}
+
+bool PassFailStudent::student_passed() const {
+    return grade() > 60;
 }
 
 
@@ -67,8 +79,8 @@ int main() {
     PassFailStudent s1(pfs_ss);
     PassFailStudent s2(pfs_ss);
 
-    cout << s1.grade() << endl;
-    cout << s2.grade() << endl;
+    cout << s1.grade() << ": " << (s1.student_passed() ? "passed" : "failed") << endl;
+    cout << s2.grade() << ": " << (s2.student_passed() ? "passed" : "failed") << endl;
 
     cout << "End." << endl;
     return 0;
