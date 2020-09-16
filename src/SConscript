@@ -172,6 +172,6 @@ env.Program(target='ex13_3', source=['ex13_3.cc', 'median.cc', 'grading_function
 env.Program(target='ex13_4', source=['ex13_4.cc', 'median.cc', 'grading_functions.cc', 'read_hw.cc'])
 env.Program(target='ex13_5', source=['ex13_5.cc', 'median.cc', 'grading_functions.cc', 'read_hw.cc'])
 env.Program(target='ex13_6', source=['ex13_6.cc', 'median.cc', 'grading_functions.cc', 'read_hw.cc'])
-env.Program(target='ex13_7', source=['ex13_7.cc'])
+env.Program(target='ex13_7', source=['ex13_7.cc', 'median.cc', 'grading_functions.cc', 'read_hw.cc'])
 env.Program(target='ex13_8', source=['ex13_8.cc'])
 env.Program(target='ex13_9', source=['ex13_9.cc'])

@@ -1462,3 +1462,17 @@ The constructor is not inherited by default as it would be in java.  Remember:
 > Every member of CoreStudent is also a member of GradStudent -- except for the
 > constructors, the assignment operator, and the destructor.
 
+Note that we didn't need to override the read() member function for this.
+
+## 13-7
+
+> Add a class to the system to represent students auditing the course.
+
+WTF is this supposed to mean?  One logical interpretation is that they only have
+a name but not a grade, and that they never do homework, and their grade is
+always zero but should not throw an error.  The read function will also have to
+be modified as read_common no longer applies.
+
+BUT!  n is private???  What should the derived class do?
+
+read_common is clearly not an option.  I chose to make `n` protected.
