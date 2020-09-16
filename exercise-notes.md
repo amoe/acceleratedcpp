@@ -1488,3 +1488,7 @@ modifying StudentInfo.
 auditstudent works by default, but just degrades to CoreStudent when used with
 studentinfo.
 Somehow the program still compiles without a clone() implementation.
+
+When getting a char: the last char will cause the read to fail.  The char will
+not be modified.  The istream will turn false after this read.  But the istream
+will still be false until the next failed read.

@@ -96,17 +96,19 @@ double AuditStudent::grade() const {
 istream& StudentInfo::read(istream& is) {
     delete student;
     
-    char ch;
+    char ch = 0;
     is >> ch;
 
-    if (ch == 'U') {
+
+    if (ch == '\0') {
+        return is;    // EOF!
+    } else if (ch == 'U') {
         student = new CoreStudent(is);
     } else if (ch == 'G') {
         student = new GradStudent(is);
     } else if (ch == 'A') {
         student = new AuditStudent(is);
     } else {
-        cout << "char was '" << ch << "'" << endl;
         throw runtime_error("bad student code");
     }
 
@@ -128,8 +130,11 @@ int main() {
     // way it seems to do an off by one, and it's nothing to do with the raw
     // string literal being used.  We need to be checking the result of 'read'
     // and bailing out if it failed *inside* the loop.
+    // The weirdness is to do with the user
+    
     StudentInfo rec;
     while (rec.read(sin)) {
+        cout << "Stream value inside loop: " << (sin ? "true" : "false") << endl;
         cout << "Read a record: " << rec.name() << endl;
         maxlen = max(maxlen, rec.name().size());
         students.push_back(rec);
