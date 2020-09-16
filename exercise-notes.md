@@ -1454,3 +1454,11 @@ We can add user defined conversions and inherit them appropriately.
 > passing grade is 60 or higher.
 
 This is another derived class, the only part really needed is the base class.
+
+Interesting things that come up.
+
+The constructor is not inherited by default as it would be in java.  Remember:
+
+> Every member of CoreStudent is also a member of GradStudent -- except for the
+> constructors, the assignment operator, and the destructor.
+

@@ -27,6 +27,8 @@ private:
 };
 
 class PassFailStudent: public CoreStudent {
+public:
+    PassFailStudent(std::istream&);
     double grade() const;
 };
 

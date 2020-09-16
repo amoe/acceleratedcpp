@@ -51,6 +51,14 @@ istream& CoreStudent::read(istream& in) {
     return in;
 }
 
+PassFailStudent::PassFailStudent(istream& is) {
+    read(is);
+}
+
+double PassFailStudent::grade() const {
+    return 0.0;
+}
+
 
 int main() {
     cout << "Starting." << endl;
@@ -59,7 +67,8 @@ int main() {
     PassFailStudent s1(pfs_ss);
     PassFailStudent s2(pfs_ss);
 
-    
+    cout << s1.grade() << endl;
+    cout << s2.grade() << endl;
 
     cout << "End." << endl;
     return 0;
