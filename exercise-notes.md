@@ -1476,3 +1476,11 @@ be modified as read_common no longer applies.
 BUT!  n is private???  What should the derived class do?
 
 read_common is clearly not an option.  I chose to make `n` protected.
+
+## 13-8
+
+> Write a program to generate a grade report that can handle all four kinds of
+> students.
+
+So this will basically mean combining all previous derived classes and probably
+modifying StudentInfo.
