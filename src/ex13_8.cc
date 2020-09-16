@@ -5,6 +5,7 @@
 #include <iomanip>
 #include <algorithm>
 #include <string>
+#include <stdexcept>
 #include "read_hw.hh"
 #include "median.hh"
 #include "grading_functions.hh"
@@ -22,12 +23,13 @@ using std::istream;
 using std::cout;
 using std::endl;
 using std::vector;
+using std::runtime_error;
 
 const string students_input = R"(
 U Gamlin 94 89 14 96 16 63
 U Capener 7 10 32 68 61 76
 G Droney 31 75 83 81 54 18 87 
-G Zutell 99 99 26 99 99 99 99 
+G Zutell 99 99 26 99 99 99 99
 )";
 
 
@@ -76,6 +78,21 @@ double GradStudent::grade() const {
     return min(CoreStudent::grade(), thesis);
 }
 
+AuditStudent::AuditStudent(istream& in) {
+    cout << "constructing auditstudent" << endl;
+    read(in);
+}
+
+istream& AuditStudent::read(istream& in) {
+    in >> n;
+    return in;
+}
+
+double AuditStudent::grade() const {
+    return 0;
+}
+
+
 istream& StudentInfo::read(istream& is) {
     delete student;
     
@@ -84,9 +101,11 @@ istream& StudentInfo::read(istream& is) {
 
     if (ch == 'U') {
         student = new CoreStudent(is);
-    } else {
+    } else if (ch == 'G') {
         student = new GradStudent(is);
-    }
+    } else if (ch == 'A') {
+        student = new AuditStudent(is);
+    } 
 
     return is;
 }

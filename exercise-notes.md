@@ -1484,3 +1484,7 @@ read_common is clearly not an option.  I chose to make `n` protected.
 
 So this will basically mean combining all previous derived classes and probably
 modifying StudentInfo.
+
+auditstudent works by default, but just degrades to CoreStudent when used with
+studentinfo.
+Somehow the program still compiles without a clone() implementation.
