@@ -55,9 +55,9 @@ istream& CoreStudent::read(istream& in) {
 int main() {
     cout << "Starting." << endl;
 
-    // stringstream pfs_ss(passfailstudent_only);
-    // PassFailStudent s1(pfs_ss);
-    // PassFailStudent s2(pfs_ss);
+    stringstream pfs_ss(passfailstudent_only);
+    PassFailStudent s1(pfs_ss);
+    PassFailStudent s2(pfs_ss);
 
     
 
