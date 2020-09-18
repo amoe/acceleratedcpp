@@ -1533,4 +1533,13 @@ self-assignment?
         return *this;
     }
 
-Well, let's try
+Well, let's try... In this example, nothing!  It is invoked -- invoked by the
+sort method.
+
+Think about what would happen.  It is invoked with a source parameter.  The
+target is the current object and the goal is to assign the value from source.
+If it didn't check, it would delete itself, which is fine.  But then
+`source.student->clone` would refer to a null pointer.  That would never be hit
+because of the if check.  As a result it would null out its own student.  So it
+would result in simply deleting its student.  Observable effect is that it would
+cause name() to segfault.
