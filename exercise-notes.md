@@ -1517,8 +1517,8 @@ loop either.
 
 ## 13-9
 
-What would happen if the assignment operator failed to check for
-self-assignment?
+> What would happen if the assignment operator [for StudentInfo] failed to check
+> for self-assignment?
 
     StudentInfo& operator=(const StudentInfo& source) {
         if (&source != this) {
@@ -1543,3 +1543,6 @@ If it didn't check, it would delete itself, which is fine.  But then
 because of the if check.  As a result it would null out its own student.  So it
 would result in simply deleting its student.  Observable effect is that it would
 cause name() to segfault.
+
+This also shows that the sort method, sensibly, does not try to self-assign
+things.

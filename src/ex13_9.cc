@@ -22,7 +22,6 @@ using std::sort;
 using std::stringstream;
 
 bool compare(const CoreStudent& c1, const CoreStudent& c2) {
-    // This will work on GradStudent and sensibly return the name.
     return c1.name() < c2.name();
 }
 
@@ -64,29 +63,20 @@ istream& CoreStudent::read(istream& in) {
 GradStudent::GradStudent(): thesis(0) {
 }
 
-// Note: If we called CoreStudent(is) here as the base class, the behaviour
-// would be wrong.  We implicitly call the default constructor.
 GradStudent::GradStudent(istream& is) {
     read(is);
 }
 
 istream& GradStudent::read(istream& in) {
-    // Directly using the scope operator to refer to members from the parent
-    // class.
     CoreStudent::read_common(in);
     in >> thesis;
     read_hw(in, CoreStudent::homework);
     return in;
 }
 
-// "The student receives the lesser of the grade ontained on the thesis and the
-// grade that would have been obtained if we just counted the exams and homework
-// scores."
 double GradStudent::grade() const {
     return min(CoreStudent::grade(), thesis);
 }
-
-// StudentInfo -- handle class
 
 istream& StudentInfo::read(istream& is) {
     delete student;
@@ -103,72 +93,27 @@ istream& StudentInfo::read(istream& is) {
     return is;
 }
 
-// The 3rd item is the thesis grade.  A really low thesis grade should
-// "dominate" a very good set of homework grades, hence Zutell should
-// be sorted to the top (the lowest effective grade).
 const string students_input = R"(
-U Gamlin 94 89 14 96 16 63
-U Capener 7 10 32 68 61 76
 G Droney 31 75 83 81 54 18 87 
-G Zutell 99 99 26 99 99 99 99 
 )";
 
-const string corestudents_only = R"(
-Gamlin 94 89 14 96 16 63
-Capener 7 10 32 68 61 76
-)";
-
-const string gradstudents_only = R"(
-Droney 31 75 83 81 54 18 87 
-Zutell 99 99 26 99 99 99 99 
-)";
-
-
-void demo_read_students() {
-    vector<StudentInfo> students;
-    string::size_type maxlen = 0;
-
-    stringstream sin(students_input);
-    StudentInfo rec;
-    while (rec.read(sin)) {
-        maxlen = max(maxlen, rec.name().size());
-        students.push_back(rec);
-    }
-
-    cout << "Read " << students.size() << " records" << endl;
-
-    // Sort is going to call the assignment operator a lot!
-    // Hence the assignment operator must be correctly implemented
-    // and must copy its managed contents.
-    // This is a perfect example of the rule of three.
-    sort(students.begin(), students.end(), StudentInfo::compare);
-    
-    for (vector<StudentInfo>::size_type i = 0; i < students.size(); i++) {
-        // This will copy the student.
-        StudentInfo this_student(students[i]);
-        cout << this_student.name()
-             << string((maxlen + 1) - this_student.name().size(), ' ');
-
-        try {
-            double final_grade = this_student.grade();
-            streamsize prec = cout.precision();
-
-            cout << setprecision(3) << final_grade << setprecision(prec);
-        } catch (std::domain_error& e) {
-            cout << e.what();
-        }
-
-        cout << endl;
-
-        // The copy of the student is freed here.
-    }
-}
 
 int main() {
     cout << "Starting." << endl;
 
-    demo_read_students();
 
+    stringstream sin(students_input);
+
+
+    cout << "After initial read:" << endl;
+    StudentInfo rec(sin);
+    cout << "name is " << rec.name() << endl;
+
+
+    cout << "After self-assign:" << endl;
+    rec = rec;
+    cout << "name is " << rec.name() << endl;
+    
     cout << "End." << endl;
     return 0;
 }

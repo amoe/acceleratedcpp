@@ -57,14 +57,14 @@ public:
     StudentInfo& operator=(const StudentInfo& source) {
         std::cout << "assignment operator invoked" << std::endl;
         
-        if (&source != this) {
+//        if (&source != this) {
             delete student;
             if (source.student) {
                 student = source.student->clone();
             } else{
                 student = 0;
             }
-        }
+//        }
 
         return *this;
     }
