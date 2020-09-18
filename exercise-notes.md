@@ -1486,13 +1486,31 @@ So this will basically mean combining all previous derived classes and probably
 modifying StudentInfo.
 
 auditstudent works by default, but just degrades to CoreStudent when used with
-studentinfo.
-Somehow the program still compiles without a clone() implementation.
+studentinfo.  Somehow the program still compiles without a clone()
+implementation -- not sure why this is the case.
 
-When getting a char: the last char will cause the read to fail.  The char will
-not be modified.  The istream will turn false after this read.  But the istream
-will still be false until the next failed read.
-
+When getting a char with >>: the last char will cause the read to fail.  The
+char will *not* be modified meaning it will still contain its old value.  The
+istream will turn false after this read.  But the istream will still be false
+until the next failed read.
 
 The indenteded/central lesson here is that every subclass must implement clone()
 otherwise the polymorphism fails tow rok and it becomes a corestudent.
+
+Regarding the confusing I/O loop format, this one also works:
+
+    for (;;) {
+        StudentInfo rec(sin);
+
+        if (!sin)
+            break;
+        
+        string name = rec.name();
+        cout << "name is " << name << endl;
+        maxlen = max(maxlen, name.size());
+        students.push_back(rec);
+    }
+
+As long as we test the stream status directly after reading a record, it seems
+that everything works OK.  But note that AFAICS this isn't a do...while style
+loop either.
