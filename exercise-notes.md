@@ -1514,3 +1514,23 @@ Regarding the confusing I/O loop format, this one also works:
 As long as we test the stream status directly after reading a record, it seems
 that everything works OK.  But note that AFAICS this isn't a do...while style
 loop either.
+
+## 13-9
+
+What would happen if the assignment operator failed to check for
+self-assignment?
+
+    StudentInfo& operator=(const StudentInfo& source) {
+        if (&source != this) {
+            delete student;
+            if (source.student) {
+                student = source.student->clone();
+            } else{
+                student = 0;
+            }
+        }
+
+        return *this;
+    }
+
+Well, let's try
