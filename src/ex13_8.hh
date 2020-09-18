@@ -20,9 +20,6 @@ protected:
     std::istream& read_common(std::istream&);
     double midterm_grade, final_grade;
     std::vector<double> homework;
-
-
-private:
     std::string n;
 };
 
@@ -92,6 +89,13 @@ public:
     
 private:
     CoreStudent* student;
+};
+
+class AuditStudent: public CoreStudent {
+public:
+    AuditStudent(std::istream&);
+    std::istream& read(std::istream&);
+    double grade() const;
 };
 
 
