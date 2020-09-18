@@ -99,6 +99,22 @@ double AuditStudent::grade() const {
     return 0;
 }
 
+PassFailStudent::PassFailStudent(istream& is) {
+    read(is);
+}
+
+double PassFailStudent::grade() const {
+    double result;
+    
+    if (homework.empty()) {
+        result = (midterm_grade + final_grade) / 2;
+    } else {
+        result = CoreStudent::grade();
+    }
+
+    return result;
+}
+
 // StudentInfo -- handle class
 
 istream& StudentInfo::read(istream& is) {
@@ -122,6 +138,8 @@ istream& StudentInfo::read(istream& is) {
         student = new CoreStudent(is);
     } else if (ch == 'G') {
         student = new GradStudent(is);
+    } else if (ch == 'P') {
+        student = new PassFailStudent(is);
     } else {
         student = new AuditStudent(is);
     }
@@ -139,6 +157,8 @@ G Droney 31 75 83 81 54 18 87
 G Zutell 99 99 26 99 99 99 99 
 A Pyne
 A Hebert
+P Ottem 94 89 14 96 16 63
+P Hellen 50 50
 )";
 
 

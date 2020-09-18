@@ -47,12 +47,23 @@ public:
     std::istream& read(std::istream&);
     double grade() const;
 
-    // Needed because copying will otherwise cause the pointer to degrade to
-    // a CoreStudent.
+    // Needed in every derived class, because copying will otherwise cause the
+    // pointer to degrade to a CoreStudent, which means its overrides won't get
+    // called after it's been pushed onto a vector.
     AuditStudent* clone() const {
         return new AuditStudent(*this);
     }
 };
+
+class PassFailStudent: public CoreStudent {
+public:
+    PassFailStudent(std::istream&);
+    double grade() const;
+    PassFailStudent* clone() const {
+        return new PassFailStudent(*this);
+    }
+};
+
 
 class StudentInfo {
 public:

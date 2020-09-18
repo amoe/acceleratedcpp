@@ -1492,3 +1492,7 @@ Somehow the program still compiles without a clone() implementation.
 When getting a char: the last char will cause the read to fail.  The char will
 not be modified.  The istream will turn false after this read.  But the istream
 will still be false until the next failed read.
+
+
+The indenteded/central lesson here is that every subclass must implement clone()
+otherwise the polymorphism fails tow rok and it becomes a corestudent.
