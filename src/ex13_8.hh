@@ -46,6 +46,12 @@ public:
     AuditStudent(std::istream&);
     std::istream& read(std::istream&);
     double grade() const;
+
+    // Needed because copying will otherwise cause the pointer to degrade to
+    // a CoreStudent.
+    AuditStudent* clone() const {
+        return new AuditStudent(*this);
+    }
 };
 
 class StudentInfo {
