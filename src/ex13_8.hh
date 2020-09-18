@@ -41,6 +41,13 @@ private:
     double thesis;
 };
 
+class AuditStudent: public CoreStudent {
+public:
+    AuditStudent(std::istream&);
+    std::istream& read(std::istream&);
+    double grade() const;
+};
+
 class StudentInfo {
 public:
     StudentInfo(): student(0) { }
@@ -89,13 +96,6 @@ public:
     
 private:
     CoreStudent* student;
-};
-
-class AuditStudent: public CoreStudent {
-public:
-    AuditStudent(std::istream&);
-    std::istream& read(std::istream&);
-    double grade() const;
 };
 
 

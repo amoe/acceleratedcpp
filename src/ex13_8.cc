@@ -111,12 +111,19 @@ istream& StudentInfo::read(istream& is) {
          << " (ascii val is " << (int) ch << ")" << endl;
     
     // It's important that we handle every case here.
-    //
-    
+    // A failure to allocate here will cause a failure to push_back() onto
+    // the vector.
+    // It will also mean that the contents of 'rec' does NOT get overwritten by
+    // this loop, so the contents of the StudentInfo record will be the same
+    // but student will be a null pointer (having already been deleted) and thus
+    // won't be able to be copied.
+
     if (ch == 'U') {
         student = new CoreStudent(is);
-    } else {
+    } else if (ch == 'G') {
         student = new GradStudent(is);
+    } else {
+        student = new AuditStudent(is);
     }
 
     return is;
@@ -142,7 +149,9 @@ void demo_read_students() {
     stringstream sin(students_input);
     StudentInfo rec;
     while (rec.read(sin)) {
-        maxlen = max(maxlen, rec.name().size());
+        string name = rec.name();
+        cout << "name is " << name << endl;
+        maxlen = max(maxlen, name.size());
         students.push_back(rec);
     }
 
