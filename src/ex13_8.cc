@@ -128,16 +128,6 @@ A Pyne
 A Hebert
 )";
 
-const string corestudents_only = R"(
-Gamlin 94 89 14 96 16 63
-Capener 7 10 32 68 61 76
-)";
-
-const string gradstudents_only = R"(
-Droney 31 75 83 81 54 18 87 
-Zutell 99 99 26 99 99 99 99 
-)";
-
 
 void demo_read_students() {
     vector<StudentInfo> students;
