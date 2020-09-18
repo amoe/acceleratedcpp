@@ -107,6 +107,12 @@ istream& StudentInfo::read(istream& is) {
     char ch;
     is >> ch;
 
+    cout << "Read identifying char '" << ch << "'"
+         << " (ascii val is " << (int) ch << ")" << endl;
+    
+    // It's important that we handle every case here.
+    //
+    
     if (ch == 'U') {
         student = new CoreStudent(is);
     } else {
