@@ -1251,3 +1251,41 @@ backing the value will be on the heap rather than on the stack as normal.
 
 Some very interesting subtleties regarding virtual call resolution.  It works
 very differently to Java.
+
+
+## CHAPTER 14 - "Managing memory (almost) automatically"
+
+They define a class which basically seems the same as unique_ptr from C++11.  It
+takes ownership of a pointer and fully manages it.  They talk about an
+'interface class' for the part of Handle which was simply forwarding other calls
+to the virtual functions of CoreStudent.  It's not that clear what this actually
+means or why it's desirable, to repeat the names of all the member functions
+that we care about.
+
+> Much of this chapter revolves around the answer to a single question: What does
+> it mean to copy an object? At first glance, this question seems to have an
+> obvious answer: A copy is a distinct object that has all the properties of the
+> original object. However, the moment it becomes possible for one object to refer
+> to another, the question becomes more complicated: If an object x refers to an
+> object y , does copying x cause y to be copied too?
+
+K&M say: We will define three versions of our pointerlike class.
+
+
+> Our Handle will have a restricted interface: Once you attach a Handle to an
+> object, the Handle class will take over memory management for that object. Users
+> should attach only one Handle to any object, after which they should not access
+> the object directly through a pointer; all access should be through the Handle
+> . These restrictions will allow Handle s to avoid the problems inherent in
+> built-in pointers. When we copy a Handle object, we'll make a new copy of the
+> object, so that each Handle points to its own copy. When we destroy a Handle ,
+> it will destroy the associated object, and doing so will be the only
+> straightforward way to free the object. We'll allow users to create unbound
+> Handles , but we will throw an exception if the user attempts to access the
+> object to which an unbound Handle refers (or, more accurately, doesn't
+> refer). Users who want to avoid the exception can test to see whether the Handle
+> is bound.
+
+How are we going to do a polymorphic copy without using ->clone()?  You surely
+face the same problem where you don't know what constructor to call, `new
+CoreStudent(*ptr)` will inadvertently degrade a GradStudent to a CoreStudent.
