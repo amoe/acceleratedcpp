@@ -1,10 +1,38 @@
 #ifndef CH14_AUTOMATIC_HH
 #define CH14_AUTOMATIC_HH
 
+class Dog {
+public:
+    void woof() {
+        std::cout << "Woof!  woof!" << std::endl;
+    }
+};
+
 template <typename T>
 class Handle {
+public:
+    Handle(): ptr(0) { }
+    Handle(const Handle& source): ptr(0) {
+        if (source.ptr) {
+            ptr = source.ptr->clone();
+        }
+    }
+    Handle& operator=(const Handle&);
+    ~Handle() {
+        delete ptr;
+    }
+    
+    Handle(T* ptr): ptr(ptr) { }
+    
+    operator bool() const {
+        return ptr;    // 0 if null, and hence false
+    }
+    
+    T& operator*() const;
+    T* operator->() const;
+    
 private:
-    T* p;
+    T* ptr;
 };
 
 
