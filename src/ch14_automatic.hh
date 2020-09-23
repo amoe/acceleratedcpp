@@ -3,9 +3,17 @@
 
 class Dog {
 public:
+    Dog(): val(42) { }
+
+    Dog* clone() {
+        return new Dog(*this);
+    }
+    
     void woof() {
         std::cout << "Woof!  woof!" << std::endl;
     }
+
+    int val;
 };
 
 template <typename T>
