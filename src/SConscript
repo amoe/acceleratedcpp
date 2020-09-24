@@ -179,5 +179,5 @@ env.Program(target='ex13_9', source=['ex13_9.cc', 'median.cc', 'grading_function
 
 env.Program(
     target='ch14_automatic',
-    source=['ch14_automatic.cc']
+    source=['ch14_automatic.cc', 'read_hw.cc', 'grading_functions.cc', 'median.cc']
 )
