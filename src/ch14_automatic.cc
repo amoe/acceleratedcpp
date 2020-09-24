@@ -4,11 +4,13 @@
 #include <string>
 #include <sstream>
 #include <algorithm>
+#include <iomanip>
 #include "median.hh"
 #include "read_hw.hh"
 #include "grading_functions.hh"
 #include "ch14_automatic.hh"
 
+using std::setprecision;
 using std::sort;
 using std::max;
 using std::min;
@@ -19,6 +21,8 @@ using std::vector;
 using std::cout;
 using std::endl;
 using std::runtime_error;
+using std::domain_error;
+using std::streamsize;
 
 const string students_input = R"(
 U Gamlin 94 89 14 96 16 63
@@ -152,7 +156,23 @@ void grading_test() {
 
     sort(students.begin(), students.end(), compare_Core_handles);
 
+    using vec_sz = vector<Handle<CoreStudent>>::size_type;
+
     
+    for (vec_sz i = 0; i < students.size(); i++) {
+        Handle<CoreStudent> s = students[i];
+        cout << s->name()
+             << string((maxlen + 1) - s->name().size(),  ' ');
+
+        try {
+            double final_grade = s->grade();
+            streamsize prec = cout.precision();
+            cout << setprecision(3) << final_grade
+                 << setprecision(prec) << endl;
+        } catch (domain_error& e) {
+            cout << e.what() << endl;
+        }
+    }
 }
 
 
