@@ -160,6 +160,7 @@ void grading_test() {
 
     
     for (vec_sz i = 0; i < students.size(); i++) {
+        // Probably doing an unnecessary copy here.
         Handle<CoreStudent> s = students[i];
         cout << s->name()
              << string((maxlen + 1) - s->name().size(),  ' ');
