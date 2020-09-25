@@ -113,7 +113,50 @@ T* Handle<T>::operator->() const {
     }
 }
 
-void dog_test() {
+template <typename T>
+T& RefHandle<T>::operator*() const {
+    if (ptr) {
+        return *ptr;
+    } else {
+        throw runtime_error("unbound handle");
+    }
+}
+
+template <typename T>
+T* RefHandle<T>::operator->() const {
+    if (ptr) {
+        return ptr;
+    } else {
+        throw runtime_error("unbound handle");
+    }
+}
+
+template <typename T>
+RefHandle<T>::~RefHandle() {
+    // XXX: destructor
+}
+
+
+template <typename T>
+RefHandle<T>& RefHandle<T>::operator=(const RefHandle& rhs) {
+    // XXX: assignment operator
+}
+
+// Code looks the same, but the Handle constructor is implicitly called!
+istream& StudentInfo::read(istream& is) {
+    char ch;
+    is >> ch;
+
+    if (ch == 'U') {
+        cp = new CoreStudent(is);
+    } else {
+        cp = new GradStudent(is);
+    }
+
+    return is;
+}
+
+void dog_handle_test() {
     Dog* dog = new Dog;
     
     Handle<Dog> handle1(dog);
@@ -124,6 +167,24 @@ void dog_test() {
     // Assignment should fully copy the Dog, using the synthetic copy
     // constructor created by the compiler.
     Handle<Dog> handle2;
+    handle2 = handle1;
+    handle2->val = 43;
+
+    cout << "Handle1's val is " << (*handle1).val << endl;
+    cout << "Handle2's val is " << (*handle2).val << endl;
+}
+
+void dog_refhandle_test() {
+    Dog* dog = new Dog;
+    
+    RefHandle<Dog> handle1(dog);
+    handle1->woof();
+
+    cout << "Dog's val is " << (*handle1).val << endl;
+
+    // Assignment should fully copy the Dog, using the synthetic copy
+    // constructor created by the compiler.
+    RefHandle<Dog> handle2;
     handle2 = handle1;
     handle2->val = 43;
 
@@ -181,7 +242,8 @@ void grading_test() {
 int main() {
     cout << "Starting." << endl;
 
-    dog_test();
+    dog_handle_test();
+    dog_refhandle_test();
     grading_test();
     
     cout << "End." << endl;

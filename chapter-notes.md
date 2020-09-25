@@ -1289,3 +1289,10 @@ K&M say: We will define three versions of our pointerlike class.
 How are we going to do a polymorphic copy without using ->clone()?  You surely
 face the same problem where you don't know what constructor to call, `new
 CoreStudent(*ptr)` will inadvertently degrade a GradStudent to a CoreStudent.
+
+## 14.2 Reference counted handles
+
+If you allow storing multiple references to a single object, you have the
+problem: what happens when you need to free the object?  You can't free the
+object when it exits scope, as there may be objects in another scope.  The
+RefHandle is likely to be the equivalent of shared_ptr in C++11.

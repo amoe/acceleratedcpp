@@ -43,6 +43,39 @@ private:
     T* ptr;
 };
 
+template <typename T>
+class RefHandle {
+public:
+    RefHandle(): ptr(0), refptr(new size_t(1)) {
+    }
+    
+    
+    RefHandle(T* ptr): ptr(ptr), refptr(new size_t(1)) { }
+
+
+    // Copying increments the count which is shared between the instances.
+    // ONLY copying does this.  Creating new RefHandles via the constructor
+    // RefHandle(T*) will just construct a totally new instance, which may
+    // destroy the object too soon.
+    RefHandle(const RefHandle& source): ptr(source.ptr), refptr(source.refptr) {
+        *refptr++;
+    }
+
+    RefHandle& operator=(const RefHandle&);
+    ~RefHandle();
+    
+    operator bool() const {
+        return ptr;    // 0 if null, and hence false
+    }
+    
+    T& operator*() const;
+    T* operator->() const;
+    
+private:
+    T* ptr;
+    size_t* refptr;
+};
+
 class CoreStudent {
 public:
     CoreStudent();
@@ -84,6 +117,42 @@ public:
 
 private:
     double thesis;
+};
+
+class StudentInfo {
+public:
+    // No need to initialize cp here because the constructor will set its
+    // pointer to zero.
+    // No need for rule-of-three member functions, because Handle controls all
+    // of that.
+    StudentInfo() { }
+
+    StudentInfo(std::istream& is) { read(is); }
+
+    std::istream& read(std::istream&);
+
+    std::string name() const {
+        if (cp) {
+            return cp->name();
+        } else {
+            throw std::runtime_error("uninitialized Student");
+        }
+    }
+
+    double grade() const {
+        if (cp) {
+            return cp->grade();
+        } else {
+            throw std::runtime_error("uninitialized Student");
+        }
+    }
+
+    static bool compare(const StudentInfo& s1, const StudentInfo& s2) {
+        return s1.name() < s2.name();
+    }
+
+private:
+    Handle<CoreStudent> cp;
 };
 
 
