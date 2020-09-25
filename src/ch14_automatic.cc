@@ -133,7 +133,10 @@ T* RefHandle<T>::operator->() const {
 
 template <typename T>
 RefHandle<T>::~RefHandle() {
-    // XXX: destructor
+    if (--*refptr == 0) {
+        delete refptr;
+        delete ptr;
+    }
 }
 
 
