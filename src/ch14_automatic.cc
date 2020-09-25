@@ -139,7 +139,24 @@ RefHandle<T>::~RefHandle() {
 
 template <typename T>
 RefHandle<T>& RefHandle<T>::operator=(const RefHandle& rhs) {
-    // XXX: assignment operator
+    // Very obscure:
+    // This protects against self-assignment, because if it's the same object,
+    // it gets its count incremented and then decremented meaning it stays static,
+    // and therefore won't be destroyed in the following call.
+    // As it needed to be incremented anyway, doing it here kills two birds with
+    // one stone, so to speak.
+    // This is quite tricky code.
+    ++*(rhs.refptr);
+
+    // Because we have been assigned to, we may need to delete our contents
+    if (--*refptr == 0) {
+        delete refptr;
+        delete p;
+    }
+
+    refptr = rhs.refptr;   // No modifications needed here -- already done above.
+    p = rhs.p;
+    return *this;
 }
 
 // Code looks the same, but the Handle constructor is implicitly called!
