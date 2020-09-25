@@ -151,11 +151,11 @@ RefHandle<T>& RefHandle<T>::operator=(const RefHandle& rhs) {
     // Because we have been assigned to, we may need to delete our contents
     if (--*refptr == 0) {
         delete refptr;
-        delete p;
+        delete ptr;
     }
 
     refptr = rhs.refptr;   // No modifications needed here -- already done above.
-    p = rhs.p;
+    ptr = rhs.ptr;
     return *this;
 }
 
