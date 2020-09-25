@@ -162,6 +162,48 @@ RefHandle<T>& RefHandle<T>::operator=(const RefHandle& rhs) {
     return *this;
 }
 
+template <typename T>
+T& LazyHandle<T>::operator*() const {
+    if (ptr) {
+        return *ptr;
+    } else {
+        throw runtime_error("unbound handle");
+    }
+}
+
+template <typename T>
+T* LazyHandle<T>::operator->() const {
+    if (ptr) {
+        return ptr;
+    } else {
+        throw runtime_error("unbound handle");
+    }
+}
+
+template <typename T>
+LazyHandle<T>::~LazyHandle() {
+    if (--*refptr == 0) {
+        delete refptr;
+        delete ptr;
+    }
+}
+
+// See notes for RefHandle
+template <typename T>
+LazyHandle<T>& LazyHandle<T>::operator=(const LazyHandle& rhs) {
+    ++*(rhs.refptr);
+
+    if (--*refptr == 0) {
+        delete refptr;
+        delete ptr;
+    }
+
+    refptr = rhs.refptr;
+    ptr = rhs.ptr;
+    return *this;
+}
+
+
 // Code looks the same, but the Handle constructor is implicitly called!
 istream& StudentInfo::read(istream& is) {
     char ch;
@@ -205,6 +247,24 @@ void dog_refhandle_test() {
     // Assignment should fully copy the Dog, using the synthetic copy
     // constructor created by the compiler.
     RefHandle<Dog> handle2;
+    handle2 = handle1;
+    handle2->val = 43;
+
+    cout << "Handle1's val is " << (*handle1).val << endl;
+    cout << "Handle2's val is " << (*handle2).val << endl;
+}
+
+void dog_lazyhandle_test() {
+    Dog* dog = new Dog;
+    
+    LazyHandle<Dog> handle1(dog);
+    handle1->woof();
+
+    cout << "Dog's val is " << (*handle1).val << endl;
+
+    // Assignment should fully copy the Dog, using the synthetic copy
+    // constructor created by the compiler.
+    LazyHandle<Dog> handle2;
     handle2 = handle1;
     handle2->val = 43;
 
@@ -258,12 +318,30 @@ void grading_test() {
 }
 
 
+void student_overwrite_refhandle_test() {
+    // Demonstrate that use of Handle causes object aliases to not affect each
+    // other.  read() is the only way that we can modify objects through
+    // StudentInfo at present.
+    stringstream sin(students_input);
+    StudentInfo s1(sin);
+    StudentInfo s2 = s1;
+    s2.read(sin);
+
+    cout << "Student grade is " << s1.grade() << endl;
+    cout << "Student grade is " << s2.grade() << endl;
+}
+
+
 
 int main() {
     cout << "Starting." << endl;
 
     dog_handle_test();
     dog_refhandle_test();
+    dog_lazyhandle_test();
+
+    student_overwrite_refhandle_test();
+    
     grading_test();
     
     cout << "End." << endl;

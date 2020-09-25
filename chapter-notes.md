@@ -1296,3 +1296,6 @@ If you allow storing multiple references to a single object, you have the
 problem: what happens when you need to free the object?  You can't free the
 object when it exits scope, as there may be objects in another scope.  The
 RefHandle is likely to be the equivalent of shared_ptr in C++11.
+
+K&M note that RefHandle never copies at all, which may be confusing given that
+people expect the copy constructor to ... copy.
