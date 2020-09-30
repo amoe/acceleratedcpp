@@ -456,15 +456,12 @@ int main() {
     cout << "Direct use of Handle:" << endl;
     grading_test_with_direct_handle();
 
-    /*
     cout << "Use of StudentInfo1 (indirectly using Handle):" << endl;
     grading_test_with_studentinfo1();
-    */
 
 
-/*    cout << "Use of StudentInfo2 (using RefHandle):" << endl;
+    cout << "Use of StudentInfo2 (using RefHandle):" << endl;
     grading_test_with_studentinfo2();
-*/
 
     cout << "End." << endl;
     return 0;
