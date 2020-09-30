@@ -58,7 +58,7 @@ public:
     // RefHandle(T*) will just construct a totally new instance, which may
     // destroy the object too soon.
     RefHandle(const RefHandle& source): ptr(source.ptr), refptr(source.refptr) {
-        *refptr++;
+        ++*refptr;   // order prevents some need for parens, still means (*refptr)++
     }
 
     RefHandle& operator=(const RefHandle&);
@@ -197,12 +197,7 @@ private:
 
 class StudentInfo2 {
 public:
-    // No need to initialize cp here because the constructor will set its
-    // pointer to zero.
-    // No need for rule-of-three member functions, because Handle controls all
-    // of that.
     StudentInfo2() { }
-
     StudentInfo2(std::istream& is) { read(is); }
 
     std::istream& read(std::istream&);
@@ -228,7 +223,7 @@ public:
     }
 
 private:
-    Handle<CoreStudent> cp;
+    RefHandle<CoreStudent> cp;
 };
 
 

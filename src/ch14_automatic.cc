@@ -24,6 +24,11 @@ using std::runtime_error;
 using std::domain_error;
 using std::streamsize;
 
+const string corestudents_only = R"(
+Gamlin 94 89 14 96 16 63
+Capener 7 10 32 68 61 76
+)";
+
 const string students_input = R"(
 U Gamlin 94 89 14 96 16 63
 U Capener 7 10 32 68 61 76
@@ -206,8 +211,11 @@ LazyHandle<T>& LazyHandle<T>::operator=(const LazyHandle& rhs) {
 
 // Code looks the same, but the Handle constructor is implicitly called!
 istream& StudentInfo1::read(istream& is) {
+    cout << "reading studentinfo1" << endl;
     char ch;
     is >> ch;
+
+    cout << "Identifier char was '" << ch << "'" << endl;
 
     if (ch == 'U') {
         cp = new CoreStudent(is);
@@ -337,8 +345,7 @@ void grading_test_with_studentinfo1() {
     string::size_type maxlen = 0;
     stringstream sin(students_input);
 
-    while (sin >> ch) {
-        record.read(sin);
+    while (record.read(sin)) {
         maxlen = max(maxlen, record.name().size());
         students.push_back(record);
     }
@@ -366,6 +373,41 @@ void grading_test_with_studentinfo1() {
     }
 }
 
+void grading_test_with_studentinfo2() {
+    vector<StudentInfo2> students;
+    StudentInfo2 record;
+    char ch;
+    string::size_type maxlen = 0;
+    stringstream sin(students_input);
+
+    while (record.read(sin)) {
+        maxlen = max(maxlen, record.name().size());
+        students.push_back(record);
+    }
+
+    cout << "Read " << students.size() << " students." << endl;
+
+    sort(students.begin(), students.end(), StudentInfo2::compare);
+    using vec_sz = vector<StudentInfo2>::size_type;
+
+    
+    for (vec_sz i = 0; i < students.size(); i++) {
+        // Probably doing an unnecessary copy here.
+        StudentInfo2 s = students[i];
+        cout << s.name()
+             << string((maxlen + 1) - s.name().size(),  ' ');
+
+        try {
+            double final_grade = s.grade();
+            streamsize prec = cout.precision();
+            cout << setprecision(3) << final_grade
+                 << setprecision(prec) << endl;
+        } catch (domain_error& e) {
+            cout << e.what() << endl;
+        }
+    }
+}
+
 
 void handle_copies_test() {
     // Demonstrate that use of Handle causes object aliases to not affect each
@@ -373,11 +415,30 @@ void handle_copies_test() {
     // StudentInfo at present.
     stringstream sin(students_input);
     StudentInfo1 s1(sin);
+    cout << "Student grade of s1 is " << s1.grade() << endl;
     StudentInfo1 s2 = s1;
     s2.read(sin);
+    cout << "Student grade of s2 is " << s2.grade() << endl;
+    cout << "Student grade of s1 is still " << s1.grade() << endl;
+}
 
-    cout << "Student grade is " << s1.grade() << endl;
-    cout << "Student grade is " << s2.grade() << endl;
+// Demonstrate that
+void refhandle_overwrites_test() {
+    stringstream sin(corestudents_only);
+    RefHandle<CoreStudent> record(new CoreStudent);
+    record->read(sin);
+    cout << "Student grade is firstly " << record->grade() << endl;
+
+    RefHandle<CoreStudent> record2(record);
+    record2->read(sin);
+    cout << "Student grade is secondly " << record->grade() << endl;
+
+    stringstream sin2(students_input);
+    StudentInfo2 s1(sin2);
+    cout << "s1's grade is " << s1.grade() << endl;
+    StudentInfo2 s2 = s1;
+    s2.read(sin2);
+    cout << "s1's grade is now " << s2.grade() << endl;
 }
 
 
@@ -389,16 +450,25 @@ int main() {
     dog_handle_test();
     dog_refhandle_test();
     dog_lazyhandle_test();
+    */
 
     handle_copies_test();
-    
+    refhandle_overwrites_test();
+
+    /*
     cout << "Direct use of Handle:" << endl;
     grading_test_with_direct_handle();
     */
-    
+
+    /*
     cout << "Use of StudentInfo1 (indirectly using Handle):" << endl;
     grading_test_with_studentinfo1();
+    */
 
+
+/*    cout << "Use of StudentInfo2 (using RefHandle):" << endl;
+    grading_test_with_studentinfo2();
+*/
 
     cout << "End." << endl;
     return 0;
