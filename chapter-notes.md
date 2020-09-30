@@ -1299,3 +1299,23 @@ RefHandle is likely to be the equivalent of shared_ptr in C++11.
 
 K&M note that RefHandle never copies at all, which may be confusing given that
 people expect the copy constructor to ... copy.
+
+In the constructor for StudentInfo, no need to initialize cp because the
+constructor for Handle will set its owned pointer to zero.  Also no need for
+rule-of-three member functions, again because Handle controls all of that.
+
+    // Code looks the same, but the Handle constructor is implicitly called!
+    istream& StudentInfo1::read(istream& is) {
+        char ch;
+        is >> ch;
+
+        if (ch == 'U') {
+            cp = new CoreStudent(is);   // IMPLICIT HANDLE CONSTRUCTOR CALL HERE!
+        } else {
+            cp = new GradStudent(is);
+        }
+
+        return is;
+    }
+
+what is the use of an interface class?  just so we can use the . instead of ->.

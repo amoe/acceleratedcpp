@@ -163,15 +163,11 @@ private:
     double thesis;
 };
 
-class StudentInfo {
+class StudentInfo1 {
 public:
-    // No need to initialize cp here because the constructor will set its
-    // pointer to zero.
-    // No need for rule-of-three member functions, because Handle controls all
-    // of that.
-    StudentInfo() { }
+    StudentInfo1() { }
 
-    StudentInfo(std::istream& is) { read(is); }
+    StudentInfo1(std::istream& is) { read(is); }
 
     std::istream& read(std::istream&);
 
@@ -191,7 +187,43 @@ public:
         }
     }
 
-    static bool compare(const StudentInfo& s1, const StudentInfo& s2) {
+    static bool compare(const StudentInfo1& s1, const StudentInfo1& s2) {
+        return s1.name() < s2.name();
+    }
+
+private:
+    Handle<CoreStudent> cp;
+};
+
+class StudentInfo2 {
+public:
+    // No need to initialize cp here because the constructor will set its
+    // pointer to zero.
+    // No need for rule-of-three member functions, because Handle controls all
+    // of that.
+    StudentInfo2() { }
+
+    StudentInfo2(std::istream& is) { read(is); }
+
+    std::istream& read(std::istream&);
+
+    std::string name() const {
+        if (cp) {
+            return cp->name();
+        } else {
+            throw std::runtime_error("uninitialized Student");
+        }
+    }
+
+    double grade() const {
+        if (cp) {
+            return cp->grade();
+        } else {
+            throw std::runtime_error("uninitialized Student");
+        }
+    }
+
+    static bool compare(const StudentInfo2& s1, const StudentInfo2& s2) {
         return s1.name() < s2.name();
     }
 

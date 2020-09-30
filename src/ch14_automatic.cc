@@ -205,7 +205,20 @@ LazyHandle<T>& LazyHandle<T>::operator=(const LazyHandle& rhs) {
 
 
 // Code looks the same, but the Handle constructor is implicitly called!
-istream& StudentInfo::read(istream& is) {
+istream& StudentInfo1::read(istream& is) {
+    char ch;
+    is >> ch;
+
+    if (ch == 'U') {
+        cp = new CoreStudent(is);
+    } else {
+        cp = new GradStudent(is);
+    }
+
+    return is;
+}
+
+istream& StudentInfo2::read(istream& is) {
     char ch;
     is >> ch;
 
@@ -317,13 +330,50 @@ void grading_test_with_direct_handle() {
     }
 }
 
-void student_overwrite_refhandle_test() {
+void grading_test_with_studentinfo1() {
+    vector<StudentInfo1> students;
+    StudentInfo1 record;
+    char ch;
+    string::size_type maxlen = 0;
+    stringstream sin(students_input);
+
+    while (sin >> ch) {
+        record.read(sin);
+        maxlen = max(maxlen, record.name().size());
+        students.push_back(record);
+    }
+
+    cout << "Read " << students.size() << " students." << endl;
+
+    sort(students.begin(), students.end(), StudentInfo1::compare);
+    using vec_sz = vector<StudentInfo1>::size_type;
+
+    
+    for (vec_sz i = 0; i < students.size(); i++) {
+        // Probably doing an unnecessary copy here.
+        StudentInfo1 s = students[i];
+        cout << s.name()
+             << string((maxlen + 1) - s.name().size(),  ' ');
+
+        try {
+            double final_grade = s.grade();
+            streamsize prec = cout.precision();
+            cout << setprecision(3) << final_grade
+                 << setprecision(prec) << endl;
+        } catch (domain_error& e) {
+            cout << e.what() << endl;
+        }
+    }
+}
+
+
+void handle_copies_test() {
     // Demonstrate that use of Handle causes object aliases to not affect each
     // other.  read() is the only way that we can modify objects through
     // StudentInfo at present.
     stringstream sin(students_input);
-    StudentInfo s1(sin);
-    StudentInfo s2 = s1;
+    StudentInfo1 s1(sin);
+    StudentInfo1 s2 = s1;
     s2.read(sin);
 
     cout << "Student grade is " << s1.grade() << endl;
@@ -335,14 +385,21 @@ void student_overwrite_refhandle_test() {
 int main() {
     cout << "Starting." << endl;
 
+    /*
     dog_handle_test();
     dog_refhandle_test();
     dog_lazyhandle_test();
 
-    student_overwrite_refhandle_test();
+    handle_copies_test();
     
+    cout << "Direct use of Handle:" << endl;
     grading_test_with_direct_handle();
+    */
     
+    cout << "Use of StudentInfo1 (indirectly using Handle):" << endl;
+    grading_test_with_studentinfo1();
+
+
     cout << "End." << endl;
     return 0;
 }
