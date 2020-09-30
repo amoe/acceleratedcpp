@@ -272,7 +272,7 @@ void dog_lazyhandle_test() {
     cout << "Handle2's val is " << (*handle2).val << endl;
 }
 
-void grading_test() {
+void grading_test_with_handle() {
     vector<Handle<CoreStudent>> students;
     Handle<CoreStudent> record;
     char ch;
@@ -342,7 +342,7 @@ int main() {
 
     student_overwrite_refhandle_test();
     
-    grading_test();
+    grading_test_with_handle();
     
     cout << "End." << endl;
     return 0;
