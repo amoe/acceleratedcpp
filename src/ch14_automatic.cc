@@ -446,19 +446,15 @@ void refhandle_overwrites_test() {
 int main() {
     cout << "Starting." << endl;
 
-    /*
     dog_handle_test();
     dog_refhandle_test();
     dog_lazyhandle_test();
-    */
 
     handle_copies_test();
     refhandle_overwrites_test();
 
-    /*
     cout << "Direct use of Handle:" << endl;
     grading_test_with_direct_handle();
-    */
 
     /*
     cout << "Use of StudentInfo1 (indirectly using Handle):" << endl;
