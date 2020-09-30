@@ -272,7 +272,7 @@ void dog_lazyhandle_test() {
     cout << "Handle2's val is " << (*handle2).val << endl;
 }
 
-void grading_test_with_handle() {
+void grading_test_with_direct_handle() {
     vector<Handle<CoreStudent>> students;
     Handle<CoreStudent> record;
     char ch;
@@ -317,7 +317,6 @@ void grading_test_with_handle() {
     }
 }
 
-
 void student_overwrite_refhandle_test() {
     // Demonstrate that use of Handle causes object aliases to not affect each
     // other.  read() is the only way that we can modify objects through
@@ -342,7 +341,7 @@ int main() {
 
     student_overwrite_refhandle_test();
     
-    grading_test_with_handle();
+    grading_test_with_direct_handle();
     
     cout << "End." << endl;
     return 0;
