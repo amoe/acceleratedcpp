@@ -407,7 +407,7 @@ void grading_test_with_studentinfo2() {
     
     for (vec_sz i = 0; i < students.size(); i++) {
         // Probably doing an unnecessary copy here.
-        StudentInfo2 s = students[i];
+        StudentInfo2& s = students[i];
         cout << s.name() << "(" << s.get_refcount() << ")"
              << string((maxlen + 1) - s.name().size(),  ' ');
 
@@ -460,18 +460,25 @@ void refhandle_overwrites_test2() {
     cout << "s1's grade is now " << s1.grade() << endl;
 }
 
-void refhandle_overwrites_test3() {
+void refhandle_test3() {
     vector<StudentInfo2> students;
     StudentInfo2 record;
     char ch;
-    string::size_type maxlen = 0;
     stringstream sin(students_input);
-
 
     while (record.read(sin)) {
         cout << "Content of record: '" << record.name() << "'" << endl;
-        maxlen = max(maxlen, record.name().size());
         students.push_back(record);
+    }
+
+    cout << "Read " << students.size() << " students." << endl;
+
+    using vec_sz = vector<StudentInfo2>::size_type;
+    
+    for (vec_sz i = 0; i < students.size(); i++) {
+        // Probably doing an unnecessary copy here.
+        StudentInfo2& s = students[i];
+        cout << s.name() << "(" << s.get_refcount() << ")" << endl;
     }
 }
 
