@@ -61,6 +61,14 @@ public:
     
     T& operator*() const;
     T* operator->() const;
+
+    void print_identity() const {
+        std::cout << ptr << std::endl;
+    }
+
+    size_t get_refcount() const {
+        return *refptr;
+    }
     
 private:
     T* ptr;
@@ -211,6 +219,14 @@ public:
 
     static bool compare(const StudentInfo2& s1, const StudentInfo2& s2) {
         return s1.name() < s2.name();
+    }
+
+    void print_identity() const {
+        cp.print_identity();
+    }
+
+    int get_refcount() const {
+        return cp.get_refcount();
     }
 
 private:

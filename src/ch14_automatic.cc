@@ -151,15 +151,12 @@ RefHandle<T>::~RefHandle() {
 // soon.
 template <typename T>
 RefHandle<T>::RefHandle(const RefHandle& source): ptr(source.ptr), refptr(source.refptr) {
-    cout << "Inside RefHandle copy constructor" << endl;
     ++*refptr;   // order prevents some need for parens, still means (*refptr)++
 }
 
 
 template <typename T>
 RefHandle<T>& RefHandle<T>::operator=(const RefHandle& rhs) {
-    cout << "Inside RefHandle assignment operator" << endl;
-    
     // Very obscure:
     // This protects against self-assignment, because if it's the same object,
     // it gets its count incremented and then decremented meaning it stays static,
@@ -387,6 +384,7 @@ void grading_test_with_studentinfo1() {
     }
 }
 
+// It's not 100% clear that this works correctly.
 void grading_test_with_studentinfo2() {
     vector<StudentInfo2> students;
     StudentInfo2 record;
@@ -410,7 +408,7 @@ void grading_test_with_studentinfo2() {
     for (vec_sz i = 0; i < students.size(); i++) {
         // Probably doing an unnecessary copy here.
         StudentInfo2 s = students[i];
-        cout << s.name()
+        cout << s.name() << "(" << s.get_refcount() << ")"
              << string((maxlen + 1) - s.name().size(),  ' ');
 
         try {
@@ -453,10 +451,12 @@ void refhandle_overwrites_test1() {
 void refhandle_overwrites_test2() {
     stringstream sin(students_input);
     StudentInfo2 s1(sin);   // Calls RefHandle assignment operator
+    
     cout << "s1's grade is " << s1.grade() << endl;
-    StudentInfo2 s2;
+    StudentInfo2 s2 = s1;
     s2 = s1;
     s2.read(sin);
+
     cout << "s1's grade is now " << s1.grade() << endl;
 }
 
@@ -489,8 +489,8 @@ int main() {
     */
 
 
-    // refhandle_overwrites_test1();
-    refhandle_overwrites_test2();
+//    refhandle_overwrites_test1();
+//    refhandle_overwrites_test2();
 //    refhandle_overwrites_test3();
 
     /*
@@ -501,10 +501,8 @@ int main() {
     grading_test_with_studentinfo1();
     */
 
-    /*
     cout << "Use of StudentInfo2 (using RefHandle):" << endl;
     grading_test_with_studentinfo2();
-    */
 
     cout << "End." << endl;
     return 0;
