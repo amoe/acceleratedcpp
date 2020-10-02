@@ -138,6 +138,8 @@ T* RefHandle<T>::operator->() const {
 
 template <typename T>
 RefHandle<T>::~RefHandle() {
+    cout << "Inside destructor" << endl;
+    
     if (--*refptr == 0) {
         delete refptr;
         delete ptr;
@@ -151,12 +153,16 @@ RefHandle<T>::~RefHandle() {
 // soon.
 template <typename T>
 RefHandle<T>::RefHandle(const RefHandle& source): ptr(source.ptr), refptr(source.refptr) {
+    cout << "Inside copy constructor" << endl;
+    
     ++*refptr;   // order prevents some need for parens, still means (*refptr)++
 }
 
 
 template <typename T>
 RefHandle<T>& RefHandle<T>::operator=(const RefHandle& rhs) {
+    cout << "Inside assignment operator" << endl;
+    
     // Very obscure:
     // This protects against self-assignment, because if it's the same object,
     // it gets its count incremented and then decremented meaning it stays static,
@@ -237,15 +243,21 @@ istream& StudentInfo1::read(istream& is) {
 }
 
 istream& StudentInfo2::read(istream& is) {
+    cout << "Inside StudentInfo2::read" << endl;
     char ch;
     is >> ch;
 
     // Call RefHandle assignment operator here.
+    // The compiler will also IMPLICITLY CALL THE REFHANDLE DESTRUCTOR.
+    // However this doesn't even matter in this case because the assignment
+    // operator automatically frees the left-hand-side.
     if (ch == 'U') {
         cp = new CoreStudent(is);
     } else {
         cp = new GradStudent(is);
     }
+
+    cout << "About to return" << endl;
 
     return is;
 }
@@ -468,7 +480,11 @@ void refhandle_test3() {
 
     while (record.read(sin)) {
         cout << "Content of record: '" << record.name() << "'" << endl;
+        cout << record.get_refcount() << endl;
+        // Should increment the ref count.
+        cout << "About to push" << endl;
         students.push_back(record);
+        cout << "Finished pushing" << endl;
     }
 
     cout << "Read " << students.size() << " students." << endl;
@@ -498,7 +514,7 @@ int main() {
 
 //    refhandle_overwrites_test1();
 //    refhandle_overwrites_test2();
-//    refhandle_overwrites_test3();
+    refhandle_test3();
 
     /*
     cout << "Direct use of Handle:" << endl;
@@ -508,8 +524,8 @@ int main() {
     grading_test_with_studentinfo1();
     */
 
-    cout << "Use of StudentInfo2 (using RefHandle):" << endl;
-    grading_test_with_studentinfo2();
+    // cout << "Use of StudentInfo2 (using RefHandle):" << endl;
+    // grading_test_with_studentinfo2();
 
     cout << "End." << endl;
     return 0;
