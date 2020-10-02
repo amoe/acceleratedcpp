@@ -51,16 +51,7 @@ public:
     
     
     RefHandle(T* ptr): ptr(ptr), refptr(new size_t(1)) { }
-
-
-    // Copying increments the count which is shared between the instances.
-    // ONLY copying does this.  Creating new RefHandles via the constructor
-    // RefHandle(T*) will just construct a totally new instance, which may
-    // destroy the object too soon.
-    RefHandle(const RefHandle& source): ptr(source.ptr), refptr(source.refptr) {
-        ++*refptr;   // order prevents some need for parens, still means (*refptr)++
-    }
-
+    RefHandle(const RefHandle& source);
     RefHandle& operator=(const RefHandle&);
     ~RefHandle();
     

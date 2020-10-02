@@ -145,8 +145,20 @@ RefHandle<T>::~RefHandle() {
 }
 
 
+// Copying increments the count which is shared between the instances.  ONLY
+// copying does this.  Creating new RefHandles via the constructor RefHandle(T*)
+// will just construct a totally new instance, which may destroy the object too
+// soon.
+template <typename T>
+RefHandle<T>::RefHandle(const RefHandle& source): ptr(source.ptr), refptr(source.refptr) {
+    ++*refptr;   // order prevents some need for parens, still means (*refptr)++
+}
+
+
 template <typename T>
 RefHandle<T>& RefHandle<T>::operator=(const RefHandle& rhs) {
+    cout << "Inside RefHandle assignment operator" << endl;
+    
     // Very obscure:
     // This protects against self-assignment, because if it's the same object,
     // it gets its count incremented and then decremented meaning it stays static,
@@ -380,7 +392,9 @@ void grading_test_with_studentinfo2() {
     string::size_type maxlen = 0;
     stringstream sin(students_input);
 
+
     while (record.read(sin)) {
+        cout << "Content of record: '" << record.name() << "'" << endl;
         maxlen = max(maxlen, record.name().size());
         students.push_back(record);
     }
@@ -422,8 +436,7 @@ void handle_copies_test() {
     cout << "Student grade of s1 is still " << s1.grade() << endl;
 }
 
-// Demonstrate that
-void refhandle_overwrites_test() {
+void refhandle_overwrites_test1() {
     stringstream sin(corestudents_only);
     RefHandle<CoreStudent> record(new CoreStudent);
     record->read(sin);
@@ -432,13 +445,26 @@ void refhandle_overwrites_test() {
     RefHandle<CoreStudent> record2(record);
     record2->read(sin);
     cout << "Student grade is secondly " << record->grade() << endl;
+}
 
-    stringstream sin2(students_input);
-    StudentInfo2 s1(sin2);
+// Demonstrating the assignment operator reference beha
+void refhandle_overwrites_test2() {
+    stringstream sin(students_input);
+    StudentInfo2 s1(sin);
     cout << "s1's grade is " << s1.grade() << endl;
     StudentInfo2 s2 = s1;
-    s2.read(sin2);
+    s2.read(sin);
     cout << "s1's grade is now " << s2.grade() << endl;
+}
+
+void refhandle_overwrites_test3() {
+    stringstream sin(students_input);
+    StudentInfo2 s1(sin);
+    cout << "s1's grade is " << s1.grade() << endl;
+    StudentInfo2 s2 = s1;
+    s2.read(sin);
+    cout << "s1's grade is now " << s2.grade() << endl;
+
 }
 
 
@@ -446,13 +472,20 @@ void refhandle_overwrites_test() {
 int main() {
     cout << "Starting." << endl;
 
+    /*
     dog_handle_test();
     dog_refhandle_test();
     dog_lazyhandle_test();
 
     handle_copies_test();
-    refhandle_overwrites_test();
+    */
 
+    
+    //refhandle_overwrites_test1();
+    refhandle_overwrites_test2();
+    //refhandle_overwrites_test3();
+
+    /*
     cout << "Direct use of Handle:" << endl;
     grading_test_with_direct_handle();
 
@@ -462,6 +495,7 @@ int main() {
 
     cout << "Use of StudentInfo2 (using RefHandle):" << endl;
     grading_test_with_studentinfo2();
+    */
 
     cout << "End." << endl;
     return 0;
