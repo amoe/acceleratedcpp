@@ -151,6 +151,7 @@ RefHandle<T>::~RefHandle() {
 // soon.
 template <typename T>
 RefHandle<T>::RefHandle(const RefHandle& source): ptr(source.ptr), refptr(source.refptr) {
+    cout << "Inside RefHandle copy constructor" << endl;
     ++*refptr;   // order prevents some need for parens, still means (*refptr)++
 }
 
@@ -242,6 +243,7 @@ istream& StudentInfo2::read(istream& is) {
     char ch;
     is >> ch;
 
+    // Call RefHandle assignment operator here.
     if (ch == 'U') {
         cp = new CoreStudent(is);
     } else {
@@ -450,9 +452,10 @@ void refhandle_overwrites_test1() {
 // Demonstrating the assignment operator reference beha
 void refhandle_overwrites_test2() {
     stringstream sin(students_input);
-    StudentInfo2 s1(sin);
+    StudentInfo2 s1(sin);   // Calls RefHandle assignment operator
     cout << "s1's grade is " << s1.grade() << endl;
-    StudentInfo2 s2 = s1;
+    StudentInfo2 s2;
+    s2 = s1;
     s2.read(sin);
     cout << "s1's grade is now " << s2.grade() << endl;
 }
