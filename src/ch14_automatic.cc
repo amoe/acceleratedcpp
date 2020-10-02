@@ -139,8 +139,12 @@ T* RefHandle<T>::operator->() const {
 template <typename T>
 RefHandle<T>::~RefHandle() {
     cout << "Inside destructor" << endl;
+
+    cout << "Refcount was " << *refptr << endl;
+    (*refptr)--;
+    cout << "Refcount is now " << *refptr << endl;
     
-    if (--*refptr == 0) {
+    if (refptr == 0) {
         delete refptr;
         delete ptr;
     }
@@ -472,7 +476,13 @@ void refhandle_overwrites_test2() {
     cout << "s1's grade is now " << s1.grade() << endl;
 }
 
-void refhandle_test3() {
+// Created to answer the question: why do we only have 1 reference at the end,
+// rather than two, when the StudentInfo2 record is still in scope?
+// The answer seems to be that read() just flat-out reassigns 'cp'.
+// Assume 'record' refers to 'Gamlin', then read() overwrites 'Gamlin' with 
+// 'Capener'.  'record' has its cp reassigned which calls the destructor for
+// Gamlin to be called.  At this point Gamlin's refcount is 
+void refhandle_test3() { 
     vector<StudentInfo2> students;
     StudentInfo2 record;
     char ch;
