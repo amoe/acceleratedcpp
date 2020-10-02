@@ -476,7 +476,7 @@ void refhandle_test3() {
     using vec_sz = vector<StudentInfo2>::size_type;
     
     for (vec_sz i = 0; i < students.size(); i++) {
-        // Probably doing an unnecessary copy here.
+        // Reference to avoid accidentally incrementing the refcount.
         StudentInfo2& s = students[i];
         cout << s.name() << "(" << s.get_refcount() << ")" << endl;
     }
