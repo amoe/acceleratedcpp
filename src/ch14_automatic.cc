@@ -457,17 +457,22 @@ void refhandle_overwrites_test2() {
     StudentInfo2 s2;
     s2 = s1;
     s2.read(sin);
-    cout << "s1's grade is now " << s2.grade() << endl;
+    cout << "s1's grade is now " << s1.grade() << endl;
 }
 
 void refhandle_overwrites_test3() {
+    vector<StudentInfo2> students;
+    StudentInfo2 record;
+    char ch;
+    string::size_type maxlen = 0;
     stringstream sin(students_input);
-    StudentInfo2 s1(sin);
-    cout << "s1's grade is " << s1.grade() << endl;
-    StudentInfo2 s2 = s1;
-    s2.read(sin);
-    cout << "s1's grade is now " << s2.grade() << endl;
 
+
+    while (record.read(sin)) {
+        cout << "Content of record: '" << record.name() << "'" << endl;
+        maxlen = max(maxlen, record.name().size());
+        students.push_back(record);
+    }
 }
 
 
@@ -483,10 +488,10 @@ int main() {
     handle_copies_test();
     */
 
-    
-    //refhandle_overwrites_test1();
+
+    // refhandle_overwrites_test1();
     refhandle_overwrites_test2();
-    //refhandle_overwrites_test3();
+//    refhandle_overwrites_test3();
 
     /*
     cout << "Direct use of Handle:" << endl;
@@ -494,8 +499,9 @@ int main() {
 
     cout << "Use of StudentInfo1 (indirectly using Handle):" << endl;
     grading_test_with_studentinfo1();
+    */
 
-
+    /*
     cout << "Use of StudentInfo2 (using RefHandle):" << endl;
     grading_test_with_studentinfo2();
     */
