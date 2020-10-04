@@ -1319,3 +1319,8 @@ rule-of-three member functions, again because Handle controls all of that.
     }
 
 what is the use of an interface class?  just so we can use the . instead of ->.
+
+Why does a grading function implemented using RefHandle store only one refernece
+-- it looks like it should store 2?  Because the final 'read()' overwrites the
+value in 'record', but does not push onto the vector, meaning that 'record' no
+longer refers to anything that's on the vector at the end of the loop.
