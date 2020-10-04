@@ -138,12 +138,7 @@ T* RefHandle<T>::operator->() const {
 
 template <typename T>
 RefHandle<T>::~RefHandle() {
-    cout << "Inside destructor" << endl;
-
-    cout << "Refcount was " << *refptr << endl;
     (*refptr)--;
-    cout << "Refcount is now " << *refptr << endl;
-    
     if (refptr == 0) {
         delete refptr;
         delete ptr;
@@ -157,16 +152,12 @@ RefHandle<T>::~RefHandle() {
 // soon.
 template <typename T>
 RefHandle<T>::RefHandle(const RefHandle& source): ptr(source.ptr), refptr(source.refptr) {
-    cout << "Inside copy constructor" << endl;
-    
     ++*refptr;   // order prevents some need for parens, still means (*refptr)++
 }
 
 
 template <typename T>
 RefHandle<T>& RefHandle<T>::operator=(const RefHandle& rhs) {
-    cout << "Inside assignment operator" << endl;
-    
     // Very obscure:
     // This protects against self-assignment, because if it's the same object,
     // it gets its count incremented and then decremented meaning it stays static,
@@ -231,11 +222,8 @@ LazyHandle<T>& LazyHandle<T>::operator=(const LazyHandle& rhs) {
 
 // Code looks the same, but the Handle constructor is implicitly called!
 istream& StudentInfo1::read(istream& is) {
-    cout << "reading studentinfo1" << endl;
     char ch;
     is >> ch;
-
-    cout << "Identifier char was '" << ch << "'" << endl;
 
     if (ch == 'U') {
         cp = new CoreStudent(is);
@@ -247,7 +235,6 @@ istream& StudentInfo1::read(istream& is) {
 }
 
 istream& StudentInfo2::read(istream& is) {
-    cout << "Inside StudentInfo2::read" << endl;
     char ch;
     is >> ch;
 
@@ -260,9 +247,6 @@ istream& StudentInfo2::read(istream& is) {
     } else {
         cp = new GradStudent(is);
     }
-
-    cout << "About to return" << endl;
-
     return is;
 }
 
@@ -477,11 +461,12 @@ void refhandle_overwrites_test2() {
 }
 
 // Created to answer the question: why do we only have 1 reference at the end,
-// rather than two, when the StudentInfo2 record is still in scope?
-// The answer is that the final 'read()' causes a blank StudentInfo2 to be stored
-// in 'record', but that blank StudentInfo2 never reaches the vector due to
-// the structure of the 'while' condition.
-void refhandle_test3() { 
+// rather than two, when the StudentInfo2 'record' is still in scope?
+
+// The answer is that the final 'read()' causes a blank StudentInfo2 to be
+// stored in 'record', but that blank StudentInfo2 never reaches the vector due
+// to the structure of the 'while' condition.
+void refhandle_reference_count_test3() { 
     vector<StudentInfo2> students;
     StudentInfo2 record;
     char ch;
@@ -512,29 +497,23 @@ void refhandle_test3() {
 int main() {
     cout << "Starting." << endl;
 
-    /*
     dog_handle_test();
     dog_refhandle_test();
     dog_lazyhandle_test();
-
     handle_copies_test();
-    */
 
+    refhandle_overwrites_test1();
+    refhandle_overwrites_test2();
+    refhandle_reference_count_test3();
 
-//    refhandle_overwrites_test1();
-//    refhandle_overwrites_test2();
-    refhandle_test3();
-
-    /*
     cout << "Direct use of Handle:" << endl;
     grading_test_with_direct_handle();
 
     cout << "Use of StudentInfo1 (indirectly using Handle):" << endl;
     grading_test_with_studentinfo1();
-    */
 
-    // cout << "Use of StudentInfo2 (using RefHandle):" << endl;
-    // grading_test_with_studentinfo2();
+    cout << "Use of StudentInfo2 (using RefHandle):" << endl;
+    grading_test_with_studentinfo2();
 
     cout << "End." << endl;
     return 0;

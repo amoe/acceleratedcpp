@@ -1324,3 +1324,9 @@ Why does a grading function implemented using RefHandle store only one refernece
 -- it looks like it should store 2?  Because the final 'read()' overwrites the
 value in 'record', but does not push onto the vector, meaning that 'record' no
 longer refers to anything that's on the vector at the end of the loop.
+
+K&M allude to this in this carefully worded sentence:
+
+"[When we reimplement the grading program using LazyHandle] we'll discover that
+we don't need to change this implementation of StudentInfo at all, because none
+of our operations change the value of the object without also replacing it."
