@@ -533,7 +533,6 @@ void str_test_input() {
 int main() {
     cout << "Starting." << endl;
 
-    /*
     dog_handle_test();
     dog_refhandle_test();
     dog_controllablehandle_test();
@@ -552,11 +551,12 @@ int main() {
 
     cout << "Use of StudentInfo2 (using RefHandle):" << endl;
     grading_test_with_studentinfo2();
-    */
 
-    // str_test();
-    // str_test_compound_concatenation();
-    // str_test_lvalue_subscript();
+    cout << "Str memory handling tests:" << endl;
+    
+    str_test();
+    str_test_compound_concatenation();
+    str_test_lvalue_subscript();
     str_test_input();
     
     cout << "End." << endl;
