@@ -510,6 +510,16 @@ void str_test_compound_concatenation() {
     cout << "Refcount of name2 is " << name2.get_refcount() << endl;
 }
 
+void str_test_lvalue_subscript() {
+    Str name1 = "Dave";
+    Str name2 = name1;
+
+    char name1[1] = 'i';
+
+    cout << "Name1 is now: '" << name1 << "'" << endl;
+    cout << "Name2 is now: '" << name2 << "'" << endl;
+}
+
 int main() {
     cout << "Starting." << endl;
 
@@ -536,6 +546,7 @@ int main() {
 
     str_test();
     str_test_compound_concatenation();
+    str_test_lvalue_subscript();
     
     cout << "End." << endl;
     return 0;

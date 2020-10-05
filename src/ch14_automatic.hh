@@ -274,12 +274,11 @@ public:
     }
 
     // Because this can be used as an lvalue, we must call make_unique.
-    /*
-    char operator[](size_type i) {
+    // Note that char& is now a reference.
+    char& operator[](size_type i) {
         data.make_unique();
         return (*data)[i];
     }
-    */
 
     const char operator[](size_type i) const {
         return (*data)[i];
