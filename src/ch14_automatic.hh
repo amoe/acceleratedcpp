@@ -75,6 +75,13 @@ private:
     size_t* refptr;
 };
 
+
+// XXX: ???  Used within make_unique().
+template <typename T>
+T* clone(const T* tp) {
+    return tp->clone();
+}
+
 // Called Ptr by K&M but ControllableHandle captures what it does better: allows
 // deferring copying decisions to user-code.  "LateBindingHandle", perhaps.
 // It acts like a RefHandle until the user calls make_unique(), at which point
@@ -90,7 +97,7 @@ public:
         if (*refptr != 1) {
             --*refptr;    // This object has been detached.
             refptr = new size_t(1);   // It forms a new pool.
-            ptr = ptr ? ptr->clone() : 0;
+            ptr = ptr ? clone(ptr) : 0;
         }
     }
     
@@ -118,6 +125,7 @@ private:
     T* ptr;
     size_t* refptr;
 };
+
 
 class CoreStudent {
 public:
