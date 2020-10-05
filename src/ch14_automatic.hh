@@ -1,6 +1,8 @@
 #ifndef CH14_AUTOMATIC_HH
 #define CH14_AUTOMATIC_HH
 
+
+
 class Dog {
 public:
     Dog(): val(42) { }
@@ -75,7 +77,6 @@ private:
     size_t* refptr;
 };
 
-
 // XXX: ???  Used within make_unique().
 template <typename T>
 T* clone(const T* tp) {
@@ -87,9 +88,10 @@ T* clone(const T* tp) {
 // with T=vector<char>, we substitute this definition for the one that directly
 // calls clone().
 template <>
-vector<char>* clone(const vector<char>* vec) {
-    return new vector<char>(*vec);
+std::vector<char>* clone(const std::vector<char>* vec) {
+    return new std::vector<char>(*vec);
 }
+
 
 // Called Ptr by K&M but ControllableHandle captures what it does better: allows
 // deferring copying decisions to user-code.  "LateBindingHandle", perhaps.
@@ -248,6 +250,18 @@ public:
 
 private:
     RefHandle<CoreStudent> cp;
+};
+
+class Str {
+public:
+    Str& operator+=(const Str& s) {
+        data.make_unique();
+        std::copy(s.data->begin(), s.data->end(), std::back_inserter(*data));
+        return *this;
+    }
+
+private:
+    ControllableHandle<std::vector<char>> data;
 };
 
 #endif /* CH14_AUTOMATIC_HH */

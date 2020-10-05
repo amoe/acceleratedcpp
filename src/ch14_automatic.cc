@@ -10,6 +10,7 @@
 #include "grading_functions.hh"
 #include "ch14_automatic.hh"
 
+using std::vector;
 using std::setprecision;
 using std::sort;
 using std::max;
@@ -496,11 +497,8 @@ int main() {
     /*
     dog_handle_test();
     dog_refhandle_test();
-    */
-    
     dog_controllablehandle_test();
 
-    /*
     handle_copies_test();
 
     refhandle_overwrites_test1();
