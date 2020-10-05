@@ -82,6 +82,15 @@ T* clone(const T* tp) {
     return tp->clone();
 }
 
+// A template specialization:
+// Basically an override for a more general template.  When clone() gets called
+// with T=vector<char>, we substitute this definition for the one that directly
+// calls clone().
+template <>
+vector<char>* clone(const vector<char>* vec) {
+    return new vector<char>(*vec);
+}
+
 // Called Ptr by K&M but ControllableHandle captures what it does better: allows
 // deferring copying decisions to user-code.  "LateBindingHandle", perhaps.
 // It acts like a RefHandle until the user calls make_unique(), at which point
