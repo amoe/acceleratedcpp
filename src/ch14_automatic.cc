@@ -179,7 +179,7 @@ RefHandle<T>& RefHandle<T>::operator=(const RefHandle& rhs) {
 }
 
 template <typename T>
-T& LazyHandle<T>::operator*() const {
+T& ControllableHandle<T>::operator*() const {
     if (ptr) {
         return *ptr;
     } else {
@@ -188,7 +188,7 @@ T& LazyHandle<T>::operator*() const {
 }
 
 template <typename T>
-T* LazyHandle<T>::operator->() const {
+T* ControllableHandle<T>::operator->() const {
     if (ptr) {
         return ptr;
     } else {
@@ -197,7 +197,7 @@ T* LazyHandle<T>::operator->() const {
 }
 
 template <typename T>
-LazyHandle<T>::~LazyHandle() {
+ControllableHandle<T>::~ControllableHandle() {
     if (--*refptr == 0) {
         delete refptr;
         delete ptr;
@@ -206,7 +206,7 @@ LazyHandle<T>::~LazyHandle() {
 
 // See notes for RefHandle
 template <typename T>
-LazyHandle<T>& LazyHandle<T>::operator=(const LazyHandle& rhs) {
+ControllableHandle<T>& ControllableHandle<T>::operator=(const ControllableHandle& rhs) {
     ++*(rhs.refptr);
 
     if (--*refptr == 0) {
@@ -276,8 +276,6 @@ void dog_refhandle_test() {
 
     cout << "Dog's val is " << (*handle1).val << endl;
 
-    // Assignment should fully copy the Dog, using the synthetic copy
-    // constructor created by the compiler.
     RefHandle<Dog> handle2;
     handle2 = handle1;
     handle2->val = 43;
@@ -286,17 +284,15 @@ void dog_refhandle_test() {
     cout << "Handle2's val is " << (*handle2).val << endl;
 }
 
-void dog_lazyhandle_test() {
+void dog_controllablehandle_test() {
     Dog* dog = new Dog;
     
-    LazyHandle<Dog> handle1(dog);
+    ControllableHandle<Dog> handle1(dog);
     handle1->woof();
 
     cout << "Dog's val is " << (*handle1).val << endl;
 
-    // Assignment should fully copy the Dog, using the synthetic copy
-    // constructor created by the compiler.
-    LazyHandle<Dog> handle2;
+    ControllableHandle<Dog> handle2;
     handle2 = handle1;
     handle2->val = 43;
 
@@ -497,9 +493,14 @@ void refhandle_reference_count_test3() {
 int main() {
     cout << "Starting." << endl;
 
+    /*
     dog_handle_test();
     dog_refhandle_test();
-    dog_lazyhandle_test();
+    */
+    
+    dog_controllablehandle_test();
+
+    /*
     handle_copies_test();
 
     refhandle_overwrites_test1();
@@ -514,7 +515,8 @@ int main() {
 
     cout << "Use of StudentInfo2 (using RefHandle):" << endl;
     grading_test_with_studentinfo2();
-
+    */
+    
     cout << "End." << endl;
     return 0;
 }

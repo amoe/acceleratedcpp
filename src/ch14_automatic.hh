@@ -75,14 +75,14 @@ private:
     size_t* refptr;
 };
 
-// Called Ptr by K&M but LazyHandle captures what it does better: allows
+// Called Ptr by K&M but ControllableHandle captures what it does better: allows
 // deferring copying decisions to user-code.  "LateBindingHandle", perhaps.
 // It acts like a RefHandle until the user calls make_unique(), at which point
 // it acts like a Handle.
 // make_unique() might also have been named 'detach()', because it effectively
 // detaches the object from its reference count pool.
 template <typename T>
-class LazyHandle {
+class ControllableHandle {
 public:
     void make_unique() {
         // If it's alive, the value of *refptr can never be zero,
@@ -94,18 +94,18 @@ public:
         }
     }
     
-    LazyHandle(): ptr(0), refptr(new size_t(1)) {
+    ControllableHandle(): ptr(0), refptr(new size_t(1)) {
     }
     
     
-    LazyHandle(T* ptr): ptr(ptr), refptr(new size_t(1)) { }
+    ControllableHandle(T* ptr): ptr(ptr), refptr(new size_t(1)) { }
 
-    LazyHandle(const LazyHandle& source): ptr(source.ptr), refptr(source.refptr) {
+    ControllableHandle(const ControllableHandle& source): ptr(source.ptr), refptr(source.refptr) {
         *refptr++;
     }
 
-    LazyHandle& operator=(const LazyHandle&);
-    ~LazyHandle();
+    ControllableHandle& operator=(const ControllableHandle&);
+    ~ControllableHandle();
     
     operator bool() const {
         return ptr;    // 0 if null, and hence false
@@ -232,7 +232,5 @@ public:
 private:
     RefHandle<CoreStudent> cp;
 };
-
-
 
 #endif /* CH14_AUTOMATIC_HH */
