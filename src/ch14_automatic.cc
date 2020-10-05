@@ -493,6 +493,15 @@ void refhandle_reference_count_test3() {
 void str_test() {
     Str name = "Dave";
     Str greeting = "Hello, " + name + "!";
+    cout << "Greeting is now: '" + greeting + "'" << endl;
+}
+
+void str_test_compound_concatenation() {
+    Str name1 = "Dave";
+    cout << "Refcount is " << name1.get_refcount() << endl;
+    Str name2 = name1;    // Should not copy.
+    cout << "Refcount is " << name1.get_refcount() << endl;
+
 }
 
 int main() {
@@ -520,6 +529,7 @@ int main() {
     */
 
     str_test();
+    str_test_compound_concatenation();
     
     cout << "End." << endl;
     return 0;

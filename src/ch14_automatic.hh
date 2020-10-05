@@ -129,6 +129,10 @@ public:
     
     T& operator*() const;
     T* operator->() const;
+
+    int get_refcount() const {
+        return *refptr;
+    }
     
 private:
     T* ptr;
@@ -263,6 +267,29 @@ public:
         std::copy(cp, cp + length, std::back_inserter(*data));
     }
 
+    using size_type = std::vector<char>::size_type;
+
+    size_type size() const {
+        return data->size();
+    }
+
+    // Because this can be used as an lvalue, we must call make_unique.
+    /*
+    char operator[](size_type i) {
+        data.make_unique();
+        return (*data)[i];
+    }
+    */
+
+    const char operator[](size_type i) const {
+        return (*data)[i];
+    }
+
+    int get_refcount() const {
+        return data.get_refcount();
+    }
+
+    
 private:
     ControllableHandle<std::vector<char>> data;
 };
@@ -273,5 +300,11 @@ Str operator+(const Str& x, const Str& y) {
     return result;
 }
 
+std::ostream& operator<<(std::ostream& os, const Str& s) {
+    for (Str::size_type i = 0; i < s.size(); i++) {
+        os << s[i];
+    }
+    return os;
+}
 
 #endif /* CH14_AUTOMATIC_HH */
