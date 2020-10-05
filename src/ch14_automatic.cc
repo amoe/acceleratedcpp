@@ -502,6 +502,12 @@ void str_test_compound_concatenation() {
     Str name2 = name1;    // Should not copy.
     cout << "Refcount is " << name1.get_refcount() << endl;
 
+    name1 += " Lister";
+    cout << "Name1 is now '" << name1 << "'" << endl;
+    cout << "Name2 is now '" << name2 << "'" << endl;
+
+    cout << "Refcount of name1 is " << name1.get_refcount() << endl;
+    cout << "Refcount of name2 is " << name2.get_refcount() << endl;
 }
 
 int main() {
