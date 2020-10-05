@@ -1330,3 +1330,7 @@ K&M allude to this in this carefully worded sentence:
 "[When we reimplement the grading program using LazyHandle] we'll discover that
 we don't need to change this implementation of StudentInfo at all, because none
 of our operations change the value of the object without also replacing it."
+
+ControllableHandle provides the ability to do make_unique() in mutation methods,
+meaning you can have a sort of 'copy-on-write' approach.  Template
+specializations are used to get around the lack of clone() function.
