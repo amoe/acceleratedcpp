@@ -5,6 +5,7 @@
 #include <sstream>
 #include <algorithm>
 #include <iomanip>
+#include <cstring>
 #include "median.hh"
 #include "read_hw.hh"
 #include "grading_functions.hh"
@@ -489,7 +490,10 @@ void refhandle_reference_count_test3() {
     }
 }
 
-
+void str_test() {
+    Str name = "Dave";
+    Str greeting = "Hello, " + name + "!";
+}
 
 int main() {
     cout << "Starting." << endl;
@@ -514,6 +518,8 @@ int main() {
     cout << "Use of StudentInfo2 (using RefHandle):" << endl;
     grading_test_with_studentinfo2();
     */
+
+    str_test();
     
     cout << "End." << endl;
     return 0;

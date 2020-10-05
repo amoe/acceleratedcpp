@@ -1,8 +1,6 @@
 #ifndef CH14_AUTOMATIC_HH
 #define CH14_AUTOMATIC_HH
 
-
-
 class Dog {
 public:
     Dog(): val(42) { }
@@ -119,7 +117,7 @@ public:
     ControllableHandle(T* ptr): ptr(ptr), refptr(new size_t(1)) { }
 
     ControllableHandle(const ControllableHandle& source): ptr(source.ptr), refptr(source.refptr) {
-        *refptr++;
+        (*refptr)++;
     }
 
     ControllableHandle& operator=(const ControllableHandle&);
@@ -260,8 +258,20 @@ public:
         return *this;
     }
 
+    Str(const char* cp): data(new std::vector<char>) {
+        std::size_t length = std::strlen(cp);
+        std::copy(cp, cp + length, std::back_inserter(*data));
+    }
+
 private:
     ControllableHandle<std::vector<char>> data;
 };
+
+Str operator+(const Str& x, const Str& y) {
+    Str result = x;
+    result += y;
+    return result;
+}
+
 
 #endif /* CH14_AUTOMATIC_HH */
