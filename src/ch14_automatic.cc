@@ -514,10 +514,20 @@ void str_test_lvalue_subscript() {
     Str name1 = "Dave";
     Str name2 = name1;
 
-    char name1[1] = 'i';
+    name1[1] = 'i';
 
     cout << "Name1 is now: '" << name1 << "'" << endl;
     cout << "Name2 is now: '" << name2 << "'" << endl;
+}
+
+void str_test_input() {
+    Str s1("Dave");
+    Str s2 = s1;
+    stringstream ss_val(" Lister");
+    ss_val >> s1;
+
+    cout << "s1 is now " << s1 << endl;
+    cout << "s2 is now " << s2 << endl;
 }
 
 int main() {
@@ -544,9 +554,10 @@ int main() {
     grading_test_with_studentinfo2();
     */
 
-    str_test();
-    str_test_compound_concatenation();
-    str_test_lvalue_subscript();
+    // str_test();
+    // str_test_compound_concatenation();
+    // str_test_lvalue_subscript();
+    str_test_input();
     
     cout << "End." << endl;
     return 0;

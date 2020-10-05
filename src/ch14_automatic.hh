@@ -255,6 +255,8 @@ private:
 };
 
 class Str {
+    friend std::istream& operator>>(std::istream&, Str&);
+    
 public:
     Str& operator+=(const Str& s) {
         data.make_unique();
@@ -305,5 +307,29 @@ std::ostream& operator<<(std::ostream& os, const Str& s) {
     }
     return os;
 }
+
+std::istream& operator>>(std::istream& is, Str& s) {
+    s.data.make_unique();
+    s.data->clear();
+    char c;
+
+    bool last_char_space = true;
+    
+    while (is.get(c) && isspace(c)) {
+    }
+
+    if (is) {
+        do {
+            s.data->push_back(c);
+        } while (is.get(c) && !isspace(c));
+
+        if (is) {
+            is.unget();
+        }
+    }
+
+    return is;
+}
+
 
 #endif /* CH14_AUTOMATIC_HH */
