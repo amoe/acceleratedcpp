@@ -1557,4 +1557,11 @@ It's probably worth separating out some of the code for reuse, maybe.
 Having some issues with compilation, needed to refactor all template functions
 into header.
 
+You can use a syntax like this to explicitly invoke the constructor.
+
+    ControllableHandle<CoreStudent> s1(
+        new CoreStudent(ss_in)
+    );
+
+
 
