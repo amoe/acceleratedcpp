@@ -17,15 +17,12 @@ Capener 7 10 32 68 61 76
 
 // Note that we don't even pass by reference here, meaning this is going to
 // increment the reference count.
-/*
-bool compare(
+bool compare_handles(
     const ControllableHandle<CoreStudent> c1,
     const ControllableHandle<CoreStudent> c2
 ) {
-    // This will work on GradStudent and sensibly return the name.
-    return c1.name() < c2.name();
+    return c1->name() < c2->name();
 }
-*/
 
 
 int main() {
@@ -43,6 +40,10 @@ int main() {
 
     cout << "Student name is " << s1->name() << endl;
     cout << "Student name is " << s2->name() << endl;
+
+    // Should return false, because s1 should not be ordered before s2.
+    bool result = compare_handles(s1, s2);
+    cout << "Comparison result was: " << (result ? "true" : "false") << endl;
 
     cout << "End." << endl;
     return 0;
