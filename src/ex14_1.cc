@@ -20,12 +20,10 @@ int main() {
 
     stringstream ss_in(corestudents_only);
 
-    RefHandle<CoreStudent> s1;
-    // ControllableHandle<CoreStudent> s2;
+    ControllableHandle<CoreStudent> s1;
 
-
-
-    // s1 = ControllableHandleread(ss_in);
+    
+//        read(ss_in);
     // s2.read(ss_in);
 
     // cout << "Student name is " << s1.name() << endl;

@@ -1553,3 +1553,8 @@ things.
 
 This translates to ControllableHandle<CoreStudent>.
 It's probably worth separating out some of the code for reuse, maybe.
+
+Having some issues with compilation, needed to refactor all template functions
+into header.
+
+

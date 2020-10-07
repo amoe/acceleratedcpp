@@ -182,4 +182,4 @@ env.Program(
     source=['ch14_automatic.cc', 'read_hw.cc', 'grading_functions.cc', 'median.cc']
 )
 
-env.Program(target='ex14_1', source=['ex14_1.cc', 'student_types.cc', 'handles.cc', 'read_hw.cc', 'grading_functions.cc', 'median.cc'])
+env.Program(target='ex14_1', source=['ex14_1.cc', 'student_types.cc', 'read_hw.cc', 'grading_functions.cc', 'median.cc'])
