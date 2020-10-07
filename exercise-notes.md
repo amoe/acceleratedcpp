@@ -1546,3 +1546,10 @@ cause name() to segfault.
 
 This also shows that the sort method, sensibly, does not try to self-assign
 things.
+
+### 14-1
+
+> Implement the comparison operation that operates on Ptr<Core>.
+
+This translates to ControllableHandle<CoreStudent>.
+It's probably worth separating out some of the code for reuse, maybe.
