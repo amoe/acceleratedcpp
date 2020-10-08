@@ -31,7 +31,8 @@ G Zutell 99 99 26 99 99 99 99
 
 
 bool compare_Core_handles(
-    const Handle<CoreStudent>& s1, const Handle<CoreStudent>& s2
+    const ControllableHandle<CoreStudent>& s1,
+    const ControllableHandle<CoreStudent>& s2
 ) {
     return s1->name() < s2->name();
 }
@@ -40,12 +41,11 @@ bool compare_Core_handles(
 int main() {
     cout << "Starting." << endl;
 
-    vector<Handle<CoreStudent>> students;
-    Handle<CoreStudent> record;
+    vector<ControllableHandle<CoreStudent>> students;
+    ControllableHandle<CoreStudent> record;
     char ch;
     string::size_type maxlen = 0;
     stringstream sin(students_input);
-
     while (sin >> ch) {
         if (ch == 'U') {
             record = new CoreStudent;
@@ -63,11 +63,11 @@ int main() {
 
     sort(students.begin(), students.end(), compare_Core_handles);
 
-    using vec_sz = vector<Handle<CoreStudent>>::size_type;
+    using vec_sz = vector<ControllableHandle<CoreStudent>>::size_type;
 
     
     for (vec_sz i = 0; i < students.size(); i++) {
-        Handle<CoreStudent> s = students[i];
+        ControllableHandle<CoreStudent> s = students[i];
         cout << s->name()
              << string((maxlen + 1) - s->name().size(),  ' ');
 
