@@ -99,6 +99,10 @@ public:
     int get_refcount() const {
         return *refptr;
     }
+
+    void print_identity() const {
+        std::cout << "ControllableHandle@" << refptr << std::endl;
+    }
     
 private:
     T* ptr;
