@@ -1577,3 +1577,7 @@ probably be put in a exercise-specific header file.
 Template specializations must be declared after their template itself, otherwise
 you'll get GCC message: "template-id ... does not match any template
 declaration".
+
+The 'clone()' template must be declared in the source file before it's first
+references, otherwise GCC is going to try to link to the clone(2) syscall which
+is obviously not what we want!

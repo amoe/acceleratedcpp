@@ -66,6 +66,11 @@ private:
 };
 
 template <typename T>
+T* clone(const T* tp) {
+    return tp->clone();
+}
+
+template <typename T>
 class ControllableHandle {
 public:
     void make_unique() {
@@ -109,10 +114,6 @@ private:
     std::size_t* refptr;
 };
 
-template <typename T>
-T* clone(const T* tp) {
-    return tp->clone();
-}
 
 template <typename T>
 Handle<T>& Handle<T>::operator=(const Handle& rhs) {
