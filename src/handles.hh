@@ -109,15 +109,9 @@ private:
     std::size_t* refptr;
 };
 
-
 template <typename T>
 T* clone(const T* tp) {
     return tp->clone();
-}
-
-template <>
-std::vector<char>* clone(const std::vector<char>* vec) {
-    return new std::vector<char>(*vec);
 }
 
 template <typename T>

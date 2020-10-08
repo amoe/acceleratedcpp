@@ -1564,3 +1564,12 @@ You can use a syntax like this to explicitly invoke the constructor.
     );
 
 
+## 14-4
+
+    template <>
+    std::vector<char>* clone(const std::vector<char>* vec) {
+        return new std::vector<char>(*vec);
+    }
+
+This is directly to do with the implementation of the Str class so it should
+probably be put in a exercise-specific header file.
