@@ -1573,3 +1573,7 @@ You can use a syntax like this to explicitly invoke the constructor.
 
 This is directly to do with the implementation of the Str class so it should
 probably be put in a exercise-specific header file.
+
+Template specializations must be declared after their template itself, otherwise
+you'll get GCC message: "template-id ... does not match any template
+declaration".
