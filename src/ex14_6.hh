@@ -17,7 +17,7 @@ public:
     }
     ReferenceCounter& operator=(const ReferenceCounter& source) {
         if (&source != this) {
-            if (is_dead()) {
+            if (is_dead()) {    // REALLY weird stuff happens if you don't check this.
                 delete refptr;
             }
             refptr = source.refptr;
