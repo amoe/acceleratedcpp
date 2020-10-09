@@ -19,7 +19,6 @@ using std::strlen;
 using std::vector;
 
 
-/*
 // Koenig&Moo's index-based string split.
 vector<Str> ch5_split(const Str& s) {
     vector<Str> result;
@@ -44,6 +43,8 @@ vector<Str> ch5_split(const Str& s) {
 
     return result;
 }
+
+
 
 bool space(char c) { return isspace(c); }
 bool not_space(char c) { return !isspace(c); }
@@ -70,7 +71,6 @@ vector<Str> ch6_split(const Str& str) {
 
     return ret;
 }
-*/
 
 void test_substr() {
     Str foo("The quick brown fox jumped over the lazy dog");
@@ -78,7 +78,6 @@ void test_substr() {
     cout << "result was '" << result << "'" << endl;
 }
 
-/*
 
 void test_ch5_split() {
     Str foo("The quick brown fox jumped over the lazy dog");
@@ -99,6 +98,8 @@ void test_ch6_split() {
         std::cout << *it << std::endl;
     }
 }
+
+/*
 
 Str::size_type width(const vector<Str>& v) {
     Str::size_type maxlen = 0;
@@ -210,8 +211,8 @@ int main() {
     cout << "Starting." << endl;
 
     test_substr();
-    // test_ch5_split();
-    // test_ch6_split();
+    test_ch5_split();
+    test_ch6_split();
     // test_frame();
 
     cout << "End." << endl;

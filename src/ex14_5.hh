@@ -11,6 +11,7 @@ class Str {
     
 public:
     using iterator = std::vector<char>::iterator;
+    using const_iterator = std::vector<char>::const_iterator;
 
     Str(const char* cp): data(new std::vector<char>) {
         std::size_t length = strlen(cp);
@@ -55,6 +56,24 @@ public:
         iterator start = data->begin() + pos;
         return Str(start, start + len);
     }
+
+    iterator begin() {
+        return data->begin();
+    }
+
+    iterator end() {
+        return data->end();
+    }
+
+    const_iterator begin() const {
+        return data->begin();
+    }
+
+    const_iterator end() const {
+        return data->end();
+    }
+
+    
     
 private:
     ControllableHandle<std::vector<char>> data;
