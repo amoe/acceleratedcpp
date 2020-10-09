@@ -11,12 +11,6 @@ class Str {
     
 public:
     using iterator = std::vector<char>::iterator;
-    
-    Str& operator+=(const Str& s) {
-        data.make_unique();
-        std::copy(s.data->begin(), s.data->end(), std::back_inserter(*data));
-        return *this;
-    }
 
     Str(const char* cp): data(new std::vector<char>) {
         std::size_t length = strlen(cp);
@@ -25,12 +19,18 @@ public:
 
     // dual iterator constructor
     template <typename T>
-    Str(T b, T e) {
-        
+    Str(T b, T e): data(new std::vector<char>) {
+        std::copy(b, e, std::back_inserter(*data));
     }
 
 
     using size_type = std::vector<char>::size_type;
+
+    Str& operator+=(const Str& s) {
+        data.make_unique();
+        std::copy(s.data->begin(), s.data->end(), std::back_inserter(*data));
+        return *this;
+    }
 
     size_type size() const {
         return data->size();
