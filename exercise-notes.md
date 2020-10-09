@@ -1584,4 +1584,15 @@ is obviously not what we want!
 
 ## 14-5
 
-Demo programs are the same from ex 12-11.
+Demo programs are the same from ex 12-11.  This presented no real problem.
+
+## 14-6
+
+> The Ptr class really solves two problems: maintaining reference counts, and
+> allocating and deallocating objects. Define a class that does reference
+> counting and nothing else; then use that class to reimplement the Ptr class.
+
+By this we mean that a reference counter class probably would not maintain a
+pointer.  So you can imagine that the controllablehandle would delegate to it in
+the rule-of-three methods.  XXX does it still need to be a pointer?  does it
+need to be in a header file?  how are we going to test it?

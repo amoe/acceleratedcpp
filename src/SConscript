@@ -187,3 +187,4 @@ env.Program(target='ex14_2', source=['ex14_2.cc', 'student_types.cc', 'read_hw.c
 env.Program(target='ex14_3', source=['ex14_3.cc', 'student_types.cc', 'read_hw.cc', 'grading_functions.cc', 'median.cc'])
 env.Program(target='ex14_4', source=['ex14_4.cc', 'student_types.cc', 'read_hw.cc', 'grading_functions.cc', 'median.cc'])
 env.Program(target='ex14_5', source=['ex14_5.cc', 'student_types.cc', 'read_hw.cc', 'grading_functions.cc', 'median.cc'])
+env.Program(target='ex14_6', source=['ex14_6.cc'])
