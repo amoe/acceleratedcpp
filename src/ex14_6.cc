@@ -41,6 +41,10 @@ int main() {
     cout << "Ref count for dog2 is " << dog2.get_refcount() << endl;
     cout << "Ref count for theDog is " << theDog.get_refcount() << endl;
 
+    ControllableHandle2<Dog> dog3;
+    dog3 = theDog;
+    cout << "Ref count for theDog is " << theDog.get_refcount() << endl;
+
     // dog2 gets destroyed first
 
     cout << "End." << endl;
