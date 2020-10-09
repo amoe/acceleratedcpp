@@ -28,7 +28,6 @@ public:
     int val;
 };
 
-/*
 void test_resource_management_functions() {
     ControllableHandle2<Dog> theDog(
         new Dog
@@ -52,21 +51,30 @@ void test_resource_management_functions() {
     // dog3 gets destroyed first, then dog2, then theDog
     // Dealllocation.
 }
-*/
 
 void test_make_unique() {
     ControllableHandle2<Dog> theDog(new Dog);
+    cout << "theDog = " << theDog->get_value() << endl;
+    
     ControllableHandle2<Dog> dog2 = theDog;
-    dog2.make_unique();
-    dog2->set_value(44);
-    cout << "Refcount of theDog is " << theDog.get_refcount() << endl;
+    dog2->set_value(43);
+    cout << "theDog = " << theDog->get_value() << endl;
+    cout << "dog2 = " << dog2->get_value() << endl;
+    
+    ControllableHandle2<Dog> dog3 = theDog;
+    dog3.make_unique();
+    dog3->set_value(44);
+
+    cout << "theDog = " << theDog->get_value() << endl;
+    cout << "dog2 = " << dog2->get_value() << endl;
+    cout << "dog3 = " << dog3->get_value() << endl;
 }
 
 
 int main() {
     cout << "Starting." << endl;
 
-//    test_resource_management_functions();
+    test_resource_management_functions();
     test_make_unique();
     
     cout << "End." << endl;
