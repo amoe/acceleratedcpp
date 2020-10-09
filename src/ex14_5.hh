@@ -7,23 +7,30 @@ std::vector<char>* clone(const std::vector<char>* vec) {
 }
 
 class Str {
-    friend istream& operator>>(istream&, Str&);
+    friend std::istream& operator>>(std::istream&, Str&);
     
 public:
-    using iterator = vector<char>::iterator;
+    using iterator = std::vector<char>::iterator;
     
     Str& operator+=(const Str& s) {
         data.make_unique();
-        copy(s.data->begin(), s.data->end(), back_inserter(*data));
+        std::copy(s.data->begin(), s.data->end(), std::back_inserter(*data));
         return *this;
     }
 
-    Str(const char* cp): data(new vector<char>) {
-        size_t length = strlen(cp);
-        copy(cp, cp + length, back_inserter(*data));
+    Str(const char* cp): data(new std::vector<char>) {
+        std::size_t length = strlen(cp);
+        copy(cp, cp + length, std::back_inserter(*data));
     }
 
-    using size_type = vector<char>::size_type;
+    // dual iterator constructor
+    template <typename T>
+    Str(T b, T e) {
+        
+    }
+
+
+    using size_type = std::vector<char>::size_type;
 
     size_type size() const {
         return data->size();
@@ -50,7 +57,7 @@ public:
     }
     
 private:
-    ControllableHandle<vector<char>> data;
+    ControllableHandle<std::vector<char>> data;
 };
 
 Str operator+(const Str& x, const Str& y) {
@@ -59,27 +66,27 @@ Str operator+(const Str& x, const Str& y) {
     return result;
 }
 
-ostream& operator<<(ostream& os, const Str& s) {
+std::ostream& operator<<(std::ostream& os, const Str& s) {
     for (Str::size_type i = 0; i < s.size(); i++) {
         os << s[i];
     }
     return os;
 }
 
-istream& operator>>(istream& is, Str& s) {
+std::istream& operator>>(std::istream& is, Str& s) {
     s.data.make_unique();
     s.data->clear();
     char c;
 
     bool last_char_space = true;
     
-    while (is.get(c) && isspace(c)) {
+    while (is.get(c) && std::isspace(c)) {
     }
 
     if (is) {
         do {
             s.data->push_back(c);
-        } while (is.get(c) && !isspace(c));
+        } while (is.get(c) && !std::isspace(c));
 
         if (is) {
             is.unget();
