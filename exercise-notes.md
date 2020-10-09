@@ -1596,3 +1596,8 @@ By this we mean that a reference counter class probably would not maintain a
 pointer.  So you can imagine that the controllablehandle would delegate to it in
 the rule-of-three methods.  XXX does it still need to be a pointer?  does it
 need to be in a header file?  how are we going to test it?
+
+What happens when we copy a handle?  We don't want to copy the object.  We need
+to initialize the reference counter with an existing pointer probably.  It can't
+be a totally disconnected ReferenceCounter as the different instances need to be
+pointing to the same thing.
