@@ -13,11 +13,17 @@ public:
     using iterator = std::vector<char>::iterator;
     using const_iterator = std::vector<char>::const_iterator;
 
+    Str(): data(new std::vector<char>) { }
+    
     Str(const char* cp): data(new std::vector<char>) {
         std::size_t length = strlen(cp);
         copy(cp, cp + length, std::back_inserter(*data));
     }
 
+    explicit Str(size_t n, char c): data(new std::vector<char>(n, c)) { 
+    }
+
+    
     // dual iterator constructor
     template <typename T>
     Str(T b, T e): data(new std::vector<char>) {

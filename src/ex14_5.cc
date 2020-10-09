@@ -99,8 +99,6 @@ void test_ch6_split() {
     }
 }
 
-/*
-
 Str::size_type width(const vector<Str>& v) {
     Str::size_type maxlen = 0;
 
@@ -204,7 +202,6 @@ void test_frame() {
         std::cout << *it << std::endl;
     }
 }
-*/
 
 
 int main() {
@@ -213,7 +210,7 @@ int main() {
     test_substr();
     test_ch5_split();
     test_ch6_split();
-    // test_frame();
+    test_frame();
 
     cout << "End." << endl;
     return 0;
