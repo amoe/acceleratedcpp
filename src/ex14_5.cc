@@ -26,6 +26,8 @@ class Str {
     friend istream& operator>>(istream&, Str&);
     
 public:
+    using iterator = vector<char>::iterator;
+    
     Str& operator+=(const Str& s) {
         data.make_unique();
         copy(s.data->begin(), s.data->end(), back_inserter(*data));
@@ -57,6 +59,12 @@ public:
     int get_refcount() const {
         return data.get_refcount();
     }
+    
+    Str substr(size_type pos, size_t len) const {
+        iterator start = data->begin() + pos;
+        return Str(start, start + len);
+    }
+
 
     
 private:
