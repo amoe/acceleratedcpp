@@ -1601,3 +1601,5 @@ What happens when we copy a handle?  We don't want to copy the object.  We need
 to initialize the reference counter with an existing pointer probably.  It can't
 be a totally disconnected ReferenceCounter as the different instances need to be
 pointing to the same thing.
+
+Really difficult exercise.
