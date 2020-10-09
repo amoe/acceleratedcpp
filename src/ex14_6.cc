@@ -12,6 +12,14 @@ public:
     Dog* clone() {
         return new Dog(*this);
     }
+
+    void set_value(int new_value) {
+        val = new_value;
+    }
+
+    int get_value() const {
+        return val;
+    }
     
     void woof() {
         std::cout << "Woof!  woof!" << std::endl;
@@ -20,12 +28,8 @@ public:
     int val;
 };
 
-
-int main() {
-    cout << "Starting." << endl;
-
-
-    // What do we actually expect to happen here?
+/*
+void test_resource_management_functions() {
     ControllableHandle2<Dog> theDog(
         new Dog
     );
@@ -45,10 +49,26 @@ int main() {
     dog3 = theDog;
     cout << "Ref count for theDog is " << theDog.get_refcount() << endl;
 
-    // dog2 gets destroyed first
-
-    cout << "End." << endl;
-
+    // dog3 gets destroyed first, then dog2, then theDog
     // Dealllocation.
+}
+*/
+
+void test_make_unique() {
+    ControllableHandle2<Dog> theDog(new Dog);
+    ControllableHandle2<Dog> dog2 = theDog;
+    dog2.make_unique();
+    dog2->set_value(44);
+    cout << "Refcount of theDog is " << theDog.get_refcount() << endl;
+}
+
+
+int main() {
+    cout << "Starting." << endl;
+
+//    test_resource_management_functions();
+    test_make_unique();
+    
+    cout << "End." << endl;
     return 0;
 }

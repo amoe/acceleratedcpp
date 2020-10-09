@@ -70,6 +70,7 @@ public:
     ~ControllableHandle2() {
         counter.decrement();
         if (counter.is_dead()) {
+            std::cout << "destructor: deleting pointer" << std::endl;
             delete ptr;
         } else {
         }
@@ -88,9 +89,27 @@ public:
         return *this;
     }
 
+    void make_unique() {
+        if (!counter.is_sole_referent()) {
+            counter.decrement();
+            counter = ReferenceCounter();
+            ptr = ptr ? ptr->clone() : 0;
+        }
+    }
+
     int get_refcount() const {
         return counter.get_refcount();
     }
+
+    // T& operator*() const;
+    T* operator->() const {
+        if (ptr) {
+            return ptr;
+        } else {
+            throw std::runtime_error("unbound handle");
+        }
+    }
+
     
 private:
     T* ptr;
