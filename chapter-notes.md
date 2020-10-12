@@ -1334,3 +1334,16 @@ of our operations change the value of the object without also replacing it."
 ControllableHandle provides the ability to do make_unique() in mutation methods,
 meaning you can have a sort of 'copy-on-write' approach.  Template
 specializations are used to get around the lack of clone() function.
+
+# 15
+
+Goal is to reimplement the character-picture code from ch5 using an inheritance
+interface.
+
+> Moreover, we believe that our users will find it convenient to use an expression
+> syntax to build up complicated pictures. We consider it clearer to write
+> `hcat(frame(p), p)` than to write `p.frame().hcat(p)` because the first example
+> reflects the symmetry of `hcat`'s arguments and the second example conceals it.
+
+This is K&M's justification for providing a functional interface to the picture
+class rather than just relying on OO operations.
