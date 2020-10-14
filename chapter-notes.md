@@ -1347,3 +1347,18 @@ interface.
 
 This is K&M's justification for providing a functional interface to the picture
 class rather than just relying on OO operations.
+
+With regard to the `virtual foo() = 0` notation:
+
+> Instead of forcing us to concoct an arbitrary definition for these operations,
+> the C++ language lets us say that there will be no definition for a given
+> virtual function. As a side effect of declining to implement the virtual
+> function, we also promise that there will never be objects of the associated
+> type. There may still be objects of types derived from this type, but there are
+> no objects of its exact type.
+
+If any function is pure virtual, the class becomes an abstract base class.  Pure
+virtuals are actually new in this chapter.
+
+
+wha tis the default access modifier?

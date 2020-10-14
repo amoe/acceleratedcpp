@@ -10,6 +10,7 @@ using std::cout;
 using std::endl;
 
 class BasePicture {
+private:
     using height_sz = vector<string>::size_type;
     using width_sz = string::size_type;
 
@@ -23,6 +24,16 @@ class StringPicture: public BasePicture {
 };
 
 class FramePicture: public BasePicture {
+private:
+    FramePicture(
+        const ControllableHandle<BasePicture>& picture
+    ): picture(picture) { }
+    
+    ControllableHandle<BasePicture> picture;
+
+    width_sz width() const;
+    height_sz height() const;
+    void display(ostream&, height_sz, bool) const;
 };
 
 class VerticallyConcatenatedPicture: public BasePicture {
