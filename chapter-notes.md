@@ -1361,4 +1361,7 @@ If any function is pure virtual, the class becomes an abstract base class.  Pure
 virtuals are actually new in this chapter.
 
 
-wha tis the default access modifier?
+wha tis the default access modifier?  private
+
+It seems to me that providing the `BasePicture*` constructor in Picture class
+violates the abstraction boundary.
