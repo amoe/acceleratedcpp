@@ -35,8 +35,8 @@ protected:
     }
     
 private:
-    virtual width_sz width() const;
-    virtual height_sz height() const;
+    virtual width_sz width() const = 0;
+    virtual height_sz height() const = 0;
     virtual void display(ostream&, height_sz, bool) const = 0;
 };
 
@@ -89,11 +89,44 @@ private:
         const ControllableHandle<BasePicture>& picture
     ): picture(picture) { }
     
-    ControllableHandle<BasePicture> picture;
 
-    width_sz width() const;
-    height_sz height() const;
-    void display(ostream&, height_sz, bool) const;
+    width_sz width() const {
+        return picture->width() + 4;
+    }
+    
+    height_sz height() const {
+        return picture->height() + 4;
+    }
+    
+    void display(ostream& os, height_sz row, bool should_pad) const {
+        // Handle the out of range case.
+        if (row >= height()) {
+            if (should_pad) {
+                pad(os, 0, width());
+                return;
+            }
+        }
+
+
+        if (row == 0 || row == height() - 1) {
+            // First or last row (the 'border' in CSS terms), pad to full width.
+            os << string(width(), '*');
+        } else if (row == 1 || row == height() - 2) {
+            // A mostly blank line we insert between this and the content.
+            // Padding in CSS terms.
+            os << "*";
+            pad(os, 1, width() - 1);
+            os << "*";
+        } else {
+            // The actual content which is still framed horizontally.  Note we
+            // force padding by 'display'.
+            os << "*";
+            picture->display(os, row - 2, true);
+            os << "*";
+        }
+    }
+
+    ControllableHandle<BasePicture> picture;
 };
 
 class VerticallyConcatenatedPicture: public BasePicture {
