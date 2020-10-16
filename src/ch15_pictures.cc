@@ -9,6 +9,9 @@ using std::vector;
 using std::cout;
 using std::endl;
 
+// fwd declaration neeeded otherwise friend declaration fails
+class Picture;
+
 // Implementation classes -- These classes implement the operations but should
 // remain invisible.
 
@@ -38,7 +41,7 @@ class StringPicture: public BasePicture {
 };
 
 class FramePicture: public BasePicture {
-    friend frame(const Picture&);
+   friend Picture frame(const Picture&);
     
 private:
     FramePicture(
@@ -53,6 +56,8 @@ private:
 };
 
 class VerticallyConcatenatedPicture: public BasePicture {
+    friend Picture vcat(const Picture&, const Picture&);
+    
     VerticallyConcatenatedPicture(
         const ControllableHandle<BasePicture>& top,
         const ControllableHandle<BasePicture>& bottom
@@ -67,6 +72,8 @@ class VerticallyConcatenatedPicture: public BasePicture {
 };
 
 class HorizontallyConcatenatedPicture: public BasePicture {
+    friend Picture hcat(const Picture&, const Picture&);
+    
     HorizontallyConcatenatedPicture(
         const ControllableHandle<BasePicture>& left,
         const ControllableHandle<BasePicture>& right
@@ -83,6 +90,10 @@ class HorizontallyConcatenatedPicture: public BasePicture {
 // Interface classes and functions.
 
 class Picture {
+    friend Picture frame(const Picture& picture);
+    friend Picture hcat(const Picture&, const Picture&);
+    friend Picture vcat(const Picture&, const Picture&);
+    
 public:
     Picture(const vector<string>& = vector<string>());
 
@@ -99,8 +110,14 @@ Picture frame(const Picture& picture) {
     return new FramePicture(picture.ptr);
 }
 
-Picture hcat(const Picture&, const Picture&);
-Picture vcat(const Picture&, const Picture&);
+Picture hcat(const Picture& left, const Picture& right) {
+    return new HorizontallyConcatenatedPicture(left.ptr, right.ptr);
+}
+
+Picture vcat(const Picture& left, const Picture& right) {
+    return new VerticallyConcatenatedPicture(left.ptr, right.ptr);
+}
+
 ostream& operator<<(ostream&, const Picture&);
 
 int main() {
