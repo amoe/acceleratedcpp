@@ -20,6 +20,7 @@ class BasePicture {
     friend class FramePicture;
     friend class VerticallyConcatenatedPicture;
     friend class HorizontallyConcatenatedPicture;
+    friend ostream& operator<<(ostream& os, const Picture& picture);
     
 private:
     using height_sz = vector<string>::size_type;
@@ -95,6 +96,7 @@ class Picture {
     friend Picture frame(const Picture& picture);
     friend Picture hcat(const Picture&, const Picture&);
     friend Picture vcat(const Picture&, const Picture&);
+    friend ostream& operator<<(ostream& os, const Picture& picture);
     
 public:
     Picture(
@@ -122,7 +124,15 @@ Picture vcat(const Picture& left, const Picture& right) {
     return new VerticallyConcatenatedPicture(left.ptr, right.ptr);
 }
 
-ostream& operator<<(ostream&, const Picture&);
+ostream& operator<<(ostream& os, const Picture& picture) {
+    using height_sz = BasePicture::height_sz;
+    height_sz height = picture.ptr->height();
+    for (height_sz i = 0; i != height; i++) {
+        picture.ptr->display(os, i, false);
+        os << endl;
+    }
+    return os;
+}
 
 int main() {
     cout << "Starting." << endl;
