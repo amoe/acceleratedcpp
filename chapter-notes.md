@@ -1371,3 +1371,9 @@ chapter code uncompileable due to the lack of friend declarations, also it's
 slightly unclear whether the structure using tons of friends is actually good,
 it's pretty interesting though regardless as a design that simply wouldn't be
 possible in Java.
+
+Why is width_sz accessible in the base class?  oh, because we friend it.  Well
+how is that different from having it be protected, then?
+
+Abstract base classes can define data members and member functions (not just
+static ones) that can be accessed by the derived classes.

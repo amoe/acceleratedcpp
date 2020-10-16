@@ -23,14 +23,20 @@ class BasePicture {
     friend class VerticallyConcatenatedPicture;
     friend class HorizontallyConcatenatedPicture;
     friend ostream& operator<<(ostream& os, const Picture& picture);
-    
-private:
     using height_sz = vector<string>::size_type;
     using width_sz = string::size_type;
 
+protected:
+    static void pad(ostream& os, width_sz begin, width_sz end) {
+        while (begin != end) {
+            os << " ";
+            begin++;
+        }
+    }
+    
+private:
     virtual width_sz width() const;
     virtual height_sz height() const;
-
     virtual void display(ostream&, height_sz, bool) const = 0;
 };
 
@@ -98,12 +104,32 @@ class VerticallyConcatenatedPicture: public BasePicture {
         const ControllableHandle<BasePicture>& bottom
     ): top(top), bottom(bottom) { }
     
+    
+    width_sz width() const {
+        return max(top->width(), bottom->width());
+    }
+    
+    height_sz height() const {
+        return top->height() + bottom->height();
+    }
+    
+    void display(ostream& os, height_sz row, bool should_pad) const {
+        width_sz start;
+        
+        if (row < top->height()) {
+            top->display(os, row, should_pad);
+            start = top->width();
+        } else {
+            bottom->display(os, row - top->height(), should_pad);
+            start = bottom->width();
+        }
+
+        if (should_pad)
+            pad(os, start, width());
+    }
+    
     ControllableHandle<BasePicture> top;
     ControllableHandle<BasePicture> bottom;
-    
-    width_sz width() const;
-    height_sz height() const;
-    void display(ostream&, height_sz, bool) const;
 };
 
 class HorizontallyConcatenatedPicture: public BasePicture {
