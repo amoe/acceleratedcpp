@@ -55,7 +55,9 @@ class StringPicture: public BasePicture {
         return data.size();
     }
     
-    void display(ostream&, height_sz, bool) const;
+    void display(ostream& os, height_sz row, bool should_pad) const {
+        
+    }
     
     vector<string> data;
 };
@@ -120,10 +122,8 @@ public:
         const vector<string>& v= vector<string>()
     ): ptr(new StringPicture(v)) { }
 
-    // XXX: abstraction violation?
-    Picture(BasePicture* raw_picture): ptr(raw_picture) { }
-
 private:
+    Picture(BasePicture* raw_picture): ptr(raw_picture) { }
     ControllableHandle<BasePicture> ptr;
 };
 
