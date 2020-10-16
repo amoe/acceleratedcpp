@@ -32,6 +32,8 @@ private:
 };
 
 class StringPicture: public BasePicture {
+    friend class Picture;
+    
     StringPicture(const vector<string>& data): data(data) { }
     vector<string> data;
     
@@ -95,7 +97,9 @@ class Picture {
     friend Picture vcat(const Picture&, const Picture&);
     
 public:
-    Picture(const vector<string>& = vector<string>());
+    Picture(
+        const vector<string>& v= vector<string>()
+    ): ptr(new StringPicture(v)) { }
 
     // XXX: abstraction violation?
     Picture(BasePicture* raw_picture): ptr(raw_picture) { }
