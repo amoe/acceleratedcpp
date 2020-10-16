@@ -1,8 +1,10 @@
+#include <algorithm>
 #include <iostream>
 #include <vector>
 #include <string>
 #include "handles.hh"
 
+using std::max;
 using std::ostream;
 using std::string;
 using std::vector;
@@ -36,11 +38,26 @@ class StringPicture: public BasePicture {
     friend class Picture;
     
     StringPicture(const vector<string>& data): data(data) { }
-    vector<string> data;
+
+    // The width of a string pic is the width of the longest string within
+    // that picture.
+    width_sz width() const {
+        width_sz n = 0;
+        for (height_sz i = 0; i != data.size(); i++) {
+            n = max(n, data[i].size());
+        }
+        return n;
+    }
     
-    width_sz width() const;
-    height_sz height() const;
+    // A string pic is a vector of lines, so therefore its height is its
+    // number of rows.
+    height_sz height() const {
+        return data.size();
+    }
+    
     void display(ostream&, height_sz, bool) const;
+    
+    vector<string> data;
 };
 
 class FramePicture: public BasePicture {
