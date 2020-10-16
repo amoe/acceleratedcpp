@@ -1365,3 +1365,9 @@ wha tis the default access modifier?  private
 
 It seems to me that providing the `BasePicture*` constructor in Picture class
 violates the abstraction boundary.
+
+I have a criticism that this chapter leaves far too long while leaving the
+chapter code uncompileable due to the lack of friend declarations, also it's
+slightly unclear whether the structure using tons of friends is actually good,
+it's pretty interesting though regardless as a design that simply wouldn't be
+possible in Java.

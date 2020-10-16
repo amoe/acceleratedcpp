@@ -56,7 +56,20 @@ class StringPicture: public BasePicture {
     }
     
     void display(ostream& os, height_sz row, bool should_pad) const {
-        
+        width_sz start;
+
+        // If we write a row, then start padding at the end of what we wrote.
+        // Otherwise, just pad the whole line, so start at column zero.
+        if (row < height()) {
+            os << data[row];
+            start = data[row].size();
+        } else {
+            start = 0;
+        }
+
+        if (should_pad) {
+            pad(os, start, width());
+        }
     }
     
     vector<string> data;
