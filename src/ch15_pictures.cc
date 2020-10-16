@@ -140,12 +140,33 @@ class HorizontallyConcatenatedPicture: public BasePicture {
         const ControllableHandle<BasePicture>& right
     ): left(left), right(right) { }
     
+
+    width_sz width() const {
+        return left->width() + right->width();
+    }
+    
+    height_sz height() const {
+        return max(left->height(), right->height());
+    }
+    
+    void display(ostream& os, height_sz row, bool should_pad) const {
+        bool should_pad_left = should_pad;
+
+        // We definitely need to pad the left-hand picture, regardless of what
+        // our caller said, if we are still within the range where we need to
+        // match up our right-margin to the left-margin column of the right-hand
+        // picture.
+        if (row < right->height()) {
+            should_pad_left = true;
+        }
+        
+        left->display(os, row, should_pad_left);
+        right->display(os, row, should_pad);
+    }
+
+
     ControllableHandle<BasePicture> left;
     ControllableHandle<BasePicture> right;
-    
-    width_sz width() const;
-    height_sz height() const;
-    void display(ostream&, height_sz, bool) const;
 };
 
 // Interface classes and functions.
