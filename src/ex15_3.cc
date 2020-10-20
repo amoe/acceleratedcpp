@@ -110,9 +110,9 @@ private:
             os << string(width() - 2, top_border);
             os << corner_border;
         } else if (row == 1 || row == height() - 2) {
-            os << "|";
+            os << side_border;
             pad(os, 1, width() - 1);
-            os << "|";
+            os << side_border;
         } else {
             os << "| ";
             picture->display(os, row - 2, true);
