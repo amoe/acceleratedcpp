@@ -1617,3 +1617,12 @@ Simple, no real logic required except to detect the corners.
 Add 3 params to the `frame` function.
 Run into some access problems...  every time you change a function signature,
 friend declarations also change and need to be updated.
+
+## 15-4
+
+> Add an operation to `reframe` a `Picture`, which changes the frame
+> characters. The operation should change all of the frames in the interior
+> picture.
+
+This is not very obvious.  How would such an operation work?
+
