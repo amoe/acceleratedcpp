@@ -252,8 +252,6 @@ int main() {
     Picture r = hcat(p, q);
     Picture s = vcat(q, r);
     cout << s;
-
-    
     
     cout << "End." << endl;
     return 0;

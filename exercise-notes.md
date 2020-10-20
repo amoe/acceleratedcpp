@@ -1606,4 +1606,6 @@ Really difficult exercise.
 
 ## 15-1
 
+Done in the main ch15_pictures.cc file.
 
+## 15-2
