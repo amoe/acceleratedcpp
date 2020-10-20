@@ -1615,4 +1615,5 @@ Simple, no real logic required except to detect the corners.
 ## 15-3
 
 Add 3 params to the `frame` function.
-Run into some access problems...
+Run into some access problems...  every time you change a function signature,
+friend declarations also change and need to be updated.

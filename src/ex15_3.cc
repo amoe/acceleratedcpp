@@ -78,12 +78,14 @@ class StringPicture: public BasePicture {
 };
 
 class FramePicture: public BasePicture {
-   friend Picture frame(const Picture&);
+   friend Picture frame(const Picture&, char, char, char);
     
 private:
     FramePicture(
-        const ControllableHandle<BasePicture>& picture
-    ): picture(picture) { }
+        const ControllableHandle<BasePicture>& picture, char top_border,
+        char side_border, char corner_border
+    ): picture(picture), top_border(top_border), side_border(side_border),
+       corner_border(corner_border) { }
     
 
     width_sz width() const {
@@ -104,9 +106,9 @@ private:
         }
 
         if (row == 0 || row == height() - 1) {
-            os << '=';
-            os << string(width() - 2, '*');
-            os << '=';
+            os << corner_border;
+            os << string(width() - 2, top_border);
+            os << corner_border;
         } else if (row == 1 || row == height() - 2) {
             os << "|";
             pad(os, 1, width() - 1);
@@ -119,11 +121,14 @@ private:
     }
 
     ControllableHandle<BasePicture> picture;
+    char top_border;
+    char side_border;
+    char corner_border;
 };
 // Interface classes and functions.
 
 class Picture {
-    friend Picture frame(const Picture& picture);
+    friend Picture frame(const Picture&, char, char, char);
     friend Picture hcat(const Picture&, const Picture&);
     friend Picture vcat(const Picture&, const Picture&);
     friend ostream& operator<<(ostream& os, const Picture& picture);
@@ -138,8 +143,8 @@ private:
     ControllableHandle<BasePicture> ptr;
 };
 
-Picture frame(const Picture& picture) {
-    return new FramePicture(picture.ptr);
+Picture frame(const Picture& picture, char top_border, char side_border, char corner_border) {
+    return new FramePicture(picture.ptr, top_border, side_border, corner_border);
 }
 
 ostream& operator<<(ostream& os, const Picture& picture) {
@@ -157,7 +162,7 @@ int main() {
 
     vector<string> initial_text = {"Hello, world!", "Keep on truckin'!"};
     Picture p(initial_text);
-    Picture q = frame(p);
+    Picture q = frame(p, '*', '|', '*');
 
     cout << q;
     
