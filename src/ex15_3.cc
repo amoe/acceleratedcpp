@@ -162,7 +162,7 @@ int main() {
 
     vector<string> initial_text = {"Hello, world!", "Keep on truckin'!"};
     Picture p(initial_text);
-    Picture q = frame(p, '*', '|', '*');
+    Picture q = frame(p, '=', '|', '*');
 
     cout << q;
     
