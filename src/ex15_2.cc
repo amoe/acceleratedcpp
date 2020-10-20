@@ -142,8 +142,6 @@ private:
     ControllableHandle<BasePicture> ptr;
 };
 
-// XXX: MAGIC HAPPENING HERE!  Return type is automatically converted to Picture
-// using the `BasePicture*` constructor of Picture.
 Picture frame(const Picture& picture) {
     return new FramePicture(picture.ptr);
 }
