@@ -1406,3 +1406,4 @@ How do we deal with this warning?
 This happens when we try to delete a basepicture.  It's a weird case because the
 classes have no public interface.  So it would be a strange asymmetry.  I don't
 think there's any sensible way to get around this.
+

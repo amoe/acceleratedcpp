@@ -1625,4 +1625,14 @@ friend declarations also change and need to be updated.
 > picture.
 
 This is not very obvious.  How would such an operation work?
+It would entail being able to call methods on the value of picture.ptr to
+reframe it.
+But, anything derived from BasePicture would also have to implement this method.
+Which is silly because they can't be reframed!
+
+The ideal would be to somehow get the value of FramePicture's 'picture' member
+and rewrap it.  But there's not method to do so.  Worse, we can't even do so
+because of typing (probably?)
+
+
 
