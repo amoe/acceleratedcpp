@@ -1609,3 +1609,5 @@ Really difficult exercise.
 Done in the main ch15_pictures.cc file.
 
 ## 15-2
+
+Simple, no real logic required except to detect the corners.

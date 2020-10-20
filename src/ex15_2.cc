@@ -93,9 +93,9 @@ private:
     height_sz height() const {
         return picture->height() + 4;
     }
-    
+
+
     void display(ostream& os, height_sz row, bool should_pad) const {
-        // Handle the out of range case.
         if (row >= height()) {
             if (should_pad) {
                 pad(os, 0, width());
@@ -103,22 +103,18 @@ private:
             }
         }
 
-
         if (row == 0 || row == height() - 1) {
-            // First or last row (the 'border' in CSS terms), pad to full width.
-            os << string(width(), '*');
+            os << '=';
+            os << string(width() - 2, '*');
+            os << '=';
         } else if (row == 1 || row == height() - 2) {
-            // A mostly blank line we insert between this and the content.
-            // Padding in CSS terms.
-            os << "*";
+            os << "|";
             pad(os, 1, width() - 1);
-            os << "*";
+            os << "|";
         } else {
-            // The actual content which is still framed horizontally.  Note we
-            // force padding by 'display'.
-            os << "* ";
+            os << "| ";
             picture->display(os, row - 2, true);
-            os << " *";
+            os << " |";
         }
     }
 
