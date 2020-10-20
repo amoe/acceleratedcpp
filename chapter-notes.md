@@ -1377,3 +1377,32 @@ how is that different from having it be protected, then?
 
 Abstract base classes can define data members and member functions (not just
 static ones) that can be accessed by the derived classes.
+
+> What may be more surprising is the friend declarations for the classes that
+> inherit from Pic_base . Don't they have access to the members of Pic_base
+> through inheritance?  Yes they do, in principle, but except for pad , all of
+> the members of Pic_base are private . Why didn't we just make these other
+> members protected , as we did with the pad function? The answer is that it
+> wouldn't have solved the problem
+
+p394
+
+A member of a derived class (such as Frame_Pic ) can access the protected
+members of the base-class parts of objects of its own class (such as Frame_Pic
+), or of other classes derived from it, but it cannot access the protected
+members of base-class objects that stand alone—that is, that are not part of a
+derived-class object.
+
+This also means that pointer types do not allow this (!!!)
+eg.  BasePicture* foo = new FramePicture;
+foo->
+
+How do we deal with this warning?
+
+> build/handles.hh:232:9: warning: deleting object of abstract class type
+> 'BasePicture' which has non-virtual destructor will cause undefined behavior
+> [-Wdelete-non-virtual-dtor]
+
+This happens when we try to delete a basepicture.  It's a weird case because the
+classes have no public interface.  So it would be a strange asymmetry.  I don't
+think there's any sensible way to get around this.

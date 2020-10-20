@@ -3,6 +3,7 @@ env = Environment()
 env.Append(
     CCFLAGS=[
         '-Wall', '-Wno-unused-but-set-variable', '-Wno-unused-variable',
+        '-Wno-delete-non-virtual-dtor',   # Used for ch15
         '-g'
 #        '-Werror',
     ]
@@ -193,3 +194,5 @@ env.Program(
     target='ch15_pictures',
     source=['ch15_pictures.cc']
 )
+
+env.Program(target='ex15_1', source=['ex15_1.cc'])

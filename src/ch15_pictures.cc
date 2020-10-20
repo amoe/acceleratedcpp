@@ -18,15 +18,14 @@ class Picture;
 // remain invisible.
 
 class BasePicture {
-    friend class StringPicture;
     friend class FramePicture;
     friend class VerticallyConcatenatedPicture;
     friend class HorizontallyConcatenatedPicture;
     friend ostream& operator<<(ostream& os, const Picture& picture);
-    using height_sz = vector<string>::size_type;
-    using width_sz = string::size_type;
 
 protected:
+    using height_sz = vector<string>::size_type;
+    using width_sz = string::size_type;
     static void pad(ostream& os, width_sz begin, width_sz end) {
         while (begin != end) {
             os << " ";
@@ -120,9 +119,9 @@ private:
         } else {
             // The actual content which is still framed horizontally.  Note we
             // force padding by 'display'.
-            os << "*";
+            os << "* ";
             picture->display(os, row - 2, true);
-            os << "*";
+            os << " *";
         }
     }
 
@@ -247,6 +246,15 @@ ostream& operator<<(ostream& os, const Picture& picture) {
 int main() {
     cout << "Starting." << endl;
 
+    vector<string> initial_text = {"Hello, world!"};
+    Picture p(initial_text);
+    Picture q = frame(p);
+    Picture r = hcat(p, q);
+    Picture s = vcat(q, r);
+    cout << s;
+
+    
+    
     cout << "End." << endl;
     return 0;
 }
