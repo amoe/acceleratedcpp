@@ -1611,3 +1611,8 @@ Done in the main ch15_pictures.cc file.
 ## 15-2
 
 Simple, no real logic required except to detect the corners.
+
+## 15-3
+
+Add 3 params to the `frame` function.
+Run into some access problems...

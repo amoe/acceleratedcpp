@@ -197,3 +197,4 @@ env.Program(
 
 env.Program(target='ex15_1', source=['ex15_1.cc'])
 env.Program(target='ex15_2', source=['ex15_2.cc'])
+env.Program(target='ex15_3', source=['ex15_3.cc'])
