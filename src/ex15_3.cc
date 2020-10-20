@@ -114,9 +114,9 @@ private:
             pad(os, 1, width() - 1);
             os << side_border;
         } else {
-            os << "| ";
+            os << side_border << " ";
             picture->display(os, row - 2, true);
-            os << " |";
+            os << " "  << side_border;
         }
     }
 
