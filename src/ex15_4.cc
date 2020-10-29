@@ -14,12 +14,6 @@ using std::endl;
 class Picture;
 
 
-struct BorderInfo {
-    char top_border;
-    char side_border;
-    char corner_border; 
-};
-
 class BasePicture {
     friend class FramePicture;
     friend class VerticallyConcatenatedPicture;
@@ -57,8 +51,7 @@ class StringPicture: public BasePicture {
         return n;
     }
     
-    // A string pic is a vector of lines, so therefore its height is its
-    // number of rows.
+
     height_sz height() const {
         return data.size();
     }
@@ -66,8 +59,6 @@ class StringPicture: public BasePicture {
     void display(ostream& os, height_sz row, bool should_pad) const {
         width_sz start;
 
-        // If we write a row, then start padding at the end of what we wrote.
-        // Otherwise, just pad the whole line, so start at column zero.
         if (row < height()) {
             os << data[row];
             start = data[row].size();
@@ -84,12 +75,12 @@ class StringPicture: public BasePicture {
 };
 
 class FramePicture: public BasePicture {
-   friend Picture frame(const Picture&, BorderInfo);
+   friend Picture frame(const Picture&);
     
 private:
     FramePicture(
-        const ControllableHandle<BasePicture>& picture, BorderInfo border_info
-    ): picture(picture), border_info(border_info) { }
+        const ControllableHandle<BasePicture>& picture
+    ): picture(picture) { }
     
 
     width_sz width() const {
@@ -99,8 +90,7 @@ private:
     height_sz height() const {
         return picture->height() + 4;
     }
-
-
+    
     void display(ostream& os, height_sz row, bool should_pad) const {
         if (row >= height()) {
             if (should_pad) {
@@ -109,28 +99,98 @@ private:
             }
         }
 
+
         if (row == 0 || row == height() - 1) {
-            os << border_info.corner_border;
-            os << string(width() - 2, border_info.top_border);
-            os << border_info.corner_border;
+            os << string(width(), '*');
         } else if (row == 1 || row == height() - 2) {
-            os << border_info.side_border;
+            os << "*";
             pad(os, 1, width() - 1);
-            os << border_info.side_border;
+            os << "*";
         } else {
-            os << border_info.side_border << " ";
+            os << "* ";
             picture->display(os, row - 2, true);
-            os << " "  << border_info.side_border;
+            os << " *";
         }
     }
 
     ControllableHandle<BasePicture> picture;
-    BorderInfo border_info;
 };
+
+class VerticallyConcatenatedPicture: public BasePicture {
+    friend Picture vcat(const Picture&, const Picture&);
+    
+    VerticallyConcatenatedPicture(
+        const ControllableHandle<BasePicture>& top,
+        const ControllableHandle<BasePicture>& bottom
+    ): top(top), bottom(bottom) { }
+    
+    
+    width_sz width() const {
+        return max(top->width(), bottom->width());
+    }
+    
+    height_sz height() const {
+        return top->height() + bottom->height();
+    }
+    
+    void display(ostream& os, height_sz row, bool should_pad) const {
+        width_sz start;
+        
+        if (row < top->height()) {
+            top->display(os, row, should_pad);
+            start = top->width();
+        } else {
+            bottom->display(os, row - top->height(), should_pad);
+            start = bottom->width();
+        }
+
+        if (should_pad)
+            pad(os, start, width());
+    }
+    
+    ControllableHandle<BasePicture> top;
+    ControllableHandle<BasePicture> bottom;
+};
+
+class HorizontallyConcatenatedPicture: public BasePicture {
+    friend Picture hcat(const Picture&, const Picture&);
+    
+    HorizontallyConcatenatedPicture(
+        const ControllableHandle<BasePicture>& left,
+        const ControllableHandle<BasePicture>& right
+    ): left(left), right(right) { }
+    
+
+    width_sz width() const {
+        return left->width() + right->width();
+    }
+    
+    height_sz height() const {
+        return max(left->height(), right->height());
+    }
+    
+    void display(ostream& os, height_sz row, bool should_pad) const {
+        bool should_pad_left = should_pad;
+
+        if (row < right->height()) {
+            should_pad_left = true;
+        }
+        
+        left->display(os, row, should_pad_left);
+        right->display(os, row, should_pad);
+    }
+
+
+    ControllableHandle<BasePicture> left;
+    ControllableHandle<BasePicture> right;
+};
+
 // Interface classes and functions.
 
 class Picture {
-    friend Picture frame(const Picture&, BorderInfo);
+    friend Picture frame(const Picture& picture);
+    friend Picture hcat(const Picture&, const Picture&);
+    friend Picture vcat(const Picture&, const Picture&);
     friend ostream& operator<<(ostream& os, const Picture& picture);
     
 public:
@@ -143,8 +203,16 @@ private:
     ControllableHandle<BasePicture> ptr;
 };
 
-Picture frame(const Picture& picture, BorderInfo border_info) {
-    return new FramePicture(picture.ptr, border_info);
+Picture frame(const Picture& picture) {
+    return new FramePicture(picture.ptr);
+}
+
+Picture hcat(const Picture& left, const Picture& right) {
+    return new HorizontallyConcatenatedPicture(left.ptr, right.ptr);
+}
+
+Picture vcat(const Picture& left, const Picture& right) {
+    return new VerticallyConcatenatedPicture(left.ptr, right.ptr);
 }
 
 ostream& operator<<(ostream& os, const Picture& picture) {
@@ -160,17 +228,12 @@ ostream& operator<<(ostream& os, const Picture& picture) {
 int main() {
     cout << "Starting." << endl;
 
-    vector<string> initial_text = {"Hello, world!", "Keep on truckin'!"};
+    vector<string> initial_text = {"Hello, world!"};
     Picture p(initial_text);
-
-    BorderInfo b;
-    b.top_border = '=';
-    b.side_border = '|';
-    b.corner_border = '*';
-    
-    Picture q = frame(p, b);
-
-    cout << q;
+    Picture q = frame(p);
+    Picture r = hcat(p, q);
+    Picture s = vcat(q, r);
+    cout << s;
     
     cout << "End." << endl;
     return 0;
