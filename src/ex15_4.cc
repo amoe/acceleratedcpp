@@ -19,7 +19,7 @@ class BasePicture {
     friend class HorizontallyConcatenatedPicture;
     friend ostream& operator<<(ostream& os, const Picture& picture);
     // non const weird method
-    friend Picture reframe(Picture& picture, char top_border, char side_border, char corner_border);
+    friend void reframe(Picture& picture, char top_border, char side_border, char corner_border);
 
 protected:
     using height_sz = vector<string>::size_type;
@@ -74,7 +74,7 @@ class StringPicture: public BasePicture {
     }
 
     void reframe(char top_border, char side_border, char corner_border) {
-        // Nothing
+        // Nothing to do on a StringPicture.
     }
     
     vector<string> data;
@@ -165,7 +165,8 @@ class VerticallyConcatenatedPicture: public BasePicture {
     }
 
     void reframe(char top_border, char side_border, char corner_border) {
-        // Nothing
+        top->reframe(top_border, side_border, corner_border);
+        bottom->reframe(top_border, side_border, corner_border);
     }
     
     
@@ -202,7 +203,8 @@ class HorizontallyConcatenatedPicture: public BasePicture {
     }
 
     void reframe(char top_border, char side_border, char corner_border) {
-        // Nothing
+        left->reframe(top_border, side_border, corner_border);
+        right->reframe(top_border, side_border, corner_border);
     }
 
     ControllableHandle<BasePicture> left;
@@ -213,7 +215,7 @@ class HorizontallyConcatenatedPicture: public BasePicture {
 
 class Picture {
     // non const weird method
-    friend Picture reframe(Picture& picture, char top_border, char side_border, char corner_border);
+    friend void reframe(Picture& picture, char top_border, char side_border, char corner_border);
     
     friend Picture frame(const Picture& picture);
     friend Picture hcat(const Picture&, const Picture&);
@@ -230,11 +232,10 @@ private:
     ControllableHandle<BasePicture> ptr;
 };
 
-Picture reframe(
+void reframe(
     Picture& picture, char top_border, char side_border, char corner_border
 ) {
     picture.ptr->reframe(top_border, side_border, corner_border);
-    return picture;
 }
 
 Picture frame(const Picture& picture) {
@@ -265,15 +266,10 @@ int main() {
     vector<string> initial_text = {"Hello, world!"};
     Picture p(initial_text);
     Picture q = frame(p);
-
-    Picture r = reframe(q, '+', '+', '+');
-
-    cout << r;
-    
-    // Picture r = hcat(p, q);
-    // Picture s = vcat(q, r);
-    // cout << s;
-
+    Picture r = hcat(p, q);
+    Picture s = vcat(q, r);
+    reframe(s, '+', '+', '+');
+    cout << s;
     
     cout << "End." << endl;
     return 0;

@@ -1628,7 +1628,8 @@ This is not very obvious.  How would such an operation work?
 It would entail being able to call methods on the value of picture.ptr to
 reframe it.
 But, anything derived from BasePicture would also have to implement this method.
-Which is silly because they can't be reframed!
+Which is silly because they can't be reframed!   [Update: actually it's not
+silly, except in the case of StringPicture]
 
 The ideal would be to somehow get the value of FramePicture's 'picture' member
 and rewrap it.  But there's not method to do so.  Worse, we can't even do so
@@ -1637,4 +1638,12 @@ because of typing (probably?)
 Github inspiration using `reframe extension:cpp` in code search.
 The correct strategy is to start with a polymorphic method reframe(), that is
 implemented by all subclasses.  Does this help?
+
+DONE by implementing a top-level `void reframe(...)`.  I don't think it's
+possible to do it using the existing style of API design -- where we have
+wrapper functions that return *new* pictures instead of modifying existing
+pictures -- "combinator-style", while maintaining the existing design.  That's
+because if we wanted to recursively rebuild ourselves from within a
+`BasePicture` derived class, how would we do so?  We don't know the concrete
+type of our own handle.
 
