@@ -13,12 +13,13 @@ using std::endl;
 
 class Picture;
 
-
 class BasePicture {
     friend class FramePicture;
     friend class VerticallyConcatenatedPicture;
     friend class HorizontallyConcatenatedPicture;
     friend ostream& operator<<(ostream& os, const Picture& picture);
+    // non const weird method
+    friend Picture reframe(Picture& picture, char top_border, char side_border, char corner_border);
 
 protected:
     using height_sz = vector<string>::size_type;
@@ -211,6 +212,9 @@ class HorizontallyConcatenatedPicture: public BasePicture {
 // Interface classes and functions.
 
 class Picture {
+    // non const weird method
+    friend Picture reframe(Picture& picture, char top_border, char side_border, char corner_border);
+    
     friend Picture frame(const Picture& picture);
     friend Picture hcat(const Picture&, const Picture&);
     friend Picture vcat(const Picture&, const Picture&);
@@ -225,6 +229,13 @@ private:
     Picture(BasePicture* raw_picture): ptr(raw_picture) { }
     ControllableHandle<BasePicture> ptr;
 };
+
+Picture reframe(
+    Picture& picture, char top_border, char side_border, char corner_border
+) {
+    picture.ptr->reframe(top_border, side_border, corner_border);
+    return picture;
+}
 
 Picture frame(const Picture& picture) {
     return new FramePicture(picture.ptr);
@@ -254,9 +265,15 @@ int main() {
     vector<string> initial_text = {"Hello, world!"};
     Picture p(initial_text);
     Picture q = frame(p);
-    Picture r = hcat(p, q);
-    Picture s = vcat(q, r);
-    cout << s;
+
+    Picture r = reframe(q, '+', '+', '+');
+
+    cout << r;
+    
+    // Picture r = hcat(p, q);
+    // Picture s = vcat(q, r);
+    // cout << s;
+
     
     cout << "End." << endl;
     return 0;
