@@ -54,6 +54,7 @@ class StringPicture: public BasePicture {
     }
     
     void display(ostream& os, height_sz row, bool should_pad) const {
+        cout << "StringPicture (" << this << ") called with row " << row << endl;
         width_sz start;
 
         if (row < height()) {
@@ -171,6 +172,7 @@ class HorizontallyConcatenatedPicture: public BasePicture {
     }
     
     void display(ostream& os, height_sz row, bool should_pad) const {
+        cout << "Hcat's display() called with row " << row << endl;
         bool should_pad_left = should_pad;
 
         // We definitely need to pad the left-hand picture, regardless of what
