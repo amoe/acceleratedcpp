@@ -1634,5 +1634,7 @@ The ideal would be to somehow get the value of FramePicture's 'picture' member
 and rewrap it.  But there's not method to do so.  Worse, we can't even do so
 because of typing (probably?)
 
-
+Github inspiration using `reframe extension:cpp` in code search.
+The correct strategy is to start with a polymorphic method reframe(), that is
+implemented by all subclasses.  Does this help?
 
