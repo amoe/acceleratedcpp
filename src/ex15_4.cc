@@ -85,7 +85,7 @@ class FramePicture: public BasePicture {
 private:
     FramePicture(
         const ControllableHandle<BasePicture>& picture
-    ): picture(picture) { }
+    ): picture(picture), top_border('='), side_border('|'), corner_border('*') { }
     
 
     width_sz width() const {
