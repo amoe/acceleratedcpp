@@ -54,7 +54,7 @@ class StringPicture: public BasePicture {
     }
     
     void display(ostream& os, height_sz row, bool should_pad) const {
-        cout << "StringPicture (" << this << ") called with row " << row << endl;
+//        cout << "StringPicture (" << this << ") called with row " << row << endl;
         width_sz start;
 
         if (row < height()) {
@@ -172,19 +172,32 @@ class HorizontallyConcatenatedPicture: public BasePicture {
     }
     
     void display(ostream& os, height_sz row, bool should_pad) const {
-        cout << "Hcat's display() called with row " << row << endl;
+        int right_start = (left->height() / 2) - (right->height() / 2);
+        
+        // Type issues here -- height_sz is signed but we need to make a
+        // subtraction that can easily be negative
+        int  offset = row - right_start;
         bool should_pad_left = should_pad;
+
+        // Height is an invalid offset, so offset = height indicates we went
+        // off the end of the RHS picture.
+        bool in_rhs_range = offset >= 0 || offset < (int) right->height();
 
         // We definitely need to pad the left-hand picture, regardless of what
         // our caller said, if we are still within the range where we need to
         // match up our right-margin to the left-margin column of the right-hand
         // picture.
-        if (row < right->height()) {
+        if (in_rhs_range) {
             should_pad_left = true;
         }
-        
+
         left->display(os, row, should_pad_left);
-        right->display(os, row, should_pad);
+
+        if (in_rhs_range) {
+            right->display(os, offset, should_pad);
+        } else {
+            right->display(os, right->height(), should_pad);
+        }
     }
 
 

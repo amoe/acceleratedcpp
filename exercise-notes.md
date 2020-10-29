@@ -1659,3 +1659,17 @@ type of our own handle.
 
 So this is the notorious vertical centering extension that I was expecting to
 happen, as it's a clear leftover feature.
+
+Try to figure this out.  If row = 0, just don't call, or call with some out
+of-range row value -- height() will work.
+
+If row = 1, row = 0 should be called on right.
+If row = 2, row = 1 should be called on right.
+
+If row = 3, row =
+
+
+Imagine height of left was 6.  Now, when row = 2, row = 0.  When row = 3, row =
+1.  Result of integer division is truncated towards zero.
+
+start = floor(lh / 2) - (rh / 2)
