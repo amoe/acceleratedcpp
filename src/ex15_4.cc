@@ -34,6 +34,7 @@ private:
     virtual width_sz width() const = 0;
     virtual height_sz height() const = 0;
     virtual void display(ostream&, height_sz, bool) const = 0;
+    virtual void reframe(char, char, char) = 0;
 };
 
 class StringPicture: public BasePicture {
@@ -69,6 +70,10 @@ class StringPicture: public BasePicture {
         if (should_pad) {
             pad(os, start, width());
         }
+    }
+
+    void reframe(char top_border, char side_border, char corner_border) {
+        // Nothing
     }
     
     vector<string> data;
@@ -113,7 +118,16 @@ private:
         }
     }
 
+    void reframe(char top_border, char side_border, char corner_border) {
+        this->top_border = top_border;
+        this->side_border = side_border;
+        this->corner_border = corner_border;
+    }
+
     ControllableHandle<BasePicture> picture;
+    char top_border;
+    char side_border;
+    char corner_border;
 };
 
 class VerticallyConcatenatedPicture: public BasePicture {
@@ -147,6 +161,11 @@ class VerticallyConcatenatedPicture: public BasePicture {
         if (should_pad)
             pad(os, start, width());
     }
+
+    void reframe(char top_border, char side_border, char corner_border) {
+        // Nothing
+    }
+    
     
     ControllableHandle<BasePicture> top;
     ControllableHandle<BasePicture> bottom;
@@ -180,6 +199,9 @@ class HorizontallyConcatenatedPicture: public BasePicture {
         right->display(os, row, should_pad);
     }
 
+    void reframe(char top_border, char side_border, char corner_border) {
+        // Nothing
+    }
 
     ControllableHandle<BasePicture> left;
     ControllableHandle<BasePicture> right;
