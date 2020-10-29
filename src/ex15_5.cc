@@ -172,6 +172,14 @@ class HorizontallyConcatenatedPicture: public BasePicture {
     }
     
     void display(ostream& os, height_sz row, bool should_pad) const {
+        // XXX: We need to generalize this to do taller and shorter picture.
+        // something like: ControllableHandle taller, shorter.
+        
+        // Then we still need to make sure that we apply the correct padding
+        // logic to the LHS picture, though.  hmmm....
+        
+        
+        
         int right_start = (left->height() / 2) - (right->height() / 2);
         
         // Type issues here -- height_sz is signed but we need to make a
@@ -257,7 +265,7 @@ int main() {
     
     Picture p1(long_pic);
     Picture p2(short_pic);
-    Picture q = hcat(p1, p2);
+    Picture q = hcat(p2, p1);
     cout << q;
     
     cout << "End." << endl;
