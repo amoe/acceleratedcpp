@@ -1647,3 +1647,15 @@ because if we wanted to recursively rebuild ourselves from within a
 `BasePicture` derived class, how would we do so?  We don't know the concrete
 type of our own handle.
 
+
+## 15-5
+
+> Reimplement `HCat_Pic` so that when pictures of a different size are
+> concatenated, the shorter one is centered in the space consumed by the longer
+> one. That is, if we horizontally concatenate two pictures, one of which is four
+> lines long and the other is two lines long, the first and last rows of the
+> output picture will be blank on the side of the shorter picture. What can we now
+> conclude about the necessity of the tests between `row` and 0?
+
+So this is the notorious vertical centering extension that I was expecting to
+happen, as it's a clear leftover feature.
