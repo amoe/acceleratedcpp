@@ -104,17 +104,18 @@ private:
             }
         }
 
-
         if (row == 0 || row == height() - 1) {
-            os << string(width(), '*');
+            os << corner_border;
+            os << string(width() - 2, top_border);
+            os << corner_border;
         } else if (row == 1 || row == height() - 2) {
-            os << "*";
+            os << side_border;
             pad(os, 1, width() - 1);
-            os << "*";
+            os << side_border;
         } else {
-            os << "* ";
+            os << side_border << " ";
             picture->display(os, row - 2, true);
-            os << " *";
+            os << " "  << side_border;
         }
     }
 
