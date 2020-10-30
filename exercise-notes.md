@@ -1673,3 +1673,11 @@ Imagine height of left was 6.  Now, when row = 2, row = 0.  When row = 3, row =
 1.  Result of integer division is truncated towards zero.
 
 start = floor(lh / 2) - (rh / 2)
+
+This eventually implemented.  Not totally DRY but working fine  You can apply
+the logic for both sides easily.  Not sure what the question about comparisons
+between `row` and 0 implies.
+
+## 15-6
+
+This was pretty much trivial.
