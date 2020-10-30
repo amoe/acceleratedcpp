@@ -6,7 +6,6 @@
 
 using std::max;
 using std::ostream;
-using std::string;
 using std::cout;
 using std::endl;
 
@@ -23,8 +22,8 @@ class BasePicture {
     friend ostream& operator<<(ostream& os, const Picture& picture);
 
 protected:
-    using height_sz = Vec<string>::size_type;
-    using width_sz = string::size_type;
+    using height_sz = Vec<Str>::size_type;
+    using width_sz = Str::size_type;
     static void pad(ostream& os, width_sz begin, width_sz end) {
         while (begin != end) {
             os << " ";
@@ -41,7 +40,7 @@ private:
 class StringPicture: public BasePicture {
     friend class Picture;
     
-    StringPicture(const Vec<string>& data): data(data) { }
+    StringPicture(const Vec<Str>& data): data(data) { }
 
     // The width of a string pic is the width of the longest string within
     // that picture.
@@ -76,7 +75,7 @@ class StringPicture: public BasePicture {
         }
     }
     
-    Vec<string> data;
+    Vec<Str> data;
 };
 
 class FramePicture: public BasePicture {
@@ -108,7 +107,7 @@ private:
 
         if (row == 0 || row == height() - 1) {
             // First or last row (the 'border' in CSS terms), pad to full width.
-            os << string(width(), '*');
+            os << Str(width(), '*');
         } else if (row == 1 || row == height() - 2) {
             // A mostly blank line we insert between this and the content.
             // Padding in CSS terms.
@@ -210,7 +209,7 @@ class Picture {
     
 public:
     Picture(
-        const Vec<string>& v= Vec<string>()
+        const Vec<Str>& v = Vec<Str>()
     ): ptr(new StringPicture(v)) { }
 
 private:
@@ -245,7 +244,7 @@ ostream& operator<<(ostream& os, const Picture& picture) {
 int main() {
     cout << "Starting." << endl;
 
-    Vec<string> initial_text;
+    Vec<Str> initial_text;
     initial_text.push_back("Hello, world!");
     Picture p(initial_text);
     Picture q = frame(p);
