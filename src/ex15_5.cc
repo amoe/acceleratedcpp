@@ -172,37 +172,28 @@ class HorizontallyConcatenatedPicture: public BasePicture {
     }
     
     void display(ostream& os, height_sz row, bool should_pad) const {
-        // XXX: We need to generalize this to do taller and shorter picture.
-        // something like: ControllableHandle taller, shorter.
+        int effective_offset_l, effective_offset_r;
         
-        // Then we still need to make sure that we apply the correct padding
-        // logic to the LHS picture, though.  hmmm....
-        
-        
-        
-        int right_start = (left->height() / 2) - (right->height() / 2);
-        
-        // Type issues here -- height_sz is signed but we need to make a
-        // subtraction that can easily be negative
-        int  offset = row - right_start;
-        bool should_pad_left = should_pad;
-
-        // Height is an invalid offset, so offset = height indicates we went
-        // off the end of the RHS picture.
-        bool in_rhs_range = offset >= 0 || offset < (int) right->height();
-
-        // We definitely need to pad the left-hand picture, regardless of what
-        // our caller said, if we are still within the range where we need to
-        // match up our right-margin to the left-margin column of the right-hand
-        // picture.
-        if (in_rhs_range) {
-            should_pad_left = true;
+        if (left->height() > right->height()) {
+            int right_start = (left->height() / 2) - (right->height() / 2);
+            int offset = row - right_start;
+            effective_offset_l = row;
+            effective_offset_r = offset;
+        } else {
+            int left_start = (right->height() / 2) - (left->height() / 2);
+            int offset = row - left_start;
+            effective_offset_l = offset;
+            effective_offset_r = row;
         }
 
-        left->display(os, row, should_pad_left);
+        if (effective_offset_l >= 0  && effective_offset_l < (int) left->height()) {
+            left->display(os, effective_offset_l, true);
+        } else {
+            left->display(os, left->height(), true);
+        }
 
-        if (in_rhs_range) {
-            right->display(os, offset, should_pad);
+        if (effective_offset_r >= 0 && effective_offset_r < (int) right->height()) {
+            right->display(os, effective_offset_r, should_pad);
         } else {
             right->display(os, right->height(), should_pad);
         }
