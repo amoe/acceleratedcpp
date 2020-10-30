@@ -185,7 +185,7 @@ class HorizontallyConcatenatedPicture: public BasePicture {
             effective_offset_l = offset;
             effective_offset_r = row;
         }
-
+        
         if (effective_offset_l >= 0  && effective_offset_l < (int) left->height()) {
             left->display(os, effective_offset_l, true);
         } else {
