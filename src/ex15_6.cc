@@ -7,7 +7,6 @@
 using std::max;
 using std::ostream;
 using std::string;
-using std::vector;
 using std::cout;
 using std::endl;
 
@@ -24,7 +23,7 @@ class BasePicture {
     friend ostream& operator<<(ostream& os, const Picture& picture);
 
 protected:
-    using height_sz = vector<string>::size_type;
+    using height_sz = Vec<string>::size_type;
     using width_sz = string::size_type;
     static void pad(ostream& os, width_sz begin, width_sz end) {
         while (begin != end) {
@@ -42,7 +41,7 @@ private:
 class StringPicture: public BasePicture {
     friend class Picture;
     
-    StringPicture(const vector<string>& data): data(data) { }
+    StringPicture(const Vec<string>& data): data(data) { }
 
     // The width of a string pic is the width of the longest string within
     // that picture.
@@ -54,7 +53,7 @@ class StringPicture: public BasePicture {
         return n;
     }
     
-    // A string pic is a vector of lines, so therefore its height is its
+    // A string pic is a Vec of lines, so therefore its height is its
     // number of rows.
     height_sz height() const {
         return data.size();
@@ -77,7 +76,7 @@ class StringPicture: public BasePicture {
         }
     }
     
-    vector<string> data;
+    Vec<string> data;
 };
 
 class FramePicture: public BasePicture {
@@ -211,7 +210,7 @@ class Picture {
     
 public:
     Picture(
-        const vector<string>& v= vector<string>()
+        const Vec<string>& v= Vec<string>()
     ): ptr(new StringPicture(v)) { }
 
 private:
@@ -246,7 +245,8 @@ ostream& operator<<(ostream& os, const Picture& picture) {
 int main() {
     cout << "Starting." << endl;
 
-    vector<string> initial_text = {"Hello, world!"};
+    Vec<string> initial_text;
+    initial_text.push_back("Hello, world!");
     Picture p(initial_text);
     Picture q = frame(p);
     Picture r = hcat(p, q);

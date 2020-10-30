@@ -71,12 +71,10 @@ public:
     }
 
     T& operator[](size_type i) {
-        cout << "inside index operator non-const" << endl;
         return data[i];
     }
 
     const T& operator[](size_type i) const {
-        cout << "inside index operator const" << endl;
         return data[i];
     }
 
