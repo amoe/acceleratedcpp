@@ -1681,3 +1681,16 @@ between `row` and 0 implies.
 ## 15-6
 
 This was pretty much trivial.
+
+## 16-1
+
+How does the quine work?
+
+    printf(n,n,41);
+
+What does this do?
+
+Well, 41 is the termination character for the raw string literal `R"(foo)"`,
+which would otherwise be considered to actually terminate the string -- it can't
+be embedded into the source of the quine -- so must be encoded as a character
+reference.
