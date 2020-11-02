@@ -1,6 +1,8 @@
 #ifndef STUDENT_INFO_NG_HH
 #define STUDENT_INFO_NG_HH
 
+#include "student_types.hh"
+
 class StudentInfo {
 public:
     StudentInfo(): student(0) { }

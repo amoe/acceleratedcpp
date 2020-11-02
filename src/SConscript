@@ -205,5 +205,5 @@ env.Program(target='ex15_6', source=['ex15_6.cc'])
 env.Program(
     target='ch16_histogram',
     source=['ch16_histogram.cc', 'pictures.cc', 'student_types.cc',
-            'read_hw.cc', 'grading_functions.cc', 'median.cc']
+            'read_hw.cc', 'grading_functions.cc', 'median.cc', 'student_info_ng.cc']
 )
