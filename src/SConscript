@@ -201,3 +201,9 @@ env.Program(target='ex15_3', source=['ex15_3.cc'])
 env.Program(target='ex15_4', source=['ex15_4.cc'])
 env.Program(target='ex15_5', source=['ex15_5.cc'])
 env.Program(target='ex15_6', source=['ex15_6.cc'])
+
+env.Program(
+    target='ch16_histogram',
+    source=['ch16_histogram.cc', 'pictures.cc', 'student_types.cc',
+            'read_hw.cc', 'grading_functions.cc', 'median.cc']
+)
