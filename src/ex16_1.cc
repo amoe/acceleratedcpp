@@ -27,7 +27,7 @@ int main() {
     a.push_back("");
     a.push_back("        if (*it1 == \"    // marker\") {");
     a.push_back("            for (vector<string>::const_iterator it2 = a.begin(); it2 != a.end(); it2++) {");
-    a.push_back("                cout << \\\"    a.push_back(\"\" << *it2 << \"\");\\\" << endl;");
+    a.push_back("                cout << \"a.push_back(\\\"\" << *it2 << \\\"\");\" << endl;");
     a.push_back("            }");
     a.push_back("        }");
     a.push_back("    }");
