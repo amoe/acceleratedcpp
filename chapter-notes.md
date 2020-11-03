@@ -1439,6 +1439,13 @@ Converting signed values between each other is not well defined -- crazy!
 
 Unary operator `~` returns a one's-complement.
 
+The list class has a specific `splice` function which may be useful to "transfer
+elements from one list to another".  Basically it uses the structure of the
+linked list to stitch lists together by just re-targeting pointers.
+
+`max_element` and `min_element` are more useful versions of `max`, `min` etc
+that operate natively on iterator ranges.
+
 `unique_copy` can be used to remove duplicates.  pretty good.  probably needs to
 be sorted first.
 
