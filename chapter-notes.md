@@ -1438,3 +1438,8 @@ literal one` not as `minus-1`.
 Converting signed values between each other is not well defined -- crazy!
 
 Unary operator `~` returns a one's-complement.
+
+`unique_copy` can be used to remove duplicates.  pretty good.  probably needs to
+be sorted first.
+
+Finished!
