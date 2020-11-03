@@ -1407,3 +1407,34 @@ This happens when we try to delete a basepicture.  It's a weird case because the
 classes have no public interface.  So it would be a strange asymmetry.  I don't
 think there's any sensible way to get around this.
 
+## Appendix
+
+When reading declarations.
+The syntax is DECL-SPECIFIER DECLARATOR.
+All DECL-SPECIFIERS are type names or keywords.
+
+Inline functions should be put in the same header as where they are declared.
+
+There are complex rules for reading type declarations that require recursively
+'unwrapping' parts of the declarator.  See page 407 for these details.
+
+short is defined to be at least a 16-bit integer.  long to be at least a 32-bit
+integer.
+
+characters can be signed or unsigned.  `char` itself is a *distinct type* that
+may be signed or unsigned. (!)  `unsigned char` doesn't seem to guarantee 8-bit
+width, only 7-bit?
+
+ASCII digits are guaranteed to have contiguous values for some reason, eg '3' +
+1 = '4'.  Same is not true for alphabetical characters.   '\x20' can be used for
+hexadecimal characters.
+
+double may be the same size as float and long double; sizes just aren't allowed
+to decrease.
+
+unary minus is generally an expression.  so `-1` parses as `unary-minus, integer
+literal one` not as `minus-1`.
+
+Converting signed values between each other is not well defined -- crazy!
+
+Unary operator `~` returns a one's-complement.
